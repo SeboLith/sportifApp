@@ -83,9 +83,6 @@ angular.module('services')
     return {
 
         getProducts: function(filters, sort) {
-
-            // console.log('Grabbing data: filters:', filters, ' sort', sort);
-
             // Let subscribers know we're loading some data
             $rootScope.$broadcast('productList.loading');
 
@@ -170,7 +167,6 @@ angular.module('services')
 
     };
 }).factory('CartService', function($rootScope, $resource, $window, GTMService) {
-    console.log('In CartService');
     var service = $resource(globals.contextPath + '/json/cart/:action.json', {_: new Date().getTime()}, {
         getCurrent:   { method: 'GET',  params: { action: 'getCurrent' } },
         updateLine:   { method: 'POST', params: { action: 'updateLine' } },
