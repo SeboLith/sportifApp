@@ -138,7 +138,7 @@ hr.flush {
   margin: 0 10px 10px;
 }
 #top ul li {
-  background: url('../images/divide_nav_account_store.png') 0 50% no-repeat;
+  background: url(/*'../images/divide_nav_account_store.png'*/) 0 50% no-repeat;
   float: left;
   font-size: 12px;
   font-style: italic;
@@ -188,7 +188,7 @@ hr.flush {
   padding: 0;
 }
 #top #tiger_link a {
-  background: url('../images/tiger_logo.jpg') 0 0 no-repeat;
+  background: url(/*'../images/tiger_logo.jpg'*/) 0 0 no-repeat;
   height: 0;
   overflow: hidden;
   padding: 28px 0 0;
@@ -221,7 +221,7 @@ hr.flush {
   width: 180px;
 }
 #top #search form input.button {
-  background: #43a0ee url('../images/icon_search.png') 7px 6px no-repeat;
+  background: #43a0ee url(/*'../images/icon_search.png'*/) 7px 6px no-repeat;
   height: 0;
   overflow: hidden;
   padding: 26px 0 0;
@@ -266,7 +266,7 @@ header[role="banner"].checkout #top nav #site_logo {
   margin-top: 11px;
 }
 header[role="banner"].checkout #top nav #site_logo h1 {
-  background: url('../images/logo_asics_white.png') 0 0 no-repeat;
+  background: url(/*'../images/logo_sportif_white.png'*/) 0 0 no-repeat;
   height: 0;
   overflow: hidden;
   padding: 45px 0 0;
@@ -276,7 +276,7 @@ header[role="banner"].checkout #top nav #site_logo h1 {
 /* Header - Social Links
 -----------------------------------------------------------------------------------------------*/
 #social_links a {
-  background: url('../../common/images/icon_social_link.png') 0 0 no-repeat;
+  background: url(/*'../../common/images/icon_social_link.png'*/) 0 0 no-repeat;
   height: 0;
   overflow: hidden;
   padding: 26px 0 0;
@@ -1260,7 +1260,7 @@ article.product.animate {
 .modal_close:before {
   content: '';
   display: block;
-  background: url('../../theme-asics-aac/images/icon_remove.png') center no-repeat;
+  background: url(/*'../../theme-sportif-aac/images/icon_remove.png'*/) center no-repeat;
   width: 25px;
   height: 25px;
 }
@@ -1970,7 +1970,7 @@ img.loading {
 .clearfix:after {
   clear: both;
 }
-.logoAsics {
+.logoSportif {
   display: inline-block;
   width: 152px;
   height: 52px;
@@ -3125,7 +3125,7 @@ dl.payment_methods input[type=radio]:checked + dd:before {
   background-position: -30px -30px;
 }
 .payment_logo {
-  background: url('../images/icon_payment.png') 0 0 no-repeat;
+  background: url(/*'../images/icon_payment.png'*/) 0 0 no-repeat;
   height: 0;
   overflow: hidden;
   padding: 35px 0 0;
@@ -3163,7 +3163,7 @@ dl.payment_methods input[type=radio]:checked + dd:before {
   background-position: -117px 0;
 }
 .logo_verisign {
-  background: url('../images/icon_payment.png') 0 no-repeat;
+  background: url(/*'../images/icon_payment.png'*/) 0 no-repeat;
   height: 0;
   overflow: hidden;
   padding: 53px 0 0;
@@ -3229,12 +3229,12 @@ section:after {
 section.highlight {
   background: #f5f4f9;
 }
-/* Section - Breakout 
+/* Section - Breakout
 -----------------------------------------------------------------------------------------------*/
 section.filter div.focal:before,
 section.search div.focal:before,
 section.side_column:before {
-  background: url('../images/divide_content.png') 50% 0 no-repeat;
+  background: url(/*'../images/divide_content.png'*/) 50% 0 no-repeat;
   content: '';
   display: block;
   height: 8px;
@@ -3352,7 +3352,7 @@ div.focal div.contents {
   text-align: left;
 }
 hr {
-  background: url('../images/divide_content.png') 50% 0 no-repeat;
+  background: url(/*'../images/divide_content.png'*/) 50% 0 no-repeat;
   border: 0;
   content: '';
   display: block;
@@ -3730,7 +3730,7 @@ header[role="banner"] nav#primary {
   width: 100%;
 }
 header[role="banner"] nav#primary #lead {
-  background: #e8e8e8 url('../images/divide_header.png') 0 100% repeat-x;
+  background: #e8e8e8 url(/*'../images/divide_header.png'*/) 0 100% repeat-x;
   float: left;
   position: relative;
   width: 100%;
@@ -3745,7 +3745,7 @@ header[role="banner"] nav#primary #lead:before {
   position: absolute;
   right: 50%;
   z-index: 1;
-  background: #ffffff url('../images/divide_header.png') 0 100% repeat-x;
+  background: #ffffff url(/*'../images/divide_header.png'*/) 0 100% repeat-x;
 }
 header[role="banner"] nav#primary #lead div.wrap {
   *zoom: 1;
@@ -3766,7 +3766,7 @@ header[role="banner"] nav#primary #lead nav#primary {
   float: left;
 }
 header[role="banner"] nav#primary #lead #site_logo {
-  background: #ffffff url('../images/divide_header.png') 0 100% repeat-x;
+  background: #ffffff url(/*'../images/divide_header.png'*/) 0 100% repeat-x;
   height: 67px;
   overflow: hidden;
   margin-left: 10px;
@@ -3799,7 +3799,7 @@ header[role="banner"] nav#primary #lead ul#areas:after {
 header[role="banner"] nav#primary #lead ul#areas:after,
 header[role="banner"] nav#primary #lead ul#areas li > a,
 header[role="banner"] nav#primary #lead ul#areas li > span {
-  background: url('../images/bg_nav_primary.png') 0 100% repeat-x;
+  background: url(/*'../images/bg_nav_primary.png'*/) 0 100% repeat-x;
 }
 header[role="banner"] nav#primary #lead ul#areas li > a,
 header[role="banner"] nav#primary #lead ul#areas li > span {
@@ -3846,7 +3846,7 @@ header[role="banner"] nav#primary #lead #minicart #minicart_data {
 }
 header[role="banner"] nav#primary #lead #minicart #minicart_data dt,
 header[role="banner"] nav#primary #lead #minicart #minicart_data dd {
-  background: url('../images/icon_cart.png') 0 0 no-repeat;
+  background: url(/*'../images/icon_cart.png'*/) 0 0 no-repeat;
   display: block;
   float: left;
   height: 23px;
@@ -4077,7 +4077,7 @@ footer[role="contentinfo"] #bottom .backToTop {
   margin-bottom: 15px;
 }
 footer[role="contentinfo"] #bottom .backToTop span.icon {
-  background: url('../images/icon_arrow_top.png') 0 0;
+  background: url(/*'../images/icon_arrow_top.png'*/) 0 0;
   height: 0;
   overflow: hidden;
   padding: 7px 0 0;
@@ -4109,7 +4109,7 @@ footer[role="contentinfo"] #bottom #tertiary #top_link {
   margin-bottom: 15px;
 }
 footer[role="contentinfo"] #bottom #tertiary #top_link span.icon {
-  background: url('../images/icon_arrow_top.png') 0 0;
+  background: url(/*'../images/icon_arrow_top.png'*/) 0 0;
   height: 0;
   overflow: hidden;
   padding: 7px 0 0;
@@ -4360,7 +4360,7 @@ footer[role="contentinfo"] #end #country_select span.flag {
 }
 footer[role="contentinfo"] #end #copyright span.icon_shoe {
   display: inline-block;
-  background: url('../images/icon_shoe.png') 0 0;
+  background: url(/*'../images/icon_shoe.png'*/) 0 0;
   height: 0;
   overflow: hidden;
   padding: 9px 0 0;
@@ -4483,7 +4483,7 @@ dl.rating dd {
 }
 dl.rating dd,
 dl.rating dd em {
-  background: url('../images/rating.png') 0 0 no-repeat;
+  background: url(/*'../images/rating.png'*/) 0 0 no-repeat;
   overflow: hidden;
 }
 dl.rating dd em {
@@ -4535,7 +4535,7 @@ div.refinements ul.facets li.facet {
   float: left;
   width: auto;
 }
-/* Product 
+/* Product
 -----------------------------------------------------------------------------------------------*/
 .product {
   display: block;
@@ -5222,7 +5222,7 @@ body.stores section:first-child div.contents:first-child,
 body.home section:first-child div.contents:first-child {
   padding-top: 15px;
 }
-/* LOGIN / REGISTER / GUEST 
+/* LOGIN / REGISTER / GUEST
 -----------------------------------------------------------------------------------------------
 ===============================================================================================*/
 #checkout_register_login {
@@ -5686,7 +5686,7 @@ body.account div.main_column {
 /* Checkout Progress Bar
 -----------------------------------------------------------------------------------------------*/
 nav#checkout_progress {
-  background: #ffffff url('../images/divide_content.png') 50% 95px no-repeat;
+  background: #ffffff url(/*'../images/divide_content.png'*/) 50% 95px no-repeat;
   height: 95px;
   padding-bottom: 36px;
   position: relative;
@@ -5891,7 +5891,7 @@ nav#checkout_progress ol li span em {
 #cart.updatable #cart_table td.remove a.item_remove:before {
   content: '';
   display: block;
-  background: url('../images/icon_remove.png') center no-repeat;
+  background: url(/*'../images/icon_remove.png'*/) center no-repeat;
   width: 25px;
   height: 25px;
 }
@@ -6503,7 +6503,7 @@ form div.set.highlight div.actions {
   font-size: 11px;
   margin: 15px 0 0 10px;
 }
-/* CHECKOUT 
+/* CHECKOUT
 -----------------------------------------------------------------------------------------------
 ===============================================================================================*/
 #checkout_confirmation {
@@ -6588,7 +6588,7 @@ form div.set.highlight div.actions {
   width: 100%;
   height: 100%;
 }
-/* STORE FINDER - STORES	
+/* STORE FINDER - STORES
 -----------------------------------------------------------------------------------------------
 ===============================================================================================*/
 section#store_search_editorials div.item.editorial_feature div.content div.header h3,
@@ -7217,7 +7217,7 @@ div.tooltip span {
 .item.editorial_widget:before,
 .item.editorial_banner:before,
 .item.editorial_navigation:before {
-  background: url('../images/divide_content.png') 50% 0 no-repeat;
+  background: url(/*'../images/divide_content.png'*/) 50% 0 no-repeat;
   content: '';
   display: block;
   height: 8px;
@@ -7597,20 +7597,20 @@ div.tooltip span {
 .item.editorial_widget div.contents .item.editorial:last-child {
   border: none;
 }
-.item.editorial_widget div.contents .item.editorial.editorial_myasics {
+.item.editorial_widget div.contents .item.editorial.editorial_mysportif {
   background: url('../images/running_man.png') right 35px no-repeat;
 }
-.item.editorial_widget div.contents .item.editorial.editorial_myasics h4 {
+.item.editorial_widget div.contents .item.editorial.editorial_mysportif h4 {
   width: 180px;
 }
-.item.editorial_widget div.contents .item.editorial.editorial_myasics li.select {
+.item.editorial_widget div.contents .item.editorial.editorial_mysportif li.select {
   margin-bottom: 18px;
   width: 180px;
 }
-.item.editorial_widget div.contents .item.editorial.editorial_myasics li.select div.select_ui {
+.item.editorial_widget div.contents .item.editorial.editorial_mysportif li.select div.select_ui {
   width: 178px;
 }
-.item.editorial_widget div.contents .item.editorial.editorial_myasics li.select div.select_ui span.label {
+.item.editorial_widget div.contents .item.editorial.editorial_mysportif li.select div.select_ui span.label {
   width: 130px;
 }
 .item.editorial_widget div.contents .item.editorial.editorial_storefinder h3 {
@@ -7641,7 +7641,7 @@ div.tooltip span {
 .editorial_wrapper  + .editorial_wrapper hr:first-child {
   display: none;
 }
-/* Overide for horizontal banner 
+/* Overide for horizontal banner
 ===================================================*/
 body section div.editorial_banner div.contents:first-child {
   padding-top: 18px;
@@ -7653,7 +7653,7 @@ a.video_link {
   position: relative;
 }
 a.video_link span.video_play_button {
-  background: url('../images/icon_play.png');
+  background: url(/*'../images/icon_play.png'*/);
   height: 0;
   overflow: hidden;
   padding: 60px 0 0;
@@ -8599,7 +8599,7 @@ span.tooltip.icon:hover {
   pointer-events: none;
   z-index: 1;
 }
-/* Global language and country selector 
+/* Global language and country selector
 -----------------------------------------------------------------------------------------------
 ===============================================================================================*/
 .tAndC_Error_Message {
@@ -8621,7 +8621,7 @@ span.tooltip.icon:hover {
 #languageSelector #lightBox {
   text-align: center;
 }
-#languageSelector #lightBox .logoAsics {
+#languageSelector #lightBox .logoSportif {
   margin: 35px 0 20px;
 }
 #languageSelector #lightBox > h2 {
@@ -8674,12 +8674,12 @@ span.tooltip.icon:hover {
 #languageSelector #lightBox > div.language_listings {
   display: inline-block;
 }
-#languageSelector #lightBox .logoAsics {
+#languageSelector #lightBox .logoSportif {
   margin: 35px 0 20px;
   padding: 0;
   left: 0;
 }
-/* Vertical line in widget component 
+/* Vertical line in widget component
 -----------------------------------------------------------------------------------------------
 ===============================================================================================*/
 vert {
@@ -8690,7 +8690,7 @@ vert {
   float: left;
   margin: 0 1em;
 }
-/* ANGULAR 
+/* ANGULAR
 -----------------------------------------------------------------------------------------------
 ===============================================================================================*/
 [ng-cloak],

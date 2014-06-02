@@ -154,7 +154,7 @@ angular.module('controllers')
 		}
 
 		// Helper methods for google analytics - not entirely necessary, but useful in dev
-		// as asicsAnalytics object was not available in this branch.
+		// as sportifAnalytics object was not available in this branch.
 		function trackPageview(pageURL) {
 			globals.googleAnalytics.trackPageview(pageURL);
 			// console.log('shoe-finder trackPageView:', pageURL);

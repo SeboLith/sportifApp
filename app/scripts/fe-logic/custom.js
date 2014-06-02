@@ -13,7 +13,7 @@ if (navigator.appName == 'Microsoft Internet Explorer') {
 document.documentElement.className = htmlClass;
 
 var globals = {
-    asicsSocialTweets: [],
+    sportifSocialTweets: [],
     autocompleteURL: '/search/autocomplete',
     autoplayInterval: 6000,
     ieLt9: (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener),
@@ -156,13 +156,13 @@ b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
 // end Mixpanel
 
 // ga is conditionally written to page if tracking id is found. All tracking handled directly in page
-// is also included within the conditional. Analytics not fired directly from this block should be routed through Asics.
+// is also included within the conditional. Analytics not fired directly from this block should be routed through Sportif.
 // GoogleAnalytics object to facilitate debugging and error handling
 (function() {
     /* Google Analytics */
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA\x2D15248285\x2D1']);
-    _gaq.push(['_setDomainName', 'www.asics.com.au']);
+    _gaq.push(['_setDomainName', 'www.sportif.com.au']);
     _gaq.push(['_setAllowLinker', true]);
 
 

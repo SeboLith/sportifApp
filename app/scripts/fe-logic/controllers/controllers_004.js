@@ -11,7 +11,7 @@ angular.module('controllers')
 	$scope.addingInProgress = false;
 	// Sizing Processing
 
-	Asics.Common.urlParamsDetect();
+	Sportif.Common.urlParamsDetect();
 
 	var model = {
 		addAttempted: false,
@@ -117,7 +117,7 @@ angular.module('controllers')
 
 	var preSetSelection = function(defaultOneSizeCode) {
 		_.each(model.selection, function(qualifier, q) {
-			if (Asics.Common.urlParams[qualifier.key]) setVariant(q, Asics.Common.urlParams[qualifier.key]);
+			if (Sportif.Common.urlParams[qualifier.key]) setVariant(q, Sportif.Common.urlParams[qualifier.key]);
 			if (!model.selection[q].value) {
 				if (qualifier.key == 'shoeWidthCode'  ) {
 					if( getOptionIndex( model.variants[q], 'standard') !== -1) {
@@ -544,7 +544,7 @@ angular.module('controllers')
 }).controller('SocialFeeds', function SocialFeeds($scope, SocialService) {
 
 	// Global namespace to collect tweets
-	var tweets = globals.asicsSocialTweets;
+	var tweets = globals.sportifSocialTweets;
 
 	// Model
 	var model = {
@@ -866,10 +866,10 @@ angular.module('controllers')
 		function retrieveSuccess (response) {
 			$scope.address = response.Items[0];
 
-			if (Asics.PostcodeAnywhere.postcodeFilter) {
+			if (Sportif.PostcodeAnywhere.postcodeFilter) {
 				var regex;
-				for(var i=0; i<Asics.PostcodeAnywhere.postcodeFilter.length; i++) {
-					regex = new RegExp('^' + Asics.PostcodeAnywhere.postcodeFilter[i]);
+				for(var i=0; i<Sportif.PostcodeAnywhere.postcodeFilter.length; i++) {
+					regex = new RegExp('^' + Sportif.PostcodeAnywhere.postcodeFilter[i]);
 					if (regex.test($scope.address.PostalCode)) {
 						$scope.address.noShippingArea = true;
 						break;

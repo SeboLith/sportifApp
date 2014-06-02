@@ -260,7 +260,7 @@ angular.module('directives')
             viewCart.on( 'click', function ( event ) {
 				event.stopImmediatePropagation();
 				closePanel();
-				Asics.Nav.animateScrollTop( event );
+				Sportif.Nav.animateScrollTop( event );
 			});
 
             quickShopOverlay.on( 'click', function ( event ) {
@@ -426,8 +426,8 @@ angular.module('directives')
 				productItemInner.stop().animate({'margin-bottom': 0 + 'px','margin-left': 0 + 'px'}, 300);
 				quickBuyPanel.children().stop().animate({'margin-left': width + 'px'}, 300);
 				if (e.currentTarget.id == 'cart_panel_id') {
-					// asics.js
-					Asics.Nav.animateScrollTop(e);
+					// sportif.js
+					Sportif.Nav.animateScrollTop(e);
 				}
 			});
 
@@ -438,8 +438,8 @@ angular.module('directives')
 		restrict: 'A',
 		link: function(scope, element, attrs) {
 			$(element).on('click', function(event) {
-				// asics.js
-				Asics.Nav.animateScrollTop();
+				// sportif.js
+				Sportif.Nav.animateScrollTop();
 			});
 		}
 	};
@@ -507,8 +507,8 @@ angular.module('directives')
 					data.pageItems = parseInt(attrs.carouselPageItems) || 1;
 					scope.$on('updated', function(event) {
 						init();
-						Asics.Common.heightMatch('div.editorial_social div.social div.viewport');
-						Asics.Common.widthMatch('div.actions.join');
+						Sportif.Common.heightMatch('div.editorial_social div.social div.viewport');
+						Sportif.Common.widthMatch('div.actions.join');
 					});
 				} else {
 					// Product (Multi)
@@ -521,7 +521,7 @@ angular.module('directives')
 						if (globals.ieLt9 && data.pageItems > 1) slides.children(':nth-child(3n+1)').addClass('first_of_page');
 						if (data.pageTotalRendered == 1) init();
 						else changePage();
-						Asics.Common.widthMatch('div.actions.join');
+						Sportif.Common.widthMatch('div.actions.join');
 					});
 				}
 			} else {
@@ -959,7 +959,7 @@ angular.module('directives')
 
 		link: function(scope, element, attrs) {
 
-			if (!Asics.PostcodeAnywhere) {
+			if (!Sportif.PostcodeAnywhere) {
 				return;
 			}
 

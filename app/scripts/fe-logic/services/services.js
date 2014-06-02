@@ -1,5 +1,5 @@
 'use strict';
-/* globals app, Asics, $, globals */
+/* globals app, Sportif, $, globals */
 
 /* Services */
 
@@ -170,7 +170,7 @@ angular.module('services')
 
     };
 }).factory('CartService', function($rootScope, $resource, $window, GTMService) {
-
+    console.log('In CartService');
     var service = $resource(globals.contextPath + '/json/cart/:action.json', {_: new Date().getTime()}, {
         getCurrent:   { method: 'GET',  params: { action: 'getCurrent' } },
         updateLine:   { method: 'POST', params: { action: 'updateLine' } },
@@ -187,8 +187,8 @@ angular.module('services')
 
 	// Delay for DOM update
 	var updateCartHeight = function(product) {
-		// asics.js
-        Asics.Nav.updateCartHeight();
+		// sportif.js
+        Sportif.Nav.updateCartHeight();
     };
 
 
@@ -303,12 +303,12 @@ angular.module('services')
         find: function (searchTerm, lastId, success, error) {
             lastId = lastId != null ? lastId : '';
 
-            var url = Asics.PostcodeAnywhere.findUrl
-                        .concat('?Key=' + Asics.PostcodeAnywhere.apiKey)
+            var url = Sportif.PostcodeAnywhere.findUrl
+                        .concat('?Key=' + Sportif.PostcodeAnywhere.apiKey)
                         .concat('&SearchTerm=' + searchTerm)
                         .concat('&LastId=' + lastId)
-                        .concat('&Country=' + Asics.PostcodeAnywhere.country)
-                        .concat('&LanguagePreference=' + Asics.PostcodeAnywhere.language)
+                        .concat('&Country=' + Sportif.PostcodeAnywhere.country)
+                        .concat('&LanguagePreference=' + Sportif.PostcodeAnywhere.language)
                         .concat('&$Top=500'); // limit response to 500 results, to prevent UI binding performance issues
 
             $http.jsonp(url + "&callback=JSON_CALLBACK")
@@ -321,8 +321,8 @@ angular.module('services')
         },
 
         retrieve: function(id, success, callback) {
-            var url = Asics.PostcodeAnywhere.retrieveUrl
-                        .concat('?Key=' + Asics.PostcodeAnywhere.apiKey)
+            var url = Sportif.PostcodeAnywhere.retrieveUrl
+                        .concat('?Key=' + Sportif.PostcodeAnywhere.apiKey)
                         .concat('&Id=' + id);
 
             $http.jsonp(url + "&callback=JSON_CALLBACK")

@@ -17,44 +17,44 @@ function registerNewsletter() {
     });
 }
 
-var Asics = {
+var Sportif = {
 
 	Common : {
 
 		init : function(){
 
 			/* Visual */
-			Asics.Common.heightMatch('footer nav#tertiary li.level_1');
-			Asics.Common.heightMatch('#address_list_other div.vcard');
-			//Asics.Common.heightMatch('#store_results li.store');
-			Asics.Common.heightMatch('#product_technologies .technology h3');
-			Asics.Common.heightMatch('div.editorial_navigation ul.navigation li div');
-			Asics.Common.widthMatch("div.actions.join");
-			Asics.Common.quote();
-			Asics.Common.languageSelector();
+			Sportif.Common.heightMatch('footer nav#tertiary li.level_1');
+			Sportif.Common.heightMatch('#address_list_other div.vcard');
+			//Sportif.Common.heightMatch('#store_results li.store');
+			Sportif.Common.heightMatch('#product_technologies .technology h3');
+			Sportif.Common.heightMatch('div.editorial_navigation ul.navigation li div');
+			Sportif.Common.widthMatch("div.actions.join");
+			Sportif.Common.quote();
+			Sportif.Common.languageSelector();
 
 			/* Interactions */
-			Asics.Common.navigationPrimary();
-			Asics.Common.cookie();
-			Asics.Common.searchAutocomplete();
-			Asics.Common.searchResultsTabs();
-			Asics.Common.videoContent('div.item.video');
-			Asics.Common.newsletterSignup();
-			Asics.Common.countrySelector();
-			Asics.Common.login();
-			Asics.Common.heroAnalytics();
-			Asics.Common.highlightsAnalytics();
-			Asics.Common.PDPAnalytics();
-			Asics.Common.navigationAnalytics();
-			Asics.Common.trackOutboundLinks();
-			Asics.Common.eventsPageAnalytics();
-			Asics.Common.athletesPageAnalytics();
-			Asics.Form.init();
-			Asics.IsotopeFiltering.init();
-			Asics.Filtering.init();
-			Asics.StoreFinder.init();
-			Asics.ProductDetail.init();
-			Asics.Checkout.init();
+			Sportif.Common.navigationPrimary();
+			Sportif.Common.cookie();
+			Sportif.Common.searchAutocomplete();
+			Sportif.Common.searchResultsTabs();
+			Sportif.Common.videoContent('div.item.video');
+			Sportif.Common.newsletterSignup();
+			Sportif.Common.countrySelector();
+			Sportif.Common.login();
+			Sportif.Common.heroAnalytics();
+			Sportif.Common.highlightsAnalytics();
+			Sportif.Common.PDPAnalytics();
+			Sportif.Common.navigationAnalytics();
+			Sportif.Common.trackOutboundLinks();
+			Sportif.Common.eventsPageAnalytics();
+			Sportif.Common.athletesPageAnalytics();
+			Sportif.Form.init();
+			Sportif.IsotopeFiltering.init();
+			Sportif.Filtering.init();
+			Sportif.StoreFinder.init();
+			Sportif.ProductDetail.init();
+			Sportif.Checkout.init();
 		},
 
 		cookie: function() {
@@ -91,15 +91,15 @@ var Asics = {
 		},
 
 		urlParamsDetect: function(){
-			if (!Asics.Common.urlParams) {
-				Asics.Common.urlParams = {};
+			if (!Sportif.Common.urlParams) {
+				Sportif.Common.urlParams = {};
 				var match,
 					pl     = /\+/g, // Regex for replacing addition symbol with a space
 					search = /([^&=]+)=?([^&]*)/g,
 					decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
 					query  = window.location.search.substring(1);
 				while (match = search.exec(query))
-					Asics.Common.urlParams[decode(match[1])] = decode(match[2]);
+					Sportif.Common.urlParams[decode(match[1])] = decode(match[2]);
 			}
 		},
 
@@ -137,8 +137,8 @@ var Asics = {
 						item.siblings('.editorial').each(function(){
 							var sibling = $(this)
 							if(sibling.offset().top == top){
-								sibling.css({'height': item.height() + 'px'}).addClass('video_active');  
-							}	
+								sibling.css({'height': item.height() + 'px'}).addClass('video_active');
+							}
 						});
 
 					}
@@ -150,7 +150,7 @@ var Asics = {
 			var links = $('#primary li, body:not(.cart) #minicart, #cart #continue_shopping');
 
 			links.bind('click', function(e) {
-				Asics.Nav.panelsAnimation(e, this, links);
+				Sportif.Nav.panelsAnimation(e, this, links);
 			});
 		},
 
@@ -163,7 +163,7 @@ var Asics = {
 				check: function() {
 					if ($(window).height() < $('#languageSelector').height()) {
 						$('#languageSelector').css('height', $(window).height()-parseInt($('#languageSelector').css('border-top')));
-					} 
+					}
 				},
 				show: function(){
 					this.check();
@@ -177,7 +177,7 @@ var Asics = {
 			$('#website_country').bind('click', function(event) {
 				event.stopPropagation()
 				action.show();
-				
+
 				$("header, #content, #closeChangeLanguage").not('#languageSelector').one('click', function(event) {
   					action.hide();
 				});
@@ -219,10 +219,10 @@ var Asics = {
 			var moreButton = $('#autocomplete_more_button', search);
 
 			// New search URLs
-			searchForm.submit(function(e){				
+			searchForm.submit(function(e){
 				e.preventDefault();
 				var term = $.trim(searchInput.val().replace(/\//g, ' '));
-				window.location.href = searchForm.attr('action') + 
+				window.location.href = searchForm.attr('action') +
 					((term.length)
 						? '/' + encodeURIComponent(term).replace(/\%20/g, '+')
 						: ''
@@ -255,13 +255,13 @@ var Asics = {
 				minLength: 3,
 				open: function(event, ui) {
 					$(".ui-menu").css({
-						"z-index": 10000, 
-						"position": "absolute", 
+						"z-index": 10000,
+						"position": "absolute",
 						"top": searchInput.offset().top + searchInput.outerHeight()
-					}); 
+					});
 				},
 				close: function(event, ui) { $(".ui-menu").css({"z-index": -1}); },
-				select: function(event, ui) { 
+				select: function(event, ui) {
 					window.location.href = globals.contextPath + ui.item.url;
 				},
 				autoFocus: false
@@ -291,7 +291,7 @@ var Asics = {
 					null,
 					href
 				);
-			}			
+			}
 
 			function format(data) {
 				var container = $('.ui-menu');
@@ -349,7 +349,7 @@ var Asics = {
 		loginAnalytics: function() {
 			if($.cookie('login') == 'attempted'){
 				$.removeCookie('login', {path: '/'});
-				globals.googleAnalytics.trackEvent('Login', 'Submit', 'Returning ASICS Customers', 4, true);
+				globals.googleAnalytics.trackEvent('Login', 'Submit', 'Returning SPORTIF Customers', 4, true);
 			}
 		},
 
@@ -357,11 +357,11 @@ var Asics = {
 
 			// Search page tabs (matching products / matching content)
 			$('.search .tab').click(function(e) {
-				
+
 				var $this = $(this);
 
 				globals.googleAnalytics.trackEvent(
-					'Tab Interaction', 
+					'Tab Interaction',
 					$this.data('ga-action'),
 					null,
 					null,
@@ -370,7 +370,7 @@ var Asics = {
 				);
 
 				e.preventDefault();
-			});			
+			});
 		},
 
 		newsletterSignup: function() {
@@ -380,7 +380,7 @@ var Asics = {
 
 			// Unchecked newsletter
 			//$('#registerForm').find('input#newsletter').prop("checked", false);
-			
+
 			form.on("submit", function(event){
 				var email = $(this).find('input').val();
 				event.preventDefault();
@@ -404,7 +404,7 @@ var Asics = {
 					error: function(){
 						messageElement = getMessage();
 						messageElement.addClass("error").html("<span class='icon'>!</span>Error");
-					} 
+					}
 				});
 				function getMessage() {
 					var $element = '';
@@ -461,7 +461,7 @@ var Asics = {
 
 		// Add mixpanel tagging to highlights block
 		highlightsAnalytics: function() {
-			$('.home .editorial_highlights .contents .item.editorial').on('click', function() { 
+			$('.home .editorial_highlights .contents .item.editorial').on('click', function() {
 				globals.mixpanel.register({
 					'Search-Currently advertised': $(this).find('.header h3').text()
 				});
@@ -471,7 +471,7 @@ var Asics = {
 		PDPAnalytics: function() {
 			var productPanel = $('#product_lead');
 			var productName = productPanel.find('h1[itemprop="name"]').text();
-			
+
 			// tag interaction with the accordion tabs
 			$('#product_information .accordion_header', productPanel).click(function(){
 				var tabName = $(this).text();
@@ -494,7 +494,7 @@ var Asics = {
 					$this = $(this);
 					href = $this.attr('href');
 
-					// don't track autocomplete more button 
+					// don't track autocomplete more button
 					if($this.attr('id') == 'more_button'){
 						return;
 					}
@@ -550,10 +550,10 @@ var Asics = {
 		        // Be careful with this if you use subdomains
 		        if (stripPortNumber(e.currentTarget.host) !== stripPortNumber(window.location.host)) {
 
-		        	// add special cases below, first up is video which has its own logic 
+		        	// add special cases below, first up is video which has its own logic
 		        	// to open in an overlay
-		            if ($this.hasClass('launch_video') 
-		            	|| target === '_blank' 
+		            if ($this.hasClass('launch_video')
+		            	|| target === '_blank'
 		            	|| target === '_new') {
 			            	// preserve url for output but not for linking
 			            	var url = href;
@@ -568,19 +568,19 @@ var Asics = {
 		},
 
 		eventsPageAnalytics: function() {
-			
+
 			// If we're on the events page, register a super property containing event name.
 			// Although the property name is race, it will register any event as there is no
 			// way of distinguishing it is a race.
 			if ($('body.event').length) {
 				globals.mixpanel.register({
 					'Search-Race name': $('#event_details > .item:first-child h2').text()
-				});				
+				});
 			}
 		},
 
 		athletesPageAnalytics: function() {
-			
+
 			// For most markets teams and athletes appear on the same page so we track 'em
 			// both, even if the super property name is a bit misleading.
 			if ($('body.athlete').length) {
@@ -592,7 +592,7 @@ var Asics = {
 			function sendAnalytics(title) {
 				globals.mixpanel.register({
 					'Search-Athlete name': title
-				});				
+				});
 			}
 		},
 
@@ -626,16 +626,16 @@ var Asics = {
 
 			$viewport
 				.bind('mousewheel scroll mousedown',preventDefaultAction) //disable manual scroll while automated scroll happening
-				.animate({scrollTop:scrollTo}, 400, function() { 
-					$('#minicart').not('.quick').click(); 
+				.animate({scrollTop:scrollTo}, 400, function() {
+					$('#minicart').not('.quick').click();
 					$(this).unbind('mousewheel scroll mousedown',preventDefaultAction); //enable manual scroll when automated scroll finished
 				});
 		},
 		updateCartHeight: function() {
 			if ($('#panels > div:visible').length > 0) {
-	            setTimeout(function(){ 
+	            setTimeout(function(){
 	                $('#panels').stop().animate({'height':$('#cart_panel').outerHeight()}, 500);
-	            }, 50); 
+	            }, 50);
 	        }
 		},
 		panelsAnimation: function(e, that, links) {
@@ -663,26 +663,26 @@ var Asics = {
 					}
 
 	  				if (a.hasClass('panel_link')) {
-	  					e.preventDefault();			
+	  					e.preventDefault();
 	  					a.toggleClass('panel_active active');
 	  					if (a.hasClass('panel_active')) {
 	  						if (links.find('a.panel_active').length > 1) {
 	  							// setup for read element width
 	  							if (!$element.hasClass('split')) {
-	  								$element.css({ 
-	  									position: "absolute", 
-	  									visibility: "hidden", 
-	  									display: "block" 
+	  								$element.css({
+	  									position: "absolute",
+	  									visibility: "hidden",
+	  									display: "block"
 	  								});
 	  							}
-	  							
+
 	  							$('#panels > div:visible').fadeOut(fadeSpeed, function() {
 	  								$element.removeAttr('style').fadeIn(fadeSpeed);
 	  							});
 	  						} else {
 	  							$element.fadeIn(fadeSpeed);
 	  						}
-	 
+
 	  						if (!$element.hasClass('split')) {
 	  							this.splitColumn($element);
 	  							$element.addClass('split');
@@ -777,10 +777,10 @@ var Asics = {
 	Form: {
 
 		init: function(){
-			Asics.Form.dropdowns.enableAll();
-			Asics.Form.focusField();
-			Asics.Form.submitLink();
-			Asics.Form.updateSecurityIcon();
+			Sportif.Form.dropdowns.enableAll();
+			Sportif.Form.focusField();
+			Sportif.Form.submitLink();
+			Sportif.Form.updateSecurityIcon();
 		},
 
 		dropdowns: {
@@ -801,7 +801,7 @@ var Asics = {
 			},
 			enableAll: function() {
 				$('select').not('.facet, [data-select]').each(function(i, e) {
-					Asics.Form.dropdowns.enableDropdown($(this));
+					Sportif.Form.dropdowns.enableDropdown($(this));
 				});
 			}
 		},
@@ -840,7 +840,7 @@ var Asics = {
 	ProductDetail: {
 
 		init: function() {
-			Asics.ProductDetail.zoom();
+			Sportif.ProductDetail.zoom();
 		},
 
 		zoom: function() {
@@ -854,7 +854,7 @@ var Asics = {
 				if (primaryImages.length == 1) {
 					zoomViewer = $('<li class="primary zoom"><img src="'+ zoomLink.attr('href') + '" alt=""></li>')
 						.insertBefore('li.primary').css({'height': primaryImages.height()});
-					zoomViewer.children('img').load(function() { 
+					zoomViewer.children('img').load(function() {
 						zoomViewer.viewport().viewport('content').draggable({containment: 'parent'});
 					});
 					primaryImages = primaryImages.add(zoomViewer);
@@ -867,12 +867,12 @@ var Asics = {
 	},
 
 	Checkout: {
-		
+
 		init : function() {
-			Asics.Checkout.deliveryMethods();
-            Asics.Checkout.ajpPaymentMethods();
-			Asics.Checkout.billingAddress();
-            Asics.Checkout.aopPaymentDetails();
+			Sportif.Checkout.deliveryMethods();
+            Sportif.Checkout.ajpPaymentMethods();
+			Sportif.Checkout.billingAddress();
+            Sportif.Checkout.aopPaymentDetails();
 		},
 
 		deliveryMethods : function() {
@@ -900,8 +900,8 @@ var Asics = {
                 var extraRefreshAddressForm = function(){};
 
 				// is this AOP? if not use default
-				if(typeof(Asics.AOP) !== "undefined" && typeof(Asics.AOP.storeDeliveryAddress) === "function") {
-					Asics.AOP.storeDeliveryAddress();
+				if(typeof(Sportif.AOP) !== "undefined" && typeof(Sportif.AOP.storeDeliveryAddress) === "function") {
+					Sportif.AOP.storeDeliveryAddress();
 				}else{
 					area.find(':input').each(function() {
 						var input = $(this);
@@ -909,7 +909,7 @@ var Asics = {
 					});
 				}
                 // is this AAC
-                if(typeof(Asics.AAC) !== "undefined") {
+                if(typeof(Sportif.AAC) !== "undefined") {
                     var country = form.find('.select.address-country');
                     var state = area.filter('.select.address-state');
                     afterRefreshAddressForm = function(){
@@ -952,9 +952,9 @@ var Asics = {
                         });
                         document.getElementById("address.state").options[0].selected = true;
                         var state = area.filter('.select');
-                        state.each(function() { 
+                        state.each(function() {
                         	var $this = $(this);
-                        	$this.find('span.label').text($this.find('select option:selected').text());	
+                        	$this.find('span.label').text($this.find('select option:selected').text());
                         });
 					}
 				}
@@ -962,7 +962,7 @@ var Asics = {
 				toggle.change(function() {
 					refreshAddressForm();
 				});
-				
+
 				refreshAddressForm();
 			});
 		},
@@ -1090,7 +1090,7 @@ var Asics = {
 				// cap past events
 				var past = events.filter('.past_event').slice(0, pastEventsMax).show();
 				var pastLength = past.length;
-				
+
 				// cap upcoming events based on filter and pagination
 				var upcoming = events.filter('.upcoming_event');
 				var upcomingLength = upcoming.length;
@@ -1124,45 +1124,45 @@ var Asics = {
 
 /* Init */
 $(function() {
-	Asics.Common.init();
+	Sportif.Common.init();
 });
 
 /* Undersocre Mixins */
 
 _.mixin({
- 
+
   // Get/set the value of a nested property
   deep: function (obj, key, value) {
- 
+
     var keys = key.replace(/\[(["']?)([^\1]+?)\1?\]/g, '.$2').replace(/^\./, '').split('.'),
         root,
         i = 0,
         n = keys.length;
- 
+
     // Set deep value
     if (arguments.length > 2) {
- 
+
       root = obj;
       n--;
- 
+
       while (i < n) {
         key = keys[i++];
         obj = obj[key] = _.isObject(obj[key]) ? obj[key] : {};
       }
- 
+
       obj[keys[i]] = value;
- 
+
       value = root;
- 
+
     // Get deep value
     } else {
       while ((obj = obj[keys[i++]]) != null && i < n) {};
       value = i < n ? void 0 : obj;
     }
- 
+
     return value;
   }
- 
+
 });
 
 _.mixin({
