@@ -1,7 +1,7 @@
 'use strict';
 /*globals angular */
 
-angular.module('ProductList.directives', [])
+angular.module('directives')
 	// Get the inline width for the ratings block based on supplied rating
 	.directive('plRating', function() {
 		return {

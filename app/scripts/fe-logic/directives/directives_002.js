@@ -2,7 +2,8 @@
 
 /* Directives */
 
-app.directive('ajax', function() { // [data-ajax]
+angular.module('directives')
+.directive('ajax', function() { // [data-ajax]
 	return {
 		link: function(scope, element, attrs) {
 			element.on('click', function(e) {
@@ -197,7 +198,7 @@ app.directive('ajax', function() { // [data-ajax]
     return {
         restrict: 'A',
         link: function(scope, element, attr) {
-            
+
             var quickShopInner = element.find('.inner'),
             	quickShopOverlay = $('.quick_shop_overlay'),
             	viewCart = element.find('.panel_link'),
@@ -279,7 +280,7 @@ app.directive('ajax', function() { // [data-ajax]
 		link: function ( scope, element, attrs ) {
 
 			var	product = element.closest('article.product'),
-				
+
 				positionPanel = function () {
 					var previous = product.prev(),
 						next = product.next(),
@@ -415,7 +416,7 @@ app.directive('ajax', function() { // [data-ajax]
 					'left': productItemOffset.left + 'px',
 					'top': productItemOffset.top + 'px'
 				}).show().children().css({'margin-left': width + 'px'}).stop().animate({'margin-left':'0'}, 300);
-				
+
 
 			};
 
@@ -635,7 +636,7 @@ app.directive('ajax', function() { // [data-ajax]
 						content.slideDown(transition).children('div').delay(transitionDownDelay).animate({'opacity': 1}, transitionFade);
 						panel.addClass('active').siblings().removeClass('active').children('div').slideUp(transition).children('div').delay(transitionDownDelay).animate({'opacity':0}, transitionFade);
 					} else {
-						content.slideUp(transition).children('div').animate({'opacity': 0}, transitionFade);						
+						content.slideUp(transition).children('div').animate({'opacity': 0}, transitionFade);
 						panel.removeClass('active');
 					}
 				});
@@ -719,7 +720,7 @@ app.directive('ajax', function() { // [data-ajax]
 
 							// check each subVariant and cross reference to see if it should be disabled
 							// for this size
-							_.each(data.item.subVariants, function(element, id) { 
+							_.each(data.item.subVariants, function(element, id) {
 								// check for a subVariant option match
 								if(element.value == option.attr('variant')){
 									// size and subVariant must be in stock
@@ -763,7 +764,7 @@ app.directive('ajax', function() { // [data-ajax]
 						var variants = scope.productData.variants[index].sizes;
 
 						if(select.attr('id') == element.value){
-							
+
 							$('option[value!=""]', select).each(function(i) {
 
 								// angularjs zero indexes options, lets add the correct variant to each one
@@ -810,7 +811,7 @@ app.directive('ajax', function() { // [data-ajax]
 	}
 }).directive('productSelect', function($timeout) {
 	// Multiple carousels can appear on a single page so this formats
-	// the label property to include the index of the carousel the 
+	// the label property to include the index of the carousel the
 	// selected product appears in eg. 1:2 = 2nd item in the 1st carousel
 	function format($a, label) {
 		var title = '';
@@ -831,7 +832,7 @@ app.directive('ajax', function() { // [data-ajax]
 
 				element.find('a').on('click', function(e) {
 					e.preventDefault();
-					
+
 					var anchor = $(this);
 					var formatter = format(anchor, attrs.gaLabel);
 
@@ -876,13 +877,13 @@ app.directive('ajax', function() { // [data-ajax]
 				scope.dialogStyle.width = attrs.width;
 			if ( attrs.height )
 				scope.dialogStyle.height = attrs.height;
-			
+
 			scope.hideModal = function () {
 				scope.show = false;
 			};
 
 			$( document ).keyup( function ( e ) {
-				if ( e.keyCode == 27 ) { 
+				if ( e.keyCode == 27 ) {
 					if( !scope.$$phase ){
 						scope.$apply( scope.hideModal );
 					}
@@ -903,7 +904,7 @@ app.directive('ajax', function() { // [data-ajax]
 			var width = element.width(),
 				viewport = element.find('.viewport'),
 				elements = element.find('li');
-			
+
 			scope.slideTotal = elements.length;
 			scope.active = 0;
 			scope.loadedImages = [true];
@@ -919,7 +920,7 @@ app.directive('ajax', function() { // [data-ajax]
 					scope.active === elements.length - 1  ? scope.active = 0 : scope.active++;
 				}
 				else {
-					scope.active === 0 ? scope.active = elements.length - 1 : scope.active--; 
+					scope.active === 0 ? scope.active = elements.length - 1 : scope.active--;
 				}
 				viewport.css('left',  scope.active * -width);
 				scope.loadedImages[ scope.active ] = true;
@@ -1228,7 +1229,7 @@ app.directive('ajax', function() { // [data-ajax]
 				close = element.find( 'a.close_stores' ),
 				storesList = element.find( 'ul.stores' ),
 				storeListHeader = element.find( 'div.store_list_header' );
-			
+
 			open.on( 'click', function () {
 				sideOpen = true;
 				open.css( 'left', '-50px' );
@@ -1253,27 +1254,3 @@ app.directive('ajax', function() { // [data-ajax]
 		}
 	}
 }]);
-// .directive( "zoomButton", [ function (){
-// 	return{
-// 		restrict: 'A',
-// 		link: function ( $scope, element, attributes ) {
-// 			var cta = element.find( '.zoom_button' ),
-// 				offsetHorizontal = cta.outerWidth()/2,
-// 				offsetVertical = 30,
-// 				image = element.find('#imageLink').find('img');
-				
-// 				element.on( 'mouseenter', function () {
-// 					cta.show();
-// 				});
-				
-// 				element.on( 'mouseleave', function () {
-// 					cta.hide();
-// 				});
-
-// 				image.on( 'mousemove', function ( event ) {
-// 					cta.css( 'left', event.clientX-offsetHorizontal );
-// 					cta.css( 'top', event.clientY-offsetVertical );
-// 				});
-// 		}
-// 	}
-// }]);

@@ -1,7 +1,7 @@
 'use strict';
 /*globals angular, _ */
 
-angular.module('ShoeFinder.directives', [])
+angular.module('directives')
 	// Grand title for something that hides outgoing view and fades in the new one
 	.directive('sfViewManager', function() {
 		return {
@@ -121,7 +121,7 @@ angular.module('ShoeFinder.directives', [])
 					var $target = angular.element(event.target),
 						$this = angular.element(this),
 						filter = scope.$storage.filters[group];
-				
+
 					// Ignore clicks on the hidden input field
 					if (!$target.is('input')) {
 
@@ -204,7 +204,7 @@ angular.module('ShoeFinder.directives', [])
 					}
 				});
 
-				// Bind loader position to mouse position 
+				// Bind loader position to mouse position
 				scope.$watch('position', function(newValue, oldValue) {
 					if (newValue !== oldValue) {
 						position(newValue.x, newValue.y);

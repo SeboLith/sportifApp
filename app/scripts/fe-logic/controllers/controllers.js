@@ -2,7 +2,7 @@
 /*global angular, globals*/
 
 /* Controllers */
-angular.module('ProductList.controllers', [])
+angular.module('controllers')
 	// Define the main ProductList controller
 	.controller('ProductListCtrl', function ProductListCtrl($scope, $rootScope, $localStorage, ProductListService, QuickBuyService) {
 
@@ -14,7 +14,7 @@ angular.module('ProductList.controllers', [])
 
 		// We'll persist sort data to local storage
 		$scope.$storage = $localStorage.$default({
-			// Backend is effectively hardcoded to return 15 
+			// Backend is effectively hardcoded to return 15
 			// results by default, so limit is a bit redundant
 			// until we request all ( * )
 			sort: {
@@ -42,9 +42,9 @@ angular.module('ProductList.controllers', [])
 
 		// Handles changes to sort options
 		function handleSortChange(newValue, oldValue) {
-			
-			// Stops this firing on init or when sort property has 
-			// been reset programmatically. 
+
+			// Stops this firing on init or when sort property has
+			// been reset programmatically.
 			if (newValue !== oldValue && !resetting) {
 				// We fire off an AJAX call each time sort property changes
 				$scope.productListService.getProducts(
@@ -55,10 +55,10 @@ angular.module('ProductList.controllers', [])
 			resetting = false;
 		}
 
-		// Set up listeners and watches. 
+		// Set up listeners and watches.
 		$scope.$on('productList.loaded', handleProductsLoaded);
 		$scope.$on('productListData.reset', handleReset);
-		
+
 		$scope.$watch('$storage.sort', handleSortChange, true);
 
 		// Invoked by show more button (in fact, it shows all)

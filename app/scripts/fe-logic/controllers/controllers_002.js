@@ -2,7 +2,7 @@
 /*global angular, globals*/
 
 /* Controllers */
-angular.module('Returns.controllers', [])
+angular.module('controllers')
 	// Define the Returns controller
 	.controller('ReturnsCtrl', function ReturnsCtrl($scope, $http, returnData) {
 

@@ -2,7 +2,8 @@
 
 /* Filters */
 
-app.filter('limitToIf', function() {
+angular.module('directives')
+.filter('limitToIf', function() {
 	return function(input, limit, condition) {
 		if (condition && input.length > limit) {
 			var hasActive = false;

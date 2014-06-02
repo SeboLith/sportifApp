@@ -1,7 +1,8 @@
 'use strict';
 
 /* Controllers */
-app.controller('App', function App($scope){
+angular.module('controllers')
+.controller('App', function App($scope){
 	$scope.sites = function(sites){
 		$scope.sites = sites;
 	}
@@ -9,7 +10,7 @@ app.controller('App', function App($scope){
 
 	$scope.addingInProgress = false;
 	// Sizing Processing
-	
+
 	Asics.Common.urlParamsDetect();
 
 	var model = {
@@ -55,7 +56,7 @@ app.controller('App', function App($scope){
 		var variants = [];
 		// Loop variant rows
 		_.each(sizeOptions, function(size, s) {
-			var options, 
+			var options,
 				option,
 				styleNumber = size.styleNumber;
 			// Collate into arrays (per qualifier)
@@ -202,13 +203,13 @@ app.controller('App', function App($scope){
 		// Only fire these if an item has been added.
 		// itemAddAttempted event is fired twice (see comment below on handler)
 		// and for reasons unknown, genderData property is undefined the second
-		// time the handler is invoked. This provides us a hook to prevent the 
-		// analytics being called twice, though long-term a solution for the 
-		// repeated event should be found. 
+		// time the handler is invoked. This provides us a hook to prevent the
+		// analytics being called twice, though long-term a solution for the
+		// repeated event should be found.
 		if (add && itemData.genderData) {
 
 			globals.mixpanel.people.set('Last item', new Date());
-			
+
 			globals.mixpanel.track('Add Item to Cart', {
 				'Product id': itemData.code,
 				'Product Name': itemData.name,
@@ -274,8 +275,8 @@ app.controller('App', function App($scope){
 	};
 	// This, despite the misleading name, is fired on success of any of the following
 	// methods in CartService:- updateLine, addCoupon, removeCoupon, addItem
-	// It's also fired twice on pages with two instances of this controller, such as the 
-	// ProductDetails page on the desktop version of the site. 
+	// It's also fired twice on pages with two instances of this controller, such as the
+	// ProductDetails page on the desktop version of the site.
 	// Too close to release to deal with it now, but addressing these issues shoule be a
 	// priority as they are likely to cause further issues in the longer term.
 	$scope.$on('itemAddAttempted', function(e, data){
@@ -583,7 +584,7 @@ app.controller('App', function App($scope){
 	$scope.cartRemoveCoupon = CartService.removeCoupon;
 }).controller( 'Modal', function ( $scope ) {
 	$scope.modalShown = false;
-	
+
 	$scope.toggleModal = function () {
 		$scope.modalShown = !$scope.modalShown;
 	};
@@ -600,7 +601,7 @@ app.controller('App', function App($scope){
 		if( $scope.quickShop.contents.sizeWrapper ) {
 			var sizeGuide = ( $scope.quickShop.contents.sizeWrapper.sizes[0].qualifier == 'shoeSizeCode' ||
 				$scope.quickShop.contents.sizeWrapper.sizes[0].qualifier == 'shoeSizeCodeUK' ) ? 'shoe-size-guide' : 'clothing-size-guide';
-			
+
 			$scope.quickShop.contents.sizeWrapper.guideUrl = globals.contextPath + '/' + sizeGuide;
 		}
 		else {
@@ -618,7 +619,7 @@ app.controller('App', function App($scope){
 			width.stockLevelStatus = { 'code' : 'outOfStock' };
 			var i,
 				length = width.sizeWrapper.sizes.length;
-			
+
 			for( i=0; i < width.sizeWrapper.sizes.length; i++ ) {
 				if( width.sizeWrapper.sizes[i].stockLevelStatus.code != 'outOfStock' ) {
 					width.stockLevelStatus.code = 'inStock';
@@ -679,13 +680,13 @@ app.controller('App', function App($scope){
 		// Only fire these if an item has been added.
 		// itemAddAttempted event is fired twice (see comment below on handler)
 		// and for reasons unknown, genderData property is undefined the second
-		// time the handler is invoked. This provides us a hook to prevent the 
-		// analytics being called twice, though long-term a solution for the 
-		// repeated event should be found. 
+		// time the handler is invoked. This provides us a hook to prevent the
+		// analytics being called twice, though long-term a solution for the
+		// repeated event should be found.
 		if ( add && itemData.genderData ) {
 
 			globals.mixpanel.people.set( 'Last item', new Date() );
-			
+
 			globals.mixpanel.track( 'Add Item to Cart', {
 				'Product id': itemData.code,
 				'Product Name': itemData.name,
@@ -790,7 +791,7 @@ app.controller('App', function App($scope){
 					if( $scope.selectedSize === null && $scope.selectedWidth === undefined ){
 						$scope.quickShop.contents.unselectedMsg = $scope.quickShop.contents.widthWrapper.widths[ 0 ].sizeWrapper.typeName +
 							' / ' + $scope.quickShop.contents.widthWrapper.typeName;
-							
+
 					}
 					else {
 						if( $scope.selectedSize === null ) {
@@ -851,7 +852,7 @@ app.controller('App', function App($scope){
 			else if (response.Items.length && response.Items[0].Error) {
 				$scope.addresses = [];
 				$scope.results = 0;
-				return; 
+				return;
 			}
 			$scope.addresses = response.Items;
 			$scope.results = $scope.addresses.length;
@@ -874,13 +875,13 @@ app.controller('App', function App($scope){
 						break;
 					}
 				};
-			}			
+			}
 			$scope.updateAddressForm();
 			$scope.resetFind();
 			$scope.pacActive = false;
 			$scope.results = 0;
 		}
-		
+
 		$scope.select = function (address) {
 			if (address.Next === 'Find') {
 				$scope.find(address.Text, address.Id);

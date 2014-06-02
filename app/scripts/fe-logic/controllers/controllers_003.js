@@ -3,11 +3,11 @@
 
 /* Controllers */
 
-// Package by feature and use modules for layers within the package as described 
-// under the large to very large project structure outline here:  
+// Package by feature and use modules for layers within the package as described
+// under the large to very large project structure outline here:
 // http://codingsmackdown.tv/blog/2013/04/19/angularjs-modules-for-great-justice/
 
-angular.module('ShoeFinder.controllers', [])
+angular.module('controllers')
 	// Define the main ShoeFinder controller
 	.controller('ShoeFinderCtrl', function ShoeFinder($scope, $rootScope, $location, $localStorage, ProductListService) {
 
@@ -21,7 +21,7 @@ angular.module('ShoeFinder.controllers', [])
 			{ id: 'pro', url: 'pronation', menu: true, label: 'Pronation', type: 'radio', data: true },
 			{ id: 'results', url: 'results', menu: false, data: true }
 		];
-		
+
 		// We'll persist filter data to local storage
 		$scope.$storage = $localStorage.$default({
 			filters: {
@@ -56,7 +56,7 @@ angular.module('ShoeFinder.controllers', [])
 			$location.path('/' + id);
 		}
 
-		// Call the product list service with the currently 
+		// Call the product list service with the currently
 		// selected filters and sort options
 		function getData() {
 			$scope.productListService.getProducts(
@@ -75,7 +75,7 @@ angular.module('ShoeFinder.controllers', [])
 			// Reset filters from this point forwards
 			resetFrom(_.indexOf($scope.views, nextView));
 
-			// Load product data if required for this particular view.  
+			// Load product data if required for this particular view.
 			// If no data is to be loaded for this view, we simply advance
 			if (nextView.data) {
 				getData();
@@ -111,7 +111,7 @@ angular.module('ShoeFinder.controllers', [])
 			$scope.resultCount = result.resultCount;
 
 			// Only move to the next view if we have results,
-			// otherwise show an error. 
+			// otherwise show an error.
 			if ($scope.products.length) {
 				$scope.currentView = nextView;
 			} else {
@@ -121,7 +121,7 @@ angular.module('ShoeFinder.controllers', [])
 
 		// Handles analytics required on view changes
 		function handleViewAnalytics(newValue, oldValue) {
-			
+
 			if (newValue && newValue !== oldValue) {
 
 				var index = getCurrentIndex();
@@ -170,14 +170,14 @@ angular.module('ShoeFinder.controllers', [])
 			// console.log('shoe-finder setCustomVar:', slot, name, value, scope);
 		}
 
-		// Set up listeners and watches. 
+		// Set up listeners and watches.
 		$scope.$on('productList.loading', handleProductsLoading);
 		$scope.$on('productList.loaded', handleProductsLoaded);
 
 		$scope.$watch('location.path()', handlePathChange);
 		$scope.$watch('currentView', handleViewAnalytics);
 
-		// Advances to the next view 
+		// Advances to the next view
 		$scope.next = function() {
 
 			// Get the index of the current view
@@ -191,9 +191,9 @@ angular.module('ShoeFinder.controllers', [])
 				$rootScope.$broadcast('productListData.reset');
 			}
 
-			// Resolve the next view 
+			// Resolve the next view
 			view = $scope.views[++ index];
-			
+
 			// Now update the URL
 			setLocation(view.id);
 		};

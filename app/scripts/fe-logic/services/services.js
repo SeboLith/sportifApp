@@ -3,7 +3,8 @@
 
 /* Services */
 
-app.factory('TransitionEndService', function($window) {
+angular.module('services')
+.factory('TransitionEndService', function($window) {
     var transitionEnd = null
     var transitions = {
             'transition': 'transitionend',
@@ -19,9 +20,7 @@ app.factory('TransitionEndService', function($window) {
         }
     }
     return transitionEnd;
-});
-
-app.factory('ProductService', function($resource) {
+}).factory('ProductService', function($resource) {
     var service = $resource(globals.contextPath + '/json/product/:action.json', {}, {
         getProductSizeData: { method: 'GET',  params: { action: 'getProductData' } }
     });
@@ -45,9 +44,7 @@ app.factory('ProductService', function($resource) {
     return {
         getTwitter: service.twitter.getStatuses
     };
-});
-
-app.factory('ProductListService', function($rootScope, $http) {
+}).factory('ProductListService', function($rootScope, $http) {
 
     // We're trying to build a lovely wee string which looks something like the following:
     // f:((cat,Footwear,b),(pro,Over Pronate,u),(experience,Intermediate,u),(gender,Male,u))
@@ -104,29 +101,13 @@ app.factory('ProductListService', function($rootScope, $http) {
         }
     };
 
-});
-
-
-// app.factory('ProductListService2', function($rootScope, $http) {
-//     var model = {};
-//     return {
-//         model: model,
-//         updateTo: function(url) {
-//             $http.get(url)
-//         }
-//     }
-// });
-
-
-/* Services - Models */
-
-app.factory( 'QuickShopService' , function ($http) {
+}).factory( 'QuickShopService' , function ($http) {
     var model = {
         contents: null
     };
     return {
         model: model,
-    
+
         getProductData: function ( code, callback ) {
             var promise = $http.get( globals.contextPath + '/json/product/getLightweightProductData.json?productCode=' + code ).success( function ( data ) {
                 if( data.primaryImage ) {
@@ -214,12 +195,12 @@ app.factory( 'QuickShopService' , function ($http) {
     // Creates basket JSON's for criteo
 
     var criteoBasket = function () {
-        
+
         var productids = [],
             prices = [],
             quantities = [];
 
-        _.each( model.contents.data.entries, function ( item ) { 
+        _.each( model.contents.data.entries, function ( item ) {
             productids.push( item.product.code );
             prices.push( item.basePrice.value );
             quantities.push( item.quantity );
@@ -328,7 +309,7 @@ app.factory( 'QuickShopService' , function ($http) {
                         .concat('&LastId=' + lastId)
                         .concat('&Country=' + Asics.PostcodeAnywhere.country)
                         .concat('&LanguagePreference=' + Asics.PostcodeAnywhere.language)
-                        .concat('&$Top=500'); // limit response to 500 results, to prevent UI binding performance issues             
+                        .concat('&$Top=500'); // limit response to 500 results, to prevent UI binding performance issues
 
             $http.jsonp(url + "&callback=JSON_CALLBACK")
                 .success(function (response) {
@@ -363,25 +344,25 @@ app.factory( 'QuickShopService' , function ($http) {
 
                 var primary = _.where(data.results.facets.primary, {active: true});
                 var secondary = _.where(data.results.facets.secondary, {active: true});
-  
-                var primaryValues = _.map(_.where(primary, { active: true }), function(obj) { 
+
+                var primaryValues = _.map(_.where(primary, { active: true }), function(obj) {
                     return obj.values;
                 });
 
-                var secondaryValues = _.map(_.where(secondary, { active: true }), function(obj) { 
+                var secondaryValues = _.map(_.where(secondary, { active: true }), function(obj) {
                     return obj.values;
                 });
 
                 var values = primaryValues.concat(secondaryValues);
 
-                facets = _.map(_.where(_.flatten(values), { active: true }), function(obj) { 
+                facets = _.map(_.where(_.flatten(values), { active: true }), function(obj) {
                     return obj.label;
                 });
 
                 if(facets.length > 0){
                     eventData['facetdisplay'] = facets.toString();
                 }
-                
+
                 globals.mixpanel.track('Product Grid', eventData);
             }
         }

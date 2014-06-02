@@ -1,7 +1,7 @@
 'use strict';
 /*globals angular, _*/
 
-angular.module('ShoeFinder.filters', [])
+angular.module('filters')
 	// Filter selections for use display in menu
 	.filter('selections', function() {
 		return function(input) {
