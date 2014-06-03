@@ -1,0 +1,1 @@
+"use strict";var app=angular.module("SportifStore");app.config(["$locationProvider",function(a){a.html5Mode(!0)}]),app.config(["$stateProvider","$urlRouterProvider",function(a,b){b.otherwise("/"),a.state("home",{url:"/",templateUrl:"../views/partials/home.html",controller:"HomeCtrl"})}]);
