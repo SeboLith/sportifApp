@@ -5206,20 +5206,20 @@ div.accordion.active div.accordion_panel div.accordion_content {
 -----------------------------------------------------------------------------------------------
 ===============================================================================================*/
 body.stores section > h3,
-body.home section > h3 {
+div.homeContainer section > h3 {
   margin: 0 auto 10px;
   width: 940px;
 }
 body.stores section > h3:first-child,
-body.home section > h3:first-child,
+div.homeContainer section > h3:first-child,
 body.stores section div.contents:first-child,
-body.home section div.contents:first-child {
+div.homeContainer section div.contents:first-child {
   padding-top: 75px;
 }
 body.stores section:first-child > h3:first-child,
-body.home section:first-child > h3:first-child,
+div.homeContainer section:first-child > h3:first-child,
 body.stores section:first-child div.contents:first-child,
-body.home section:first-child div.contents:first-child {
+div.homeContainer section:first-child div.contents:first-child {
   padding-top: 15px;
 }
 /* LOGIN / REGISTER / GUEST
@@ -6758,7 +6758,7 @@ body.athletes #athletes .item.view h5 span.singular,
 body.events #sport_events .item.view h5 span.singular {
   display: none;
 }
-body.home div.hero_slider {
+div.homeContainer div.hero_slider {
   margin-bottom: 10px;
 }
 body.events #sport_events div.event {

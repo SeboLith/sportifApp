@@ -1,11 +1,11 @@
 'use strict';
-/*globals angular*/
 
 /* App Module */
 angular.module('SportifStore', [
     'ngResource',
     'ngStorage',
     'ngSanitize',
+    'ui.router',
     'controllers',
     'directives',
     'services',

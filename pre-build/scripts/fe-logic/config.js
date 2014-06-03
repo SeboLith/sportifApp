@@ -12,9 +12,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
   $urlRouterProvider.otherwise('/');
   $stateProvider
     .state('home', {
-      url: '/index.html',
-      templateUrl: 'home/home.html',
+      url: '/',
+      templateUrl: '../views/partials/home.html',
       controller: 'HomeCtrl'
   })
 }]);
-// console.log("In ui router");

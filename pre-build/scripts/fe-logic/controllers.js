@@ -328,7 +328,8 @@ angular.module('controllers')
 			return _.where($scope.$storage.filters[group], { id: prop }).length;
 		};
 	}])
-	.controller('App', ['$scope', function ($scope){
+	.controller('HomeCtrl', ['$scope', function ($scope){
+		console.log('In App controller');
 		$scope.sites = function(sites){
 			$scope.sites = sites;
 		}
