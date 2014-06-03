@@ -13,7 +13,17 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
   $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: '../views/partials/home.html',
-      controller: 'HomeCtrl'
-  })
+      views: {
+        '': {
+          templateUrl: '../views/partials/home.html',
+          controller: 'HomeCtrl'
+        },
+        // 'slider@soon': {
+        //   templateUrl: 'partials/soon/slider.html'
+        // },
+        // 'timer@soon': {
+        //   templateUrl: 'partials/soon/timer.html'
+        // }
+      }
+    })
 }]);

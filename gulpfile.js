@@ -28,14 +28,10 @@ gulp.task('cleanJS', function () {
     .pipe(clean());
 });
 
-gulp.task('html', function () {
-  return gulp.src('app/build/*.html')
+gulp.task('partials', function () {
+  return gulp.src('app/build/views/partials/*.html')
     .pipe(connect.reload())
     .pipe(notify({ message: 'HTML updated' }));
-});
-
-gulp.task('watch', function () {
-  gulp.watch(['app/build/*.html'], ['html']);
 });
 
 // create task to prefix, minify, and notify changes to css file
@@ -112,6 +108,15 @@ gulp.task('filters', function() {
         .pipe(notify({ message: 'filters.js updated' }));
 });
 
+gulp.task('connect', function() {
+  connect.server({
+    root: outputDir,
+    livereload: true
+  });
+});
+
+gulp.watch(['app/build/views/partials/*.html'], ['partials']);
+
 gulp.watch('pre-build/styles/*.css', ['css']);
 
 gulp.watch('pre-build/scripts/fe-logic/sportif.js', ['sportif']);
@@ -120,13 +125,6 @@ gulp.watch('pre-build/scripts/fe-logic/app.js', ['app']);
 
 gulp.watch('pre-build/scripts/fe-logic/config.js', ['config']);
 
-
-gulp.task('connect', function() {
-  connect.server({
-    root: outputDir,
-    livereload: true
-  });
-});
 gulp.watch('pre-build/scripts/fe-logic/services.js', ['services']);
 
 gulp.watch('pre-build/scripts/fe-logic/controllers.js', ['controllers']);
@@ -136,4 +134,4 @@ gulp.watch('pre-build/scripts/fe-logic/directives.js', ['directives']);
 gulp.watch('pre-build/scripts/fe-logic/filters.js', ['filters']);
 
 // the default array of tasks to run when gulp is called
-gulp.task('default', ['watch', 'cleanCSS', 'cleanJS', 'css', 'sportif', 'app', 'config', 'services', 'controllers', 'directives', 'filters', 'connect', 'watch']);
+gulp.task('default', ['cleanCSS', 'cleanJS', 'partials', 'css', 'sportif', 'app', 'config', 'services', 'controllers', 'directives', 'filters', 'connect']);

@@ -329,9 +329,9 @@ angular.module('controllers')
 		};
 	}])
 	.controller('HomeCtrl', ['$scope', function ($scope){
-		console.log('In App controller');
 		$scope.sites = function(sites){
 			$scope.sites = sites;
+			$scope.message = 'In Home controller';
 		}
 	}])
 	.controller('ProductSelector', ['$rootScope', '$scope', '$http', '$window', 'ProductService', 'QuickBuyService', 'CartService', function ($rootScope, $scope, $http, $window, ProductService, QuickBuyService, CartService) {
