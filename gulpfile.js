@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 
 // create task to prefix, minify, and notify changes to css file
 gulp.task('css', function() {
-    return gulp.src('app/styles/*.css')
+    return gulp.src('pre-build/styles/*.css')
         .pipe(autoprefixer('last 15 version'))
         .pipe(concat('main.css'))
         .pipe(minifyCSS())
@@ -21,7 +21,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('custom', function() {
-    return gulp.src('app/scripts/fe-logic/custom.js')
+    return gulp.src('pre-build/scripts/fe-logic/custom.js')
         .pipe(concat('2.js'))
         .pipe(uglify({mangle: false}))
         .pipe(gulp.dest('app/build/js'))
@@ -29,7 +29,7 @@ gulp.task('custom', function() {
 });
 
 gulp.task('sportif', function() {
-    return gulp.src('app/scripts/fe-logic/sportif.js')
+    return gulp.src('pre-build/scripts/fe-logic/sportif.js')
         .pipe(concat('3.js'))
         .pipe(uglify({mangle: false}))
         .pipe(gulp.dest('app/build/js'))
@@ -37,7 +37,7 @@ gulp.task('sportif', function() {
 });
 
 gulp.task('app', function() {
-    return gulp.src('app/scripts/fe-logic/app.js')
+    return gulp.src('pre-build/scripts/fe-logic/app.js')
         .pipe(concat('4.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/build/js'))
@@ -45,7 +45,7 @@ gulp.task('app', function() {
 });
 
 gulp.task('services', function() {
-    return gulp.src('app/scripts/fe-logic/services.js')
+    return gulp.src('pre-build/scripts/fe-logic/services.js')
         .pipe(concat('5.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/build/js'))
@@ -53,7 +53,7 @@ gulp.task('services', function() {
 });
 
 gulp.task('controllers', function() {
-    return gulp.src('app/scripts/fe-logic/controllers.js')
+    return gulp.src('pre-build/scripts/fe-logic/controllers.js')
         .pipe(concat('6.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/build/js'))
@@ -61,7 +61,7 @@ gulp.task('controllers', function() {
 });
 
 gulp.task('directives', function() {
-    return gulp.src('app/scripts/fe-logic/directives.js')
+    return gulp.src('pre-build/scripts/fe-logic/directives.js')
         .pipe(concat('7.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/build/js'))
@@ -69,30 +69,28 @@ gulp.task('directives', function() {
 });
 
 gulp.task('filters', function() {
-    return gulp.src('app/scripts/fe-logic/filters.js')
+    return gulp.src('pre-build/scripts/fe-logic/filters.js')
         .pipe(concat('8.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/build/js'))
         .pipe(notify({ message: 'filters.js updated' }));
 });
 
-// watch for css file changes in the app/styles/ directory
-// and run the css task
-gulp.watch('app/styles/*.css', ['css']);
+gulp.watch('pre-build/styles/*.css', ['css']);
 
-gulp.watch('app/scripts/fe-logic/custom.js', ['custom']);
+gulp.watch('pre-build/scripts/fe-logic/custom.js', ['custom']);
 
-gulp.watch('app/scripts/fe-logic/sportif.js', ['sportif']);
+gulp.watch('pre-build/scripts/fe-logic/sportif.js', ['sportif']);
 
-gulp.watch('app/scripts/fe-logic/app.js', ['app']);
+gulp.watch('pre-build/scripts/fe-logic/app.js', ['app']);
 
-gulp.watch('app/scripts/fe-logic/services.js', ['services']);
+gulp.watch('pre-build/scripts/fe-logic/services.js', ['services']);
 
-gulp.watch('app/scripts/fe-logic/controllers.js', ['controllers']);
+gulp.watch('pre-build/scripts/fe-logic/controllers.js', ['controllers']);
 
-gulp.watch('app/scripts/fe-logic/directives.js', ['directives']);
+gulp.watch('pre-build/scripts/fe-logic/directives.js', ['directives']);
 
-gulp.watch('app/scripts/fe-logic/filters.js', ['filters']);
+gulp.watch('pre-build/scripts/fe-logic/filters.js', ['filters']);
 
 // the default array of tasks to run when gulp is called
 gulp.task('default', ['css', 'custom', 'sportif', 'app', 'services', 'controllers', 'directives', 'filters']);
