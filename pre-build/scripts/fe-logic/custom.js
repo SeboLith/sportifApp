@@ -6,8 +6,8 @@ if (navigator.appName == 'Microsoft Internet Explorer') {
     htmlClass += ' ie';
     if (!document.addEventListener) {
         htmlClass += ' ie_lt9';
-        document.write('<script src="/_ui/desktop/common/js/ie/html5shiv.js"><\/script>');
-        document.write('<script id="ie8s" src="/_ui/desktop/common/js/ie/selectivizr.min.js"><\/script>');
+        document.write('<script src="html5shiv.js"><\/script>');
+        document.write('<script id="ie8s" src="selectivizr.js"><\/script>');
     }
 }
 document.documentElement.className = htmlClass;
@@ -162,7 +162,7 @@ b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
     /* Google Analytics */
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA\x2D15248285\x2D1']);
-    _gaq.push(['_setDomainName', 'www.sportif.com.au']);
+    _gaq.push(['_setDomainName', 'www.sportif.com']);
     _gaq.push(['_setAllowLinker', true]);
 
 
