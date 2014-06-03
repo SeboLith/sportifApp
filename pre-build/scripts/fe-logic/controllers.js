@@ -898,6 +898,50 @@ angular.module('controllers')
 		$scope.socialFeeds = model;
 
 	}])
+	.controller('FooterCtrl', ['$scope', 'ViewData', function ($scope, ViewData) {
+		$scope.popularProducts  = ViewData.popularProducts;
+		$scope.customerServices = ViewData.customerServices;
+		$scope.corporateInfo    = ViewData.corporateInfo;
+		$scope.company    = ViewData.company;
+		// set the current date
+        var currentDate = new Date();
+        // the year to be displayed in the footer
+        $scope.year = currentDate.getFullYear();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}])
 	.controller('MiniCart', ['$scope', 'CartService', function ($scope, CartService) {
 		$scope.cart = CartService.model;
 	}])

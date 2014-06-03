@@ -1,170 +1,57 @@
-      <footer role="contentinfo">
-
+<footer role="contentinfo">
   <div id="bottom">
     <div class="wrap">
-            <nav id="tertiary" role="navigation">
+      <nav id="tertiary" role="navigation">
         <div class="backToTop">
-                      <a href="#"><span class="icon"></span>Back to top</a>
-                  </div>
-              <ul class="level_1">
+          <a href="#"><span class="icon"></span>Back to top</a>
+        </div>
+
+        <ul class="level_1">
+
           <li style="min-height: 289px;" class="level_1">
-                            <h3>Popular Products</h3>
-                            <ul class="level_2 first_of_row">
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/running/cat/runningshoes" title="Running Shoes">
-      Running Shoes</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/training/cat/trainingshoes" title="Training Shoes">
-      Training Shoes</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/shoes/cat/genderkidsshoes" title="Kids Shoes">
-      Kids Shoes</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/football/cat/footballshoes" title="Football Boots">
-      Football Boots</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/netball/cat/netballshoes" title="Netball Shoes">
-      Netball Shoes</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/health-%26-leisure/cat/healthleisureshoes" title="Health &amp; Leisure Shoes">
-      Health &amp; Leisure Shoes</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/cricket/cat/cricketshoes" title="Cricket Shoes">
-      Cricket Shoes</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/tennis/cat/tennisshoes" title="Tennis Shoes">
-      Tennis Shoes</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/clothing/cat/clothing" title="Clothing">
-      Clothing</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/accessories/cat/accessories" title="Accessories">
-      Accessories</a>
-  </li>
-                </ul>
-            </li>
+            <h3>Popular Products</h3>
+            <ul class="level_2 first_of_row">
+              <li ng-repeat="product in popularProducts" class="level_2">
+                <a href="{{product.link}}" title="{{product.name}}">{{product.name}}</a>
+              </li>
+            </ul>
+          </li>
+
           <li style="min-height: 289px;" class="level_1">
-                            <h3>Customer Services</h3>
-                            <ul class="level_2 first_of_row">
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/contact-sportif" title="Contact SPORTIF">
-      Contact SPORTIF</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/store-finder" title="Store Locator">
-      Store Locator</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/returns" title="Returns Policy">
-      Returns Policy</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/delivery-info" title="Delivery Information">
-      Delivery Information</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/shoe-size-guide" title="Shoe Size Guide">
-      Shoe Size Guide</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/shoe-width-guide" title="Shoe Width Guide">
-      Shoe Width Guide</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/clothing-size-guide" title="Clothing Size Guide">
-      Clothing Size Guide</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/pronation-guide" title="Pronation Chart">
-      Pronation Chart</a>
-  </li>
-                </ul>
-            </li>
+            <h3>Customer Services</h3>
+            <ul class="level_2 first_of_row">
+              <li ng-repeat="service in customerServices" class="level_2">
+                <a href="{{service.link}}" title="{{service.name}}">{{service.name}}</a>
+              </li>
+            </ul>
+          </li>
+
           <li style="min-height: 289px;" class="level_1">
-                            <h3>Corporate</h3>
-                            <ul class="level_2 first_of_row">
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/about-sportif" title="About SPORTIF">
-      About SPORTIF</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/news" title="News">
-      News</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/partnerships" title="Partnerships">
-      Partnerships</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/en/csr" title="Corporate Responsibility" target="_blank">
-      Corporate Responsibility</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/careers-why-join" title="Careers">
-      Careers</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/privacy-policy" title="Privacy Policy">
-      Privacy Policy</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/terms-of-sale" title="Terms of Sale">
-      Terms of Sale</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.ggsportif.com/terms-of-use" title="Terms of Use">
-      Terms of Use</a>
-  </li>
-                <li class="level_2">
-                    <a href="http://www.sportifmedical.com/signin.aspx" title="SPORTIF Medical" target="_blank">
-      SPORTIF Medical</a>
-  </li>
-                </ul>
-            </li>
-          </ul>
+            <h3>Corporate</h3>
+            <ul class="level_2 first_of_row">
+              <li ng-repeat="info in corporateInfo" class="level_2">
+                <a href="{{info.link}}" title="{{info.name}}">{{info.name}}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </nav>
 
       <div id="newsletter_signup">
-          <h3>Email newsletter</h3>
-          <form class="newsletter_signup_form ng-pristine ng-valid" action="/json/newsletter/signup.json" novalidate="">
-            <ol>
-              <li>
-                <label>Email address</label>
-                <input name="email" class="text" placeholder="Email address" type="email">
-              </li>
-            </ol>
-            <div class="buttons">
-              <input class="button  auto" value="Sign Up" type="submit">
-            </div>
-          </form>
-          <p>Signup to our newsletter and receive special offers and exclusive news about our products</p>
-        </div>
-      <div id="payment_wrap">
-            <div id="verisign_info">
-              <dl>
-                <dt class="logo_verisign"></dt>
-                <dd>SPORTIF.com is secure.</dd>
-                          <dd>We protect your personal details at all times.</dd>
-                        </dl>
-                      </div>
-                      <div id="card_logos">
-                          <dl>
-                              <dt>We accept</dt>
-                              <dd class="payment_icons payment_logo_visa"></dd>
-                              <dd class="payment_icons payment_logo_mastercard"></dd>
-                              <dd class="payment_icons payment_logo_paypal"></dd>
-                          </dl>
-                      </div>
-                  </div>
+        <h3>Email newsletter</h3>
+        <form class="newsletter_signup_form ng-pristine ng-valid" action="/json/newsletter/signup.json" novalidate="">
+          <ol>
+            <li>
+              <label>Email address</label>
+              <input name="email" class="text" placeholder="Email address" type="email">
+            </li>
+          </ol>
+          <div class="buttons">
+            <input class="button auto" value="Sign Up" type="submit">
+          </div>
+        </form>
+        <p>Signup for our newsletter and receive special offers and exclusive news about our products</p>
+      </div>
                 <div class="site_payments">
         </div>
 
@@ -175,13 +62,11 @@
     <div class="wrap">
 
       <div id="trademark">
-        <p>The stripe design featured on the sides of SPORTIF shoes is a
-trademark of SPORTIF Corporation and is a registered trademark in most
-countries of the world</p>
+        <p>created by <a href="www.nescion.com"><span class="nescion_logo"></span></a></p>
       </div>
 
       <div id="copyright">
-        <p><span class="icon icon_shoe"></span>¬© 2013 SPORTIF </p>
+        <p><span class="icon icon_shoe"></span>¬© {{year}} {{company}}</p>
       </div>
 
             </div>

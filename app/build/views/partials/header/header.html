@@ -1,0 +1,506 @@
+<header role="banner">
+
+      <div id="top">
+          <div class="wrap">
+
+              <nav id="secondary" role="navigation">
+
+                  <div id="search" class="ui-widget">
+
+                      <form class="ng-pristine ng-valid" name="search_form" method="get" action="/search" role="search">
+                          <label class="skip" for="search">Search</label>
+                          <input autocomplete="off" id="search_query" class="text ui-autocomplete-input" name="text" maxlength="100" placeholder="Search..." type="text"><span class="ui-helper-hidden-accessible" aria-live="polite" role="status"></span>
+                          <input class="button" value="Search" src="sportif.com%20%7C%20Running%20Shoes%20%7C%20Sport%20Clothing%20&amp;%20Accessories%20%7C%20SPORTIF%20_files/a.html" alt="Search" type="submit">
+                          </form>
+                      <li id="autocomplete_more_button" class="close" style="display: none;"><a id="more_button" class="button alternate" href="#">More</a></li>
+                  </div>
+
+                  <ul id="account_store" data-gtm="[{'event': 'loginFinished', 'existingCustomer': false}, {'event': 'notifyCriteo', 'customerid':'' }]">
+                      <li>
+                          <a href="http://www.ggsportif.com/store-finder">Store Locator</a>
+                      </li>
+                      <li>
+                          <a href="http://www.ggsportif.com/my-account">
+                              My Account</a>
+                      </li>
+                      <li><a href="http://my.sportif.com/" title="MY SPORTIF" target="_new">MY SPORTIF</a></li>
+                      </ul>
+                  <ul id="tiger_link">
+                          <a href="http://www.onitsukatiger.com/" class="icon" title="" target="_new"></a>
+                      </ul>
+                  <!-- OLD WAY OF DEALING WITH CENTER HEADER LINKS
+                  <ul>
+                      <li><a href="http://www.onitsukatiger.com/" class="icon" title="" target="_new"></a></li>
+                      </ul>
+                  -->
+                  <ul id="social_links">
+                      <li><a href="https://twitter.com/SPORTIFaustralia" class="icon icon_twitter" title="Twitter" target="_new">Twitter</a></li>
+                      <li><a href="https://www.facebook.com/SPORTIFAUSTRALIA" class="icon icon_facebook" title="Facebook" target="_new">Facebook</a></li>
+                      <li><a href="http://www.instagram.com/sportifaustralia" class="icon icon_instagram" title="" target="_new"></a></li>
+                      <li><a href="http://www.youtube.com/SPORTIFOceania" class="icon icon_youtube" title="YouTube" target="_new">YouTube</a></li>
+                      <li><a href="http://www.pinterest.com/sportifaustralia/" class="icon icon_pinterest" title="" target="_new"></a></li>
+                      </ul>
+                  </nav>
+
+          </div>
+      </div>
+
+      <nav id="primary" role="navigation">
+
+          <div id="lead">
+              <div class="wrap">
+
+                  <div id="site_logo">
+                      <div class="simple_banner">
+      <a href="http://www.ggsportif.com/"><img title="Sportif AU" alt="Sportif AU" src="images/logo-hybris.png"></a>
+          </div></div>
+
+                  <ul id="areas" class="level_1">
+      <li class="active" id="ShopBarComponent">
+                      <a href="javascript:void(0);" class="panel_link">
+                          <span>Shop</span>
+              </a>
+                  </li>
+              <li class="active" id="RunningBarComponent">
+                      <a href="javascript:void(0);" class="panel_link">
+                          <span>Running</span>
+              </a>
+                  </li>
+              <li class="active" id="nav-component-featured-sports">
+                      <a href="javascript:void(0);" class="panel_link">
+                          <span>Featured Sports</span>
+              </a>
+                  </li>
+              <li class="active" id="nav-component-link-mysportif">
+                      <a href="javascript:void(0);" class="panel_link">
+                          <span>My Sportif</span>
+              </a>
+                  </li>
+              </ul>
+  <div class="ng-scope" id="minicart" ng-controller="MiniCart">
+      <dl id="minicart_data">
+          <dt>Basket items</dt>
+          <dd><span class="ng-binding" ng-bind="cart.contents.data.totalUnitCount">0</span></dd>
+      </dl>
+      <div id="minicart_actions">
+          <a class="button button_toggle highlight_off panel_link">
+              <span class="off">View Basket</span>
+              <span class="on">Hide Basket</span>
+          </a>
+      </div>
+  </div></div>
+          </div>
+
+          <div id="panels">
+          <div id="ShopBarComponent" class="panel secondary wrap">
+              <!-- Need for JS split -->
+              <div class="navigation_group">
+              <!---->
+                  <div class="listing">
+                                  <h3>Shop by Product</h3>
+                                  <ul class="level_3" data-js-split="0,6,10">
+                                      <li class="level_3" id="cat-link-shoes">
+                                                  <a href="http://www.ggsportif.com/shoes/cat/shoes" title="Shoes">
+              Shoes</a>
+      </li>
+                                          <li class="level_3" id="cat-link-clothing">
+                                                  <a href="http://www.ggsportif.com/clothing/cat/clothing" title="Clothing">
+              Clothing</a>
+      </li>
+                                          <li class="level_3" id="cat-link-cricket-accessories">
+                                                  <a href="http://www.ggsportif.com/accessories/cat/accessories" title="Accessories">
+              Accessories</a>
+      </li>
+                                          <li class="level_3" id="cat-link-licensed-replica">
+                                                  <a href="http://www.ggsportif.com/licensed-replica/cat/licensedreplica" title="Fan Gear">
+              Fan Gear</a>
+      </li>
+                                          </ul>
+                              </div>
+                          <div class="listing">
+                                  <h3>Shop by Gender</h3>
+                                  <ul class="level_3" data-js-split="0,6,10">
+                                      <li class="level_3" id="cat-link-mens">
+                                                  <a href="http://www.ggsportif.com/mens/cat/mensgender" title="Mens">
+              Mens</a>
+      </li>
+                                          <li class="level_3" id="cat-link-womens">
+                                                  <a href="http://www.ggsportif.com/womens/cat/womensgender" title="Womens">
+              Womens</a>
+      </li>
+                                          <li class="level_3" id="cat-link-kids">
+                                                  <a href="http://www.ggsportif.com/kids/cat/kidsgender" title="Kids">
+              Kids</a>
+      </li>
+                                          </ul>
+                              </div>
+                          <div class="listing">
+                                  <h3>Shop by Activity</h3>
+                                  <ul class="level_3" data-js-split="0,6,10">
+                                      <li class="level_3" id="cat-link-running">
+                                                  <a href="http://www.ggsportif.com/running/cat/sportrunning" title="Running">
+              Running</a>
+      </li>
+                                          <li class="level_3" id="cat-link-football">
+                                                  <a href="http://www.ggsportif.com/football/cat/sportfootball" title="Football">
+              Football</a>
+      </li>
+                                          <li class="level_3" id="cat-link-netball">
+                                                  <a href="http://www.ggsportif.com/netball/cat/sportnetball" title="Netball">
+              Netball</a>
+      </li>
+                                          <li class="level_3" id="cat-link-cricket">
+                                                  <a href="http://www.ggsportif.com/cricket/cat/sportcricket" title="Cricket">
+              Cricket</a>
+      </li>
+                                          <li class="level_3" id="cat-link-tennis">
+                                                  <a href="http://www.ggsportif.com/tennis/cat/sporttennis" title="Tennis">
+              Tennis</a>
+      </li>
+                                          <li class="level_3" id="cat-link-trail-running">
+                                                  <a href="http://www.ggsportif.com/trail/cat/sporttrail" title="Trail">
+              Trail</a>
+      </li>
+                                          <li class="level_3" id="cat-link-training">
+                                                  <a href="http://www.ggsportif.com/training/cat/sporttraining" title="Training">
+              Training</a>
+      </li>
+                                          <li class="level_3" id="cat-link-health-and-leisure">
+                                                  <a href="http://www.ggsportif.com/health-%26-leisure/cat/sporthealth&amp;leisure" title="Health And Leisure">
+              Health And Leisure</a>
+      </li>
+                                          <li class="level_3" id="cat-link-track-and-field">
+                                                  <a href="http://www.ggsportif.com/track-%26-field/cat/sporttrack&amp;field" title="Track and Field">
+              Track and Field</a>
+      </li>
+                                          <li class="level_3" id="cat-link-lawn-bowls">
+                                                  <a href="http://www.ggsportif.com/lawn-bowls/cat/sportlawnbowls" title="Lawn Bowls">
+              Lawn Bowls</a>
+      </li>
+                                          <li class="level_3" id="cat-link-martial-arts">
+                                                  <a href="http://www.ggsportif.com/martial-arts/cat/sportmartialarts" title="Martial Arts">
+              Martial Arts</a>
+      </li>
+                                          <li class="level_3" id="cat-link-indoor">
+                                                  <a href="http://www.ggsportif.com/indoor/cat/sportindoor" title="Indoor">
+              Indoor</a>
+      </li>
+                                          <li class="level_3" id="cat-link-hockey">
+                                                  <a href="http://www.ggsportif.com/hockey/cat/sporthockey" title="Hockey">
+              Hockey</a>
+      </li>
+                                          <li class="level_3" id="cat-link-touch-football">
+                                                  <a href="http://www.ggsportif.com/touch-football/cat/sporttouchfootball" title="Touch Football">
+              Touch Football</a>
+      </li>
+                                          </ul>
+                              </div>
+                          <div class="listing">
+                                  <h3>Shop by Collection</h3>
+                                  <ul class="level_3" data-js-split="0,6,10">
+                                      <li class="level_3" id="collection-link-panthers">
+                                                  <a href="http://www.ggsportif.com/panthers/cat/pantherslicensedreplica" title="penrith panthers">
+              penrith panthers</a>
+      </li>
+                                          <li class="level_3" id="collection-link-cricket-australia">
+                                                  <a href="http://www.ggsportif.com/cricket-australia/cat/cricketaustralialicensedreplica" title="australian cricket team">
+              australian cricket team</a>
+      </li>
+                                          <li class="level_3" id="collection-link-kayano-20">
+                                                  <a href="http://www.ggsportif.com/gel-kayano-20/cat/kayano20collection" title="gel-kayano 20">
+              gel-kayano 20</a>
+      </li>
+                                          <li class="level_3" id="collection-link-gel-nimbus-15">
+                                                  <a href="http://www.ggsportif.com/gel-nimbus-16/cat/gelnimbus16" title="gel-nimbus 16">
+              gel-nimbus 16</a>
+      </li>
+                                          <li class="level_3" id="collection-link-football-boots">
+                                                  <a href="http://www.ggsportif.com/football/cat/footballshoes" title="football boots">
+              football boots</a>
+      </li>
+                                          <li class="level_3" id=" collection-link-natural-shoes">
+                                                  <a href="http://www.ggsportif.com/natural/cat/naturalrunning" title="natural running">
+              natural running</a>
+      </li>
+                                          </ul>
+                              </div>
+                          <div class="featured">
+                                  <ul class="level_3">
+                                      <li class="level_3" id="nav-link-with-image-wallabies">
+                                                  <a href="http://www.ggsportif.com/wallabies/cat/wallabieslicensedreplica">
+      <img src="images/nav-140x90-wallabies.jpg" alt="wallabies">
+  </a>
+  <a href="http://www.ggsportif.com/wallabies/cat/wallabieslicensedreplica" title="wallabies">
+              wallabies</a>
+      </li>
+                                          </ul>
+                              </div>
+                          </div>
+          </div>
+      <div id="RunningBarComponent" class="panel secondary wrap">
+              <!-- Need for JS split -->
+              <div class="navigation_group">
+              <!---->
+                  <div class="featured">
+                                  <ul class="level_3">
+                                      <li class="level_3" id="con-running-LINK-WITH-IMAGE">
+                                                  <a href="http://www.ggsportif.com/running">
+      <img src="images/Navigation_140x90_Running.png" alt="Featured Products">
+  </a>
+  <a href="http://www.ggsportif.com/running" title="Featured Products">
+              Featured Products</a>
+      </li>
+                                          </ul>
+                              </div>
+                          <div class="listing">
+                                  <h3>Running Products</h3>
+                                  <ul class="level_3" data-js-split="0">
+                                      <li class="level_3" id="cat-link-running-shoes">
+                                                  <a href="http://www.ggsportif.com/running/cat/runningshoes" title="Shoes">
+              Shoes</a>
+      </li>
+                                          <li class="level_3" id="cat-link-running-clothing">
+                                                  <a href="http://www.ggsportif.com/running/cat/runningclothing" title="Clothing">
+              Clothing</a>
+      </li>
+                                          <li class="level_3" id="cat-link-running-accessories">
+                                                  <a href="http://www.ggsportif.com/running/cat/runningaccessories" title="Accessories">
+              Accessories</a>
+      </li>
+                                          </ul>
+                              </div>
+                          <div class="listing">
+                                  <h3>Shop by gender</h3>
+                                  <ul class="level_3" data-js-split="0">
+                                      <li class="level_3" id="cat-link-running-mens">
+                                                  <a href="http://www.ggsportif.com/mens/cat/sportrunningmens" title="Mens">
+              Mens</a>
+      </li>
+                                          <li class="level_3" id="cat-link-running-womens">
+                                                  <a href="http://www.ggsportif.com/womens/cat/sportrunningwomens" title="Womens">
+              Womens</a>
+      </li>
+                                          <li class="level_3" id="cat-link-running-kids">
+                                                  <a href="http://www.ggsportif.com/kids/cat/sportrunningkids" title="Kids">
+              Kids</a>
+      </li>
+                                          </ul>
+                              </div>
+                          <div class="listing">
+                                  <h3>Footwear Categories</h3>
+                                  <ul class="level_3" data-js-split="0">
+                                      <li class="level_3" id="cat-link-roadrunning">
+                                                  <a href="http://www.ggsportif.com/road/cat/roadrunning" title="road">
+              road</a>
+      </li>
+                                          <li class="level_3" id="cat-link-speedrunning">
+                                                  <a href="http://www.ggsportif.com/speed/cat/speedrunning" title="speed">
+              speed</a>
+      </li>
+                                          <li class="level_3" id="cat-link-trailrunning">
+                                                  <a href="http://www.ggsportif.com/trail/cat/trailrunning" title="trail">
+              trail</a>
+      </li>
+                                          <li class="level_3" id="cat-link-naturalrunning">
+                                                  <a href="http://www.ggsportif.com/natural/cat/naturalrunning" title="natural">
+              natural</a>
+      </li>
+                                          </ul>
+                              </div>
+                          </div>
+          </div>
+      <div id="nav-component-featured-sports" class="panel secondary wrap">
+              <!-- Need for JS split -->
+              <div class="navigation_group">
+              <!---->
+                  <div class="featured">
+                                  <ul class="level_3">
+                                      <li class="level_3" id="nav-link-running-landing-page">
+                                                  <a href="http://www.ggsportif.com/running">
+      <img src="images/Navigation_140x90_Running.png" alt="Running">
+  </a>
+  <a href="http://www.ggsportif.com/running" title="Running">
+              Running</a>
+      </li>
+                                          <li class="level_3" id="nav-link-training">
+                                                  <a href="http://www.ggsportif.com/training">
+      <img src="images/140x90-nav-training-v2.png" alt="training">
+  </a>
+  <a href="http://www.ggsportif.com/training" title="training">
+              training</a>
+      </li>
+                                          <li class="level_3" id="nav-link-hockey">
+                                                  <a href="http://www.ggsportif.com/hockey">
+      <img src="images/nav_140x90_hockey.png" alt="hockey">
+  </a>
+  <a href="http://www.ggsportif.com/hockey" title="hockey">
+              hockey</a>
+      </li>
+                                          <li class="level_3" id="nav-link-netball-landing-page">
+                                                  <a href="http://www.ggsportif.com/netball">
+      <img src="images/Navigation_140x90_Netball.png" alt="Netball">
+  </a>
+  <a href="http://www.ggsportif.com/netball" title="Netball">
+              Netball</a>
+      </li>
+                                          <li class="level_3" id="nav-link-football-landing-page">
+                                                  <a href="http://www.ggsportif.com/football">
+      <img src="images/Navigation_140x90_Football.png" alt="Football">
+  </a>
+  <a href="http://www.ggsportif.com/football" title="Football">
+              Football</a>
+      </li>
+                                          </ul>
+                              </div>
+                          </div>
+          </div>
+      <div id="nav-component-link-mysportif" class="panel secondary wrap">
+              <!-- Need for JS split -->
+              <div class="navigation_group">
+              <!---->
+                  <div class="featured">
+                                  <ul class="level_3">
+                                      <li class="level_3" id="nav-link-more-about-my-sportif">
+                                                  <a href="http://www.ggsportif.com/about-mysportif">
+      <img src="images/nav_140x90_find_out_more.png" alt="more about my sportif">
+  </a>
+  <a href="http://www.ggsportif.com/about-mysportif" title="more about my sportif">
+              more about my sportif</a>
+      </li>
+                                          <li class="level_3" id="nav-link-google-play-download">
+                                                  <a href="https://play.google.com/store/apps/details?id=com.sportif.mysportif&amp;hl=en">
+      <img src="images/nav_140x90_google_play.png" alt="download from google play">
+  </a>
+  <a href="https://play.google.com/store/apps/details?id=com.sportif.mysportif&amp;hl=en" title="download from google play">
+              download from google play</a>
+      </li>
+                                          <li class="level_3" id="nav-link-app-store">
+                                                  <a href="https://itunes.apple.com/us/app/my-sportif/id466664337?mt=8">
+      <img src="images/nav_140x90_app_store.png" alt="download from app store">
+  </a>
+  <a href="https://itunes.apple.com/us/app/my-sportif/id466664337?mt=8" title="download from app store">
+              download from app store</a>
+      </li>
+                                          <li class="level_3" id="nav-link-get-started-mysportif">
+                                                  <a href="http://my.sportif.com/">
+      <img src="images/nav_140x90_get_started.png" alt="start your training plan">
+  </a>
+  <a href="http://my.sportif.com/" title="start your training plan">
+              start your training plan</a>
+      </li>
+                                          </ul>
+                              </div>
+                          </div>
+          </div>
+
+
+  <div id="cart_panel" class="panel wrap" style="display:none;">
+                      <article id="cart" class="updatable item ng-scope empty" ng-controller="MainCart" ng-class="{empty: !cart.data.totalItems}">
+
+      <div class="ng-hide" ng-show="cart.contents.data.totalItems">
+
+          <header id="cart_header">
+              <h2>Your Shopping Basket</h2>
+              <h3 class="ng-binding" id="cart_id">Basket ID:</h3>
+          </header>
+
+          <p class="message  ng-hide" ng-show="cart.contents.messages.cart &amp;&amp; cart.contents.messages.cart.type != 'success'">
+              <span class="icon ng-binding">:</span>
+              <span class="ng-binding"></span>
+          </p>
+
+          <table id="cart_table">
+      <thead>
+          <tr>
+              <th id="head_details" colspan="2" class="details">Items</th>
+              <th id="head_quantity" class="quantity">Quantity</th>
+              <th id="head_pricing" class="price">Price</th>
+              <th id="head_total" class="subtotal">Subtotal</th>
+              <th id="head_remove" class="remove"><span class="conceal">Remove</span></th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- ngRepeat: entry in cart.contents.data.entries -->
+      </tbody>
+  </table>
+  <div id="cart_totals_holder" class="cart">
+
+      <dl class="cart_totals">
+
+          <dt class="subtotal">Subtotal</dt>
+          <dd class="subtotal ng-binding">$0.00</dd>
+
+          <dt class="coupons">
+              <a href="javascript:void(0);" class="promo_link" ng-show="!isPromotionsVisible" ng-click="showPromotions()">I have a discount code</a>
+              <span class="tooltip icon ng-isolate-scope" ng-show="!isPromotionsVisible" data-tooltip="If you have an SPORTIF discount code, it can be redeemed by entering it here"><div class="tooltip"><p class="ng-binding" ng-bind-html="tooltipValue">If you have an SPORTIF discount code, it can be redeemed by entering it here</p><span></span></div></span>
+              <label class="ng-hide" for="coupon_code" ng-show="isPromotionsVisible">Promotion code</label>
+          </dt>
+          <dd class="coupons">
+              <ul class="ng-hide" ng-show="cart.contents.data.coupons">
+                  <!-- ngRepeat: coupon in cart.contents.data.coupons -->
+              </ul>
+              <form class="ng-pristine ng-valid ng-hide" ng-show="isPromotionsVisible" ng-submit="cartAddCoupon(cart.inputs.coupon)">
+                  <ol>
+                      <li ng-class="{field_error: couponErrors.length}">
+                          <input id="coupon_code" class="text coupon ng-pristine ng-valid" ng-model="cart.inputs.coupon" type="text">
+                          <a id="cartCouponLink" ng-click="cartAddCoupon(cart.inputs.coupon)">Apply</a>
+                          <p class="message  ng-hide" ng-show="cart.contents.messages.coupons &amp;&amp; cart.contents.messages.coupons.type != 'success'">
+                              <span class="icon ng-binding">:</span>
+                              <span class="ng-binding"></span>
+                          </p>
+                      </li>
+                  </ol>
+              </form>
+          </dd>
+
+          <dt class="savings ng-hide" ng-show="cart.contents.data.orderDiscounts.value">Savings</dt>
+          <dd class="savings ng-binding ng-hide" ng-show="cart.contents.data.orderDiscounts.value"></dd>
+
+          <dt class="shipping ng-hide" ng-show="cart.contents.data.deliveryCost">Delivery cost</dt>
+                  <dd class="shipping ng-hide" ng-show="cart.contents.data.deliveryCost">
+                      <span class="ng-binding ng-hide" ng-show="cart.contents.data.deliveryCost.value"></span>
+                      <span ng-hide="cart.contents.data.deliveryCost.value">Free</span>
+                  </dd>
+                  <dt class="shipping" ng-hide="cart.contents.data.deliveryCost">
+                      * Estimated delivery<span class="note">* The exact delivery cost will be calculated during checkout</span>
+                  </dt>
+                  <dd class="shipping ng-binding" ng-hide="cart.contents.data.deliveryCost"></dd>
+              <dt class="tax" ng-hide="cart.contents.data.net">Tax</dt>
+          <dd class="tax ng-binding" ng-hide="cart.contents.data.net"></dd>
+
+      </dl>
+
+      <div class="cart_promotions_total">
+          <!-- ngIf: cart.contents.data.appliedOrderPromotions.length || cart.contents.data.potentialOrderPromotions.length -->
+          <dl class="cart_total">
+              <dt class="total" ng-hide="cart.contents.data.net">Total</dt>
+              <dt class="total ng-hide" ng-show="cart.contents.data.net">
+                  Total</dt>
+              <dd class="total ng-binding"></dd>
+          </dl>
+          </div>
+
+  </div>
+  <div class="actions">
+              <a id="checkout_button" class="button highlight" href="http://www.ggsportif.com/cart/checkout">Proceed to Checkout</a>
+              <a class="button" href="http://www.ggsportif.com/returns">Returns information</a>
+          </div>
+
+      </div>
+
+      <div ng-show="cart.contents.data.totalItems == 0">
+
+          <header id="cart_header">
+              <h2>Your Shopping Basket Is Empty</h2>
+          </header>
+          <a id="continue_shopping" class="button panel_link" href="#cart_panel">Continue Shopping</a>
+
+      </div>
+
+  </article>
+  </div>
+              </div>
+
+      </nav>
+
+  </header>

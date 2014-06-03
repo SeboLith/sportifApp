@@ -81,6 +81,15 @@ gulp.task('services', function() {
         .pipe(notify({ message: 'services.js updated' }));
 });
 
+gulp.task('factories', function() {
+    return gulp.src('pre-build/scripts/fe-logic/factories.js')
+        .pipe(concat('7.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('app/build/js'))
+        .pipe(connect.reload())
+        .pipe(notify({ message: 'factories.js updated' }));
+});
+
 gulp.task('controllers', function() {
     return gulp.src('pre-build/scripts/fe-logic/controllers.js')
         .pipe(concat('3.js'))
@@ -127,6 +136,8 @@ gulp.watch('pre-build/scripts/fe-logic/config.js', ['config']);
 
 gulp.watch('pre-build/scripts/fe-logic/services.js', ['services']);
 
+gulp.watch('pre-build/scripts/fe-logic/factories.js', ['factories']);
+
 gulp.watch('pre-build/scripts/fe-logic/controllers.js', ['controllers']);
 
 gulp.watch('pre-build/scripts/fe-logic/directives.js', ['directives']);
@@ -134,4 +145,4 @@ gulp.watch('pre-build/scripts/fe-logic/directives.js', ['directives']);
 gulp.watch('pre-build/scripts/fe-logic/filters.js', ['filters']);
 
 // the default array of tasks to run when gulp is called
-gulp.task('default', ['cleanCSS', 'cleanJS', 'partials', 'css', 'sportif', 'app', 'config', 'services', 'controllers', 'directives', 'filters', 'connect']);
+gulp.task('default', ['cleanCSS', 'cleanJS', 'partials', 'css', 'sportif', 'app', 'config', 'services', 'factories', 'controllers', 'directives', 'filters', 'connect']);

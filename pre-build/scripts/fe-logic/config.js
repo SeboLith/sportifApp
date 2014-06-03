@@ -18,12 +18,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
           templateUrl: '../views/partials/home.html',
           controller: 'HomeCtrl'
         },
-        // 'slider@soon': {
-        //   templateUrl: 'partials/soon/slider.html'
-        // },
-        // 'timer@soon': {
-        //   templateUrl: 'partials/soon/timer.html'
-        // }
+        'colorbox@home': {
+          templateUrl: '../views/partials/colorbox/colorbox.html'
+        },
+        'header@home': {
+          templateUrl: '../views/partials/header/header.html'
+        },
+        'homeMain@home': {
+          templateUrl: '../views/partials/home_main/homeMain.html'
+        },
+        'footer@home': {
+          templateUrl: '../views/partials/footer/footer.html',
+          controller: 'FooterCtrl'
+        },
       }
     })
 }]);
