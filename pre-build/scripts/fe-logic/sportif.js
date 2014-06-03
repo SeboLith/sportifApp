@@ -1,3 +1,26 @@
+'use strict';
+
+var htmlClass = 'js';
+if (window.Touch !== undefined) htmlClass += ' touch';
+if (navigator.appName == 'Microsoft Internet Explorer') {
+    htmlClass += ' ie';
+    if (!document.addEventListener) {
+        htmlClass += ' ie_lt9';
+        document.write('<script src="html5shiv.js"><\/script>');
+        document.write('<script id="ie8s" src="selectivizr.js"><\/script>');
+    }
+}
+document.documentElement.className = htmlClass;
+
+var globals = {
+    sportifSocialTweets: [],
+    autocompleteURL: '/search/autocomplete',
+    autoplayInterval: 6000,
+    ieLt9: (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener),
+    contextPath: '',
+    languageISO: 'en'
+};
+
 function debug() {
 	$("#content").toggleClass("show_grid");
 	return $("#content").hasClass("show_grid");

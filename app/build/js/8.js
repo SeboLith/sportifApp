@@ -1,1 +1,0 @@
-"use strict";angular.module("filters").filter("selections",function(){return function(a){return _.isArray(a)?_.pluck(a,"label").join(" / "):a&&a.id||""}});
