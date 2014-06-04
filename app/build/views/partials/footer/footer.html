@@ -34,24 +34,29 @@
               </li>
             </ul>
           </li>
+
         </ul>
       </nav>
 
       <div id="newsletter_signup">
         <h3>Email newsletter</h3>
-        <form class="newsletter_signup_form ng-pristine ng-valid" action="/json/newsletter/signup.json" novalidate="">
+        <form name="form" class="newsletter_signup_form ng-pristine ng-valid" ng-submit="signup(this.form)">
           <ol>
             <li>
-              <label>Email address</label>
-              <input name="email" class="text" placeholder="Email address" type="email">
+              <div class="form-group" ng-class="{ 'has-error' : form.email.$invalid && !form.email.$pristine }">
+                <label>Email address</label>
+                <input ng-pattern="emailRegexValidation" type="email" name="email" class="text" ng-model="newsletter.email">
+                <p ng-show="form.email.$invalid && !form.email.$pristine" class="error_message"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{validEmailErrorMessage}}</p>
+              </div>
             </li>
           </ol>
           <div class="buttons">
-            <input class="button auto" value="Sign Up" type="submit">
+            <input class="button auto" value="Sign Up" type="submit" ng-disabled="form.$dirty && form.$invalid">
           </div>
         </form>
-        <p>Signup for our newsletter and receive special offers and exclusive news about our products</p>
+        <p>{{newsLetterSignupMessage}}</p>
       </div>
+
       <div class="site_payments"></div>
 
     </div>

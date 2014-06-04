@@ -1,11 +1,10 @@
 <div class="homeContainer">
-    <div style="display: none;" id="cboxOverlay"></div>
 
     <!-- START COLORBOX -->
     <div ui-view="colorbox"></div>
     <!-- END COLORBOX -->
 
-  <div class="ng-scope" id="page"ng-init="sites({isAac: '', isAeb: '', isAebGb: '', isAop: 'true', isAjp: ''});">
+  <div class="ng-scope" id="page">
 
     <!-- START HEADER -->
     <div ui-view="header"></div>
@@ -19,5 +18,8 @@
     <div ui-view="footer"></div>
     <!-- END FOOTER -->
 
-  <div style="display: none;" id="overlay_fill"></div></div>
+    <div style="display: none;" id="overlay_fill"></div>
+  </div>
+  <!-- end #page -->
 </div>
+<!-- end .homeContainer -->

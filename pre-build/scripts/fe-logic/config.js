@@ -30,7 +30,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         'footer@home': {
           templateUrl: '../views/partials/footer/footer.html',
           controller: 'FooterCtrl'
-        },
+        }
       }
     })
 }]);

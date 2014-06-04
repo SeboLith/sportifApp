@@ -4024,14 +4024,6 @@ header[role="banner"] nav#primary #panels div.panel div.navigation_group div.lis
   margin-bottom: 0;
   padding-bottom: 10px;
 }
-/* Newsletter
------------------------------------------------------------------------------------------------*/
-.editorial_newsletter .newsletter_signup_form li {
-  margin-bottom: 7px;
-}
-.editorial_newsletter .newsletter_signup_form input[type="submit"] {
-  margin-top: 7px;
-}
 /* FOOTER
 -----------------------------------------------------------------------------------------------
 ===============================================================================================*/
@@ -4059,6 +4051,8 @@ footer[role="contentinfo"] #bottom {
   background-color: #133578;
   padding: 25px 0 30px;
 }
+/* Start Newsletter
+-----------------------------------------------------------------------------------------------*/
 footer[role="contentinfo"] #bottom #tertiary,
 footer[role="contentinfo"] #bottom #newsletter_signup {
   float: left;
@@ -4072,6 +4066,44 @@ footer[role="contentinfo"] #bottom #tertiary p,
 footer[role="contentinfo"] #bottom #newsletter_signup p {
   margin-bottom: 0px;
 }
+.editorial_newsletter .newsletter_signup_form li {
+  margin-bottom: 7px;
+}
+.editorial_newsletter .newsletter_signup_form input[type="submit"] {
+  margin-top: 7px;
+}
+
+input.ng-pristine {
+  border: 2px solid green;
+}
+
+input.ng-dirty {
+  border: 2px solid yellow;
+}
+
+input.ng-invalid.ng-dirty {
+  border: 2px solid red;
+}
+
+input.ng-valid.ng-dirty {
+  border: 2px solid green;
+}
+
+input.ng-invalid-minlength.ng-dirty {
+  border: 2px solid blue;
+}
+
+.error_message {
+  color: #e43d3d;
+  font-size: 1.2em;
+}
+
+img..warning_icon {
+  max-width: 80%;
+}
+
+/* End Newsletter
+-----------------------------------------------------------------------------------------------*/
 footer[role="contentinfo"] #bottom .backToTop {
   font-size: 12px;
   margin-bottom: 15px;

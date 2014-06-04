@@ -3,6 +3,35 @@
 
 /* Controllers */
 angular.module('controllers')
+	/*
+		FOOTER CONTROLLER
+	----------------------------------------------------------------------------
+	============================================================================ */
+	.controller('FooterCtrl', ['$scope', 'ViewData', function ($scope, ViewData) {
+
+		// set the current date
+        var currentDate = new Date();
+
+		$scope.popularProducts  = ViewData.popularProducts;
+		$scope.customerServices = ViewData.customerServices;
+		$scope.corporateInfo    = ViewData.corporateInfo;
+		$scope.company    		= ViewData.company;
+        $scope.year 			= currentDate.getFullYear();
+
+        /* NEWSLETTER-SPECIFIC VALUES
+           ========================== */
+        $scope.newsletter 				= {};
+		$scope.emailRegexValidation  	= ViewData.emailRegexValidation;
+		$scope.validEmailErrorMessage   = ViewData.validEmailErrorMessage;
+		$scope.newsLetterSignupMessage  = ViewData.newsLetterSignupMessage;
+
+        $scope.signup = function(form) {
+
+        	if(form.$valid) {
+        		ViewData.newsletterSignup(form.email.$modelValue);
+        	}
+         };
+	}])
 	// Define the main ProductList controller
 	.controller('ProductListCtrl', ['$scope', '$rootScope', '$localStorage', 'ProductListService', 'QuickBuyService', function ($scope, $rootScope, $localStorage, ProductListService, QuickBuyService) {
 
@@ -329,10 +358,7 @@ angular.module('controllers')
 		};
 	}])
 	.controller('HomeCtrl', ['$scope', function ($scope){
-		$scope.sites = function(sites){
-			$scope.sites = sites;
-			$scope.message = 'In Home controller';
-		}
+
 	}])
 	.controller('ProductSelector', ['$rootScope', '$scope', '$http', '$window', 'ProductService', 'QuickBuyService', 'CartService', function ($rootScope, $scope, $http, $window, ProductService, QuickBuyService, CartService) {
 
@@ -896,50 +922,6 @@ angular.module('controllers')
 			}
 		};
 		$scope.socialFeeds = model;
-
-	}])
-	.controller('FooterCtrl', ['$scope', 'ViewData', function ($scope, ViewData) {
-		$scope.popularProducts  = ViewData.popularProducts;
-		$scope.customerServices = ViewData.customerServices;
-		$scope.corporateInfo    = ViewData.corporateInfo;
-		$scope.company    = ViewData.company;
-		// set the current date
-        var currentDate = new Date();
-        // the year to be displayed in the footer
-        $scope.year = currentDate.getFullYear();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	}])
 	.controller('MiniCart', ['$scope', 'CartService', function ($scope, CartService) {
