@@ -9,21 +9,24 @@ angular.module('controllers')
 	============================================================================ */
 	.controller('FooterCtrl', ['$scope', 'ViewData', function ($scope, ViewData) {
 
-		// set the current date
+		// // set the current date
         var currentDate = new Date();
+	    $scope.year = currentDate.getFullYear();
 
-		$scope.popularProducts  = ViewData.popularProducts;
-		$scope.customerServices = ViewData.customerServices;
-		$scope.corporateInfo    = ViewData.corporateInfo;
-		$scope.company    		= ViewData.company;
-        $scope.year 			= currentDate.getFullYear();
+        $scope.newsletter = {};
 
-        /* NEWSLETTER-SPECIFIC VALUES
-           ========================== */
-        $scope.newsletter 				= {};
-		$scope.emailRegexValidation  	= ViewData.emailRegexValidation;
-		$scope.validEmailErrorMessage   = ViewData.validEmailErrorMessage;
-		$scope.newsLetterSignupMessage  = ViewData.newsLetterSignupMessage;
+		$scope.emailRegexValidation  	= /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+
+		var returnedViewData = ViewData.returnedData.then(function(data){
+
+			$scope.popularProducts  = data[3].data.value;
+			$scope.customerServices = data[4].data.value;
+			$scope.corporateInfo    = data[5].data.value;
+			$scope.company    		= data[0].data.value;
+
+			$scope.validEmailErrorMessage   = data[1].data.value;
+			$scope.newsLetterSignupMessage  = data[2].data.value;
+		});
 
         $scope.signup = function(form) {
 

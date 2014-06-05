@@ -138,8 +138,6 @@ gulp.task('serverStart', function () {
 });
 
 gulp.task('serve', function() {
-    //Set up your static fileserver, which serves files in the build dir
-    http.createServer(ecstatic({ root: __dirname + '/dist' })).listen(serverport);
 
     //Set up your livereload server
     lrserver.listen(livereloadport);
