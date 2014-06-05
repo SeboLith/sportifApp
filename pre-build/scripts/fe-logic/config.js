@@ -22,7 +22,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
           templateUrl: '../views/partials/colorbox/colorbox.html'
         },
         'header@home': {
-          templateUrl: '../views/partials/header/header.html'
+          templateUrl: '../views/partials/header/header.html',
+          controller: 'HeaderCtrl'
         },
         'homeMain@home': {
           templateUrl: '../views/partials/home_main/homeMain.html'

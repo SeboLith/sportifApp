@@ -4,12 +4,124 @@
 /* Controllers */
 angular.module('controllers')
 	/*
+		PRODUCTS CONTROLLER
+	----------------------------------------------------------------------------
+	============================================================================ */
+	.controller('ProductsCtrl', ['$scope', 'ProductsFactory', function ($scope, ProductsFactory) {
+
+		/* Product Categories */
+		$scope.shoesProducts = [];
+		$scope.clothingProducts = [];
+		$scope.accessoriesProducts = [];
+		$scope.fanGearProducts = [];
+
+		/* User Categories */
+		$scope.mensProducts = [];
+		$scope.womensProducts = [];
+		$scope.kidsProducts = [];
+
+		/* User Activities */
+		$scope.soccerProducts = [];
+		$scope.basketballProducts = [];
+		$scope.runningProducts = [];
+		$scope.martialArtsProducts = [];
+
+		var returnedProducts = ProductsFactory.getAll.then(function(data){
+			data.forEach( function (product) {
+				// filter and assign the products by category to an array
+				switch (product.category) {
+					case "Shoes":
+						$scope.shoesProducts.push(product);
+						break;
+					case "Clothing":
+						$scope.clothingProducts.push(product);
+						break;
+					case "Accessories":
+						$scope.accessoriesProducts.push(product);
+						break;
+					case "Fan Gear":
+						$scope.fanGearProducts.push(product);
+						break;
+					default:
+						break;
+				}
+				// filter and assign the products by user to an array
+				switch (product.user) {
+					case "men":
+						$scope.mensProducts.push(product);
+						break;
+					case "women":
+						$scope.womensProducts.push(product);
+						break;
+					case "children":
+						$scope.kidsProducts.push(product);
+						break;
+					default:
+						break;
+				}
+				// filter and assign the products by activity to an array
+				switch (product.activity) {
+					case "Basketball":
+						$scope.basketballProducts.push(product);
+						break;
+					case "Scoocer":
+						$scope.soccerProducts.push(product);
+						break;
+					case "Running":
+						$scope.runningProducts.push(product);
+					case "Martial Arts":
+						$scope.martialArtsProducts.push(product);
+						break;
+					default:
+						break;
+				}
+			});
+		});
+	}])
+	/*
+		HEADER CONTROLLER
+	----------------------------------------------------------------------------
+	============================================================================ */
+	.controller('HeaderCtrl', ['$scope', function ($scope) {
+
+		$scope.search = {};
+
+        $scope.componentShow = function(componentName) {
+        	// reset the component values
+			$scope.ShopBarComponent = false;
+			$scope.RunningBarComponent = false;
+			$scope.FeaturedSportsBarComponent = false;
+			$scope.MySportifBarComponent = false;
+
+			// set the show value for the clicked component to true
+			switch (componentName) {
+				case "ShopBar":
+					$scope.ShopBarComponent = true;
+					break;
+				case "RunningBar":
+					$scope.RunningBarComponent = true;
+					break;
+				case "FeaturedSportsBar":
+					$scope.FeaturedSportsBarComponent = true;
+					break;
+				case "MySportifBar":
+					$scope.MySportifBarComponent = true;
+					break;
+			}
+        };
+
+        $scope.headerSearch = function(searchQuery) {
+
+        	console.log(searchQuery.text.$modelValue);
+        	$scope.search.query = '';
+        };
+	}])
+	/*
 		FOOTER CONTROLLER
 	----------------------------------------------------------------------------
 	============================================================================ */
-	.controller('FooterCtrl', ['$scope', 'ViewData', 'ProductsFactory', function ($scope, ViewData, ProductsFactory) {
+	.controller('FooterCtrl', ['$scope', 'ViewData', '$rootScope', function ($scope, ViewData, $rootScope) {
 
-		console.log(ProductsFactory.getOne);
 		// // set the current date
         var currentDate = new Date();
 	    $scope.year = currentDate.getFullYear();
@@ -29,12 +141,13 @@ angular.module('controllers')
 			$scope.newsLetterSignupMessage  = data[2].data.value;
 		});
 
-        $scope.signup = function(form) {
+        $scope.newsletterSignup = function(newsletterForm) {
 
-        	if(form.$valid) {
-        		ViewData.newsletterSignup(form.email.$modelValue);
+        	if(newsletterForm.$valid) {
+        		console.log(newsletterForm.email.$modelValue);
+        		ViewData.newsletterSignup(newsletterForm.email.$modelValue);
         	}
-         };
+        };
 	}])
 	// Define the main ProductList controller
 	.controller('ProductListCtrl', ['$scope', '$rootScope', '$localStorage', 'ProductListService', 'QuickBuyService', function ($scope, $rootScope, $localStorage, ProductListService, QuickBuyService) {
