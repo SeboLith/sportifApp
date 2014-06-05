@@ -7,15 +7,16 @@ angular.module('controllers')
 		FOOTER CONTROLLER
 	----------------------------------------------------------------------------
 	============================================================================ */
-	.controller('FooterCtrl', ['$scope', 'ViewData', function ($scope, ViewData) {
+	.controller('FooterCtrl', ['$scope', 'ViewData', 'ProductsFactory', function ($scope, ViewData, ProductsFactory) {
 
+		console.log(ProductsFactory.getOne);
 		// // set the current date
         var currentDate = new Date();
 	    $scope.year = currentDate.getFullYear();
 
         $scope.newsletter = {};
 
-		$scope.emailRegexValidation  	= /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+		$scope.emailRegexValidation = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 
 		var returnedViewData = ViewData.returnedData.then(function(data){
 
