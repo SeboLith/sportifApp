@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="js csstransforms no-csstransforms3d csstransitions" lang="en">
+<html class="js csstransforms no-csstransforms3d csstransitions" lang="en" ng-app="SportifStore" ng-controller="MainCtrl">
 <head>
   <style type="text/css">
     @charset "UTF-8";
@@ -17,7 +17,7 @@
   <!--
   -->
 
-	<title>G&G Sportif</title>
+	<title>{{company}}</title>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="title" content="Running Shoes | Sport Clothing &amp;amp; Accessories | SPORTIF ">
@@ -78,7 +78,7 @@
 
 </head>
 
-<body ng-app="SportifStore" ng-controller="ProductsCtrl">
+<body>
   <!-- Add your site or application content here -->
   <div ui-view></div>
 </body>

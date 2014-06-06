@@ -640,20 +640,6 @@ var Sportif = {
 
 	Nav: {
 		splitArray: [],
-		animateScrollTop: function(e) {
-			var scrollTo = 0;
-			var $viewport = $('html, body');
-			var preventDefaultAction = function(e) {e.preventDefault()};
-
-			if (e) scrollTo = $('#top').outerHeight();
-
-			$viewport
-				.bind('mousewheel scroll mousedown',preventDefaultAction) //disable manual scroll while automated scroll happening
-				.animate({scrollTop:scrollTo}, 400, function() {
-					$('#minicart').not('.quick').click();
-					$(this).unbind('mousewheel scroll mousedown',preventDefaultAction); //enable manual scroll when automated scroll finished
-				});
-		},
 		updateCartHeight: function() {
 			if ($('#panels > div:visible').length > 0) {
 	            setTimeout(function(){

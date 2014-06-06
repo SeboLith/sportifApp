@@ -4,10 +4,10 @@
 /* Controllers */
 angular.module('controllers')
 	/*
-		PRODUCTS CONTROLLER
+		MAIN CONTROLLER
 	----------------------------------------------------------------------------
 	============================================================================ */
-	.controller('ProductsCtrl', ['$scope', 'ProductsFactory', function ($scope, ProductsFactory) {
+	.controller('MainCtrl', ['$scope', 'ProductsFactory', 'ViewData', function ($scope, ProductsFactory, ViewData) {
 
 		/* Product Categories */
 		$scope.shoesProducts = [];
@@ -77,6 +77,21 @@ angular.module('controllers')
 				}
 			});
 		});
+
+		var returnedViewData = ViewData.returnedData.then(function(data){
+
+			$scope.popularProducts         = data[0].data;
+			$scope.customerServices        = data[1].data;
+			$scope.corporateInfo           = data[2].data;
+
+			console.log(data[3].data.values);
+
+			$scope.company    		       = data[3].data.values[0].data.value;
+			$scope.validEmailErrorMessage  = data[3].data.values[1].data.value;
+			$scope.newsLetterSignupMessage = data[3].data.values[2].data.value;
+			$scope.signUpButton            = data[3].data.values[3].data.value;
+
+		});
 	}])
 	/*
 		HEADER CONTROLLER
@@ -113,6 +128,7 @@ angular.module('controllers')
         $scope.headerSearch = function(searchQuery) {
 
         	console.log(searchQuery.text.$modelValue);
+        	// clear the search query field
         	$scope.search.query = '';
         };
 	}])
@@ -120,7 +136,7 @@ angular.module('controllers')
 		FOOTER CONTROLLER
 	----------------------------------------------------------------------------
 	============================================================================ */
-	.controller('FooterCtrl', ['$scope', 'ViewData', '$rootScope', function ($scope, ViewData, $rootScope) {
+	.controller('FooterCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
 		// // set the current date
         var currentDate = new Date();
@@ -130,24 +146,23 @@ angular.module('controllers')
 
 		$scope.emailRegexValidation = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 
-		var returnedViewData = ViewData.returnedData.then(function(data){
+        $scope.newsletterSignup = function(newsletterSignupForm) {
 
-			$scope.popularProducts  = data[3].data.value;
-			$scope.customerServices = data[4].data.value;
-			$scope.corporateInfo    = data[5].data.value;
-			$scope.company    		= data[0].data.value;
+        	if(newsletterSignupForm.$valid) {
 
-			$scope.validEmailErrorMessage   = data[1].data.value;
-			$scope.newsLetterSignupMessage  = data[2].data.value;
-		});
-
-        $scope.newsletterSignup = function(newsletterForm) {
-
-        	if(newsletterForm.$valid) {
-        		console.log(newsletterForm.email.$modelValue);
-        		ViewData.newsletterSignup(newsletterForm.email.$modelValue);
+        		console.log(newsletterSignupForm.email.$modelValue);
+        		ViewData.newsletterSignup(newsletterSignupForm.email.$modelValue);
+        		// clear the email signup field
+	        	$scope.newsletter.email = '';
         	}
         };
+	}])
+	/*
+		HOME CONTROLLER
+	----------------------------------------------------------------------------
+	============================================================================ */
+	.controller('HomeCtrl', ['$scope', function ($scope){
+
 	}])
 	// Define the main ProductList controller
 	.controller('ProductListCtrl', ['$scope', '$rootScope', '$localStorage', 'ProductListService', 'QuickBuyService', function ($scope, $rootScope, $localStorage, ProductListService, QuickBuyService) {
@@ -473,9 +488,6 @@ angular.module('controllers')
 		$scope.isSelected = function(group, prop) {
 			return _.where($scope.$storage.filters[group], { id: prop }).length;
 		};
-	}])
-	.controller('HomeCtrl', ['$scope', function ($scope){
-
 	}])
 	.controller('ProductSelector', ['$rootScope', '$scope', '$http', '$window', 'ProductService', 'QuickBuyService', 'CartService', function ($rootScope, $scope, $http, $window, ProductService, QuickBuyService, CartService) {
 

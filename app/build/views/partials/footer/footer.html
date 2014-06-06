@@ -2,34 +2,30 @@
   <div id="bottom">
     <div class="wrap">
       <nav id="tertiary" role="navigation">
-        <div class="backToTop">
-          <a href="#"><span class="icon"></span>Back to top</a>
-        </div>
-
         <ul class="level_1">
 
           <li style="min-height: 289px;" class="level_1">
-            <h3>Popular Products</h3>
+            <h3>{{popularProducts.key}}</h3>
             <ul class="level_2 first_of_row">
-              <li ng-repeat="product in popularProducts" class="level_2">
+              <li ng-repeat="product in popularProducts.values" class="level_2">
                 <a href="{{product.link}}" title="{{product.name}}">{{product.name}}</a>
               </li>
             </ul>
           </li>
 
           <li style="min-height: 289px;" class="level_1">
-            <h3>Customer Services</h3>
+            <h3>{{customerServices.key}}</h3>
             <ul class="level_2 first_of_row">
-              <li ng-repeat="service in customerServices" class="level_2">
+              <li ng-repeat="service in customerServices.values" class="level_2">
                 <a href="{{service.link}}" title="{{service.name}}">{{service.name}}</a>
               </li>
             </ul>
           </li>
 
           <li style="min-height: 289px;" class="level_1">
-            <h3>Corporate</h3>
+            <h3>{{corporateInfo.key}}</h3>
             <ul class="level_2 first_of_row">
-              <li ng-repeat="info in corporateInfo" class="level_2">
+              <li ng-repeat="info in corporateInfo.values" class="level_2">
                 <a href="{{info.link}}" title="{{info.name}}">{{info.name}}</a>
               </li>
             </ul>
@@ -49,8 +45,8 @@
               </div>
             </li>
           </ol>
-          <div class="buttons">
-            <input class="button auto" value="Sign Up" type="submit" ng-disabled="newsletterForm.$dirty && newsletterForm.$invalid">
+          <div ng-show="!newsletterForm.email.$invalid" class="buttons">
+            <input class="button auto" value="{{signUpButton}}" type="submit" ng-disabled="newsletterForm.$dirty && newsletterForm.$invalid">
           </div>
         </form>
         <p>{{newsLetterSignupMessage}}</p>
