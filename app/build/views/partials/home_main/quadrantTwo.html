@@ -1,51 +1,14 @@
 <div class="item editorial editorial_highlights">
   <div class="contents">
 
-    <div class="item editorial  column_3">
-      <a href="http://www.ggsportif.com/hockey" class="image_link " title="hockey">
-        <img src="images/content_highlight_container_hockey.jpg">
+    <div class="item editorial  column_3" ng-repeat="pane in quadrantTwoData">
+      <a href="{{pane.link}}" class="image_link " title="{{pane.alt}}">
+        <img ng-src="{{pane.src}}" alt="{{pane.alt}}">
       </a>
       <div class="header">
-        <a href="http://www.ggsportif.com/hockey" data-videoheight="">
-          <h3>Hockey Collection</h3>
-          <h4>shop now</h4>
-        </a>
-      </div>
-    </div>
-
-    <div class="item editorial  column_3">
-      <a href="http://www.ggsportif.com/cat/mensgender" class="image_link " title="mens products">
-        <img src="images/Mens-1.png">
-      </a>
-      <div class="header">
-        <a href="http://www.ggsportif.com/cat/mensgender" data-videoheight="">
-          <h3>Men's Products</h3>
-          <h4>SHOP NOW</h4>
-        </a>
-      </div>
-    </div>
-
-    <div class="item editorial  column_3">
-      <a href="http://www.ggsportif.com/cat/womensgender" class="image_link " title="womens products">
-        <img src="images/Womens-2.png">
-      </a>
-      <div class="header">
-        <a href="http://www.ggsportif.com/cat/womensgender" data-videoheight="">
-          <h3>Women's Products</h3>
-          <h4>SHOP NOW</h4>
-        </a>
-      </div>
-    </div>
-
-    <div class="item editorial video column_3">
-      <a href="http://www.youtube.com/embed/HEt_DLSuceE?rel=0&amp;autoplay=1" class="image_link video_link launch_video" data-videoheight="">
-        <span class="video_play_button">Video</span>
-        <img src="images/220x260-wallabies-tvc.jpg">
-      </a>
-      <div class="header">
-        <a href="http://www.youtube.com/embed/HEt_DLSuceE" class="launch_video" data-videoheight="">
-          <h3>wallabies: better your best</h3>
-          <h4>watch the video</h4>
+        <a href="{{pane.link}}">
+          <h3>{{pane.mainTitle}}</h3>
+          <h4>{{pane.subTitle}}</h4>
         </a>
       </div>
     </div>

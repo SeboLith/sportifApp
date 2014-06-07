@@ -164,8 +164,10 @@ angular.module('controllers')
 
 		var returnedViewData = ViewData.returnedData.then(function(data){
 
-			$scope.quadrantOneData = data[4].data.values[0].heroSlider;
-			console.log($scope.quadrantOneData[0].src);
+			$scope.quadrantOneData = data[4].data.values[0].quadrantOneData;
+			$scope.quadrantTwoData = data[4].data.values[0].quadrantTwoData;
+			$scope.quadrantThreeData = data[4].data.values[0].quadrantThreeData;
+			$scope.quadrantFourData = data[4].data.values[0].quadrantFourData;
 		});
 	}])
 
