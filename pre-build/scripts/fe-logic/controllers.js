@@ -84,8 +84,6 @@ angular.module('controllers')
 			$scope.customerServices        = data[1].data;
 			$scope.corporateInfo           = data[2].data;
 
-			console.log(data[3].data.values);
-
 			$scope.company    		       = data[3].data.values[0].data.value;
 			$scope.validEmailErrorMessage  = data[3].data.values[1].data.value;
 			$scope.newsLetterSignupMessage = data[3].data.values[2].data.value;
@@ -161,9 +159,67 @@ angular.module('controllers')
 		HOME CONTROLLER
 	----------------------------------------------------------------------------
 	============================================================================ */
-	.controller('HomeCtrl', ['$scope', function ($scope){
+	.controller('HomeCtrl', ['$scope', 'ViewData', function ($scope, ViewData){
 
+
+		var returnedViewData = ViewData.returnedData.then(function(data){
+
+			$scope.quadrantOneData = data[4].data.values[0].heroSlider;
+			console.log($scope.quadrantOneData[0].src);
+		});
 	}])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	// Define the main ProductList controller
 	.controller('ProductListCtrl', ['$scope', '$rootScope', '$localStorage', 'ProductListService', 'QuickBuyService', function ($scope, $rootScope, $localStorage, ProductListService, QuickBuyService) {
 

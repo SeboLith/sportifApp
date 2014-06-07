@@ -44,42 +44,6 @@ var Sportif = {
 
 	Common : {
 
-		init : function(){
-
-			/* Visual */
-			Sportif.Common.heightMatch('footer nav#tertiary li.level_1');
-			Sportif.Common.heightMatch('#address_list_other div.vcard');
-			//Sportif.Common.heightMatch('#store_results li.store');
-			Sportif.Common.heightMatch('#product_technologies .technology h3');
-			Sportif.Common.heightMatch('div.editorial_navigation ul.navigation li div');
-			Sportif.Common.widthMatch("div.actions.join");
-			Sportif.Common.quote();
-			Sportif.Common.languageSelector();
-
-			/* Interactions */
-			Sportif.Common.navigationPrimary();
-			Sportif.Common.cookie();
-			Sportif.Common.searchAutocomplete();
-			Sportif.Common.searchResultsTabs();
-			Sportif.Common.videoContent('div.item.video');
-			Sportif.Common.newsletterSignup();
-			Sportif.Common.countrySelector();
-			Sportif.Common.login();
-			Sportif.Common.heroAnalytics();
-			Sportif.Common.highlightsAnalytics();
-			Sportif.Common.PDPAnalytics();
-			Sportif.Common.navigationAnalytics();
-			Sportif.Common.trackOutboundLinks();
-			Sportif.Common.eventsPageAnalytics();
-			Sportif.Common.athletesPageAnalytics();
-			Sportif.Form.init();
-			Sportif.IsotopeFiltering.init();
-			Sportif.Filtering.init();
-			Sportif.StoreFinder.init();
-			Sportif.ProductDetail.init();
-			Sportif.Checkout.init();
-		},
-
 		cookie: function() {
 			var cookieBar = $('#cookie-bar');
 			var policyMessage = cookieBar.find('p.policy');
@@ -439,118 +403,6 @@ var Sportif = {
 					if (form.find("p").length == 0) $element;
 					return form.find("p");
 				};
-			});
-		},
-
-		// Add ga and mixpanel tagging to carousel
-		heroAnalytics: function() {
-
-			var $slider = $('.home .hero_slider'),
-				$banner = $('.home .hero_banner');
-
-			// Mixpanel we set the selected image title as a super property
-			$slider.find('.image_link').on('click', function() {
-				globals.mixpanel.register({
-					'Search-Currently advertised': $(this).attr('title')
-				});
-			});
-
-			// Disabled as per ACE-251
-
-			// $slider.find('area, a').on('click', function(e) {
-			// 	sendAnalytics('Hero Banner', this.href);
-			// });
-
-			// $banner.find('area, a').on('click', function(e) {
-			// 	sendAnalytics('Sales Banner', this.href);
-			// });
-
-			// function sendAnalytics(type, url) {
-			// 	// These would ideally be set to 2 - session level custom var
-			// 	// For some reason level 2 custom variables don't appear to persist
-			// 	// so as a workaround these are being set as as level 1 - visitor
-			// 	// level.
-			// 	globals.googleAnalytics.setCustomVar(5, type, url, 1);
-			// }
-
-
-			// Event version, this is broken because the event tracking code is a mess
-
-			// function sendAnalytics(type, url) {
-			// 	globals.googleAnalytics.trackEvent('Banner Interaction', type, url, null, true, url);
-			// }
-
-		},
-
-		// Add mixpanel tagging to highlights block
-		highlightsAnalytics: function() {
-			$('.home .editorial_highlights .contents .item.editorial').on('click', function() {
-				globals.mixpanel.register({
-					'Search-Currently advertised': $(this).find('.header h3').text()
-				});
-			});
-		},
-
-		PDPAnalytics: function() {
-			var productPanel = $('#product_lead');
-			var productName = productPanel.find('h1[itemprop="name"]').text();
-
-			// tag interaction with the accordion tabs
-			$('#product_information .accordion_header', productPanel).click(function(){
-				var tabName = $(this).text();
-				globals.googleAnalytics.trackEvent('Additional content', tabName, productName, null, true);
-			})
-
-			// tag interaction with the find in store link
-			$('#product_instore_link a', productPanel).click(function(){
-				globals.googleAnalytics.trackEvent('Find item in store', 'click', productName, null, true);
-			})
-		},
-
-		navigationAnalytics: function() {
-
-			var $this, href, action, label, header = $('header');
-
-			header.find('#secondary a').on('click', function(e) {
-				// If href is an external site the link is tracked by outbound link tracking (see below)
-				if (e.currentTarget.host === window.location.host) {
-					$this = $(this);
-					href = $this.attr('href');
-
-					// don't track autocomplete more button
-					if($this.attr('id') == 'more_button'){
-						return;
-					}
-
-					globals.googleAnalytics.trackEvent('Global Navigation', $(this).text(), null, null, true, href);
-				}
-			});
-
-			header.find('#areas a').on('click', function(e){
-				e.preventDefault();
-				$this = $(this);
-				href = $this.attr('href');
-
-				if(href.indexOf('#') == 0) {
-					href = null;
-				}
-
-				action = ($this.find('span').length) ? $this.find('span').text() : $this.text();
-
-				globals.googleAnalytics.trackEvent('Global Navigation', action, null, null, true, href);
-			});
-
-			header.find('#panels ul.level_3 a').on('click', function(){
-				$this = $(this);
-				href = $this.attr('href');
-				action = $this.closest('div.listing').find('h3').text();
-				label = $this.text();
-
-				globals.googleAnalytics.trackEvent('Global Navigation', action, label, null, true, href);
-			});
-
-			$('footer #tertiary a').on('click', function(){
-				globals.googleAnalytics.trackEvent('Footer Navigation', $(this).text(), null, null, true, href);
 			});
 		},
 
@@ -1130,11 +982,6 @@ var Sportif = {
 		}
 	}
 }
-
-/* Init */
-$(function() {
-	Sportif.Common.init();
-});
 
 /* Undersocre Mixins */
 
