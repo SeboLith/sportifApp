@@ -8,7 +8,7 @@
 
     <div class="item editorial  column_3" ng-repeat="pane in quadrantFourData.values">
       <a href="{{pane.link}}" class="image_link" title="{{pane.alt}}">
-        <img src="{{pane.src}}" alt="{{pane.alt}}">
+        <img ng-src="{{pane.src}}" alt="{{pane.alt}}">
       </a>
       <div class="header">
         <a href="{{pane.link}}">
