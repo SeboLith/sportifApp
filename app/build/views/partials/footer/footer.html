@@ -34,12 +34,11 @@
       </nav>
 
       <div id="newsletter_signup">
-        <h3>Email newsletter</h3>
+        <h3>{{signUpTitle}}</h3>
         <form name="newsletterForm" class="newsletter_signup_form ng-pristine ng-valid" ng-submit="newsletterSignup(this.newsletterForm)">
           <ol>
             <li>
               <div class="form-group" ng-class="{ 'has-error' : newsletterForm.email.$invalid && !newsletterForm.email.$pristine }">
-                <label>Email address</label>
                 <input ng-pattern="emailRegexValidation" type="email" name="email" class="text" ng-model="newsletter.email">
                 <p ng-show="newsletterForm.email.$invalid && !newsletterForm.email.$pristine" class="error_message"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{validEmailErrorMessage}}</p>
               </div>

@@ -88,6 +88,7 @@ angular.module('controllers')
 			$scope.validEmailErrorMessage  = data[3].data.values[1].data.value;
 			$scope.newsLetterSignupMessage = data[3].data.values[2].data.value;
 			$scope.signUpButton            = data[3].data.values[3].data.value;
+			$scope.signUpTitle             = data[3].data.values[4].data.value;
 
 		});
 	}])
