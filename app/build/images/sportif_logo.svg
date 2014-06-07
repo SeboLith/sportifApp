@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="39.875px" height="40px" viewBox="0 0 39.875 40" enable-background="new 0 0 39.875 40" xml:space="preserve">
+<g id="circles">
+	<circle fill="none" stroke="#547265" stroke-width="2" stroke-miterlimit="10" cx="19.938" cy="20" r="18.827"/>
+	<circle fill="none" stroke="#003333" stroke-width="0.75" stroke-miterlimit="10" cx="19.938" cy="20" r="17.688"/>
+	<circle fill="none" stroke="#273F32" stroke-width="6" stroke-miterlimit="10" cx="19.938" cy="20" r="14.688"/>
+	<circle fill="none" stroke="#003333" stroke-miterlimit="10" cx="19.938" cy="20" r="11.688"/>
+	<circle fill="#FF6600" stroke="#FFFFCC" stroke-miterlimit="10" cx="19.938" cy="20" r="11.312"/>
+</g>
+<g id="Layer_4">
+	<path fill="none" d="M36.837,19.998c0-9.332-7.569-16.896-16.897-16.896c-9.332,0-16.897,7.564-16.897,16.896
+		c0,9.33,7.565,16.898,16.897,16.898C29.268,36.896,36.837,29.328,36.837,19.998z"/>
+	<text transform="matrix(0.7862 0.618 -0.618 0.7862 8.5498 32.5391)"><tspan x="0" y="0" fill="#FFFFCC" font-family="'Bauhaus93'" font-size="5.884">S</tspan><tspan x="2.988" y="-0.011" fill="#FFFFCC" font-family="'Bauhaus93'" font-size="5.884" rotate="-11.563">P</tspan><tspan x="6.927" y="-0.839" fill="#FFFFCC" font-family="'Bauhaus93'" font-size="5.884" rotate="-27.139">O</tspan><tspan x="11.428" y="-3.329" fill="#FFFFCC" font-family="'Bauhaus93'" font-size="5.884" rotate="-42.886">R</tspan><tspan x="14.367" y="-6.189" fill="#FFFFCC" font-family="'Bauhaus93'" font-size="5.884" rotate="-55.988">T</tspan><tspan x="16.239" y="-9.114" fill="#FFFFCC" font-family="'Bauhaus93'" font-size="5.884" rotate="-65.992">I</tspan><tspan x="17.212" y="-11.299" fill="#FFFFCC" font-family="'Bauhaus93'" font-size="5.884" rotate="-75.567">F</tspan></text>
+</g>
+<g id="center_text">
+	<text transform="matrix(1 0 0 1 11.2705 22.2295)" fill="#E2DD7A" font-family="'DINCondensed-Bold'" font-size="13">G</text>
+	<text transform="matrix(1 0 0 1 16.292 23.6436)" font-family="'Harrington'" font-size="12">&amp;</text>
+	<text transform="matrix(1 0 0 1 23 27.334)" fill="#E2DD7A" font-family="'DINCondensed-Bold'" font-size="13">G</text>
+</g>
+</svg>
