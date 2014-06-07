@@ -1,70 +1,24 @@
 <div class="item editorial editorial_highlights">
   <div class="header">
-    <h2>The world of SPORTIF</h2>
+    <h2>{{quadrantFourData.header}}</h2>
   </div>
   <!-- END .header -->
 
   <div class="contents">
 
-    <div class="item editorial  column_3">
-      <a href="http://www.onitsukatiger.com/en-au" class="image_link " title="VISIT THE SITE">
-        <img src="images/Onitsuka_Tiger_Logo_220x260_Highlight_Content_Container.png">
+    <div class="item editorial  column_3" ng-repeat="pane in quadrantFourData.values">
+      <a href="{{pane.link}}" class="image_link" title="{{pane.alt}}">
+        <img src="{{pane.src}}" alt="{{pane.alt}}">
       </a>
       <div class="header">
-        <a href="http://www.onitsukatiger.com/en-au" data-videoheight="">
-          <h3>Onitsuka Tiger</h3>
-          <h4>Visit The Site</h4>
+        <a href="{{pane.link}}">
+          <h3>{{pane.mainTitle}}</h3>
+          <h4>{{pane.subTitle}}</h4>
         </a>
       </div>
       <!-- END .header -->
     </div>
     <!-- END .editorial -->
-
-    <div class="item editorial video column_3">
-      <a href="http://www.youtube.com/embed/PVOmtaBaAZ4?rel=0&amp;autoplay=1" class="image_link video_link launch_video" data-videoheight="">
-        <span class="video_play_button">Video</span>
-        <img src="images/Content_Highlight_Banner_220x260_MY_SPORTIF-V2.png">
-      </a>
-      <div class="header">
-        <a href="http://www.youtube.com/embed/PVOmtaBaAZ4https://www.youtube.com/watch?v=PVOmtaBaAZ4" class="launch_video" data-videoheight="">
-          <h3>MYSPORTIF</h3>
-          <h4>WATCH THE VIDEO</h4>
-        </a>
-      </div>
-      <!-- END .header -->
-    </div>
-    <!-- END .editorial -->
-
-    <div class="item editorial video column_3">
-      <a href="http://www.youtube.com/embed/hQX6nULAi-o?rel=0&amp;autoplay=1" class="image_link video_link launch_video" data-videoheight="">
-        <span class="video_play_button">Video</span>
-        <img src="images/Flag_Ship_Store_Foot_ID.png">
-      </a>
-      <div class="header">
-        <a href="http://www.youtube.com/embed/hQX6nULAi-ohttps://www.youtube.com/watch?v=hQX6nULAi-o" class="launch_video" data-videoheight="">
-          <h3>SPORTIF FOOT ID</h3>
-          <h4>WATCH THE VIDEO</h4>
-        </a>
-      </div>
-      <!-- END .header -->
-    </div>
-    <!-- END .editorial -->
-
-    <div class="item editorial video column_3">
-      <a href="http://www.youtube.com/embed/n34fe7xhlQ0?rel=0&amp;autoplay=1" class="image_link video_link launch_video" data-videoheight="">
-        <span class="video_play_button">Video</span>
-        <img src="images/220x260-mms-tvc.dms">
-      </a>
-      <div class="header">
-        <a href="http://www.youtube.com/embed/n34fe7xhlQ0" class="launch_video" data-videoheight="">
-          <h3>Run. and Run</h3>
-          <h4>watch the video</h4>
-        </a>
-      </div>
-      <!-- END .header -->
-    </div>
-    <!-- END .editorial -->
-
   </div>
   <!-- END .contents -->
 </div>
