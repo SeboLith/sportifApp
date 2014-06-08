@@ -39,7 +39,7 @@
           <ol>
             <li>
               <div class="form-group" ng-class="{ 'has-error' : newsletterForm.email.$invalid && !newsletterForm.email.$pristine }">
-                <input ng-pattern="emailRegexValidation" type="email" name="email" class="text" ng-model="newsletter.email">
+                <input ng-pattern="emailRegexValidation" type="email" name="email" class="text" ng-model="newsletter.email" placeholder="Ma recherche...">
                 <p ng-show="newsletterForm.email.$invalid && !newsletterForm.email.$pristine" class="error_message"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{validEmailErrorMessage}}</p>
               </div>
             </li>
