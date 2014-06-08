@@ -1,5 +1,4 @@
 'use strict';
-/*global angular, globals*/
 
 /* Controllers */
 angular.module('controllers')
@@ -78,29 +77,54 @@ angular.module('controllers')
 			});
 		});
 
-		var returnedViewData = ViewData.returnedData.then(function(data){
+		var returnedMiscViewData = ViewData.miscViewData.then(function(miscViewData){
 
-			$scope.popularProducts         = data[0].data;
-			$scope.customerServices        = data[1].data;
-			$scope.corporateInfo           = data[2].data;
+			var promise = miscViewData.data.values;
 
-			$scope.company    		       = data[3].data.values[0].data.value;
-			$scope.validEmailErrorMessage  = data[3].data.values[1].data.value;
-			$scope.newsLetterSignupMessage = data[3].data.values[2].data.value;
-			$scope.signUpButton            = data[3].data.values[3].data.value;
-			$scope.signUpTitle             = data[3].data.values[4].data.value;
+			$scope.company    		       = promise.company.value;
+			$scope.validEmailErrorMessage  = promise.emailErrorMessage.value;
+			$scope.newsLetterSignupMessage = promise.newsletterSignupMessage.value;
+			$scope.signUpButton            = promise.signupButtonText.value;
+			$scope.signUpTitle             = promise.signupTite.value;
 
+		});
+
+		var returnedCorporateInfo = ViewData.corporateInfo.then(function(corporateInfo){
+
+			var promise = corporateInfo.data;
+
+			$scope.corporateInfo  = promise;
+		});
+
+		var returnedCustomerServices = ViewData.customerServices.then(function(customerServices){
+
+			var promise = customerServices.data;
+
+			$scope.customerServices  = promise;
+		});
+
+		var returnedPopularProducts = ViewData.popularProducts.then(function(popularProducts){
+
+			var promise = popularProducts.data;
+
+			$scope.popularProducts  = promise;
 		});
 	}])
 	/*
 		HEADER CONTROLLER
 	----------------------------------------------------------------------------
 	============================================================================ */
-	.controller('HeaderCtrl', ['$scope', function ($scope) {
+	.controller('HeaderCtrl', ['$scope', 'ViewData', function ($scope, ViewData) {
 
 		$scope.search = {};
 
-        $scope.componentShow = function(componentName) {
+        var returnedHeaderData = ViewData.headerData.then(function(headerData){
+
+			$scope.topNav = headerData.data.values.topNav;
+
+		});
+
+		$scope.componentShow = function(componentName) {
         	// reset the component values
 			$scope.ShopBarComponent = false;
 			$scope.RunningBarComponent = false;
@@ -163,12 +187,14 @@ angular.module('controllers')
 	.controller('HomeCtrl', ['$scope', 'ViewData', function ($scope, ViewData){
 
 
-		var returnedViewData = ViewData.returnedData.then(function(data){
+		var returnedViewData = ViewData.homeMainData.then(function(homeMainData){
 
-			$scope.quadrantOneData = data[4].data.values[0].quadrantOneData;
-			$scope.quadrantTwoData = data[4].data.values[0].quadrantTwoData;
-			$scope.quadrantThreeData = data[4].data.values[0].quadrantThreeData;
-			$scope.quadrantFourData = data[4].data.values[0].quadrantFourData;
+			var promise = homeMainData.data.values;
+
+			$scope.quadrantOneData = promise.quadrantOneData;
+			$scope.quadrantTwoData = promise.quadrantTwoData;
+			$scope.quadrantThreeData = promise.quadrantThreeData;
+			$scope.quadrantFourData = promise.quadrantFourData;
 		});
 	}])
 
