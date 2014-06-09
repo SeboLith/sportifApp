@@ -159,7 +159,7 @@ angular.module('controllers')
 		FOOTER CONTROLLER
 	----------------------------------------------------------------------------
 	============================================================================ */
-	.controller('FooterCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+	.controller('FooterCtrl', ['$scope', 'ViewData', function ($scope, ViewData) {
 
 		// // set the current date
         var currentDate = new Date();

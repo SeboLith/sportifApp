@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="99px"
+	 height="51.652px" viewBox="0 0 99 51.652" enable-background="new 0 0 99 51.652" xml:space="preserve">
+<g id="circles" display="none">
+</g>
+<g id="Layer_4" display="none">
+	<g display="inline">
+		<rect x="-1.052" y="-0.27" fill="#FF9933" width="101.104" height="52.191"/>
+		<g>
+			
+				<image overflow="visible" width="1350" height="1350" xlink:href="ballon_dor.png"  transform="matrix(0.0202 0 0 0.0202 35.8877 13.0234)">
+			</image>
+			<circle fill="none" stroke="#666666" stroke-width="2" stroke-miterlimit="10" cx="49.499" cy="26.635" r="19.236"/>
+			<circle fill="none" stroke="#111111" stroke-width="0.75" stroke-miterlimit="10" cx="49.5" cy="26.635" r="18.072"/>
+			<path fill="none" stroke="#1C1C1C" stroke-width="6" stroke-miterlimit="10" d="M64.507,26.635
+				c0,8.287-6.722,15.006-15.007,15.006c-8.288,0-15.007-6.719-15.007-15.006c0-8.285,6.719-15.008,15.007-15.008
+				C57.785,11.627,64.507,18.35,64.507,26.635z"/>
+			<circle fill="none" stroke="#111111" stroke-miterlimit="10" cx="49.5" cy="26.635" r="11.941"/>
+			<circle fill="none" stroke="#FFFFFF" stroke-miterlimit="10" cx="49.5" cy="26.635" r="11.559"/>
+			<circle fill="none" stroke="#BC5C06" stroke-width="0.2" stroke-miterlimit="10" cx="49.5" cy="26.635" r="11.048"/>
+			<path fill="none" d="M66.766,26.633c0-9.535-7.732-17.264-17.264-17.264c-9.534,0-17.266,7.729-17.266,17.264
+				c0,9.533,7.731,17.266,17.266,17.266C59.033,43.898,66.766,36.166,66.766,26.633z"/>
+			<text transform="matrix(0.4707 0.8823 -0.8823 0.4707 33.4512 33.2324)"><tspan x="0" y="0" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012">B</tspan><tspan x="4.053" y="-0.066" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012" rotate="-13.592">A</tspan><tspan x="7.946" y="-1.129" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012" rotate="-24.355">L</tspan><tspan x="10.092" y="-2.127" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012" rotate="-32.189">L</tspan><tspan x="12.338" y="-3.45" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012" rotate="-44.992">O</tspan><tspan x="15.943" y="-7.301" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012" rotate="-60.828">N</tspan><tspan x="17.768" y="-10.819" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012" rotate="-70.522"> </tspan><tspan x="18.539" y="-12.717" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012" rotate="-82.129">D</tspan><tspan x="19.032" y="-17.67" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012" rotate="-95.109">’</tspan><tspan x="18.84" y="-20.51" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012" rotate="-108.199">O</tspan><tspan x="17.055" y="-25.425" fill="#FFFFFF" stroke="#333333" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="6.012" rotate="-123.922">R</tspan></text>
+		</g>
+	</g>
+</g>
+<g id="Layer_5">
+	
+		<image overflow="visible" width="1920" height="1200" xlink:href="Flaming-Soccer-Ball-Desktop-Wallpaper.png"  transform="matrix(0.0516 0 0 0.0516 0 -8.2852)">
+	</image>
+	
+		<text transform="matrix(1 0 0 1 20.0908 47.6934)" fill="#FF6600" stroke="#666666" stroke-width="0.2" stroke-miterlimit="10" font-family="'Bauhaus93'" font-size="10">BALLON D’OR</text>
+</g>
+<g id="center_text">
+</g>
+</svg>
