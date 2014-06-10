@@ -124,26 +124,44 @@ angular.module('controllers')
 
 		});
 
+		$scope.ShopBarComponent = false;
+		$scope.RunningBarComponent = false;
+		$scope.FeaturedSportsBarComponent = false;
+		$scope.MySportifBarComponent = false;
+
 		$scope.componentShow = function(componentName) {
+
         	// reset the component values
-			$scope.ShopBarComponent = false;
-			$scope.RunningBarComponent = false;
-			$scope.FeaturedSportsBarComponent = false;
-			$scope.MySportifBarComponent = false;
 
 			// set the show value for the clicked component to true
 			switch (componentName) {
 				case "ShopBar":
-					$scope.ShopBarComponent = true;
+					$scope.ShopBarComponent = !$scope.ShopBarComponent;
+					$scope.RunningBarComponent = false;
+					$scope.FeaturedSportsBarComponent = false;
+					$scope.MySportifBarComponent = false;
+					console.log("ShopBar lead clicked");
 					break;
 				case "RunningBar":
-					$scope.RunningBarComponent = true;
+					$scope.RunningBarComponent = !$scope.RunningBarComponent;
+					$scope.ShopBarComponent = false;
+					$scope.FeaturedSportsBarComponent = false;
+					$scope.MySportifBarComponent = false;
+					console.log("RunningBar lead clicked");
 					break;
 				case "FeaturedSportsBar":
-					$scope.FeaturedSportsBarComponent = true;
+					$scope.FeaturedSportsBarComponent = !$scope.FeaturedSportsBarComponent;
+					$scope.ShopBarComponent = false;
+					$scope.RunningBarComponent = false;
+					$scope.MySportifBarComponent = false;
+					console.log("FeaturedSportsBar lead clicked");
 					break;
 				case "MySportifBar":
-					$scope.MySportifBarComponent = true;
+					$scope.MySportifBarComponent = !$scope.MySportifBarComponent;
+					$scope.ShopBarComponent = false;
+					$scope.RunningBarComponent = false;
+					$scope.FeaturedSportsBarComponent = false;
+					console.log("MySportifBar lead clicked");
 					break;
 			}
         };

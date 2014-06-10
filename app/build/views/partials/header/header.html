@@ -29,19 +29,19 @@
 
         <ul id="areas" class="level_1">
 
-          <li class="active" id="ShopBarControl" ng-click="componentShow('ShopBar')">
-             <span>Shop</span>
+          <li id="ShopBarControl" ng-click="componentShow('ShopBar')">
+             <a ng-class="{ 'active' : ShopBarComponent }" href=""><span>Shop</span></a>
           </li>
 
-          <li class="" id="RunningBarControl" ng-click="componentShow('RunningBar')">
-            <span>Training</span>
+          <li id="RunningBarControl" ng-click="componentShow('RunningBar')">
+            <a ng-class="{ 'active' : RunningBarComponent }" href=""><span>Training</span></a>
           </li>
 
-          <li class="" id="FeaturedSportsBarControl" ng-click="componentShow('FeaturedSportsBar')">
-            <span>Featured Sports</span>
+          <li id="FeaturedSportsBarControl" ng-click="componentShow('FeaturedSportsBar')">
+            <a ng-class="{ 'active' : FeaturedSportsBarComponent }" href=""><span>Featured Sports</span></a>
           </li>
-          <li class="" id="MySportifBarControl" ng-click="componentShow('MySportifBar')">
-            <span>My Sportif</span>
+          <li id="MySportifBarControl" ng-click="componentShow('MySportifBar')">
+            <a ng-class="{ 'active' : MySportifBarComponent }" href=""><span>My Sportif</span></a>
           </li>
 
         </ul>
@@ -51,19 +51,19 @@
     </div>
     <!-- END #lead -->
 
-    <div id="panels">
+    <div id="lead-panels">
 
       <!-- ShopBarComponent -->
-      <div ng-include="'partials/header/shopbar'"></div>
+      <div  id="ShopBarComponent" ng-class="{ 'bar-slider' : ShopBarComponent }" ng-include="'partials/header/shopbar'"></div>
 
       <!-- RunningBarComponent -->
-      <div ng-include="'partials/header/runningbar'"></div>
+      <div  id="RunningBarComponent" ng-class="{ 'bar-slider' : RunningBarComponent }" ng-include="'partials/header/runningbar'"></div>
 
-      <!-- FeaturedSportsBar -->
-      <div ng-include="'partials/header/featuredsportsbar'"></div>
+      <!-- FeaturedSportsBarComponent -->
+      <div  id="FeaturedSportsBarComponent" ng-class="{ 'bar-slider' : FeaturedSportsBarComponent }" ng-include="'partials/header/featuredsportsbar'"></div>
 
-      <!-- MySportifBar -->
-      <div ng-include="'partials/header/mysportifbar'"></div>
+      <!-- MySportifBarComponent -->
+      <div  id="MySportifBarComponent" ng-class="{ 'bar-slider' : MySportifBarComponent }" ng-include="'partials/header/mysportifbar'"></div>
 
     </div>
     <!-- END #panels -->
