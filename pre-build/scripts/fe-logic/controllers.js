@@ -121,6 +121,7 @@ angular.module('controllers')
         var returnedHeaderData = ViewData.headerData.then(function(headerData){
 
 			$scope.topNav = headerData.data.values.topNav;
+			$scope.shopBar = headerData.data.values.mainNav.shopBar;
 
 		});
 
