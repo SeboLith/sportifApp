@@ -1,0 +1,74 @@
+<header role="banner">
+
+  <div id="top">
+      <nav id="secondary" role="navigation">
+
+    <div class="wrap">
+
+        <!-- SearchBarComponent -->
+        <div ng-include="'partials/header/searchbar'"></div>
+
+        <!-- TopNavComponent -->
+        <div ng-include="'partials/header/topnav'"></div>
+
+      </nav>
+      <!-- END #secondary -->
+    </div>
+    <!-- END .wrap -->
+  </div>
+  <!-- END #top -->
+
+  <nav id="primary" role="navigation">
+
+      <div id="lead">
+      <div class="wrap">
+        <div id="spacer">
+          <a href=""><img src="images/spacer.png"></a>
+        </div>
+        <!-- END #spacer -->
+
+        <ul id="areas" class="level_1">
+
+          <li id="ShopBarControl" ng-click="componentShow('ShopBar')">
+             <a ng-class="{ 'active' : ShopBarComponent }" href=""><span>{{shopBar.tabTitle}}</span></a>
+          </li>
+
+          <li id="RunningBarControl" ng-click="componentShow('RunningBar')">
+            <a ng-class="{ 'active' : RunningBarComponent }" href=""><span>{{runningBar.tabTitle}}</span></a>
+          </li>
+
+          <li id="FeaturedSportsBarControl" ng-click="componentShow('FeaturedSportsBar')">
+            <a ng-class="{ 'active' : FeaturedSportsBarComponent }" href=""><span>{{featuredSportsBar.tabTitle}}</span></a>
+          </li>
+          <li id="MySportifBarControl" ng-click="componentShow('MySportifBar')">
+            <a ng-class="{ 'active' : MySportifBarComponent }" href=""><span>{{mySportifBar.tabTitle}}</span></a>
+          </li>
+
+        </ul>
+        <!-- END #areas -->
+      </div>
+      <!-- END .wrap -->
+    </div>
+    <!-- END #lead -->
+
+    <div id="lead-panels">
+
+      <!-- ShopBarComponent -->
+      <div  id="ShopBarComponent" ng-class="{ 'bar-slider' : ShopBarComponent }" ng-include="'partials/header/shopbar'"></div>
+
+      <!-- RunningBarComponent -->
+      <div  id="RunningBarComponent" ng-class="{ 'bar-slider' : RunningBarComponent }" ng-include="'partials/header/runningbar'"></div>
+
+      <!-- FeaturedSportsBarComponent -->
+      <div  id="FeaturedSportsBarComponent" ng-class="{ 'bar-slider' : FeaturedSportsBarComponent }" ng-include="'partials/header/featuredsportsbar'"></div>
+
+      <!-- MySportifBarComponent -->
+      <div  id="MySportifBarComponent" ng-class="{ 'bar-slider' : MySportifBarComponent }" ng-include="'partials/header/mysportifbar'"></div>
+
+    </div>
+    <!-- END #panels -->
+
+  </nav>
+  <!-- END #primary -->
+
+</header>

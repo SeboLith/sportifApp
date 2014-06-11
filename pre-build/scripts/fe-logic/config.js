@@ -15,18 +15,18 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/',
       views: {
         '': {
-          templateUrl: 'partials/home.html'
+          templateUrl: 'views/partials/home.html'
         },
         'header@home': {
-          templateUrl: 'partials/header/header.html',
+          templateUrl: 'views/partials/header/header.html',
           controller: 'HeaderCtrl'
         },
         'homeMain@home': {
-          templateUrl: 'partials/home_main/homeMain.html',
+          templateUrl: 'views/partials/home_main/homeMain.html',
           controller: 'HomeCtrl'
         },
         'footer@home': {
-          templateUrl: 'partials/footer/footer.html',
+          templateUrl: 'views/partials/footer/footer.html',
           controller: 'FooterCtrl'
         }
       }
