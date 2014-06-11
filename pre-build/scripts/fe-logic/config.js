@@ -35,7 +35,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/shoes',
       views: {
         '': {
-          template: '<h1>Hi from shoes page</h1>'
+          templateUrl: 'views/partials/shoes.html'
+        },
+        'header@shoes': {
+          templateUrl: 'views/partials/header/header.html',
+          controller: 'HeaderCtrl'
+        },
+        'shoesMain@shoes': {
+          templateUrl: 'views/partials/shoes_main/shoesMain.html'
+          // controller: 'HomeCtrl'
+        },
+        'footer@shoes': {
+          templateUrl: 'views/partials/footer/footer.html',
+          controller: 'FooterCtrl'
         }
       }
     })
