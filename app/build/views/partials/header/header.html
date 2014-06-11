@@ -25,23 +25,23 @@
         <div id="spacer">
           <a href=""><img src="images/spacer.png"></a>
         </div>
-        <!-- END #site_logo -->
+        <!-- END #spacer -->
 
         <ul id="areas" class="level_1">
 
           <li id="ShopBarControl" ng-click="componentShow('ShopBar')">
-             <a ng-class="{ 'active' : ShopBarComponent }" href=""><span>Shop</span></a>
+             <a ng-class="{ 'active' : ShopBarComponent }" href=""><span>{{shopBar.tabTitle}}</span></a>
           </li>
 
           <li id="RunningBarControl" ng-click="componentShow('RunningBar')">
-            <a ng-class="{ 'active' : RunningBarComponent }" href=""><span>Training</span></a>
+            <a ng-class="{ 'active' : RunningBarComponent }" href=""><span>{{runningBar.tabTitle}}</span></a>
           </li>
 
           <li id="FeaturedSportsBarControl" ng-click="componentShow('FeaturedSportsBar')">
-            <a ng-class="{ 'active' : FeaturedSportsBarComponent }" href=""><span>Featured Sports</span></a>
+            <a ng-class="{ 'active' : FeaturedSportsBarComponent }" href=""><span>{{featuredSportsBar.tabTitle}}</span></a>
           </li>
           <li id="MySportifBarControl" ng-click="componentShow('MySportifBar')">
-            <a ng-class="{ 'active' : MySportifBarComponent }" href=""><span>My Sportif</span></a>
+            <a ng-class="{ 'active' : MySportifBarComponent }" href=""><span>{{mySportifBar.tabTitle}}</span></a>
           </li>
 
         </ul>

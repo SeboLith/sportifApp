@@ -1,72 +1,15 @@
 <div class="panel secondary wrap">
 
-              <div class="navigation_group">
-              <!---->
-                  <div class="featured">
-                                  <ul class="level_3">
-                                      <li class="level_3" id="con-running-LINK-WITH-IMAGE">
-                                                  <a href="http://www.ggsportif.com/running">
-      <img src="images/Navigation_140x90_Running.png" alt="Featured Products">
-  </a>
-  <a href="http://www.ggsportif.com/running" title="Featured Products">
-              Featured Products</a>
-      </li>
-                                          </ul>
-                              </div>
-                          <div class="listing">
-                                  <h3>Running Products</h3>
-                                  <ul class="level_3" data-js-split="0">
-                                      <li class="level_3" id="cat-link-running-shoes">
-                                                  <a href="http://www.ggsportif.com/running/cat/runningshoes" title="Shoes">
-              Shoes</a>
-      </li>
-                                          <li class="level_3" id="cat-link-running-clothing">
-                                                  <a href="http://www.ggsportif.com/running/cat/runningclothing" title="Clothing">
-              Clothing</a>
-      </li>
-                                          <li class="level_3" id="cat-link-running-accessories">
-                                                  <a href="http://www.ggsportif.com/running/cat/runningaccessories" title="Accessories">
-              Accessories</a>
-      </li>
-                                          </ul>
-                              </div>
-                          <div class="listing">
-                                  <h3>Shop by gender</h3>
-                                  <ul class="level_3" data-js-split="0">
-                                      <li class="level_3" id="cat-link-running-mens">
-                                                  <a href="http://www.ggsportif.com/mens/cat/sportrunningmens" title="Mens">
-              Mens</a>
-      </li>
-                                          <li class="level_3" id="cat-link-running-womens">
-                                                  <a href="http://www.ggsportif.com/womens/cat/sportrunningwomens" title="Womens">
-              Womens</a>
-      </li>
-                                          <li class="level_3" id="cat-link-running-kids">
-                                                  <a href="http://www.ggsportif.com/kids/cat/sportrunningkids" title="Kids">
-              Kids</a>
-      </li>
-                                          </ul>
-                              </div>
-                          <div class="listing">
-                                  <h3>Footwear Categories</h3>
-                                  <ul class="level_3" data-js-split="0">
-                                      <li class="level_3" id="cat-link-roadrunning">
-                                                  <a href="http://www.ggsportif.com/road/cat/roadrunning" title="road">
-              road</a>
-      </li>
-                                          <li class="level_3" id="cat-link-speedrunning">
-                                                  <a href="http://www.ggsportif.com/speed/cat/speedrunning" title="speed">
-              speed</a>
-      </li>
-                                          <li class="level_3" id="cat-link-trailrunning">
-                                                  <a href="http://www.ggsportif.com/trail/cat/trailrunning" title="trail">
-              trail</a>
-      </li>
-                                          <li class="level_3" id="cat-link-naturalrunning">
-                                                  <a href="http://www.ggsportif.com/natural/cat/naturalrunning" title="natural">
-              natural</a>
-      </li>
-                                          </ul>
-                              </div>
-                          </div>
-          </div>
+  <div class="navigation_group">
+
+    <div class="primary-nav-listing" ng-repeat="section in runningBar.content">
+      <h3>{{section.mainTitle}}</h3>
+      <ul class="" ng-repeat="item in section.subSection">
+        <li>
+          <a href="{{item.link}}" title="{{item.subTitle}}">{{item.subTitle}}</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>

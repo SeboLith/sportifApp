@@ -120,8 +120,11 @@ angular.module('controllers')
 
         var returnedHeaderData = ViewData.headerData.then(function(headerData){
 
-			$scope.topNav = headerData.data.values.topNav;
-			$scope.shopBar = headerData.data.values.mainNav.shopBar;
+			$scope.topNav            = headerData.data.values.topNav;
+			$scope.shopBar           = headerData.data.values.mainNav.shopBar;
+			$scope.runningBar        = headerData.data.values.mainNav.runningBar;
+			$scope.featuredSportsBar = headerData.data.values.mainNav.featuredSportsBar;
+			$scope.mySportifBar      = headerData.data.values.mainNav.mySportifBar;
 
 		});
 

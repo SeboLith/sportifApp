@@ -2,10 +2,10 @@
 
   <div class="navigation_group">
 
-    <div class="primary-nav-listing" ng-repeat="section in shopBar">
+    <div class="primary-nav-listing" ng-repeat="section in shopBar.content">
       <h3>{{section.mainTitle}}</h3>
       <ul class="" ng-repeat="item in section.subSection">
-        <li id="{{item.id}}">
+        <li>
           <a href="{{item.link}}" title="{{item.subTitle}}">{{item.subTitle}}</a>
         </li>
       </ul>
