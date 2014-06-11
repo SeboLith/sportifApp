@@ -15,18 +15,18 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/',
       views: {
         '': {
-          templateUrl: '../views/partials/home.html'
+          templateUrl: 'partials/home.html'
         },
         'header@home': {
-          templateUrl: '../views/partials/header/header.html',
+          templateUrl: 'partials/header/header.html',
           controller: 'HeaderCtrl'
         },
         'homeMain@home': {
-          templateUrl: '../views/partials/home_main/homeMain.html',
+          templateUrl: 'partials/home_main/homeMain.html',
           controller: 'HomeCtrl'
         },
         'footer@home': {
-          templateUrl: '../views/partials/footer/footer.html',
+          templateUrl: 'partials/footer/footer.html',
           controller: 'FooterCtrl'
         }
       }
@@ -35,19 +35,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/shoes',
       views: {
         '': {
-          templateUrl: '../views/partials/shoes.html'
-        },
-        'header@home': {
-          templateUrl: '../views/partials/header/header.html',
-          controller: 'HeaderCtrl'
-        },
-        'homeMain@home': {
-          templateUrl: '../views/partials/home_main/homeMain.html',
-          controller: 'HomeCtrl'
-        },
-        'footer@home': {
-          templateUrl: '../views/partials/footer/footer.html',
-          controller: 'FooterCtrl'
+          template: '<h1>Hi from shoes page</h1>'
         }
       }
     })

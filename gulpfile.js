@@ -14,7 +14,7 @@ var gulp = require('gulp'),
     // Gulp plugin to run a webserver (with LiveReload).
     connect = require('gulp-connect'),
 
-    outputDir = 'app/build',
+    outputDir = 'app',
     // Concat files by your operating system's newLine.
     concat = require('gulp-concat'),
     // Minify css with clean-css, including optional caching.
@@ -32,18 +32,18 @@ var gulp = require('gulp'),
 
 
 gulp.task('cleanCSS', function () {
-    return gulp.src('app/build/css/', {read: false})
+    return gulp.src('app/css/', {read: false})
         .pipe(clean());
 });
 
 
 gulp.task('cleanJS', function () {
-    return gulp.src('app/build/js/', {read: false})
+    return gulp.src('app/js/', {read: false})
         .pipe(clean());
 });
 
 gulp.task('views', function () {
-    return gulp.src('app/build/views/**/*.html')
+    return gulp.src('app/views/**/*.html')
         .pipe(refresh(lrserver))
         .pipe(notify({ message: 'HTML updated' }));
 });
@@ -54,7 +54,7 @@ gulp.task('css', function() {
         .pipe(autoprefixer('last 15 version'))
         .pipe(concat('main.css'))
         .pipe(minifyCSS())
-        .pipe(gulp.dest('app/build/css'))
+        .pipe(gulp.dest('app/css'))
         .pipe(refresh(lrserver))
         .pipe(notify({ message: 'CSS updated' }))
 });
@@ -63,7 +63,7 @@ gulp.task('sportif', function() {
     return gulp.src('pre-build/scripts/fe-logic/sportif.js')
         .pipe(concat('0.js'))
         .pipe(uglify({mangle: false}))
-        .pipe(gulp.dest('app/build/js'))
+        .pipe(gulp.dest('app/js'))
         .pipe(refresh(lrserver))
         .pipe(notify({ message: 'sportif.js updated' }));
 });
@@ -72,7 +72,7 @@ gulp.task('app', function() {
     return gulp.src('pre-build/scripts/fe-logic/app.js')
         .pipe(concat('1.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('app/build/js'))
+        .pipe(gulp.dest('app/js'))
         .pipe(refresh(lrserver))
         .pipe(notify({ message: 'app.js updated' }));
 });
@@ -81,7 +81,7 @@ gulp.task('config', function() {
     return gulp.src('pre-build/scripts/fe-logic/config.js')
         .pipe(concat('6.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('app/build/js'))
+        .pipe(gulp.dest('app/js'))
         .pipe(refresh(lrserver))
         .pipe(notify({ message: 'config.js updated' }));
 });
@@ -90,7 +90,7 @@ gulp.task('services', function() {
     return gulp.src('pre-build/scripts/fe-logic/services.js')
         .pipe(concat('2.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('app/build/js'))
+        .pipe(gulp.dest('app/js'))
         .pipe(refresh(lrserver))
         .pipe(notify({ message: 'services.js updated' }));
 });
@@ -99,7 +99,7 @@ gulp.task('factories', function() {
     return gulp.src('pre-build/scripts/fe-logic/factories.js')
         .pipe(concat('7.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('app/build/js'))
+        .pipe(gulp.dest('app/js'))
         .pipe(refresh(lrserver))
         .pipe(notify({ message: 'factories.js updated' }));
 });
@@ -108,7 +108,7 @@ gulp.task('controllers', function() {
     return gulp.src('pre-build/scripts/fe-logic/controllers.js')
         .pipe(concat('3.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('app/build/js'))
+        .pipe(gulp.dest('app/js'))
         .pipe(refresh(lrserver))
         .pipe(notify({ message: 'controllers.js updated' }));
 });
@@ -117,7 +117,7 @@ gulp.task('directives', function() {
     return gulp.src('pre-build/scripts/fe-logic/directives.js')
         .pipe(concat('4.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('app/build/js'))
+        .pipe(gulp.dest('app/js'))
         .pipe(refresh(lrserver))
         .pipe(notify({ message: 'directives.js updated' }));
 });
@@ -126,7 +126,7 @@ gulp.task('filters', function() {
     return gulp.src('pre-build/scripts/fe-logic/filters.js')
         .pipe(concat('5.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('app/build/js'))
+        .pipe(gulp.dest('app/js'))
         .pipe(refresh(lrserver))
         .pipe(notify({ message: 'filters.js updated' }));
 });
@@ -143,7 +143,7 @@ gulp.task('serve', function() {
     lrserver.listen(livereloadport);
 });
 
-gulp.watch(['app/build/views/**/*.html'], ['views']);
+gulp.watch(['app/views/**/*.html'], ['views']);
 
 gulp.watch('pre-build/styles/*.css', ['css']);
 
