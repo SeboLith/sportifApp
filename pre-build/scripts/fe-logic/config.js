@@ -31,4 +31,24 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         }
       }
     })
+    .state('shoes', {
+      url: '/shoes',
+      views: {
+        '': {
+          templateUrl: '../views/partials/shoes.html'
+        },
+        'header@home': {
+          templateUrl: '../views/partials/header/header.html',
+          controller: 'HeaderCtrl'
+        },
+        'homeMain@home': {
+          templateUrl: '../views/partials/home_main/homeMain.html',
+          controller: 'HomeCtrl'
+        },
+        'footer@home': {
+          templateUrl: '../views/partials/footer/footer.html',
+          controller: 'FooterCtrl'
+        }
+      }
+    })
 }]);
