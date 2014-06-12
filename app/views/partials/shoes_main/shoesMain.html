@@ -15,11 +15,19 @@
       <div ng-include="'partials/shoes_main/sidebar'"></div>
       <!-- END SIDEBAR -->
 
-      <h5 class="listing_count">322 Results</h5>
+      <h5 class="listing_count">{{shoesProducts.length}} Results</h5>
+
+      <!-- START PAGINATION -->
+      <div ng-include="'partials/pagination'"></div>
+      <!-- END PAGINATION -->
 
       <!-- START PRODUCT LISTING -->
       <div ng-include="'partials/shoes_main/productListing'"></div>
       <!-- END PRODUCT LISTING -->
+
+      <!-- START PAGINATION -->
+      <div ng-include="'partials/pagination'"></div>
+      <!-- END PAGINATION -->
 
     </section>
   </div>

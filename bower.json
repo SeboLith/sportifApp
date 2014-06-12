@@ -1,0 +1,8 @@
+{
+  "name": "sportif-app",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular-bootstrap": "~0.11.0"
+  },
+  "devDependencies": {}
+}

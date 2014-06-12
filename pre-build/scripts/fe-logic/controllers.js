@@ -228,6 +228,9 @@ angular.module('controllers')
 		/* Product Categories */
 		$scope.shoesProducts = [];
 
+		// set the number of items per page
+		$scope.itemsPerPage = localStorage.getItem('itemsPerPage') ? localStorage.getItem('itemsPerPage') : 6;
+
 		var returnedProducts = ProductsFactory.getAll.then(function(data){
 			data.forEach( function (product) {
 				// filter and assign the products by category to an array
@@ -239,6 +242,24 @@ angular.module('controllers')
 						break;
 				}
 			});
+
+			// assign the number of members to a variable for pagination purposes
+			$scope.totalItems = $scope.shoesProducts.length;
+
+	        // get the current page using local storage; if none exists, set it to 1
+	        $scope.currentPage = localStorage.getItem('currentPage') ? localStorage.getItem('currentPage') : 1;
+
+	        // watch for the change in current page to update the members per page
+	        $scope.$watch("currentPage", function() {
+	          // set the current page using local storage
+	          localStorage.setItem('currentPage', $scope.currentPage);
+
+	          // data array to be passed into the ViewData.page() function
+	          var data =[$scope.currentPage, $scope.itemsPerPage, $scope.shoesProducts];
+
+	          // set the members segment array for the current page
+	          $scope.page = ViewData.page(data);
+	        });
 		});
 	}])
 

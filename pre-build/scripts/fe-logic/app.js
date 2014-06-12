@@ -6,6 +6,7 @@ angular.module('SportifStore', [
     'ngStorage',
     'ngSanitize',
     'ui.router',
+    'ui.bootstrap',
     'restangular',
     'controllers',
     'directives',

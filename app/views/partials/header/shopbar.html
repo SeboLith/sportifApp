@@ -6,7 +6,7 @@
       <h3>{{section.mainTitle}}</h3>
       <ul class="" ng-repeat="item in section.subSection">
         <li>
-          <a href="{{item.link}}" title="{{item.subTitle}}">{{item.subTitle}}</a>
+          <a ui-sref="{{item.link}}" title="{{item.subTitle}}">{{item.subTitle}}</a>
         </li>
       </ul>
     </div>
