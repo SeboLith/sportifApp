@@ -268,6 +268,44 @@ angular.module('controllers')
 	          $scope.shoesProductsShow = ViewData.page(data);
 	        });
 		});
+
+		/* default selected values for users checkboxes */
+		// check for the string "true" value of the selected item in localStorage
+		// if it doesn't exist, set it to false
+        $scope.users = {
+        	Male: {
+        		selected: localStorage.getItem('users.Male.selected') == "true" ? true : false
+        	},
+        	Female: {
+        		selected: localStorage.getItem('users.Female.selected') == "true" ? true : false
+        	},
+        	Kids: {
+        		selected: localStorage.getItem('users.Kids.selected') == "true" ? true : false
+        	}
+        };
+
+        $scope.userSelected = function(checkbox, currentValue) {
+
+        	// change the selected value of the "this" checkbox
+        	// from the current value to its opposite
+        	$scope.users[checkbox].selected = !currentValue;
+
+        	switch (checkbox) {
+        		case "Male":
+        			// set the changed value of the checkbox on the in localStorage
+        			localStorage.setItem('users.Male.selected', !currentValue);
+        			break;
+        		case "Female":
+        			// set the changed value of the checkbox on the in localStorage
+        			localStorage.setItem('users.Female.selected', !currentValue);
+        			break;
+        		case "Kids":
+        			// set the changed value of the checkbox on the in localStorage
+        			localStorage.setItem('users.Kids.selected', !currentValue);
+        			break;
+        	}
+        };
+
         $scope.sizeChange = function(size) {
 
         	console.log(size);

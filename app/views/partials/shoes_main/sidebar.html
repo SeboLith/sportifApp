@@ -26,7 +26,7 @@
           </div>
           <ol>
             <li ng-repeat="value in sidebarData.userSection.values" class="checkbox_holder">
-              <input ng-checked="value.active" value="0" type="checkbox">
+              <input ng-model="users[value.user].selected" ng-click="userSelected(value.user, users[value.user].selected)" type="checkbox">
               <label>
                 {{value.user}}
               </label>
