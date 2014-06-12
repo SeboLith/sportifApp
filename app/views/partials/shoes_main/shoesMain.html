@@ -1,14 +1,26 @@
 <div id="content" class="main" role="main">
   <div class="wrap">
 
-    <section>
+    <section class="search">
 
-      <!-- START QUADRANT ONE -->
-      <div ng-include="'partials/shoes_main/section'"></div>
-      <!-- END QUADRANT THREE -->
+      <!-- START BREADCRUMB -->
+      <div ng-include="'partials/shoes_main/breadcrumb'"></div>
+      <!-- END BREADCRUMB -->
+
+      <header class="search_header">
+          <h1>shoes</h1>
+      </header>
+
+      <!-- START SIDEBAR -->
+      <div ng-include="'partials/shoes_main/sidebar'"></div>
+      <!-- END SIDEBAR -->
+
+      <h5 class="listing_count">322 Results</h5>
+
+      <!-- START PRODUCT LISTING -->
+      <div ng-include="'partials/shoes_main/productListing'"></div>
+      <!-- END PRODUCT LISTING -->
 
     </section>
-
   </div>
-  <!-- END .wrap -->
 </div>

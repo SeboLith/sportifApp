@@ -219,6 +219,28 @@ angular.module('controllers')
 			$scope.quadrantFourData = promise.quadrantFourData;
 		});
 	}])
+	/*
+		SHOES CONTROLLER
+	----------------------------------------------------------------------------
+	============================================================================ */
+	.controller('ShoesCtrl', ['$scope', 'ViewData', 'ProductsFactory', function ($scope, ViewData, ProductsFactory){
+
+		/* Product Categories */
+		$scope.shoesProducts = [];
+
+		var returnedProducts = ProductsFactory.getAll.then(function(data){
+			data.forEach( function (product) {
+				// filter and assign the products by category to an array
+				switch (product.category) {
+					case "Shoes":
+						$scope.shoesProducts.push(product);
+						break;
+					default:
+						break;
+				}
+			});
+		});
+	}])
 
 
 

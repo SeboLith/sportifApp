@@ -1,0 +1,40 @@
+<div class="product_listing_main cover_holder">
+  <div class="product_listing_compact">
+
+    <p>pagination</p>
+
+    <article ng-repeat="shoe in shoesProducts" class="product basic" ng-class="{'first_of_row': $index % 3 == 0}">
+
+      <div class="image">
+        <a href="{{shoe.link}}" class="image_link">
+          <img ng-src="{{shoe.src}}" class="loaded" style="display: block;" alt="{{shoe.name}}">
+        </a>
+      </div>
+
+      <div class="content">
+
+        <h3 class="name">
+          <a href="{{shoe.link}}">{{shoe.name}}</a>
+        </h3>
+        <ul class="pricing">
+          <li class="price_black" nig-if="shoe.currentPrice !== null">
+            {{shoe.currentPrice}}
+          </li>
+        </ul>
+        <h4>{{shoe.sub_category}}</h4>
+
+        <p>{{shoe.short_description}}</p>
+
+      </div>
+
+      <div class="actions">
+        <a href="{{shoe.link}}" class="button highlight">{{shoe.availability}}</a>
+      </div>
+
+    </article>
+
+    <p>pagination</p>
+  </div>
+</div>
+
+<!-- </div> -->

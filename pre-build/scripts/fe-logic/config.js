@@ -42,13 +42,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
           controller: 'HeaderCtrl'
         },
         'shoesMain@shoes': {
-          templateUrl: 'views/partials/shoes_main/shoesMain.html'
-          // controller: 'HomeCtrl'
+          templateUrl: 'views/partials/shoes_main/shoesMain.html',
+          controller: 'ShoesCtrl'
         },
         'footer@shoes': {
           templateUrl: 'views/partials/footer/footer.html',
           controller: 'FooterCtrl'
         }
       }
-    })
+    });
 }]);

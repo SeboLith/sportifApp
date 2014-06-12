@@ -326,16 +326,16 @@ div.main div.tabs.search {
     position:relative;
     top:1px
 }
-form.search ol.facet_listing {
+div.search ol.facet_listing {
     background:#f9f9f9;
     float:none
 }
-form.search ol.facet_listing li {
+div.search ol.facet_listing li {
     float:none;
     margin:0 0 15px;
     position:relative
 }
-form.search ol.facet_listing li.facet_reset_all {
+div.search ol.facet_listing li.facet_reset_all {
     font-size:12px;
     height:0;
     margin-bottom:0;
@@ -347,26 +347,26 @@ form.search ol.facet_listing li.facet_reset_all {
     -o-transition:height .25s linear;
     transition:height .25s linear
 }
-form.search ol.facet_listing li.facet_reset_all.active {
+div.search ol.facet_listing li.facet_reset_all.active {
     height:45px
 }
-form.search ol.facet_listing li.facet_reset_all a {
+div.search ol.facet_listing li.facet_reset_all a {
     margin:15px 10px 10px
 }
-form.search ol.facet_listing li .facet_count {
+div.search ol.facet_listing li .facet_count {
     display:inline;
     color:#8f8f8f;
     font-weight:400;
     line-height:1.5em
 }
-form.search ol.facet_listing li .facet_reset {
+div.search ol.facet_listing li .facet_reset {
     border:0;
     display:inline-block;
     font-weight:700;
     padding-left:20px;
     position:relative
 }
-form.search ol.facet_listing li .facet_reset:before {
+div.search ol.facet_listing li .facet_reset:before {
     background:url(../../common/images/icon_facet_clear.png) 0 0 no-repeat;
     content:'';
     height:15px;
@@ -375,19 +375,19 @@ form.search ol.facet_listing li .facet_reset:before {
     top:2px;
     width:15px
 }
-form.search ol.facet_listing li.facet {
+div.search ol.facet_listing li.facet {
     border-top:1px solid #cacacb;
     margin-bottom:0;
     padding:14px 10px 10px
 }
-form.search ol.facet_listing li.facet.toggle {
+div.search ol.facet_listing li.facet.toggle {
     overflow:hidden
 }
-form.search ol.facet_listing li.facet.toggle div.facet_header {
+div.search ol.facet_listing li.facet.toggle div.facet_header {
     margin-bottom:4px;
     cursor:pointer
 }
-form.search ol.facet_listing li.facet.toggle div.facet_header:before {
+div.search ol.facet_listing li.facet.toggle div.facet_header:before {
     position:absolute;
     top:17px;
     right:15px;
@@ -396,7 +396,7 @@ form.search ol.facet_listing li.facet.toggle div.facet_header:before {
     height:13px;
     background:#8f8f8f
 }
-form.search ol.facet_listing li.facet.toggle div.facet_header:after {
+div.search ol.facet_listing li.facet.toggle div.facet_header:after {
     position:absolute;
     top:22px;
     right:10px;
@@ -405,116 +405,116 @@ form.search ol.facet_listing li.facet.toggle div.facet_header:after {
     height:3px;
     background:#8f8f8f
 }
-form.search ol.facet_listing li.facet.toggle div.facet_header.active {
+div.search ol.facet_listing li.facet.toggle div.facet_header.active {
     margin-bottom:25px
 }
-form.search ol.facet_listing li.facet.toggle div.facet_header.active:before {
+div.search ol.facet_listing li.facet.toggle div.facet_header.active:before {
     display:none
 }
-form.search ol.facet_listing li.facet div.facet_header {
+div.search ol.facet_listing li.facet div.facet_header {
     margin-bottom:20px;
     overflow:hidden
 }
-form.search ol.facet_listing li.facet div.facet_header h3 {
+div.search ol.facet_listing li.facet div.facet_header h3 {
     float:left;
     margin-right:10px;
     margin-bottom:0
 }
-form.search ol.facet_listing li.facet div.facet_header a.clear_facet {
+div.search ol.facet_listing li.facet div.facet_header a.clear_facet {
     font-size:12px;
     margin-right:23px
 }
-form.search ol.facet_listing li.facet a.clear_all {
+div.search ol.facet_listing li.facet a.clear_all {
     float:right
 }
-form.search ol.facet_listing li.facet ol {
+div.search ol.facet_listing li.facet ol {
     clear:both
 }
-form.search ol.facet_listing li.facet .facet_limit_toggle {
+div.search ol.facet_listing li.facet .facet_limit_toggle {
     text-transform:uppercase
 }
-form.search ol.facet_listing li.facet ul.multiselect a {
+div.search ol.facet_listing li.facet ul.multiselect a {
     border:0;
     padding-left:31px
 }
-form.search ol.facet_listing li.facet ul.multiselect a span.type {
+div.search ol.facet_listing li.facet ul.multiselect a span.type {
     text-transform:uppercase;
     font-size:11px
 }
-form.search ol.facet_listing li.facet ul.multiselect a label {
+div.search ol.facet_listing li.facet ul.multiselect a label {
     width:auto;
     float:none;
     padding-left:0
 }
-form.search ol.facet_listing li.facet ul.multiselect a:hover label {
+div.search ol.facet_listing li.facet ul.multiselect a:hover label {
     color:inherit;
     cursor:pointer
 }
-form.search ol.facet_listing li.facet ul.multiselect a:hover label span {
+div.search ol.facet_listing li.facet ul.multiselect a:hover label span {
     color:inherit
 }
-form.search ol.facet_listing li.facet ul.multiselect a:before {
+div.search ol.facet_listing li.facet ul.multiselect a:before {
     background:url(../../common/images/icon_big_facet_clear.png) 0 0 no-repeat;
     width:25px;
     height:25px;
     top:-2px
 }
-form.search ol.facet_listing li.facet ul.multiselect li:last-child {
+div.search ol.facet_listing li.facet ul.multiselect li:last-child {
     margin-bottom:0
 }
-form.search ol.facet_listing li.disconnected input[type=radio]:disabled+label,form.search ol.facet_listing li.disconnected label {
+div.search ol.facet_listing li.disconnected input[type=radio]:disabled+label,div.search ol.facet_listing li.disconnected label {
     color:#c8c8c8
 }
-form.search ol.facet_listing li.disconnected input[type=radio]:disabled+label:before,form.search ol.facet_listing li.disconnected label:before {
+div.search ol.facet_listing li.disconnected input[type=radio]:disabled+label:before,div.search ol.facet_listing li.disconnected label:before {
     background-position:0 -90px
 }
-form.search ol.facet_listing li.disconnected .colour_value:hover,form.search ol.facet_listing li.disconnected label:hover {
+div.search ol.facet_listing li.disconnected .colour_value:hover,div.search ol.facet_listing li.disconnected label:hover {
     color:#c8c8c8;
     cursor:default
 }
-form.search ol.facet_listing li.select,form.search ol.facet_listing li.select div.select_wrap {
+div.search ol.facet_listing li.select,div.search ol.facet_listing li.select div.select_wrap {
     width:200px
 }
-form.search ol.facet_listing li.select div.select_wrap div.select_ui span.label {
+div.search ol.facet_listing li.select div.select_wrap div.select_ui span.label {
     width:153px
 }
-form.search ol.facet_listing li.select div.select_wrap select {
+div.search ol.facet_listing li.select div.select_wrap select {
     width:100%
 }
-form.search ol.facet_listing li .colour_value,form.search ol.facet_listing li label {
+div.search ol.facet_listing li .colour_value,div.search ol.facet_listing li label {
     font-family:inherit;
     font-size:11px;
     font-weight:700;
     line-height:1.5em
 }
-form.search ol.facet_listing li .colour_value:hover,form.search ol.facet_listing li label:hover {
+div.search ol.facet_listing li .colour_value:hover,div.search ol.facet_listing li label:hover {
     color:#666;
     cursor:pointer
 }
-form.search ol.facet_listing li label {
+div.search ol.facet_listing li label {
     color:#8f8f8f;
     margin:0 0 5px;
     padding-left:32px;
     text-transform:none;
     width:159px
 }
-form.search ol.facet_listing li label:before {
+div.search ol.facet_listing li label:before {
     left:-4px
 }
-form.search ol.facet_listing li li.radio_button input[type=radio],form.search ol.facet_listing li.checkbox_holder input[type=checkbox] {
+div.search ol.facet_listing li li.radio_button input[type=radio],div.search ol.facet_listing li.checkbox_holder input[type=checkbox] {
     left:3px
 }
-form.search ol.facet_listing li li.radio_button input[type=radio]:checked+label {
+div.search ol.facet_listing li li.radio_button input[type=radio]:checked+label {
     color:#8f8f8f
 }
-form.search ol.facet_listing li.colour_holder {
+div.search ol.facet_listing li.colour_holder {
     float:left;
     margin:0 0 15px;
     min-height:19px;
     padding-left:32px;
     width:63px
 }
-form.search ol.facet_listing li.colour_holder.odd {
+div.search ol.facet_listing li.colour_holder.odd {
     margin-right:10px
 }
 .colour_holder {
@@ -3171,7 +3171,7 @@ header[role=banner] nav#primary #lead-panels {
     transition:max-height .3s ease-in-out
 }
 #FeaturedSportsBarComponent.bar-slider,#MySportifBarComponent.bar-slider,#RunningBarComponent.bar-slider,#ShopBarComponent.bar-slider {
-    max-height:225px;
+    max-height:250px;
     overflow-y:hidden;
     -webkit-transition:max-height .5s ease-in-out;
     -moz-transition:max-height .5s ease-in-out;
@@ -3179,7 +3179,7 @@ header[role=banner] nav#primary #lead-panels {
     transition:max-height .5s ease-in-out
 }
 body.force_show_all header[role=banner] nav#primary #lead-panels,body.force_show_all header[role=banner] nav#primary #lead-panels div.panel,header[role=banner] nav#primary #lead-panels.active {
-    border-bottom:1px solid #969696
+    /*border-bottom:1px solid #969696*/
 }
 header[role=banner] nav#primary #lead-panels div.panel {
     overflow:hidden;

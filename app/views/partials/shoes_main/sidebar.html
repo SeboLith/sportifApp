@@ -1,0 +1,719 @@
+<div class="item product_listing_side">
+
+      <div class="search">
+          <ol class="facets facet_listing">
+              <li class="facet_reset_all" ng-class="{active: listing.results.facets.clear.url.length}">
+                  <a href="" class="facet_reset ng-binding" ng-click="update(listing.results.facets.clear.url)">Clear all</a>
+              </li>
+              <li class="facet" ng-init="primary=true">
+                <div class="facet_header">
+                  <h3 class="ng-binding first" ng-class="{first: $first &amp;&amp; primary}">
+                    Sport
+                  </h3>
+                </div>
+                <ol>
+                  <!-- ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_sportfacet_string_en_mv_0" ng-checked="value.active" value="0" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_sportfacet_string_en_mv_0">
+                      cricket
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (13)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_sportfacet_string_en_mv_1" ng-checked="value.active" value="1" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_sportfacet_string_en_mv_1">
+                      football
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (45)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_sportfacet_string_en_mv_2" ng-checked="value.active" value="2" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_sportfacet_string_en_mv_2">
+                      health &amp; leisure
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (33)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_sportfacet_string_en_mv_3" ng-checked="value.active" value="3" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_sportfacet_string_en_mv_3">
+                      hockey
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (11)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_sportfacet_string_en_mv_4" ng-checked="value.active" value="4" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_sportfacet_string_en_mv_4">
+                      indoor
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (7)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_sportfacet_string_en_mv_5" ng-checked="value.active" value="5" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_sportfacet_string_en_mv_5">
+                      lawn bowls
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (7)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_sportfacet_string_en_mv_6" ng-checked="value.active" value="6" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_sportfacet_string_en_mv_6">
+                      martial arts
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (6)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <a class="facet_limit_toggle ng-binding" href="" ng-click="listingView.facetShowAll[facet.name] = !listingView.facetShowAll[facet.name]">
+                    Show all
+                  </a>
+                </ol>
+              </li>
+              <!-- end ngRepeat: facet in listing.results.facets.primary -->
+              <li class="facet" ng-init="primary=true">
+                <div class="facet_header">
+                  <h3 class="ng-binding" ng-class="{first: $first &amp;&amp; primary}">
+                    Gender
+                  </h3>
+                </div>
+                <ol>
+                  <!-- ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_gender_string_en_mv_0" ng-checked="value.active" value="0" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_gender_string_en_mv_0">
+                      Female
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (101)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_gender_string_en_mv_1" ng-checked="value.active" value="1" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_gender_string_en_mv_1">
+                      Kids
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (75)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_gender_string_en_mv_2" ng-checked="value.active" value="2" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_gender_string_en_mv_2">
+                      Male
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (146)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <a class="facet_limit_toggle ng-binding ng-hide" href="" ng-click="listingView.facetShowAll[facet.name] = !listingView.facetShowAll[facet.name]">
+                    Show all
+                  </a>
+                </ol>
+              </li>
+              <!-- end ngRepeat: facet in listing.results.facets.primary -->
+              <li class="facet" ng-init="primary=true">
+                <div class="facet_header">
+                  <h3 class="ng-binding" ng-class="{first: $first &amp;&amp; primary}">
+                    Size
+                  </h3>
+                </div>
+                <ol>
+                  <li class="select">
+                    <div class="select_wrap">
+                      <div class="select_ui">
+                        <span class="label ng-binding">
+                          Select a size
+                        </span>
+                        <span class="label ng-binding ng-hide">
+                          Add another size
+                        </span>
+                        <span class="icon">
+                        </span>
+                      </div>
+                      <select style="opacity: 0;" class="multi" id="facet_sizeinstockdescriptionsfacet_string_en_mv" ng-disabled="loading || value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active">
+                        <option class="ng-binding" value="" disabled="disabled" selected="selected">
+                          Select a size
+                        </option>
+                        <!-- ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/1/0-45-featured">
+                          1
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/2/0-45-featured">
+                          2
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/3/0-45-featured">
+                          3
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/4/0-45-featured">
+                          4
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/4.5/0-45-featured">
+                          4.5
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/5/0-45-featured">
+                          5
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/5.5/0-45-featured">
+                          5.5
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/6/0-45-featured">
+                          6
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/6.5/0-45-featured">
+                          6.5
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/7/0-45-featured">
+                          7
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/7.5/0-45-featured">
+                          7.5
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/8/0-45-featured">
+                          8
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/8.5/0-45-featured">
+                          8.5
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/9/0-45-featured">
+                          9
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/9.5/0-45-featured">
+                          9.5
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/10/0-45-featured">
+                          10
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/10.5/0-45-featured">
+                          10.5
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/11/0-45-featured">
+                          11
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/11.5/0-45-featured">
+                          11.5
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/12/0-45-featured">
+                          12
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/12.5/0-45-featured">
+                          12.5
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/13/0-45-featured">
+                          13
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/14/0-45-featured">
+                          14
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/15/0-45-featured">
+                          15
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/16/0-45-featured">
+                          16
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/17/0-45-featured">
+                          17
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/K12/0-45-featured">
+                          K12
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/K10/0-45-featured">
+                          K10
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/K11/0-45-featured">
+                          K11
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/K13/0-45-featured">
+                          K13
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/K8/0-45-featured">
+                          K8
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/sizestock/K9/0-45-featured">
+                          K9
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                      </select>
+                    </div>
+                  </li>
+                  <li class="ng-hide">
+                    <ul class="multiselect">
+                      <!-- ngRepeat: value in facet.values | filter:{active:true} -->
+                    </ul>
+                  </li>
+                </ol>
+              </li>
+              <!-- end ngRepeat: facet in listing.results.facets.primary -->
+              <li class="facet" ng-init="primary=true">
+                <div class="facet_header">
+                  <h3 class="ng-binding" ng-class="{first: $first &amp;&amp; primary}">
+                    Width
+                  </h3>
+                </div>
+                <ol>
+                  <!-- ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_widthdescriptionsfacet_string_en_mv_0" ng-checked="value.active" value="0" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_widthdescriptionsfacet_string_en_mv_0">
+                      Standard
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (280)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_widthdescriptionsfacet_string_en_mv_1" ng-checked="value.active" value="1" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_widthdescriptionsfacet_string_en_mv_1">
+                      Width 2E
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (21)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_widthdescriptionsfacet_string_en_mv_2" ng-checked="value.active" value="2" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_widthdescriptionsfacet_string_en_mv_2">
+                      Width D
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (18)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_widthdescriptionsfacet_string_en_mv_3" ng-checked="value.active" value="3" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_widthdescriptionsfacet_string_en_mv_3">
+                      Width 4E
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (7)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_widthdescriptionsfacet_string_en_mv_4" ng-checked="value.active" value="4" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_widthdescriptionsfacet_string_en_mv_4">
+                      Width 2A
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (1)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <a class="facet_limit_toggle ng-binding ng-hide" href="" ng-click="listingView.facetShowAll[facet.name] = !listingView.facetShowAll[facet.name]">
+                    Show all
+                  </a>
+                </ol>
+              </li>
+              <!-- end ngRepeat: facet in listing.results.facets.primary -->
+              <li class="facet" ng-init="primary=true">
+                <div class="facet_header">
+                  <h3 class="ng-binding" ng-class="{first: $first &amp;&amp; primary}">
+                    Pronation
+                  </h3>
+                </div>
+                <ol>
+                  <!-- ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_pronationcodesfacet_string_en_mv_0" ng-checked="value.active" value="0" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_pronationcodesfacet_string_en_mv_0">
+                      Neutral
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (189)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_pronationcodesfacet_string_en_mv_1" ng-checked="value.active" value="1" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_pronationcodesfacet_string_en_mv_1">
+                      Over Pronate
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (105)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_pronationcodesfacet_string_en_mv_2" ng-checked="value.active" value="2" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_pronationcodesfacet_string_en_mv_2">
+                      Severe Over Pronate
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (4)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_pronationcodesfacet_string_en_mv_3" ng-checked="value.active" value="3" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_pronationcodesfacet_string_en_mv_3">
+                      Under Pronate
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (7)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <a class="facet_limit_toggle ng-binding ng-hide" href="" ng-click="listingView.facetShowAll[facet.name] = !listingView.facetShowAll[facet.name]">
+                    Show all
+                  </a>
+                </ol>
+              </li>
+              <!-- end ngRepeat: facet in listing.results.facets.primary -->
+              <li class="facet" ng-init="primary=true">
+                <div class="facet_header">
+                  <h3 class="ng-binding" ng-class="{first: $first &amp;&amp; primary}">
+                    Colour
+                  </h3>
+                </div>
+                <ol>
+                  <!-- ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_primarycolourfacet_string_en_0" ng-checked="value.active" value="0" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_primarycolourfacet_string_en_0">
+                      Black
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (72)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_primarycolourfacet_string_en_1" ng-checked="value.active" value="1" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_primarycolourfacet_string_en_1">
+                      Blue
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (24)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_primarycolourfacet_string_en_2" ng-checked="value.active" value="2" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_primarycolourfacet_string_en_2">
+                      Brown
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (2)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_primarycolourfacet_string_en_3" ng-checked="value.active" value="3" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_primarycolourfacet_string_en_3">
+                      Green
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (9)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_primarycolourfacet_string_en_4" ng-checked="value.active" value="4" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_primarycolourfacet_string_en_4">
+                      Grey/Silver
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (19)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_primarycolourfacet_string_en_5" ng-checked="value.active" value="5" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_primarycolourfacet_string_en_5">
+                      Pink
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (11)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <li class="checkbox_holder">
+                    <input id="facet_primarycolourfacet_string_en_6" ng-checked="value.active" value="6" data-change="update(value.url)" ng-disabled="loading || (value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active)" type="checkbox">
+                    <label class="ng-binding" for="facet_primarycolourfacet_string_en_6">
+                      Purple
+                      <span class="facet_count ng-binding" ng-show="(!value.disconnected || facet.current || value.active) &amp;&amp; facet.displayCount &amp;&amp; value.count &gt; 0">
+                        (7)
+                      </span>
+                    </label>
+                  </li>
+                  <!-- end ngRepeat: value in facet.values | limitToIf:listing.results.facets.limit:!listingView.facetShowAll[facet.name] -->
+                  <a class="facet_limit_toggle ng-binding" href="" ng-click="listingView.facetShowAll[facet.name] = !listingView.facetShowAll[facet.name]">
+                    Show all
+                  </a>
+                </ol>
+              </li><!-- end ngRepeat: facet in listing.results.facets.primary -->
+              <!-- ngRepeat: facet in listing.results.facets.secondary -->
+
+              <li class="facet toggle" ng-repeat="facet in listing.results.facets.secondary" ng-init="primary=false; toggleFacet=true; listingView.facetCollapse[facet.name] = facet.active">
+                <div class="facet_header" ng-class="{active: listingView.facetCollapse[facet.name]}" ng-click="listingView.facetCollapse[facet.name] = !listingView.facetCollapse[facet.name]">
+                  <h3 class="ng-binding" ng-class="{first: $first &amp;&amp; primary}">
+                    Feature
+                  </h3>
+                </div>
+                <ol class="ng-scope ng-hide" ng-show="listingView.facetCollapse[facet.name]">
+                  <li class="select">
+                    <div class="select_wrap">
+                      <div class="select_ui">
+                        <span class="label ng-binding">
+                          Select a feature
+                        </span>
+                        <span class="label ng-binding ng-hide">
+                          Add another feature
+                        </span>
+                        <span class="icon">
+                        </span>
+                      </div>
+                      <select style="opacity: 0;" class="multi" id="facet_featurefacet_string_en_mv" ng-disabled="loading || value.disconnected &amp;&amp; !facet.current &amp;&amp; !value.active">
+                        <option class="ng-binding" value="" disabled="disabled" selected="selected">
+                          Select a feature
+                        </option>
+                        <!-- ngRepeat: value in facet.values -->
+                        <option value="/-/feature/3M+Reflectivity/0-45-featured">
+                          3M Reflectivity (68)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/AHAR+/0-45-featured">
+                          AHAR  (108)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/AHAR+Ride%2B/0-45-featured">
+                          AHAR Ride+ (39)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Air+Cycle+Ventilation/0-45-featured">
+                          Air Cycle Ventilation (7)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Anti-Gravel+Tongue/0-45-featured">
+                          Anti-Gravel Tongue (2)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Asymmetrical+Lacing/0-45-featured">
+                          Asymmetrical Lacing (13)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Biomorphic+Fit/0-45-featured">
+                          Biomorphic Fit (4)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Bunion+Window/0-45-featured">
+                          Bunion Window (7)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Clutch+Collar/0-45-featured">
+                          Clutch Collar (16)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Clutch+Counter/0-45-featured">
+                          Clutch Counter (33)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/ComforDry+Sockliner/0-45-featured">
+                          ComforDry Sockliner (13)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Discreet+Eyelet/0-45-featured">
+                          Discreet Eyelet (2)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Discreet+Sole/0-45-featured">
+                          Discreet Sole (4)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/DuoMax/0-45-featured">
+                          DuoMax (99)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/DuoSole/0-45-featured">
+                          DuoSole (1)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Dynamic+DuoMax/0-45-featured">
+                          Dynamic DuoMax (19)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Fluid+Axis/0-45-featured">
+                          Fluid Axis (13)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Fluid+Fit/0-45-featured">
+                          Fluid Fit (13)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Fluid+Ride/0-45-featured">
+                          Fluid Ride (37)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Forefoot+GEL+Cushioning/0-45-featured">
+                          Forefoot GEL Cushioning (6)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Gender+Specific+Cushioning/0-45-featured">
+                          Gender Specific Cushioning (2)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Guidance+Line/0-45-featured">
+                          Guidance Line (71)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Gusset+Tongue/0-45-featured">
+                          Gusset Tongue (9)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/HG10MM+/0-45-featured">
+                          HG10MM  (45)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Inner+Lock+Lacing/0-45-featured">
+                          Inner Lock Lacing (2)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Lace+Pocket/0-45-featured">
+                          Lace Pocket (7)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Multi-Function+Cleats/0-45-featured">
+                          Multi-Function Cleats (30)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/PHF+/0-45-featured">
+                          PHF  (92)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/PLUS3/0-45-featured">
+                          PLUS3 (2)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Pguard/0-45-featured">
+                          Pguard (19)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Propulsion+Plate/0-45-featured">
+                          Propulsion Plate (20)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Rearfoot+%26amp%3B+Forefoot+GEL+Cushioning/0-45-featured">
+                          Rearfoot &amp;amp; Forefoot GEL Cushioning (124)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Rearfoot+GEL+Cushioning/0-45-featured">
+                          Rearfoot GEL Cushioning (124)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Removable+Sockliner/0-45-featured">
+                          Removable Sockliner (145)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Rhyno+Skin/0-45-featured">
+                          Rhyno Skin (5)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Rock+Protection+Plate/0-45-featured">
+                          Rock Protection Plate (5)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Shoes/0-45-featured">
+                          Shoes (26)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/SoftTop+DuoMax/0-45-featured">
+                          SoftTop DuoMax (2)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Solyte+Midsole/0-45-featured">
+                          Solyte Midsole (119)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/SpEVA+Lasting+45/0-45-featured">
+                          SpEVA Lasting 45 (2)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/SpEVA+Midsole/0-45-featured">
+                          SpEVA Midsole (50)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/SpEVA+lasting+55/0-45-featured">
+                          SpEVA lasting 55 (7)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Trusstic/0-45-featured">
+                          Trusstic (95)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Wet+Grip/0-45-featured">
+                          Wet Grip (3)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                        <option value="/-/feature/Zip+Closure/0-45-featured">
+                          Zip Closure (4)
+                        </option>
+                        <!-- end ngRepeat: value in facet.values -->
+                      </select>
+                    </div>
+                  </li>
+                  <li class="ng-hide">
+                    <ul class="multiselect">
+                      <!-- ngRepeat: value in facet.values | filter:{active:true} -->
+                    </ul>
+                  </li>
+                </ol>
+              </li><!-- end ngRepeat: facet in listing.results.facets.secondary -->
+              </ol>
+              </div>
+
+                      </div>
