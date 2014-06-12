@@ -1,7 +1,7 @@
 <div class="product_listing_main cover_holder">
   <div class="product_listing_compact">
 
-    <article ng-repeat="shoe in shoesProducts" class="product basic" ng-class="{'first_of_row': $index % 3 == 0}">
+    <article ng-repeat="shoe in shoesProductsShow" class="product basic" ng-class="{'first_of_row': $index % 3 == 0}">
 
       <div class="image">
         <a href="{{shoe.link}}" class="image_link">
@@ -16,7 +16,7 @@
         </h3>
         <ul class="pricing">
           <li class="price_black" nig-if="shoe.currentPrice !== null">
-            {{shoe.currentPrice}}
+            {{shoe.currentPrice | currency}}
           </li>
         </ul>
         <h4>{{shoe.sub_category}}</h4>

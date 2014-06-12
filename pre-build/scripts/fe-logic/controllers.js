@@ -229,7 +229,8 @@ angular.module('controllers')
 		$scope.shoesProducts = [];
 
 		// set the number of items per page
-		$scope.itemsPerPage = localStorage.getItem('itemsPerPage') ? localStorage.getItem('itemsPerPage') : 6;
+		$scope.itemsPerPage = localStorage.getItem('itemsPerPage') ? localStorage.getItem('itemsPerPage') : 3;
+	    $scope.shoes = {};
 
 		var returnedProducts = ProductsFactory.getAll.then(function(data){
 			data.forEach( function (product) {
@@ -247,18 +248,20 @@ angular.module('controllers')
 			$scope.totalItems = $scope.shoesProducts.length;
 
 	        // get the current page using local storage; if none exists, set it to 1
-	        $scope.currentPage = localStorage.getItem('currentPage') ? localStorage.getItem('currentPage') : 1;
+	        $scope.shoes.currentPage = localStorage.getItem('shoes.currentPage') ? localStorage.getItem('shoes.currentPage') : 1;
 
 	        // watch for the change in current page to update the members per page
-	        $scope.$watch("currentPage", function() {
+	        $scope.$watch("shoes.currentPage", function() {
+	          console.log($scope.shoes.currentPage);
 	          // set the current page using local storage
-	          localStorage.setItem('currentPage', $scope.currentPage);
+	          localStorage.setItem('shoes.currentPage', $scope.shoes.currentPage);
 
 	          // data array to be passed into the ViewData.page() function
-	          var data =[$scope.currentPage, $scope.itemsPerPage, $scope.shoesProducts];
+	          var data =[$scope.shoes.currentPage, $scope.itemsPerPage, $scope.shoesProducts];
 
 	          // set the members segment array for the current page
-	          $scope.page = ViewData.page(data);
+	          console.log(ViewData.page(data));
+	          $scope.shoesProductsShow = ViewData.page(data);
 	        });
 		});
 	}])
