@@ -231,7 +231,10 @@ angular.module('controllers')
 			$scope.sidebarData = promise.sidebarData;
 		});
 
-		/* Product Categories */
+		// temp array to hold all shoes
+		var tempShoes = [];
+
+		// scope array to hold available shoes
 		$scope.shoesProducts = [];
 
 		// set the number of items per page
@@ -239,11 +242,20 @@ angular.module('controllers')
 	    $scope.shoes = {};
 
 		var returnedProducts = ProductsFactory.getAll.then(function(data){
+			// filter products and assign all shoes to tempShoes
 			data.forEach( function (product) {
-				// filter and assign the products by category to an array
 				switch (product.category) {
 					case "Shoes":
-						$scope.shoesProducts.push(product);
+						tempShoes.push(product);
+						break;
+				}
+			});
+
+			// filter shoes and assign available shoes to $scope.shoesProducts
+			tempShoes.forEach( function (shoe) {
+				switch (shoe.available) {
+					case true:
+						$scope.shoesProducts.push(shoe);
 						break;
 				}
 			});
@@ -296,6 +308,14 @@ angular.module('controllers')
 
         	// store the checkbox's value in localstorage
         	ViewData.processCheckbox(checkbox, currentValue);
+
+        	// get the selected size by which to filter available shoes
+        	var selectedSize = localStorage.getItem('shoes.sidebar.size.selected');
+
+        	/*	@TODO: Filter available shoes based on user's selections
+        	 *
+        	 *  $scope.shoesProducts = ViewData.shoeFilter($scope.shoesProducts, $scope.sports, $scope.users, selectedSize);
+        	 */
         };
 
 		/* default selected values for users checkboxes */
