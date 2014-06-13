@@ -235,7 +235,7 @@ angular.module('controllers')
 		$scope.shoesProducts = [];
 
 		// set the number of items per page
-		$scope.itemsPerPage = localStorage.getItem('itemsPerPage') ? localStorage.getItem('itemsPerPage') : 9;
+		$scope.itemsPerPage = localStorage.getItem("itemsPerPage") ? localStorage.getItem("itemsPerPage") : 9;
 	    $scope.shoes = {};
 
 		var returnedProducts = ProductsFactory.getAll.then(function(data){
@@ -254,12 +254,12 @@ angular.module('controllers')
 			$scope.totalItems = $scope.shoesProducts.length;
 
 	        // get the current page using local storage; if none exists, set it to 1
-	        $scope.shoes.currentPage = localStorage.getItem('shoes.currentPage') ? localStorage.getItem('shoes.currentPage') : 1;
+	        $scope.shoes.currentPage = localStorage.getItem("shoes.pagination.page") ? localStorage.getItem("shoes.pagination.page") : 1;
 
 	        // watch for the change in current page to update the members per page
 	        $scope.$watch("shoes.currentPage", function() {
 	          // set the current page using local storage
-	          localStorage.setItem('shoes.currentPage', $scope.shoes.currentPage);
+	          localStorage.setItem("shoes.pagination.page", $scope.shoes.currentPage);
 
 	          // data array to be passed into the ViewData.page() function
 	          var data =[$scope.shoes.currentPage, $scope.itemsPerPage, $scope.shoesProducts];
@@ -269,18 +269,69 @@ angular.module('controllers')
 	        });
 		});
 
+		/* default selected values for sports checkboxes */
+		// check for the string "true" value of the selected item in localStorage
+		// if it doesn't exist, set it to false
+        $scope.sports = {
+        	Running: {
+        		selected: localStorage.getItem('shoes.sidebar.sport.Running.selected') == "true" ? true : false
+        	},
+        	Training: {
+        		selected: localStorage.getItem('shoes.sidebar.sport.Training.selected') == "true" ? true : false
+        	},
+        	Basketball: {
+        		selected: localStorage.getItem('shoes.sidebar.sport.Basketball.selected') == "true" ? true : false
+        	},
+        	Football: {
+        		selected: localStorage.getItem('shoes.sidebar.sport.Football.selected') == "true" ? true : false
+        	},
+        	"Martial Arts": {
+        		selected: localStorage.getItem('shoes.sidebar.sport.MartialArts.selected') == "true" ? true : false
+        	}
+        };
+
+        $scope.sportSelected = function(checkbox, currentValue) {
+
+        	// change the selected value of the "this" checkbox
+        	// from the current value to its opposite
+        	$scope.sports[checkbox].selected = !currentValue;
+
+        	switch (checkbox) {
+        		case "Running":
+        			// set the changed value of the checkbox on the in localStorage
+        			localStorage.setItem('shoes.sidebar.sport.Running.selected', !currentValue);
+        			break;
+        		case "Training":
+        			// set the changed value of the checkbox on the in localStorage
+        			localStorage.setItem('shoes.sidebar.sport.Training.selected', !currentValue);
+        			break;
+        		case "Basketball":
+        			// set the changed value of the checkbox on the in localStorage
+        			localStorage.setItem('shoes.sidebar.sport.Basketball.selected', !currentValue);
+        			break;
+        		case "Football":
+        			// set the changed value of the checkbox on the in localStorage
+        			localStorage.setItem('shoes.sidebar.sport.Football.selected', !currentValue);
+        			break;
+        		case "Martial Arts":
+        			// set the changed value of the checkbox on the in localStorage
+        			localStorage.setItem('shoes.sidebar.sport.MartialArts.selected', !currentValue);
+        			break;
+        	}
+        };
+
 		/* default selected values for users checkboxes */
 		// check for the string "true" value of the selected item in localStorage
 		// if it doesn't exist, set it to false
         $scope.users = {
         	Male: {
-        		selected: localStorage.getItem('users.Male.selected') == "true" ? true : false
+        		selected: localStorage.getItem('shoes.sidebar.user.Male.selected') == "true" ? true : false
         	},
         	Female: {
-        		selected: localStorage.getItem('users.Female.selected') == "true" ? true : false
+        		selected: localStorage.getItem('shoes.sidebar.user.Female.selected') == "true" ? true : false
         	},
         	Kids: {
-        		selected: localStorage.getItem('users.Kids.selected') == "true" ? true : false
+        		selected: localStorage.getItem('shoes.sidebar.user.Kids.selected') == "true" ? true : false
         	}
         };
 
@@ -293,22 +344,22 @@ angular.module('controllers')
         	switch (checkbox) {
         		case "Male":
         			// set the changed value of the checkbox on the in localStorage
-        			localStorage.setItem('users.Male.selected', !currentValue);
+        			localStorage.setItem('shoes.sidebar.user.Male.selected', !currentValue);
         			break;
         		case "Female":
         			// set the changed value of the checkbox on the in localStorage
-        			localStorage.setItem('users.Female.selected', !currentValue);
+        			localStorage.setItem('shoes.sidebar.user.Female.selected', !currentValue);
         			break;
         		case "Kids":
         			// set the changed value of the checkbox on the in localStorage
-        			localStorage.setItem('users.Kids.selected', !currentValue);
+        			localStorage.setItem('shoes.sidebar.user.Kids.selected', !currentValue);
         			break;
         	}
         };
 
         $scope.sizeChange = function(size) {
 
-        	console.log(size);
+        	localStorage.setItem('shoes.sidebar.size.selected', size);
         };
 	}])
 
