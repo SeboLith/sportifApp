@@ -333,6 +333,11 @@ angular.module('controllers')
         	}
         };
 
+		/* default selected values for users checkboxes */
+		// check for the string "true" value of the selected item in localStorage
+		// if it doesn't exist, set it to false
+        $scope.size = {selected: localStorage.getItem('shoes.sidebar.size.selected') ? localStorage.getItem('shoes.sidebar.size.selected') : ""};
+
         $scope.userSelected = function(checkbox, currentValue) {
 
         	// change the selected value of the "this" checkbox
@@ -343,9 +348,9 @@ angular.module('controllers')
         	ViewData.processCheckbox(checkbox, currentValue);
         };
 
-        $scope.sizeChange = function(size) {
-
-        	localStorage.setItem('shoes.sidebar.size.selected', size);
+        $scope.sizeChange = function(selectedSize) {
+console.log(selectedSize);
+        	localStorage.setItem('shoes.sidebar.size.selected', selectedSize);
         };
 	}])
 

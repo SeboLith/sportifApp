@@ -1,4 +1,9 @@
 <div class="product_listing_main cover_holder">
+
+  <!-- START PAGINATION -->
+  <div ng-include="'partials/pagination'"></div>
+  <!-- END PAGINATION -->
+
   <div class="product_listing_compact">
 
     <article ng-repeat="shoe in shoesProductsShow" class="product basic" ng-class="{'first_of_row': $index % 3 == 0}">
@@ -31,6 +36,11 @@
 
     </article>
   </div>
+
+  <!-- START PAGINATION -->
+  <div ng-include="'partials/pagination'"></div>
+  <!-- END PAGINATION -->
+
 </div>
 
 <!-- </div> -->

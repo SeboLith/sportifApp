@@ -43,11 +43,11 @@
           <ul>
             <li class="select">
               <div class="select_wrap">
-                <select ng-model="size" ng-change="sizeChange(size)">
+                <select ng-model="size.selected" ng-change="sizeChange(size.selected)">
                   <option disabled="disabled" ng-selected="true">
                     Select a size
                   </option>
-                  <option ng-repeat="value in sidebarData.sizeSection.values">
+                  <option ng-repeat="value in sidebarData.sizeSection.values" ng-selected="size.selected == value">
                     {{value}}
                   </option>
                 </select>

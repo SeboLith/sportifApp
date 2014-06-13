@@ -7314,21 +7314,21 @@ div.logo_wrap {
   border-bottom-right-radius: 3px;
 }
 .pagination > .active > a {
-  background-color: #336666;
-  border-color: #336666;
+  background-color: #AFAFAF;
+  border-color: #AFAFAF;
 }
 
 .pagination > li > a,
 .pagination > li > span {
-  color: #336666;
+  color: #000;
 }
 
 .pagination > li > a:hover {
-  color: #669999;
+  color: #FD6F00;
 }
 
 .pagination > .active > a:hover,
 .pagination > .active > span:hover {
-  background-color: #669999;
-  border-color: #669999;
+  background-color: #FD6F00;
+  border-color: #FD6F00;
 }
