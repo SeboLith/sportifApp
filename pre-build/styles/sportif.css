@@ -244,6 +244,12 @@ hr.search_top {
 div.product_listing_holder {
     overflow:hidden
 }
+div.product_listing_side.item {
+    margin-top: 177px;
+}
+nav#breadcrumb {
+    /*margin-top: 125px;*/
+}
 div.product_listing_main,div.product_listing_side {
     position:relative;
     z-index:1
@@ -260,40 +266,6 @@ div.product_listing_main {
 div.product_listing_main .product_listing_compact {
     float:left;
     overflow:hidden
-}
-.product.basic {
-    float:left;
-    width:220px
-}
-.product.basic div.image,.product.basic>div.inner {
-    width:220px
-}
-.product.basic div.image {
-    height:155px
-}
-.product.basic div.image a.image_link img {
-    height:0;
-    width:0;
-    padding-top:125px;
-    padding-left:220px
-}
-.product.basic div.image a.image_link img.loaded {
-    height:125px;
-    width:220px;
-    padding:0
-}
-.product.basic div.image a.image_link {
-    height:125px;
-    width:220px;
-    background:url(../../common/images/loading.gif) 90px 42.5px no-repeat
-}
-.product.basic div.content {
-    background:0 0;
-    padding-top:0
-}
-.product.basic .actions {
-    border:0;
-    padding:0
 }
 header.search_header {
     float:right;
@@ -378,7 +350,8 @@ div.search ol.facet_listing li .facet_reset:before {
 div.search ol.facet_listing li.facet {
     border-top:1px solid #cacacb;
     margin-bottom:0;
-    padding:14px 10px 10px
+    padding:14px 10px 10px;
+    background: #fff;
 }
 div.search ol.facet_listing li.facet.toggle {
     overflow:hidden
@@ -1290,12 +1263,6 @@ div.main #cart a {
 #postcode_anywhere .panel ul.addresses li.active,#postcode_anywhere .panel ul.addresses li:hover {
     background-color:#dfdfdf;
     cursor:pointer
-}
-#postcode_anywhere .panel ul.addresses li .product {
-    overflow:hidden;
-    padding:7px 20px 10px 62px;
-    position:relative;
-    text-align:left
 }
 #postcode_anywhere .panel ul.addresses li .product div.image {
     position:absolute;
@@ -7220,10 +7187,10 @@ div.logo_wrap {
 .pagination {
   display: inline-block;
   padding-left: 0;
-  margin: 20px 0;
+  margin: 40px 0;
   /*border-radius: 8px;*/
-  /*margin-left: auto;
-  margin-right: auto;*/
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
 }
 
 .pagination > li {
@@ -7331,4 +7298,67 @@ div.logo_wrap {
 .pagination > .active > span:hover {
   background-color: #FD6F00;
   border-color: #FD6F00;
+}
+.product.basic {
+    width:206px
+}
+.product.basic div.image,.product.basic>div.inner {
+    width:206px
+}
+.product.basic div.image {
+    height:155px
+}
+.product.basic div.image a.image_link img {
+    height:0;
+    width:0;
+    padding-top:125px;
+    padding-left:220px
+}
+.product.basic div.image a.image_link {
+    height:125px;
+    width:220px;
+    background:url(../../common/images/loading.gif) 90px 42.5px no-repeat
+}
+.product.basic div.content {
+    background:0 0;
+    padding-top:0
+}
+.product.basic .actions {
+    border:0;
+    padding:0
+}
+article.product.basic {
+    float:left;
+    margin: 5px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(50, 50, 50, .06);
+    border-radius: 5px;
+}
+.product.basic div.image a.image_link img.loaded {
+    height:115px;
+    width:204px;
+    padding:0;
+    box-shadow:  3px 3px 7px 0px rgba(50, 50, 50, 0.15);
+    border-radius: 3px;
+}
+.select-style {
+    border: 1px solid #ccc;
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fafafa url("img/icon-select.png") no-repeat 90% 50%;
+}
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
 }
