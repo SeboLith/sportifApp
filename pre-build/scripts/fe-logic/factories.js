@@ -34,18 +34,58 @@ angular.module("factories").factory("ViewData", ["Restangular", function (Restan
             console.log("Email: " + email + " received by ViewData newsletterSignup function")
         },
         page : function(data) {
-        /*
-         * data[0] = currentPage
-         * data[1] = itemsPerPage
-         * data[1] = $scope.Members[]
-         */
+            /*
+             * data[0] = currentPage
+             * data[1] = itemsPerPage
+             * data[1] = $scope.Members[]
+             */
 
-        // when paginating, reset the beginning and end of the members array segment
-        var sliceStart = (data[0] * data[1]) - data[1];
-        var sliceEnd = data[0] * data[1];
+            // when paginating, reset the beginning and end of the members array segment
+            var sliceStart = (data[0] * data[1]) - data[1];
+            var sliceEnd = data[0] * data[1];
 
-        return data[2].slice(sliceStart, sliceEnd);
-      }
+            return data[2].slice(sliceStart, sliceEnd);
+        },
+        processCheckbox : function(checkbox, currentValue) {
+            /*
+             * store the checkbox value in localstorage
+             */
+
+            switch (checkbox) {
+                case "Running":
+                    // set the changed value of the checkbox on the in localStorage
+                    localStorage.setItem('shoes.sidebar.sport.Running.selected', !currentValue);
+                    break;
+                case "Training":
+                    // set the changed value of the checkbox on the in localStorage
+                    localStorage.setItem('shoes.sidebar.sport.Training.selected', !currentValue);
+                    break;
+                case "Basketball":
+                    // set the changed value of the checkbox on the in localStorage
+                    localStorage.setItem('shoes.sidebar.sport.Basketball.selected', !currentValue);
+                    break;
+                case "Football":
+                    // set the changed value of the checkbox on the in localStorage
+                    localStorage.setItem('shoes.sidebar.sport.Football.selected', !currentValue);
+                    break;
+                case "Martial Arts":
+                    // set the changed value of the checkbox on the in localStorage
+                    localStorage.setItem('shoes.sidebar.sport.MartialArts.selected', !currentValue);
+                    break;
+                    case "Male":
+                    // set the changed value of the checkbox on the in localStorage
+                    localStorage.setItem('shoes.sidebar.user.Male.selected', !currentValue);
+                    break;
+                case "Female":
+                    // set the changed value of the checkbox on the in localStorage
+                    localStorage.setItem('shoes.sidebar.user.Female.selected', !currentValue);
+                    break;
+                case "Kids":
+                    // set the changed value of the checkbox on the in localStorage
+                    localStorage.setItem('shoes.sidebar.user.Kids.selected', !currentValue);
+                    break;
+            }
+        }
     }
 }]).factory("ProductsFactory", ["Restangular", function (Restangular) {
     var baseUrl = "/api",
