@@ -6,7 +6,7 @@ angular.module('controllers')
         SHOES CONTROLLER
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .controller('ShoesCtrl', ['$scope', 'ViewData', 'ProductsFactory', function ($scope, ViewData, ProductsFactory){
+    .controller('ShoesCtrl', ['$scope', 'ViewData', 'SidebarService', 'ProductsFactory', function ($scope, ViewData, SidebarService, ProductsFactory){
 
         var returnedViewData = ViewData.shoesMainData.then(function(shoesMainData){
 
@@ -83,7 +83,7 @@ angular.module('controllers')
             /*  @TODO: Filter available shoes based on user's selections
              *
              */
-             $scope.shoesProducts = ViewData.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
+             $scope.shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
         };
 
         /* default selected values for users checkboxes */

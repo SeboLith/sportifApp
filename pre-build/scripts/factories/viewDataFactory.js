@@ -7,28 +7,35 @@ angular.module('factories')
     ----------------------------------------------------------------------------
     ============================================================================ */
     .factory("ViewData", ["Restangular", function (Restangular) {
+
         var baseUrl = "/api",
+
+            // configure Restangular object with baseUrl
             viewDataCollection = Restangular.withConfig(function (configurer) {
                 configurer.setBaseUrl(baseUrl)
             }),
-            viewDataRoute = "viewdata",
-            headerRoute = "viewdata/header",
-            homemainRoute = "viewdata/homemain",
-            shoesmainRoute = "viewdata/shoesmain",
-            miscDataRoute = "viewdata/miscdata",
-            corporateInfoRoute = "viewdata/corporateinfo",
-            customServicesRoute = "viewdata/customerservices",
+
+            // api routes
+            viewDataRoute        = "viewdata",
+            headerRoute          = "viewdata/header",
+            homemainRoute        = "viewdata/homemain",
+            shoesmainRoute       = "viewdata/shoesmain",
+            miscDataRoute        = "viewdata/miscdata",
+            corporateInfoRoute   = "viewdata/corporateinfo",
+            customServicesRoute  = "viewdata/customerservices",
             popularProductsRoute = "viewdata/popularproducts",
 
-            returnedData = viewDataCollection.all(viewDataRoute).getList(),
-            headerData = viewDataCollection.one(headerRoute).get(),
-            homeMainData = viewDataCollection.one(homemainRoute).get(),
-            shoesMainData = viewDataCollection.one(shoesmainRoute).get(),
-            miscViewData = viewDataCollection.one(miscDataRoute).get(),
-            corporateInfo = viewDataCollection.one(corporateInfoRoute).get(),
+            // api get calls
+            returnedData     = viewDataCollection.all(viewDataRoute).getList(),
+            headerData       = viewDataCollection.one(headerRoute).get(),
+            homeMainData     = viewDataCollection.one(homemainRoute).get(),
+            shoesMainData    = viewDataCollection.one(shoesmainRoute).get(),
+            miscViewData     = viewDataCollection.one(miscDataRoute).get(),
+            corporateInfo    = viewDataCollection.one(corporateInfoRoute).get(),
             customerServices = viewDataCollection.one(customServicesRoute).get(),
-            popularProducts = viewDataCollection.one(popularProductsRoute).get();
+            popularProducts  = viewDataCollection.one(popularProductsRoute).get();
 
+            // set localStorage values to false if checkboxes are checked
         var sportsCheckboxes = {
             Running: {
                 selected: localStorage.getItem('shoes.sidebar.sport.Running.selected') == "true" ? false : true
@@ -60,19 +67,32 @@ angular.module('factories')
         };
 
         return {
+
             returnedData: returnedData,
+
             headerData: headerData,
+
             homeMainData: homeMainData,
+
             shoesMainData: shoesMainData,
+
             miscViewData: miscViewData,
+
             corporateInfo: corporateInfo,
+
             customerServices: customerServices,
+
             popularProducts: popularProducts,
+
             sportsCheckboxes: sportsCheckboxes,
+
             usersCheckboxes: usersCheckboxes,
+
             newsletterSignup: function (email) {
+
                 console.log("Email: " + email + " received by ViewData newsletterSignup function")
             },
+
             page : function(data) {
                 /*
                  * data[0] = currentPage
@@ -86,93 +106,7 @@ angular.module('factories')
 
                 return data[2].slice(sliceStart, sliceEnd);
             },
-            shoeFilter : function(tempShoes, sports, users, selectedSize) {
-                var availableShoes     = [],
-                    checkboxSelections = [],
-                    runningVal         = {
-                            selector : "Running",
-                            category : "Sports",
-                            val      : sports.Running.selected
-                     },
-                    trainingVal        = {
-                            selector : "Training",
-                            category : "Sports",
-                            val      : sports.Training.selected
-                     },
-                    basketballVal      = {
-                            selector : "Basketball",
-                            category : "Sports",
-                            val      : sports.Basketball.selected
-                     },
-                    footballVal        = {
-                            selector : "Football",
-                            category : "Sports",
-                            val      : sports.Football.selected
-                     },
-                    martialArtsVal     = {
-                            selector : "Martial Arts",
-                            category : "Sports Arts",
-                            val      : sports["Martial Arts"].selected
-                     },
-                    menVal             = {
-                            selector : "Men",
-                            category : "User",
-                            val      : users.Male.selected
-                     },
-                    womenVal           = {
-                            selector : "Women",
-                            category : "User",
-                            val      : users.Female.selected
-                     },
-                    kidsVal            = {
-                            selector : "Kids",
-                            category : "User",
-                            val      : users.Kids.selected
-                     },
-                    sizeVal            = {
-                            selector : "Shoe Size",
-                            category : "Size",
-                            val      : selectedSize
-                     };
 
-                checkboxSelections.push(runningVal);
-                checkboxSelections.push(trainingVal);
-                checkboxSelections.push(basketballVal);
-                checkboxSelections.push(footballVal);
-                checkboxSelections.push(martialArtsVal);
-                checkboxSelections.push(menVal);
-                checkboxSelections.push(womenVal);
-                checkboxSelections.push(kidsVal);
-
-                // console.log(checkboxSelections);
-
-                // assign available shoes to an array
-                tempShoes.forEach( function (shoe) {
-                    switch (shoe.available) {
-                        case true:
-                            availableShoes.push(shoe);
-                            break;
-                    }
-                });
-
-                checkboxSelections.forEach( function (checkbox) {
-                    switch (checkbox.val) {
-                        case false:
-                            removeShoes(checkbox.selector);
-                            break;
-                    }
-                });
-
-                function removeShoes (selector) {
-                    availableShoes.forEach( function (shoe) {
-                        if (shoe.activity == selector) {
-                            availableShoes.splice(shoe, 1);
-                        };
-                    });
-                }
-
-                return availableShoes;
-            },
             processCheckbox : function(checkbox, currentValue) {
                 /*
                  * store the checkbox value in localstorage

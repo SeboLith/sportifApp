@@ -1,5 +1,6 @@
 'use strict';
 
+/* Application Configuration Settings */
 var app = angular.module('SportifStore');
 
 // Enable HTML5 Mode.

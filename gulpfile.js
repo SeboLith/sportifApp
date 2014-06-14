@@ -58,7 +58,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('logic', function() {
-    return gulp.src('pre-build/scripts/fe-logic/**/*.js')
+    return gulp.src('pre-build/scripts/**/*.js')
         .pipe(concat('0.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/js'))
@@ -81,7 +81,7 @@ gulp.watch(['app/views/**/*.html'], ['views']);
 
 gulp.watch('pre-build/styles/*.css', ['css']);
 
-gulp.watch('pre-build/scripts/fe-logic/**/*.js', ['logic']);
+gulp.watch('pre-build/scripts/**/*.js', ['logic']);
 
 // the default array of tasks to run when gulp is called
 gulp.task('default',

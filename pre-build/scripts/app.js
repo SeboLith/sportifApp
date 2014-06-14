@@ -7,8 +7,7 @@ angular.module('SportifStore', [
     'ui.bootstrap',
     'restangular',
     'controllers',
-    'factories',
-    'filters'
+    'factories'
 ]);
 
 angular.module('controllers', []);
