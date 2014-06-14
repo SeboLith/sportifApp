@@ -44,8 +44,7 @@ gulp.task('cleanJS', function () {
 
 gulp.task('views', function () {
     return gulp.src('app/views/**/*.html')
-        .pipe(refresh(lrserver))
-        .pipe(notify({ message: 'HTML updated' }));
+        .pipe(refresh(lrserver));
 });
 
 // create task to prefix, minify, and notify changes to css file
@@ -55,80 +54,15 @@ gulp.task('css', function() {
         .pipe(concat('main.css'))
         .pipe(minifyCSS())
         .pipe(gulp.dest('app/css'))
-        .pipe(refresh(lrserver))
-        .pipe(notify({ message: 'CSS updated' }))
+        .pipe(refresh(lrserver));
 });
 
-gulp.task('sportif', function() {
-    return gulp.src('pre-build/scripts/fe-logic/sportif.js')
+gulp.task('logic', function() {
+    return gulp.src('pre-build/scripts/fe-logic/**/*.js')
         .pipe(concat('0.js'))
-        .pipe(uglify({mangle: false}))
-        .pipe(gulp.dest('app/js'))
-        .pipe(refresh(lrserver))
-        .pipe(notify({ message: 'sportif.js updated' }));
-});
-
-gulp.task('app', function() {
-    return gulp.src('pre-build/scripts/fe-logic/app.js')
-        .pipe(concat('1.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/js'))
-        .pipe(refresh(lrserver))
-        .pipe(notify({ message: 'app.js updated' }));
-});
-
-gulp.task('config', function() {
-    return gulp.src('pre-build/scripts/fe-logic/config.js')
-        .pipe(concat('6.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('app/js'))
-        .pipe(refresh(lrserver))
-        .pipe(notify({ message: 'config.js updated' }));
-});
-
-gulp.task('services', function() {
-    return gulp.src('pre-build/scripts/fe-logic/services.js')
-        .pipe(concat('2.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('app/js'))
-        .pipe(refresh(lrserver))
-        .pipe(notify({ message: 'services.js updated' }));
-});
-
-gulp.task('factories', function() {
-    return gulp.src('pre-build/scripts/fe-logic/factories.js')
-        .pipe(concat('7.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('app/js'))
-        .pipe(refresh(lrserver))
-        .pipe(notify({ message: 'factories.js updated' }));
-});
-
-gulp.task('controllers', function() {
-    return gulp.src('pre-build/scripts/fe-logic/controllers.js')
-        .pipe(concat('3.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('app/js'))
-        .pipe(refresh(lrserver))
-        .pipe(notify({ message: 'controllers.js updated' }));
-});
-
-gulp.task('directives', function() {
-    return gulp.src('pre-build/scripts/fe-logic/directives.js')
-        .pipe(concat('4.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('app/js'))
-        .pipe(refresh(lrserver))
-        .pipe(notify({ message: 'directives.js updated' }));
-});
-
-gulp.task('filters', function() {
-    return gulp.src('pre-build/scripts/fe-logic/filters.js')
-        .pipe(concat('5.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('app/js'))
-        .pipe(refresh(lrserver))
-        .pipe(notify({ message: 'filters.js updated' }));
+        .pipe(refresh(lrserver));
 });
 
 gulp.task('serverStart', function () {
@@ -147,38 +81,17 @@ gulp.watch(['app/views/**/*.html'], ['views']);
 
 gulp.watch('pre-build/styles/*.css', ['css']);
 
-gulp.watch('pre-build/scripts/fe-logic/sportif.js', ['sportif']);
-
-gulp.watch('pre-build/scripts/fe-logic/app.js', ['app']);
-
-gulp.watch('pre-build/scripts/fe-logic/config.js', ['config']);
-
-gulp.watch('pre-build/scripts/fe-logic/services.js', ['services']);
-
-gulp.watch('pre-build/scripts/fe-logic/factories.js', ['factories']);
-
-gulp.watch('pre-build/scripts/fe-logic/controllers.js', ['controllers']);
-
-gulp.watch('pre-build/scripts/fe-logic/directives.js', ['directives']);
-
-gulp.watch('pre-build/scripts/fe-logic/filters.js', ['filters']);
+gulp.watch('pre-build/scripts/fe-logic/**/*.js', ['logic']);
 
 // the default array of tasks to run when gulp is called
 gulp.task('default',
     [
       'cleanCSS',
       'cleanJS',
-      'views',
       'css',
-      'sportif',
-      'app',
-      'config',
-      'services',
-      'factories',
-      'controllers',
-      'directives',
-      'filters',
+      'logic',
       'serverStart',
-      'serve'
+      'serve',
+      'views'
     ]
 );
