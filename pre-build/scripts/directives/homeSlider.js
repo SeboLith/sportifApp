@@ -1,48 +1,132 @@
 'use strict';
 
+/* DATA PULLED IN FROM CUSTOM.JS.GLOBALS */
+
+/* Directives */
 angular.module('directives')
-
-    .directive('homeSlider', ['$document', '$q', '$rootScope', '$timeout', 'SliderPanelService', function($document, $q, $rootScope, $timeout, SliderPanelService) { // [data-quick-shop-panel]
+    /*
+        AUTOPLAY DIRECTIVE
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .directive('autoplay', function($injector) {
         return {
-
             restrict: 'A',
+            scope: true,
+            link: function(scope, element, attrs) {
 
-            link: function(scope, element, attr) {
-
-                var imageContainer = element.find('.slider_image_container'),
-                    imageLoadDeffered = $q.defer(),
-
-                positionPanel = function(){
-                    element.css({'top': SliderPanelService.panel.top, 'left': SliderPanelService.panel.left});
-                    element.height( imageContainer.outerHeight() );
-                    openPanel();
-                },
-
-                listener = $rootScope.$on('quickShopImageLoaded', function(){
-                    imageLoadDeffered.resolve();
-                    listener();
-                });
-
-                scope.$on('quickShopDataLoaded', function(event, promise){
-                    $timeout( function () {
-                        var sliderImageSrc = imageContainer.find('.slider_image').attr('src');
-                        if(sliderImageSrc === "" || sliderImageSrc === undefined){
-                            imageLoadDeffered.resolve();
-                        }
-                    },500);
-
-                    $q.all([promise, imageLoadDeffered.promise]).then(function(){
-                        $timeout(function(){
-                            positionPanel();
-                        });
-                    });
-                });
-
-                $document.keyup( function ( event ) {
-                    if ( event.keyCode == 27 ) {
-                        closePanel();
-                    }
-                });
+                function loop() {
+                    globals.timer = setTimeout(function(){
+                        var rScope = $injector.get('$rootScope');
+                        rScope.$broadcast('autoplay');
+                        loop();
+                    }, globals.autoplayInterval);
+                }
+                if (!globals.timer) loop();
             }
         };
-    }]);
+    })
+    /*
+        CAROUSEL DIRECTIVE
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .directive('carousel', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+
+                var data,
+                    carousel  = element,
+                    container = carousel.hasClass('.item') ? carousel : carousel.closest('div.item'),
+                    dynamic   = carousel.hasClass('dynamic'),
+                    viewport  = carousel.find(".viewport"),
+                    slides    = carousel.find(".slides"),
+                    controls,
+                    transition  = 400,
+                    pageWidth   = attrs.carouselPageWidth || viewport.width(),
+                    pageCurrent = 0,
+                    pageTarget,
+                    pageTotal,
+                    timer;
+
+                //Verify pageWidth is divisble by 10, otherwise add 1 pixel to pageWidth as it was rounded down by browser
+                //during page zoom out. This is based on hardcoded css widths which are all multiples of 10.
+                //(See: http://tylertate.com/blog/2012/01/05/subpixel-rounding.html for details on problem.)
+                if (pageWidth % 10 != 0) {
+                    pageWidth += 1;
+                }
+                if (dynamic) {
+                        // Product (Multi)
+                        scope.$on('updated', function(event) {
+                            changePage();
+                            Asics.Common.widthMatch('div.actions.join');
+                        });
+                } else {
+                    data = {
+                        itemsTotal: slides.children().length,
+                        pageItems: parseInt(attrs.carouselPageItems) || 1
+                    }
+                    if (globals.ieLt9 && data.pageItems > 1) slides.children(':nth-child(3n+1)').addClass('first_of_page');
+                    init();
+                }
+
+                function init() {
+                    if (data.itemsTotal > 1) {
+                        carousel.addClass('active');
+                        pageTotal = Math.ceil(data.itemsTotal / data.pageItems);
+                        slides.css({ 'width': pageTotal * pageWidth });
+                    }
+                    if (data.itemsTotal > data.pageItems) {
+                        interaction();
+                        autoplay();
+                    }
+                }
+
+                function interaction() {
+                    var li = ''; for (var i = 0; i < pageTotal; i++) li += '<li><span>' + (i + 1) + '</span></li>';
+                    $('<ol class="controls">' + li + '</ol>').appendTo(carousel);
+                    controls = carousel.children('ol.controls').children();
+                    controls.each(function(i, e) {
+                        var control = $(this).on('click', function() {
+                            if (!carousel.hasClass('paused')) {
+                                pageTarget = i;
+                                if (dynamic && i > data.pageTotalRendered - 1) {
+                                    scope.getProducts(i * data.pageItems + data.pageItems -1);
+                                    carousel.addClass('paused');
+                                } else {
+                                    changePage();
+                                }
+                            }
+                        });
+                    }).first().addClass('active');
+                }
+
+                function autoplay() {
+                    carousel.on('load', function() {
+                        if (timer) clearTimeout(timer);
+                        container.addClass('hover');
+                    }).on('mouseleave', function() {
+                        if (timer) clearTimeout(timer);
+                        timer = setTimeout(function(){ container.removeClass('hover'); }, 1000);
+                    })
+                    if (attrs.autoplay !== undefined && attrs.autoplay !== false) {
+                        scope.$on('autoplay', function() {
+                            if (!container.hasClass('hover')) {
+                                pageTarget = pageCurrent + 1;
+                                if (pageTarget > pageTotal - 1) pageTarget = 0;
+                                changePage();
+                            }
+                        });
+                    }
+                }
+
+                function changePage() {
+                    carousel.removeClass('paused');
+                    if (pageCurrent !== pageTarget) {
+                        slides.stop().animate({'left': - (pageWidth * pageTarget)}, transition);
+                        controls.eq(pageTarget).addClass('active').siblings().removeClass('active');
+                        pageCurrent = pageTarget;
+                    }
+                }
+            }
+        };
+    });

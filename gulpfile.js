@@ -52,7 +52,7 @@ gulp.task('css', function() {
     return gulp.src('pre-build/styles/*.css')
         .pipe(autoprefixer('last 15 version'))
         .pipe(concat('main.css'))
-        .pipe(minifyCSS())
+        // .pipe(minifyCSS())
         .pipe(gulp.dest('app/css'))
         .pipe(refresh(lrserver));
 });
@@ -60,7 +60,7 @@ gulp.task('css', function() {
 gulp.task('logic', function() {
     return gulp.src('pre-build/scripts/**/*.js')
         .pipe(concat('0.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest('app/js'))
         .pipe(refresh(lrserver));
 });

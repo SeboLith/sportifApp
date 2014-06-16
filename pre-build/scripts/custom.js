@@ -13,12 +13,12 @@ if (navigator.appName == 'Microsoft Internet Explorer') {
 document.documentElement.className = htmlClass;
 
 var globals = {
-    sportifSocialTweets: [],
-    autocompleteURL: '/search/autocomplete',
-    autoplayInterval: 6000,
-    ieLt9: (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener),
-    contextPath: '',
-    languageISO: 'en'
+	asicsSocialTweets: [],
+	autocompleteURL: '/search/autocomplete',
+	autoplayInterval: 6000,
+	ieLt9: (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener),
+	contextPath: '',
+	languageISO: 'en',
 };
 
 function debug() {
