@@ -11,31 +11,31 @@ angular.module('factories')
             // set localStorage values to false if checkboxes are checked
         var sportsCheckboxes = {
             Running: {
-                selected: localStorage.getItem('shoes.sidebar.sport.Running.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.sport.Running.unselected') == "true" ? false : true
             },
             Training: {
-                selected: localStorage.getItem('shoes.sidebar.sport.Training.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.sport.Training.unselected') == "true" ? false : true
             },
             Basketball: {
-                selected: localStorage.getItem('shoes.sidebar.sport.Basketball.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.sport.Basketball.unselected') == "true" ? false : true
             },
             Football: {
-                selected: localStorage.getItem('shoes.sidebar.sport.Football.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.sport.Football.unselected') == "true" ? false : true
             },
             "Martial Arts": {
-                selected: localStorage.getItem('shoes.sidebar.sport.MartialArts.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.sport.MartialArts.unselected') == "true" ? false : true
             }
         };
 
         var usersCheckboxes = {
             Male: {
-                selected: localStorage.getItem('shoes.sidebar.user.Male.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.user.Male.unselected') == "true" ? false : true
             },
             Female: {
-                selected: localStorage.getItem('shoes.sidebar.user.Female.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.user.Female.unselected') == "true" ? false : true
             },
             Kids: {
-                selected: localStorage.getItem('shoes.sidebar.user.Kids.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.user.Kids.unselected') == "true" ? false : true
             }
         };
 
@@ -49,6 +49,7 @@ angular.module('factories')
 
                 var availableShoes     = [],
                     checkboxSelections = [],
+
                     runningVal         = {
                             selector : "Running",
                             category : "Sports",
@@ -95,6 +96,7 @@ angular.module('factories')
                             val      : selectedSize
                     };
 
+                // build an array of checkbox selections to compare against shoes
                 checkboxSelections.push(runningVal);
                 checkboxSelections.push(trainingVal);
                 checkboxSelections.push(basketballVal);
@@ -113,6 +115,7 @@ angular.module('factories')
                     }
                 });
 
+                // compare checkbox selections against shoe values
                 checkboxSelections.forEach( function (checkbox) {
                     switch (checkbox.val) {
                         case false:
@@ -123,24 +126,23 @@ angular.module('factories')
                 });
 
                 function matchBySport (checkbox) {
-
-                    for(var i = availableShoes.length - 1; i >= 0; i--) {
-                        if(availableShoes[i].activity === checkbox.selector) {
+                    // remove every element matching the deselected sport from the available shoes array
+                    for (var i = availableShoes.length - 1; i >= 0; i--) {
+                        if (availableShoes[i].activity === checkbox.selector) {
                            availableShoes.splice(i, 1);
                         }
                     }
-                }
+                };
 
                 function matchByUser (checkbox) {
-
-                    for(var i = availableShoes.length - 1; i >= 0; i--) {
-                        if(availableShoes[i].user === checkbox.selector) {
+                    // remove every element matching the deselected user from the available shoes array
+                    for (var i = availableShoes.length - 1; i >= 0; i--) {
+                        if (availableShoes[i].user === checkbox.selector) {
                            availableShoes.splice(i, 1);
                         }
                     }
-                }
+                };
 
-                console.log(availableShoes)
                 return availableShoes;
             },
 
@@ -152,35 +154,35 @@ angular.module('factories')
                 switch (checkbox) {
                     case "Running":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.sport.Running.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.sport.Running.unselected', currentValue);
                         break;
                     case "Training":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.sport.Training.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.sport.Training.unselected', currentValue);
                         break;
                     case "Basketball":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.sport.Basketball.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.sport.Basketball.unselected', currentValue);
                         break;
                     case "Football":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.sport.Football.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.sport.Football.unselected', currentValue);
                         break;
                     case "Martial Arts":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.sport.MartialArts.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.sport.MartialArts.unselected', currentValue);
                         break;
                         case "Male":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.user.Male.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.user.Male.unselected', currentValue);
                         break;
                     case "Female":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.user.Female.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.user.Female.unselected', currentValue);
                         break;
                     case "Kids":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.user.Kids.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.user.Kids.unselected', currentValue);
                         break;
                 }
             }
