@@ -19,7 +19,7 @@ angular.module('directives')
                         var rScope = $injector.get('$rootScope');
                         rScope.$broadcast('autoplay');
                         loop();
-                    }, globals.autoplayInterval);
+                    }, 3000);
                 }
                 if (!globals.timer) loop();
             }
@@ -41,7 +41,6 @@ angular.module('directives')
                     viewport  = carousel.find(".viewport"),
                     slides    = carousel.find(".slides"),
                     controls,
-                    transition  = 400,
                     pageWidth   = attrs.carouselPageWidth || viewport.width(),
                     pageCurrent = 0,
                     pageTarget,
@@ -122,7 +121,7 @@ angular.module('directives')
                 function changePage() {
                     carousel.removeClass('paused');
                     if (pageCurrent !== pageTarget) {
-                        slides.stop().animate({'left': - (pageWidth * pageTarget)}, transition);
+                        slides.stop().animate({'left': - (pageWidth * pageTarget)}, 400);
                         controls.eq(pageTarget).addClass('active').siblings().removeClass('active');
                         pageCurrent = pageTarget;
                     }

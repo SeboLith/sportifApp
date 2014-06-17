@@ -15,7 +15,6 @@ document.documentElement.className = htmlClass;
 var globals = {
 	asicsSocialTweets: [],
 	autocompleteURL: '/search/autocomplete',
-	autoplayInterval: 6000,
 	ieLt9: (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener),
 	contextPath: '',
 	languageISO: 'en',

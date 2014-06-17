@@ -52,21 +52,18 @@ angular.module('controllers')
 
             // watch for the change in current page to update the members per page
             $scope.$watch("shoes.currentPage", function() {
-              // set the current page using local storage
-              localStorage.setItem("shoes.pagination.page", $scope.shoes.currentPage);
+                // set the current page using local storage
+                localStorage.setItem("shoes.pagination.page", $scope.shoes.currentPage);
 
-              // data array to be passed into the ViewData.page() function
-              var data =[$scope.shoes.currentPage, $scope.itemsPerPage, $scope.shoesProducts];
+                updatePage();
 
-              // set the members segment array for the current page
-              $scope.shoesProductsShow = ViewData.page(data);
             });
         });
 
         /* default selected values for sports checkboxes */
         // check for the string "true" value of the selected item in localStorage
         // if it doesn't exist, set it to true
-        $scope.sports = ViewData.sportsCheckboxes;
+        $scope.sports = SidebarService.sportsCheckboxes;
 
         $scope.sportSelected = function(checkbox, currentValue) {
 
@@ -75,7 +72,7 @@ angular.module('controllers')
             $scope.sports[checkbox].selected = !currentValue;
 
             // store the checkbox's value in localstorage
-            ViewData.processCheckbox(checkbox, currentValue);
+            SidebarService.processCheckbox(checkbox, currentValue);
 
             // get the selected size by which to filter available shoes
             var selectedSize = localStorage.getItem('shoes.sidebar.size.selected');
@@ -83,13 +80,15 @@ angular.module('controllers')
             /*  @TODO: Filter available shoes based on user's selections
              *
              */
-             $scope.shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
+            $scope.shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
+
+            updatePage();
         };
 
         /* default selected values for users checkboxes */
         // check for the string "true" value of the selected item in localStorage
         // if it doesn't exist, set it to true
-        $scope.users = ViewData.usersCheckboxes;
+        $scope.users = SidebarService.usersCheckboxes;
 
         /* default selected values for users checkboxes */
         // check for the string "true" value of the selected item in localStorage
@@ -103,11 +102,33 @@ angular.module('controllers')
             $scope.users[checkbox].selected = !currentValue;
 
             // store the checkbox's value in localstorage
-            ViewData.processCheckbox(checkbox, currentValue);
+            SidebarService.processCheckbox(checkbox, currentValue);
+
+            // get the selected size by which to filter available shoes
+            var selectedSize = localStorage.getItem('shoes.sidebar.size.selected');
+
+            /*  @TODO: Filter available shoes based on user's selections
+             *
+             */
+            $scope.shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
+
+            updatePage();
         };
 
         $scope.sizeChange = function(selectedSize) {
 
             localStorage.setItem('shoes.sidebar.size.selected', selectedSize);
+        };
+
+        function updatePage () {
+
+            // assign the number of members to a variable for pagination purposes
+            $scope.totalItems = $scope.shoesProducts.length;
+
+            // data array to be passed into the ViewData.page() function
+            var data =[$scope.shoes.currentPage, $scope.itemsPerPage, $scope.shoesProducts];
+
+            // set the members segment array for the current page
+            $scope.shoesProductsShow = ViewData.page(data);
         };
     }]);
