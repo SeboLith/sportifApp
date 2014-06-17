@@ -1,0 +1,17 @@
+<div class="panel secondary wrap">
+
+  <div class="navigation_group">
+
+    <div class="featured">
+      <ul>
+        <li ng-repeat="sport in featuredSportsBar.content">
+          <a href="{{sport.link}}">
+            <img ng-src="{{sport.src}}" alt="{{sport.title}}">
+          </a>
+          <a href="{{sport.link}}" title="{{sport.title}}">{{sport.title}}</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
