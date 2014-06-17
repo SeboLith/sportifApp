@@ -2925,7 +2925,7 @@ angular.module('factories')
                     },
                     martialArtsVal     = {
                             selector : "Martial Arts",
-                            category : "Sports Arts",
+                            category : "Sports",
                             val      : sports["Martial Arts"].selected
                     },
                     menVal             = {
@@ -2970,21 +2970,31 @@ angular.module('factories')
                 checkboxSelections.forEach( function (checkbox) {
                     switch (checkbox.val) {
                         case false:
-                            matchBySelector(checkbox.selector);
+                            matchBySport(checkbox);
+                            matchByUser(checkbox);
                             break;
                     }
                 });
 
-                function matchBySelector (selector) {
-                    availableShoes.forEach( function (shoe) {
-                        if (shoe.activity == selector) {
-                            availableShoes.splice(availableShoes.indexOf(shoe), 1);
-                        } else if (shoe.user == selector) {
-                            availableShoes.splice(availableShoes.indexOf(shoe), 1);
-                        };
-                    });
+                function matchBySport (checkbox) {
+
+                    for(var i = availableShoes.length - 1; i >= 0; i--) {
+                        if(availableShoes[i].activity === checkbox.selector) {
+                           availableShoes.splice(i, 1);
+                        }
+                    }
                 }
 
+                function matchByUser (checkbox) {
+
+                    for(var i = availableShoes.length - 1; i >= 0; i--) {
+                        if(availableShoes[i].user === checkbox.selector) {
+                           availableShoes.splice(i, 1);
+                        }
+                    }
+                }
+
+                console.log(availableShoes)
                 return availableShoes;
             },
 
