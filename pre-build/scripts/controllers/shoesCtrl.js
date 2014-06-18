@@ -60,7 +60,15 @@ angular.module('controllers')
             // set the current page using local storage
             localStorage.setItem("shoes.pagination.page", $scope.shoes.currentPage);
 
-            updatePage();
+            // get the selected size by which to filter available shoes
+            var selectedSize = localStorage.getItem('shoes.sidebar.size.selected');
+
+            /*  Filter available shoes based on user's selections */
+            var shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
+
+            localStorage.setItem('shoes.shoesProducts', JSON.stringify(shoesProducts.availableShoes));
+
+            updatePage(shoesProducts.quantities);
 
         });
 
@@ -82,9 +90,9 @@ angular.module('controllers')
             /*  Filter available shoes based on user's selections */
             var shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
 
-            localStorage.setItem('shoes.shoesProducts', JSON.stringify(shoesProducts));
+            localStorage.setItem('shoes.shoesProducts', JSON.stringify(shoesProducts.availableShoes));
 
-            updatePage();
+            updatePage(shoesProducts.quantities);
         };
 
         /* default selected values for users checkboxes */
@@ -105,9 +113,9 @@ angular.module('controllers')
             /*  Filter available shoes based on user's selections */
             var shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
 
-            localStorage.setItem('shoes.shoesProducts', JSON.stringify(shoesProducts));
+            localStorage.setItem('shoes.shoesProducts', JSON.stringify(shoesProducts.availableShoes));
 
-            updatePage();
+            updatePage(shoesProducts.quantities);
         };
 
         $scope.size = {selected: localStorage.getItem('shoes.sidebar.size.selected') ? localStorage.getItem('shoes.sidebar.size.selected') : ""};
@@ -117,17 +125,22 @@ angular.module('controllers')
             localStorage.setItem('shoes.sidebar.size.selected', selectedSize);
         };
 
-        function updatePage () {
+        function updatePage (quantities) {
+
+            // quantities to show next to selector values
+            $scope.quantities = quantities;
+
+            // available shoes
+            $scope.shoesProducts = JSON.parse(localStorage.getItem('shoes.shoesProducts'));
 
             // data array to be passed into the ViewData.page() function
-            var data =[$scope.shoes.currentPage, $scope.itemsPerPage, $scope.shoesProducts];
+            var data = [$scope.shoes.currentPage, $scope.itemsPerPage, $scope.shoesProducts];
 
             // set the members segment array for the current page
             var shoesProductsShow = ViewData.page(data);
 
             localStorage.setItem('shoes.shoesProductsShow', JSON.stringify(shoesProductsShow));
 
-            $scope.shoesProducts = JSON.parse(localStorage.getItem('shoes.shoesProducts'));
             $scope.shoesProductsShow = JSON.parse(localStorage.getItem('shoes.shoesProductsShow'));
 
             // assign the number of members to a variable for pagination purposes

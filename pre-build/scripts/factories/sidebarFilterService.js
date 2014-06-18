@@ -49,51 +49,61 @@ angular.module('factories')
 
                 var availableShoes     = [],
                     checkboxSelections = [],
+                    shoes = {availableShoes: [], quantities: {}},
 
                     runningVal         = {
-                            selector : "Running",
-                            category : "Sports",
-                            val      : sports.Running.selected
+                            selector   : "Running",
+                            category   : "Sports",
+                            val        : sports.Running.selected,
+                            updatedQty : 0
                     },
                     trainingVal        = {
-                            selector : "Training",
-                            category : "Sports",
-                            val      : sports.Training.selected
+                            selector   : "Training",
+                            category   : "Sports",
+                            val        : sports.Training.selected,
+                            updatedQty : 0
                     },
                     basketballVal      = {
-                            selector : "Basketball",
-                            category : "Sports",
-                            val      : sports.Basketball.selected
+                            selector   : "Basketball",
+                            category   : "Sports",
+                            val        : sports.Basketball.selected,
+                            updatedQty : 0
                     },
                     footballVal        = {
-                            selector : "Football",
-                            category : "Sports",
-                            val      : sports.Football.selected
+                            selector   : "Football",
+                            category   : "Sports",
+                            val        : sports.Football.selected,
+                            updatedQty : 0
                     },
                     martialArtsVal     = {
-                            selector : "Martial Arts",
-                            category : "Sports",
-                            val      : sports["Martial Arts"].selected
+                            selector   : "Martial Arts",
+                            category   : "Sports",
+                            val        : sports["Martial Arts"].selected,
+                            updatedQty : 0
                     },
                     menVal             = {
-                            selector : "Men",
-                            category : "User",
-                            val      : users.Male.selected
+                            selector   : "Men",
+                            category   : "User",
+                            val        : users.Male.selected,
+                            updatedQty : 0
                     },
                     womenVal           = {
-                            selector : "Women",
-                            category : "User",
-                            val      : users.Female.selected
+                            selector   : "Women",
+                            category   : "User",
+                            val        : users.Female.selected,
+                            updatedQty : 0
                     },
                     kidsVal            = {
-                            selector : "Kids",
-                            category : "User",
-                            val      : users.Kids.selected
+                            selector   : "Kids",
+                            category   : "User",
+                            val        : users.Kids.selected,
+                            updatedQty : 0
                     },
                     sizeVal            = {
-                            selector : "Shoe Size",
-                            category : "Size",
-                            val      : selectedSize
+                            selector   : "Shoe Size",
+                            category   : "Size",
+                            val        : selectedSize,
+                            updatedQty : 0
                     };
 
                 // build an array of checkbox selections to compare against shoes
@@ -143,7 +153,52 @@ angular.module('factories')
                     }
                 };
 
-                return availableShoes;
+                function updateProductQuantity () {
+                    // remove every element matching the deselected user from the available shoes array
+                    availableShoes.forEach( function (shoe) {
+                        switch (shoe.activity) {
+                            case "Running":
+                                runningVal.updatedQty += 1;
+                                break;
+                            case "Training":
+                                trainingVal.updatedQty += 1;
+                                break;
+                            case "Basketball":
+                                basketballVal.updatedQty += 1;
+                                break;
+                            case "Football":
+                                footballVal.updatedQty += 1;
+                                break;
+                            case "Martial Arts":
+                                martialArtsVal.updatedQty += 1;
+                                break;
+                        }
+                        switch (shoe.user) {
+                            case "Men":
+                                menVal.updatedQty += 1;
+                                break;
+                            case "Women":
+                                womenVal.updatedQty += 1;
+                                break;
+                            case "Kids":
+                                kidsVal.updatedQty += 1;
+                                break;
+                        }
+                    });
+                };
+                updateProductQuantity();
+
+                shoes.availableShoes = availableShoes;
+                shoes.quantities.Running         = runningVal.updatedQty;
+                shoes.quantities.Training        = trainingVal.updatedQty;
+                shoes.quantities.Basketball      = basketballVal.updatedQty;
+                shoes.quantities.Football        = footballVal.updatedQty;
+                shoes.quantities["Martial Arts"] = martialArtsVal.updatedQty;
+                shoes.quantities.Male            = menVal.updatedQty;
+                shoes.quantities.Female          = womenVal.updatedQty;
+                shoes.quantities.Kids            = kidsVal.updatedQty;
+
+                return shoes;
             },
 
             processCheckbox : function(checkbox, currentValue) {
