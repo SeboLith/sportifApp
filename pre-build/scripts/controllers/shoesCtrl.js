@@ -60,6 +60,8 @@ angular.module('controllers')
             // set the current page using local storage
             localStorage.setItem("shoes.pagination.page", $scope.shoes.currentPage);
 
+            localStorage.setItem('shoes.sidebar.size.selected', 0);
+
             updatePage();
 
         });
@@ -99,6 +101,15 @@ angular.module('controllers')
         $scope.sizeChange = function(selectedSize) {
 
             localStorage.setItem('shoes.sidebar.size.selected', selectedSize);
+
+            updatePage();
+        };
+
+        $scope.sizeReset = function() {
+
+            localStorage.setItem('shoes.sidebar.size.selected', 0);
+
+            updatePage();
         };
 
         function updatePage () {

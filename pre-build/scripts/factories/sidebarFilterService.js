@@ -49,6 +49,7 @@ angular.module('factories')
 
                 var availableShoes     = [],
                     checkboxSelections = [],
+                    matchedSizes       = [],
                     shoes = {availableShoes: [], quantities: {}},
 
                     runningVal         = {
@@ -152,6 +153,28 @@ angular.module('factories')
                         }
                     }
                 };
+
+                Array.prototype.contains = function ( needle ) {
+                   for (var i in this) {
+                       if (this[i] == needle) return true;
+                   }
+                   return false;
+                };
+
+                function matchBySize () {
+                    // remove every element matching the deselected user from the available shoes array
+                    for (var i = availableShoes.length - 1; i >= 0; i--) {
+                        // console.log(sizeVal.val);
+                        if (availableShoes[i].sizes.contains(JSON.parse(sizeVal.val))) {
+                            matchedSizes.push(availableShoes[i]);
+                        }
+                    }
+                    // if (matchedSizes.length > 0) {
+                        availableShoes = matchedSizes;
+                    // }
+
+                };
+                matchBySize();
 
                 function updateProductQuantity () {
                     // remove every element matching the deselected user from the available shoes array
