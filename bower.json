@@ -7,7 +7,8 @@
     "angular-ui-router": "~0.2.10",
     "restangular": "~1.4.0",
     "angular-sanitize": "~1.2.18",
-    "html5shiv": "~3.7.2"
+    "html5shiv": "~3.7.2",
+    "velocity": "~0.1.0"
   },
   "devDependencies": {}
 }
