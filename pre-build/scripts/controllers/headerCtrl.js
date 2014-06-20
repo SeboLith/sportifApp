@@ -36,28 +36,24 @@ angular.module('controllers')
                     $scope.RunningBarComponent = false;
                     $scope.FeaturedSportsBarComponent = false;
                     $scope.MySportifBarComponent = false;
-                    console.log("ShopBar lead clicked");
                     break;
                 case "RunningBar":
                     $scope.RunningBarComponent = !$scope.RunningBarComponent;
                     $scope.ShopBarComponent = false;
                     $scope.FeaturedSportsBarComponent = false;
                     $scope.MySportifBarComponent = false;
-                    console.log("RunningBar lead clicked");
                     break;
                 case "FeaturedSportsBar":
                     $scope.FeaturedSportsBarComponent = !$scope.FeaturedSportsBarComponent;
                     $scope.ShopBarComponent = false;
                     $scope.RunningBarComponent = false;
                     $scope.MySportifBarComponent = false;
-                    console.log("FeaturedSportsBar lead clicked");
                     break;
                 case "MySportifBar":
                     $scope.MySportifBarComponent = !$scope.MySportifBarComponent;
                     $scope.ShopBarComponent = false;
                     $scope.RunningBarComponent = false;
                     $scope.FeaturedSportsBarComponent = false;
-                    console.log("MySportifBar lead clicked");
                     break;
             }
         };
