@@ -5,6 +5,43 @@
 /* Directives */
 angular.module('directives')
     /*
+        ARTICLE-LOAD DIRECTIVE
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .directive('articleLoadAnimate', function() {
+        return {
+            restrict: 'A',
+            // scope: true,
+            link: function(scope, element, attrs) {
+                // listen for the "last_element_loaded" event
+                // prior to applying transition effects
+                scope.$on('last_element_loaded', function( domainElement ) {
+                    // assign the articles to a variable
+                    var articles = element.children();
+
+                    // animate the loading of articles on pagination
+                    articles.css("opacity", 0).velocity("transition.slideUpIn", { stagger: 60   , duration: 350 });
+                } );
+
+
+            }
+        };
+    })
+    /*
+        ON-REPEAT-DONE DIRECTIVE
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .directive("onRepeatDone", function() {
+        return {
+            restriction: 'A',
+            link: function(scope, element, attributes ) {
+                // if the directive has the value "last_element_loaded"
+                // use it to name the emitted event, else explicitly name the event
+                scope.$emit(attributes["onRepeatDone"] || "last_element_loaded", element);
+            }
+        }
+    })
+    /*
         AUTOPLAY DIRECTIVE
     ----------------------------------------------------------------------------
     ============================================================================ */
