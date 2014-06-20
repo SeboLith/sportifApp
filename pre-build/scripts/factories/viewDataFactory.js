@@ -33,7 +33,9 @@ angular.module('factories')
             miscViewData     = viewDataCollection.one(miscDataRoute).get(),
             corporateInfo    = viewDataCollection.one(corporateInfoRoute).get(),
             customerServices = viewDataCollection.one(customServicesRoute).get(),
-            popularProducts  = viewDataCollection.one(popularProductsRoute).get();
+            popularProducts  = viewDataCollection.one(popularProductsRoute).get(),
+
+            ieLt9            = (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener);
 
         return {
 
@@ -52,6 +54,8 @@ angular.module('factories')
             customerServices: customerServices,
 
             popularProducts: popularProducts,
+
+            ieLt9: ieLt9,
 
             newsletterSignup: function (email) {
 

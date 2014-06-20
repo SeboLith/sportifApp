@@ -33,7 +33,6 @@ document.documentElement.className = htmlClass;
 var globals = {
 	asicsSocialTweets: [],
 	autocompleteURL: '/search/autocomplete',
-	ieLt9: (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener),
 	contextPath: '',
 	languageISO: 'en',
 };
@@ -2518,7 +2517,7 @@ angular.module('controllers')
             $scope.shoesProducts = localStorage.getItem('shoes.shoesProducts') ? JSON.parse(localStorage.getItem('shoes.shoesProducts')) : [];
 
             // set the number of items per page
-            $scope.itemsPerPage = localStorage.getItem("itemsPerPage") ? localStorage.getItem("itemsPerPage") : 6;
+            $scope.itemsPerPage = localStorage.getItem("itemsPerPage") ? localStorage.getItem("itemsPerPage") : 18;
 
             $scope.shoes = {};
 
@@ -2688,19 +2687,25 @@ angular.module('directives')
     .directive('autoplay', ["$injector", function($injector) {
         return {
             restrict: 'A',
+            // create a *new* scope that prototypically inherits from the scope of the parent
             scope: true,
             link: function(scope, element, attrs) {
 
-                var rScope = $injector.get('$rootScope');
+                var rScope = $injector.get('$rootScope'),
+                    autoplayTimer;
 
-                function loop() {
-                    globals.timer = setTimeout(function(){
-                        var rScope = $injector.get('$rootScope');
+                function autoplayBroadcast() {
+                    autoplayTimer = setTimeout(function() {
                         rScope.$broadcast('autoplay');
-                        loop();
-                    }, 3000);
+                        // recursively call this function to run it repeatedly after the set interval
+                        autoplayBroadcast();
+                    }, 5000);
                 }
-                if (!globals.timer) loop();
+                // if autoplayTimer hasn't been initialized,
+                // run the autoplayBroadcast function
+                if (!autoplayTimer) {
+                    autoplayBroadcast();
+                }
             }
         };
     }])
@@ -2713,7 +2718,8 @@ angular.module('directives')
             restrict: 'A',
             link: function(scope, element, attrs) {
 
-                var rScope = $injector.get('$rootScope');
+                var rScope = $injector.get('$rootScope'),
+                    viewData = $injector.get('ViewData');
 
                 // listen for the "last_slide_loaded" event
                 // prior to applying carousel effects
@@ -2749,7 +2755,7 @@ angular.module('directives')
                             itemsTotal: slides.children().length,
                             pageItems: parseInt(attrs.carouselPageItems) || 1
                         }
-                        if (globals.ieLt9 && data.pageItems > 1) slides.children(':nth-child(3n+1)').addClass('first_of_page');
+                        if (viewData.ieLt9 && data.pageItems > 1) slides.children(':nth-child(3n+1)').addClass('first_of_page');
                         init();
                     }
 
@@ -3140,7 +3146,9 @@ angular.module('factories')
             miscViewData     = viewDataCollection.one(miscDataRoute).get(),
             corporateInfo    = viewDataCollection.one(corporateInfoRoute).get(),
             customerServices = viewDataCollection.one(customServicesRoute).get(),
-            popularProducts  = viewDataCollection.one(popularProductsRoute).get();
+            popularProducts  = viewDataCollection.one(popularProductsRoute).get(),
+
+            ieLt9            = (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener);
 
         return {
 
@@ -3159,6 +3167,8 @@ angular.module('factories')
             customerServices: customerServices,
 
             popularProducts: popularProducts,
+
+            ieLt9: ieLt9,
 
             newsletterSignup: function (email) {
 

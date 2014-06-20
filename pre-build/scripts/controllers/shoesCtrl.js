@@ -24,7 +24,7 @@ angular.module('controllers')
             $scope.shoesProducts = localStorage.getItem('shoes.shoesProducts') ? JSON.parse(localStorage.getItem('shoes.shoesProducts')) : [];
 
             // set the number of items per page
-            $scope.itemsPerPage = localStorage.getItem("itemsPerPage") ? localStorage.getItem("itemsPerPage") : 6;
+            $scope.itemsPerPage = localStorage.getItem("itemsPerPage") ? localStorage.getItem("itemsPerPage") : 18;
 
             $scope.shoes = {};
 
