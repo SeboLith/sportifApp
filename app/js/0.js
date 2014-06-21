@@ -3104,7 +3104,7 @@ angular.module('factories')
 
         return {
 
-            typesCheckboxes : typesCheckboxes,
+            typesCheckboxes  : typesCheckboxes,
 
             sportsCheckboxes : sportsCheckboxes,
 
@@ -3395,7 +3395,7 @@ angular.module('factories')
                     case "Martial Arts":
                         localStorage.setItem('clothing.sidebar.sport.MartialArts.unselected', currentValue);
                         break;
-                        case "Male":
+                    case "Male":
                         localStorage.setItem('clothing.sidebar.user.Male.unselected', currentValue);
                         break;
                     case "Female":
