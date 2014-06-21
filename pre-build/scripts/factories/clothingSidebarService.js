@@ -39,11 +39,31 @@ angular.module('factories')
             }
         };
 
+        var sizeSelections = {
+            small: {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "small" ? true : false
+            },
+            medium: {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "medium" ? true : false
+            },
+            large: {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "large" ? true : false
+            },
+            "x-large": {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "x-large" ? true : false
+            },
+            "2x-large": {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "2x-large" ? true : false
+            }
+        };
+
         return {
 
-            sportsCheckboxes: sportsCheckboxes,
+            sportsCheckboxes : sportsCheckboxes,
 
-            usersCheckboxes: usersCheckboxes,
+            usersCheckboxes  : usersCheckboxes,
+
+            sizeSelections   : sizeSelections,
 
             clothingFilter : function(tempClothing, sports, users, selectedSize) {
 
@@ -103,7 +123,7 @@ angular.module('factories')
                     sizeVal            = {
                             selector   : "Clothing Size",
                             category   : "Size",
-                            val        : selectedSize,
+                            val        : selectedSize.replace(/(^\s+|\s+$)/g,''),
                             updatedQty : 0
                     };
 
@@ -165,7 +185,7 @@ angular.module('factories')
                     // remove every element matching the deselected user from the available clothing array
                     for (var i = availableClothing.length - 1; i >= 0; i--) {
 
-                        if (availableClothing[i].sizes.contains(sizeVal.val.replace(/(^\s+|\s+$)/g,''))) {
+                        if (availableClothing[i].sizes.contains(sizeVal.val)) {
                             matchedSizes.push(availableClothing[i]);
                         }
                     }

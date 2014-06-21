@@ -100,7 +100,7 @@ angular.module('controllers')
             updatePage();
         };
 
-        $scope.size = {selected: localStorage.getItem('clothing.sidebar.size.selected') ? localStorage.getItem('clothing.sidebar.size.selected') : ""};
+        $scope.size = {selected: localStorage.getItem('clothing.sidebar.size.selected') ? localStorage.getItem('clothing.sidebar.size.selected').replace(/(^\s+|\s+$)/g,'') : ""};
 
         $scope.sizeChange = function(selectedSize) {
 
@@ -112,6 +112,8 @@ angular.module('controllers')
         $scope.sizeReset = function() {
 
             localStorage.setItem('clothing.sidebar.size.selected', 0);
+
+            $scope.size.selected = false;
 
             updatePage();
         };

@@ -1221,7 +1221,7 @@ angular.module('controllers')
             updatePage();
         };
 
-        $scope.size = {selected: localStorage.getItem('clothing.sidebar.size.selected') ? localStorage.getItem('clothing.sidebar.size.selected') : ""};
+        $scope.size = {selected: localStorage.getItem('clothing.sidebar.size.selected') ? localStorage.getItem('clothing.sidebar.size.selected').replace(/(^\s+|\s+$)/g,'') : ""};
 
         $scope.sizeChange = function(selectedSize) {
 
@@ -1233,6 +1233,8 @@ angular.module('controllers')
         $scope.sizeReset = function() {
 
             localStorage.setItem('clothing.sidebar.size.selected', 0);
+
+            $scope.size.selected = false;
 
             updatePage();
         };
@@ -2775,6 +2777,8 @@ angular.module('controllers')
 
             localStorage.setItem('shoes.sidebar.size.selected', 0);
 
+            $scope.size.selected = false;
+
             updatePage();
         };
 
@@ -3036,11 +3040,31 @@ angular.module('factories')
             }
         };
 
+        var sizeSelections = {
+            small: {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "small" ? true : false
+            },
+            medium: {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "medium" ? true : false
+            },
+            large: {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "large" ? true : false
+            },
+            "x-large": {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "x-large" ? true : false
+            },
+            "2x-large": {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "2x-large" ? true : false
+            }
+        };
+
         return {
 
-            sportsCheckboxes: sportsCheckboxes,
+            sportsCheckboxes : sportsCheckboxes,
 
-            usersCheckboxes: usersCheckboxes,
+            usersCheckboxes  : usersCheckboxes,
+
+            sizeSelections   : sizeSelections,
 
             clothingFilter : function(tempClothing, sports, users, selectedSize) {
 
@@ -3100,7 +3124,7 @@ angular.module('factories')
                     sizeVal            = {
                             selector   : "Clothing Size",
                             category   : "Size",
-                            val        : selectedSize,
+                            val        : selectedSize.replace(/(^\s+|\s+$)/g,''),
                             updatedQty : 0
                     };
 
@@ -3162,7 +3186,7 @@ angular.module('factories')
                     // remove every element matching the deselected user from the available clothing array
                     for (var i = availableClothing.length - 1; i >= 0; i--) {
 
-                        if (availableClothing[i].sizes.contains(sizeVal.val.replace(/(^\s+|\s+$)/g,''))) {
+                        if (availableClothing[i].sizes.contains(sizeVal.val)) {
                             matchedSizes.push(availableClothing[i]);
                         }
                     }

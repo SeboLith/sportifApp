@@ -113,6 +113,8 @@ angular.module('controllers')
 
             localStorage.setItem('shoes.sidebar.size.selected', 0);
 
+            $scope.size.selected = false;
+
             updatePage();
         };
 
