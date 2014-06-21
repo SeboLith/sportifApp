@@ -123,7 +123,7 @@ angular.module('factories')
                     sizeVal            = {
                             selector   : "Clothing Size",
                             category   : "Size",
-                            val        : selectedSize.replace(/(^\s+|\s+$)/g,''),
+                            val        : selectedSize.replace(/(^\s+|\s+$)/g,'') /*remove blank spaces from size value*/,
                             updatedQty : 0
                     };
 

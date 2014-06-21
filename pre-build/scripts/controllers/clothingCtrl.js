@@ -64,7 +64,8 @@ angular.module('controllers')
             // set the current page using local storage
             localStorage.setItem("clothing.pagination.page", $scope.clothing.currentPage);
 
-            localStorage.setItem('clothing.sidebar.size.selected', 0);
+            // set the size select value to false to show all sizes
+            localStorage.setItem('clothing.sidebar.size.selected', false);
 
             updatePage();
 
@@ -100,7 +101,7 @@ angular.module('controllers')
             updatePage();
         };
 
-        $scope.size = {selected: localStorage.getItem('clothing.sidebar.size.selected') ? localStorage.getItem('clothing.sidebar.size.selected').replace(/(^\s+|\s+$)/g,'') : ""};
+        $scope.size = {selected: localStorage.getItem('clothing.sidebar.size.selected') ? localStorage.getItem('clothing.sidebar.size.selected').replace(/(^\s+|\s+$)/g,'' /*remove blank spaces from size value*/) : false};
 
         $scope.sizeChange = function(selectedSize) {
 
@@ -111,8 +112,10 @@ angular.module('controllers')
 
         $scope.sizeReset = function() {
 
-            localStorage.setItem('clothing.sidebar.size.selected', 0);
+            // set the size select value to false to show all sizes
+            localStorage.setItem('clothing.sidebar.size.selected', false);
 
+            // set the value to false to show the select a size option
             $scope.size.selected = false;
 
             updatePage();
