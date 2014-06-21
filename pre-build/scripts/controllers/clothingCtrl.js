@@ -64,12 +64,29 @@ angular.module('controllers')
             // set the current page using local storage
             localStorage.setItem("clothing.pagination.page", $scope.clothing.currentPage);
 
-            // set the size select value to false to show all sizes
-            localStorage.setItem('clothing.sidebar.size.selected', false);
+            if ( localStorage.getItem('clothing.sidebar.size.selected') == null ) {
+                // set the size select value to false to show all sizes
+                localStorage.setItem('clothing.sidebar.size.selected', false);
+            }
 
             updatePage();
 
         });
+
+        /* default selected values for types checkboxes */
+        $scope.types = ClothingSidebarService.typesCheckboxes;
+
+        $scope.typeSelected = function(checkbox, currentValue) {
+
+            // change the selected value of "this" checkbox
+            // from the current value to its opposite
+            $scope.types[checkbox].selected = !currentValue;
+
+            // store the checkbox's value in localstorage
+            ClothingSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
 
         /* default selected values for sports checkboxes */
         $scope.sports = ClothingSidebarService.sportsCheckboxes;
@@ -127,7 +144,7 @@ angular.module('controllers')
             var selectedSize = localStorage.getItem('clothing.sidebar.size.selected');
 
             /*  Filter available clothing based on user's selections */
-            var clothingProducts = ClothingSidebarService.clothingFilter(tempClothing, $scope.sports, $scope.users, selectedSize);
+            var clothingProducts = ClothingSidebarService.clothingFilter(tempClothing, $scope.types, $scope.sports, $scope.users, selectedSize);
 
             localStorage.setItem('clothing.clothingProducts', JSON.stringify(clothingProducts.availableClothing));
 

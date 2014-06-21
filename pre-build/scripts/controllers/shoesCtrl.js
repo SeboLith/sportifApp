@@ -64,8 +64,10 @@ angular.module('controllers')
             // set the current page using local storage
             localStorage.setItem("shoes.pagination.page", $scope.shoes.currentPage);
 
-            // set the size select value to false to show all sizes
-            localStorage.setItem('shoes.sidebar.size.selected', false);
+            if ( localStorage.getItem('shoes.sidebar.size.selected') == null ) {
+                // set the size select value to false to show all sizes
+                localStorage.setItem('shoes.sidebar.size.selected', false);
+            }
 
             updatePage();
 
