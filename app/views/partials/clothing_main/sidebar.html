@@ -1,0 +1,63 @@
+<div class="item product_listing_side">
+
+  <div class="search">
+    <ol class="facets facet_listing">
+        <li class="facet" ng-init="primary=true">
+          <div class="facet_header">
+            <h3 class=" first" ng-class="{first: $first &amp;&amp; primary}">
+              {{sidebarData.sportSection.section}}
+            </h3>
+          </div>
+          <ol>
+            <li ng-repeat="value in sidebarData.sportSection.values" class="checkbox_holder">
+              <input ng-model="sports[value.sport].selected" ng-click="sportSelected(value.sport, sports[value.sport].selected)" type="checkbox">
+              <label>
+                {{value.sport}} ({{quantities[value.sport]}})
+              </label>
+            </li>
+          </ol>
+        </li>
+
+        <li class="facet" ng-init="primary=true">
+          <div class="facet_header">
+            <h3 class=" first" ng-class="{first: $first &amp;&amp; primary}">
+              {{sidebarData.userSection.section}}
+            </h3>
+          </div>
+          <ol>
+            <li ng-repeat="value in sidebarData.userSection.values" class="checkbox_holder">
+              <input ng-model="users[value.user].selected" ng-click="userSelected(value.user, users[value.user].selected)" type="checkbox">
+              <label>
+                {{value.user}} ({{quantities[value.user]}})
+              </label>
+            </li>
+          </ol>
+        </li>
+
+        <li class="facet" ng-init="primary=true">
+          <div class="facet_header">
+            <h3 class="" ng-class="{first: $first &amp;&amp; primary}">
+              {{sidebarData.sizeSection.section}}
+            </h3>
+          </div>
+          <p><a ng-click="sizeReset()">Show All</a></p>
+          <ul>
+            <li class="select">
+              <div class="select_wrap">
+                <select class="" ng-model="size.selected" ng-change="sizeChange(size.selected)">
+                  <option disabled="disabled" ng-selected="true">
+                    Select a size
+                  </option>
+                  <option ng-repeat="value in sidebarData.sizeSection.values" ng-selected="size.selected == value">
+                    {{value}}
+                  </option>
+                </select>
+              </div>
+            </li>
+          </ul>
+        </li>
+
+    </ol>
+  </div>
+
+</div>

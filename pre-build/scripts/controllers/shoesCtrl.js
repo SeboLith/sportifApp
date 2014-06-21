@@ -6,7 +6,11 @@ angular.module('controllers')
         SHOES CONTROLLER
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .controller('ShoesCtrl', ['$scope', 'ViewData', 'SidebarService', 'ProductsFactory', function ($scope, ViewData, SidebarService, ProductsFactory){
+    .controller('ShoesCtrl', ['$scope', "$injector", function ($scope, $injector){
+
+        var ShoesSidebarService = $injector.get("ShoesSidebarService"),
+            ViewData            = $injector.get("ViewData"),
+            ProductsFactory     = $injector.get("ProductsFactory");
 
         if (!$scope.shoes) {
 
@@ -67,7 +71,7 @@ angular.module('controllers')
         });
 
         /* default selected values for sports checkboxes */
-        $scope.sports = SidebarService.sportsCheckboxes;
+        $scope.sports = ShoesSidebarService.sportsCheckboxes;
 
         $scope.sportSelected = function(checkbox, currentValue) {
 
@@ -76,13 +80,13 @@ angular.module('controllers')
             $scope.sports[checkbox].selected = !currentValue;
 
             // store the checkbox's value in localstorage
-            SidebarService.processCheckbox(checkbox, currentValue);
+            ShoesSidebarService.processCheckbox(checkbox, currentValue);
 
             updatePage();
         };
 
         /* default selected values for users checkboxes */
-        $scope.users = SidebarService.usersCheckboxes;
+        $scope.users = ShoesSidebarService.usersCheckboxes;
 
         $scope.userSelected = function(checkbox, currentValue) {
 
@@ -91,7 +95,7 @@ angular.module('controllers')
             $scope.users[checkbox].selected = !currentValue;
 
             // store the checkbox's value in localstorage
-            SidebarService.processCheckbox(checkbox, currentValue);
+            ShoesSidebarService.processCheckbox(checkbox, currentValue);
 
             updatePage();
         };
@@ -118,7 +122,7 @@ angular.module('controllers')
             var selectedSize = localStorage.getItem('shoes.sidebar.size.selected');
 
             /*  Filter available shoes based on user's selections */
-            var shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
+            var shoesProducts = ShoesSidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
 
             localStorage.setItem('shoes.shoesProducts', JSON.stringify(shoesProducts.availableShoes));
 

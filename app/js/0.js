@@ -1096,8 +1096,177 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
           controller: 'FooterCtrl'
         }
       }
+    })
+    .state('clothing', {
+      url: '/clothing',
+      views: {
+        '': {
+          templateUrl: 'views/partials/clothing.html'
+        },
+        'header@clothing': {
+          templateUrl: 'views/partials/header/header.html',
+          controller: 'HeaderCtrl'
+        },
+        'clothingMain@clothing': {
+          templateUrl: 'views/partials/clothing_main/clothingMain.html',
+          controller: 'ClothingCtrl'
+        },
+        'footer@clothing': {
+          templateUrl: 'views/partials/footer/footer.html',
+          controller: 'FooterCtrl'
+        }
+      }
     });
 }]);
+
+'use strict';
+
+/* Controllers */
+angular.module('controllers')
+    /*
+        CLOTHING CONTROLLER
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .controller('ClothingCtrl', ['$scope', "$injector", function ($scope, $injector){
+
+        var ClothingSidebarService = $injector.get("ClothingSidebarService"),
+            ViewData               = $injector.get("ViewData"),
+            ProductsFactory        = $injector.get("ProductsFactory");
+
+        if (!$scope.clothing) {
+
+            var returnedViewData = ViewData.clothingMainData.then(function(clothingMainData){
+
+                var promise = clothingMainData.data.values;
+
+                $scope.sidebarData = promise.sidebarData;
+            });
+
+            // temp array to hold all clothing
+            var tempClothing = [];
+
+            // scope array to hold available clothing
+            $scope.clothingProducts = localStorage.getItem('clothing.clothingProducts') ? JSON.parse(localStorage.getItem('clothing.clothingProducts')) : [];
+
+            // set the number of items per page
+            $scope.itemsPerPage = localStorage.getItem("itemsPerPage") ? localStorage.getItem("itemsPerPage") : 18;
+
+            $scope.clothing = {};
+
+            var returnedProducts = ProductsFactory.getAll.then(function(data){
+                // filter products and assign all clothing to tempClothing
+                data.forEach( function (product) {
+                    switch (product.category) {
+                        case "Clothing":
+                            tempClothing.push(product);
+                            break;
+                    }
+                });
+
+                // filter clothing and assign available clothing to $scope.clothingProducts
+                tempClothing.forEach( function (item) {
+                    switch (item.available) {
+                        case true:
+                            $scope.clothingProducts.push(item);
+                            break;
+                    }
+                });
+
+                // assign the number of members to a variable for pagination purposes
+                $scope.totalItems = $scope.clothingProducts.length;
+
+                // get the current page using local storage; if none exists, set it to 1
+                $scope.clothing.currentPage = localStorage.getItem("clothing.pagination.page") ? localStorage.getItem("clothing.pagination.page") : 1;
+            });
+        }
+
+        // watch for the change in current page to update the members per page
+        $scope.$watch("clothing.currentPage", function() {
+            // set the current page using local storage
+            localStorage.setItem("clothing.pagination.page", $scope.clothing.currentPage);
+
+            localStorage.setItem('clothing.sidebar.size.selected', 0);
+
+            updatePage();
+
+        });
+
+        /* default selected values for sports checkboxes */
+        $scope.sports = ClothingSidebarService.sportsCheckboxes;
+
+        $scope.sportSelected = function(checkbox, currentValue) {
+
+            // change the selected value of "this" checkbox
+            // from the current value to its opposite
+            $scope.sports[checkbox].selected = !currentValue;
+
+            // store the checkbox's value in localstorage
+            ClothingSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        /* default selected values for users checkboxes */
+        $scope.users = ClothingSidebarService.usersCheckboxes;
+
+        $scope.userSelected = function(checkbox, currentValue) {
+
+            // change the selected value of "this" checkbox
+            // from the current value to its opposite
+            $scope.users[checkbox].selected = !currentValue;
+
+            // store the checkbox's value in localstorage
+            ClothingSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        $scope.size = {selected: localStorage.getItem('clothing.sidebar.size.selected') ? localStorage.getItem('clothing.sidebar.size.selected') : ""};
+
+        $scope.sizeChange = function(selectedSize) {
+
+            localStorage.setItem('clothing.sidebar.size.selected', selectedSize);
+
+            updatePage();
+        };
+
+        $scope.sizeReset = function() {
+
+            localStorage.setItem('clothing.sidebar.size.selected', 0);
+
+            updatePage();
+        };
+
+        function updatePage () {
+
+            // get the selected size by which to filter available clothing
+            var selectedSize = localStorage.getItem('clothing.sidebar.size.selected');
+
+            /*  Filter available clothing based on user's selections */
+            var clothingProducts = ClothingSidebarService.clothingFilter(tempClothing, $scope.sports, $scope.users, selectedSize);
+
+            localStorage.setItem('clothing.clothingProducts', JSON.stringify(clothingProducts.availableClothing));
+
+            // quantities to show next to selector values
+            $scope.quantities = clothingProducts.quantities;
+
+            // all available clothing to display on all pages
+            $scope.clothingProducts = JSON.parse(localStorage.getItem('clothing.clothingProducts'));
+
+            // data array to be passed into the ViewData.page() function
+            var data = [$scope.clothing.currentPage, $scope.itemsPerPage, $scope.clothingProducts];
+
+            // set the members segment array for the current page
+            var clothingProductsShow = ViewData.page(data);
+
+            localStorage.setItem('clothing.clothingProductsShow', JSON.stringify(clothingProductsShow));
+
+            $scope.clothingProductsShow = JSON.parse(localStorage.getItem('clothing.clothingProductsShow'));
+
+            // assign the number of members to a variable for pagination purposes
+            $scope.totalItems = $scope.clothingProducts.length;
+        };
+    }]);
 
 // 'use strict';
 
@@ -2499,7 +2668,11 @@ angular.module('controllers')
         SHOES CONTROLLER
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .controller('ShoesCtrl', ['$scope', 'ViewData', 'SidebarService', 'ProductsFactory', function ($scope, ViewData, SidebarService, ProductsFactory){
+    .controller('ShoesCtrl', ['$scope', "$injector", function ($scope, $injector){
+
+        var ShoesSidebarService = $injector.get("ShoesSidebarService"),
+            ViewData            = $injector.get("ViewData"),
+            ProductsFactory     = $injector.get("ProductsFactory");
 
         if (!$scope.shoes) {
 
@@ -2560,7 +2733,7 @@ angular.module('controllers')
         });
 
         /* default selected values for sports checkboxes */
-        $scope.sports = SidebarService.sportsCheckboxes;
+        $scope.sports = ShoesSidebarService.sportsCheckboxes;
 
         $scope.sportSelected = function(checkbox, currentValue) {
 
@@ -2569,13 +2742,13 @@ angular.module('controllers')
             $scope.sports[checkbox].selected = !currentValue;
 
             // store the checkbox's value in localstorage
-            SidebarService.processCheckbox(checkbox, currentValue);
+            ShoesSidebarService.processCheckbox(checkbox, currentValue);
 
             updatePage();
         };
 
         /* default selected values for users checkboxes */
-        $scope.users = SidebarService.usersCheckboxes;
+        $scope.users = ShoesSidebarService.usersCheckboxes;
 
         $scope.userSelected = function(checkbox, currentValue) {
 
@@ -2584,7 +2757,7 @@ angular.module('controllers')
             $scope.users[checkbox].selected = !currentValue;
 
             // store the checkbox's value in localstorage
-            SidebarService.processCheckbox(checkbox, currentValue);
+            ShoesSidebarService.processCheckbox(checkbox, currentValue);
 
             updatePage();
         };
@@ -2611,7 +2784,7 @@ angular.module('controllers')
             var selectedSize = localStorage.getItem('shoes.sidebar.size.selected');
 
             /*  Filter available shoes based on user's selections */
-            var shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
+            var shoesProducts = ShoesSidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
 
             localStorage.setItem('shoes.shoesProducts', JSON.stringify(shoesProducts.availableShoes));
 
@@ -2827,6 +3000,275 @@ angular.module('directives')
 /* Factories */
 angular.module('factories')
     /*
+        CLOTHING SIDEBAR SERVICE
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .factory("ClothingSidebarService", [function () {
+
+            // set localStorage values to false if checkboxes are checked
+        var sportsCheckboxes = {
+            Running: {
+                selected: localStorage.getItem('clothing.sidebar.sport.Running.unselected') == "true" ? false : true
+            },
+            Training: {
+                selected: localStorage.getItem('clothing.sidebar.sport.Training.unselected') == "true" ? false : true
+            },
+            Basketball: {
+                selected: localStorage.getItem('clothing.sidebar.sport.Basketball.unselected') == "true" ? false : true
+            },
+            Football: {
+                selected: localStorage.getItem('clothing.sidebar.sport.Football.unselected') == "true" ? false : true
+            },
+            "Martial Arts": {
+                selected: localStorage.getItem('clothing.sidebar.sport.MartialArts.unselected') == "true" ? false : true
+            }
+        };
+
+        var usersCheckboxes = {
+            Male: {
+                selected: localStorage.getItem('clothing.sidebar.user.Male.unselected') == "true" ? false : true
+            },
+            Female: {
+                selected: localStorage.getItem('clothing.sidebar.user.Female.unselected') == "true" ? false : true
+            },
+            Kids: {
+                selected: localStorage.getItem('clothing.sidebar.user.Kids.unselected') == "true" ? false : true
+            }
+        };
+
+        return {
+
+            sportsCheckboxes: sportsCheckboxes,
+
+            usersCheckboxes: usersCheckboxes,
+
+            clothingFilter : function(tempClothing, sports, users, selectedSize) {
+
+                var availableClothing  = [],
+                    checkboxSelections = [],
+                    matchedSizes       = [],
+                    clothing           = {availableClothing: [], quantities: {}},
+
+                    runningVal         = {
+                            selector   : "Running",
+                            category   : "Sports",
+                            val        : sports.Running.selected,
+                            updatedQty : 0
+                    },
+                    trainingVal        = {
+                            selector   : "Training",
+                            category   : "Sports",
+                            val        : sports.Training.selected,
+                            updatedQty : 0
+                    },
+                    basketballVal      = {
+                            selector   : "Basketball",
+                            category   : "Sports",
+                            val        : sports.Basketball.selected,
+                            updatedQty : 0
+                    },
+                    footballVal        = {
+                            selector   : "Football",
+                            category   : "Sports",
+                            val        : sports.Football.selected,
+                            updatedQty : 0
+                    },
+                    martialArtsVal     = {
+                            selector   : "Martial Arts",
+                            category   : "Sports",
+                            val        : sports["Martial Arts"].selected,
+                            updatedQty : 0
+                    },
+                    menVal             = {
+                            selector   : "Men",
+                            category   : "User",
+                            val        : users.Male.selected,
+                            updatedQty : 0
+                    },
+                    womenVal           = {
+                            selector   : "Women",
+                            category   : "User",
+                            val        : users.Female.selected,
+                            updatedQty : 0
+                    },
+                    kidsVal            = {
+                            selector   : "Kids",
+                            category   : "User",
+                            val        : users.Kids.selected,
+                            updatedQty : 0
+                    },
+                    sizeVal            = {
+                            selector   : "Clothing Size",
+                            category   : "Size",
+                            val        : selectedSize,
+                            updatedQty : 0
+                    };
+
+                // build an array of checkbox selections to compare against clothing
+                checkboxSelections.push(runningVal);
+                checkboxSelections.push(trainingVal);
+                checkboxSelections.push(basketballVal);
+                checkboxSelections.push(footballVal);
+                checkboxSelections.push(martialArtsVal);
+                checkboxSelections.push(menVal);
+                checkboxSelections.push(womenVal);
+                checkboxSelections.push(kidsVal);
+
+                // assign available clothing to an array
+                tempClothing.forEach( function (item) {
+                    switch (item.available) {
+                        case true:
+                            availableClothing.push(item);
+                            break;
+                    }
+                });
+
+                // compare checkbox selections against item values
+                checkboxSelections.forEach( function (checkbox) {
+                    switch (checkbox.val) {
+                        case false:
+                            matchBySport(checkbox);
+                            matchByUser(checkbox);
+                            break;
+                    }
+                });
+
+                function matchBySport (checkbox) {
+                    // remove every element matching the deselected sport from the available clothing array
+                    for (var i = availableClothing.length - 1; i >= 0; i--) {
+                        if (availableClothing[i].activity === checkbox.selector) {
+                           availableClothing.splice(i, 1);
+                        }
+                    }
+                };
+
+                function matchByUser (checkbox) {
+                    // remove every element matching the deselected user from the available clothing array
+                    for (var i = availableClothing.length - 1; i >= 0; i--) {
+                        if (availableClothing[i].user === checkbox.selector) {
+                           availableClothing.splice(i, 1);
+                        }
+                    }
+                };
+
+                Array.prototype.contains = function ( needle ) {
+                   for (var i in this) {
+                       if (this[i] == needle) return true;
+                   }
+                   return false;
+                };
+
+                function matchBySize () {
+                    // remove every element matching the deselected user from the available clothing array
+                    for (var i = availableClothing.length - 1; i >= 0; i--) {
+
+                        if (availableClothing[i].sizes.contains(sizeVal.val.replace(/(^\s+|\s+$)/g,''))) {
+                            matchedSizes.push(availableClothing[i]);
+                        }
+                    }
+                    if (matchedSizes.length > 0) {
+                        availableClothing = matchedSizes;
+                    }
+
+                };
+                matchBySize();
+
+                function updateProductQuantity () {
+                    // remove every element matching the deselected user from the available clothing array
+                    availableClothing.forEach( function (item) {
+                        switch (item.activity) {
+                            case "Running":
+                                runningVal.updatedQty += 1;
+                                break;
+                            case "Training":
+                                trainingVal.updatedQty += 1;
+                                break;
+                            case "Basketball":
+                                basketballVal.updatedQty += 1;
+                                break;
+                            case "Football":
+                                footballVal.updatedQty += 1;
+                                break;
+                            case "Martial Arts":
+                                martialArtsVal.updatedQty += 1;
+                                break;
+                        }
+                        switch (item.user) {
+                            case "Men":
+                                menVal.updatedQty += 1;
+                                break;
+                            case "Women":
+                                womenVal.updatedQty += 1;
+                                break;
+                            case "Kids":
+                                kidsVal.updatedQty += 1;
+                                break;
+                        }
+                    });
+                };
+                updateProductQuantity();
+
+                clothing.availableClothing          = availableClothing;
+                clothing.quantities.Running         = runningVal.updatedQty;
+                clothing.quantities.Training        = trainingVal.updatedQty;
+                clothing.quantities.Basketball      = basketballVal.updatedQty;
+                clothing.quantities.Football        = footballVal.updatedQty;
+                clothing.quantities["Martial Arts"] = martialArtsVal.updatedQty;
+                clothing.quantities.Male            = menVal.updatedQty;
+                clothing.quantities.Female          = womenVal.updatedQty;
+                clothing.quantities.Kids            = kidsVal.updatedQty;
+
+                return clothing;
+            },
+
+            processCheckbox : function(checkbox, currentValue) {
+                /*
+                 * store the checkbox value in localstorage
+                 */
+
+                switch (checkbox) {
+                    case "Running":
+                        // set the changed value of the checkbox on the in localStorage
+                        localStorage.setItem('clothing.sidebar.sport.Running.unselected', currentValue);
+                        break;
+                    case "Training":
+                        // set the changed value of the checkbox on the in localStorage
+                        localStorage.setItem('clothing.sidebar.sport.Training.unselected', currentValue);
+                        break;
+                    case "Basketball":
+                        // set the changed value of the checkbox on the in localStorage
+                        localStorage.setItem('clothing.sidebar.sport.Basketball.unselected', currentValue);
+                        break;
+                    case "Football":
+                        // set the changed value of the checkbox on the in localStorage
+                        localStorage.setItem('clothing.sidebar.sport.Football.unselected', currentValue);
+                        break;
+                    case "Martial Arts":
+                        // set the changed value of the checkbox on the in localStorage
+                        localStorage.setItem('clothing.sidebar.sport.MartialArts.unselected', currentValue);
+                        break;
+                        case "Male":
+                        // set the changed value of the checkbox on the in localStorage
+                        localStorage.setItem('clothing.sidebar.user.Male.unselected', currentValue);
+                        break;
+                    case "Female":
+                        // set the changed value of the checkbox on the in localStorage
+                        localStorage.setItem('clothing.sidebar.user.Female.unselected', currentValue);
+                        break;
+                    case "Kids":
+                        // set the changed value of the checkbox on the in localStorage
+                        localStorage.setItem('clothing.sidebar.user.Kids.unselected', currentValue);
+                        break;
+                }
+            }
+        }
+    }]);
+
+'use strict';
+
+/* Factories */
+angular.module('factories')
+    /*
         PRODUCTS FACTORY
     ----------------------------------------------------------------------------
     ============================================================================ */
@@ -2847,10 +3289,10 @@ angular.module('factories')
 /* Factories */
 angular.module('factories')
     /*
-        SIDEBAR SERVICE
+        SHOE SIDEBAR SERVICE
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .factory("SidebarService", [function () {
+    .factory("ShoesSidebarService", [function () {
 
             // set localStorage values to false if checkboxes are checked
         var sportsCheckboxes = {
@@ -2894,7 +3336,7 @@ angular.module('factories')
                 var availableShoes     = [],
                     checkboxSelections = [],
                     matchedSizes       = [],
-                    shoes = {availableShoes: [], quantities: {}},
+                    shoes              = {availableShoes: [], quantities: {}},
 
                     runningVal         = {
                             selector   : "Running",
@@ -3133,6 +3575,7 @@ angular.module('factories')
             headerRoute          = "viewdata/header",
             homemainRoute        = "viewdata/homemain",
             shoesmainRoute       = "viewdata/shoesmain",
+            clothingmainRoute    = "viewdata/clothingmain",
             miscDataRoute        = "viewdata/miscdata",
             corporateInfoRoute   = "viewdata/corporateinfo",
             customServicesRoute  = "viewdata/customerservices",
@@ -3143,6 +3586,7 @@ angular.module('factories')
             headerData       = viewDataCollection.one(headerRoute).get(),
             homeMainData     = viewDataCollection.one(homemainRoute).get(),
             shoesMainData    = viewDataCollection.one(shoesmainRoute).get(),
+            clothingMainData = viewDataCollection.one(clothingmainRoute).get(),
             miscViewData     = viewDataCollection.one(miscDataRoute).get(),
             corporateInfo    = viewDataCollection.one(corporateInfoRoute).get(),
             customerServices = viewDataCollection.one(customServicesRoute).get(),
@@ -3159,6 +3603,8 @@ angular.module('factories')
             homeMainData: homeMainData,
 
             shoesMainData: shoesMainData,
+
+            clothingMainData: clothingMainData,
 
             miscViewData: miscViewData,
 

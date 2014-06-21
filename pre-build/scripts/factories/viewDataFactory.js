@@ -20,6 +20,7 @@ angular.module('factories')
             headerRoute          = "viewdata/header",
             homemainRoute        = "viewdata/homemain",
             shoesmainRoute       = "viewdata/shoesmain",
+            clothingmainRoute    = "viewdata/clothingmain",
             miscDataRoute        = "viewdata/miscdata",
             corporateInfoRoute   = "viewdata/corporateinfo",
             customServicesRoute  = "viewdata/customerservices",
@@ -30,6 +31,7 @@ angular.module('factories')
             headerData       = viewDataCollection.one(headerRoute).get(),
             homeMainData     = viewDataCollection.one(homemainRoute).get(),
             shoesMainData    = viewDataCollection.one(shoesmainRoute).get(),
+            clothingMainData = viewDataCollection.one(clothingmainRoute).get(),
             miscViewData     = viewDataCollection.one(miscDataRoute).get(),
             corporateInfo    = viewDataCollection.one(corporateInfoRoute).get(),
             customerServices = viewDataCollection.one(customServicesRoute).get(),
@@ -46,6 +48,8 @@ angular.module('factories')
             homeMainData: homeMainData,
 
             shoesMainData: shoesMainData,
+
+            clothingMainData: clothingMainData,
 
             miscViewData: miscViewData,
 

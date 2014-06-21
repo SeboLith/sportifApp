@@ -3,10 +3,10 @@
 /* Factories */
 angular.module('factories')
     /*
-        SIDEBAR SERVICE
+        SHOE SIDEBAR SERVICE
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .factory("SidebarService", [function () {
+    .factory("ShoesSidebarService", [function () {
 
             // set localStorage values to false if checkboxes are checked
         var sportsCheckboxes = {
@@ -50,7 +50,7 @@ angular.module('factories')
                 var availableShoes     = [],
                     checkboxSelections = [],
                     matchedSizes       = [],
-                    shoes = {availableShoes: [], quantities: {}},
+                    shoes              = {availableShoes: [], quantities: {}},
 
                     runningVal         = {
                             selector   : "Running",
