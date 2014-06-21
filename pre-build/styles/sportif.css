@@ -7335,6 +7335,9 @@ article.product.basic {
     border: 1px solid rgba(50, 50, 50, .06);
     border-radius: 5px;
 }
+article.product.basic:last-child {
+    margin-bottom: 40px;
+}
 .product.basic div.image a.image_link img.loaded {
     height:115px;
     width:204px;

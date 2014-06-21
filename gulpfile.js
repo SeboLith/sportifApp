@@ -32,13 +32,13 @@ var gulp = require('gulp'),
 
 
 gulp.task('cleanCSS', function () {
-    return gulp.src('app/css/', {read: false})
+    return gulp.src('app/css/*', {read: false})
         .pipe(clean());
 });
 
 
 gulp.task('cleanJS', function () {
-    return gulp.src('app/js/', {read: false})
+    return gulp.src('app/js/*', {read: false})
         .pipe(clean());
 });
 

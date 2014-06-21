@@ -33,7 +33,6 @@ document.documentElement.className = htmlClass;
 var globals = {
 	asicsSocialTweets: [],
 	autocompleteURL: '/search/autocomplete',
-	ieLt9: (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener),
 	contextPath: '',
 	languageISO: 'en',
 };
@@ -1097,8 +1096,199 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
           controller: 'FooterCtrl'
         }
       }
+    })
+    .state('clothing', {
+      url: '/clothing',
+      views: {
+        '': {
+          templateUrl: 'views/partials/clothing.html'
+        },
+        'header@clothing': {
+          templateUrl: 'views/partials/header/header.html',
+          controller: 'HeaderCtrl'
+        },
+        'clothingMain@clothing': {
+          templateUrl: 'views/partials/clothing_main/clothingMain.html',
+          controller: 'ClothingCtrl'
+        },
+        'footer@clothing': {
+          templateUrl: 'views/partials/footer/footer.html',
+          controller: 'FooterCtrl'
+        }
+      }
     });
 }]);
+
+'use strict';
+
+/* Controllers */
+angular.module('controllers')
+    /*
+        CLOTHING CONTROLLER
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .controller('ClothingCtrl', ['$scope', "$injector", function ($scope, $injector){
+
+        var ClothingSidebarService = $injector.get("ClothingSidebarService"),
+            ViewData               = $injector.get("ViewData"),
+            ProductsFactory        = $injector.get("ProductsFactory");
+
+        if (!$scope.clothing) {
+
+            var returnedViewData = ViewData.clothingMainData.then(function(clothingMainData){
+
+                var promise = clothingMainData.data.values;
+
+                $scope.sidebarData = promise.sidebarData;
+            });
+
+            // temp array to hold all clothing
+            var tempClothing = [];
+
+            // scope array to hold available clothing
+            $scope.clothingProducts = localStorage.getItem('clothing.clothingProducts') ? JSON.parse(localStorage.getItem('clothing.clothingProducts')) : [];
+
+            // set the number of items per page
+            $scope.itemsPerPage = localStorage.getItem("itemsPerPage") ? localStorage.getItem("itemsPerPage") : 18;
+
+            $scope.clothing = {};
+
+            var returnedProducts = ProductsFactory.getAll.then(function(data){
+                // filter products and assign all clothing to tempClothing
+                data.forEach( function (product) {
+                    switch (product.category) {
+                        case "Clothing":
+                            tempClothing.push(product);
+                            break;
+                    }
+                });
+
+                // filter clothing and assign available clothing to $scope.clothingProducts
+                tempClothing.forEach( function (item) {
+                    switch (item.available) {
+                        case true:
+                            $scope.clothingProducts.push(item);
+                            break;
+                    }
+                });
+
+                // assign the number of members to a variable for pagination purposes
+                $scope.totalItems = $scope.clothingProducts.length;
+
+                // get the current page using local storage; if none exists, set it to 1
+                $scope.clothing.currentPage = localStorage.getItem("clothing.pagination.page") ? localStorage.getItem("clothing.pagination.page") : 1;
+            });
+        }
+
+        // watch for the change in current page to update the members per page
+        $scope.$watch("clothing.currentPage", function() {
+            // set the current page using local storage
+            localStorage.setItem("clothing.pagination.page", $scope.clothing.currentPage);
+
+            if ( localStorage.getItem('clothing.sidebar.size.selected') == null ) {
+                // set the size select value to false to show all sizes
+                localStorage.setItem('clothing.sidebar.size.selected', false);
+            }
+
+            updatePage();
+
+        });
+
+        /* default selected values for types checkboxes */
+        $scope.types = ClothingSidebarService.typesCheckboxes;
+
+        $scope.typeSelected = function(checkbox, currentValue) {
+
+            // change the selected value of "this" checkbox
+            // from the current value to its opposite
+            $scope.types[checkbox].selected = !currentValue;
+
+            // store the checkbox's value in localstorage
+            ClothingSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        /* default selected values for sports checkboxes */
+        $scope.sports = ClothingSidebarService.sportsCheckboxes;
+
+        $scope.sportSelected = function(checkbox, currentValue) {
+
+            // change the selected value of "this" checkbox
+            // from the current value to its opposite
+            $scope.sports[checkbox].selected = !currentValue;
+
+            // store the checkbox's value in localstorage
+            ClothingSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        /* default selected values for users checkboxes */
+        $scope.users = ClothingSidebarService.usersCheckboxes;
+
+        $scope.userSelected = function(checkbox, currentValue) {
+
+            // change the selected value of "this" checkbox
+            // from the current value to its opposite
+            $scope.users[checkbox].selected = !currentValue;
+
+            // store the checkbox's value in localstorage
+            ClothingSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        $scope.size = {selected: localStorage.getItem('clothing.sidebar.size.selected') ? localStorage.getItem('clothing.sidebar.size.selected').replace(/(^\s+|\s+$)/g,'' /*remove blank spaces from size value*/) : false};
+
+        $scope.sizeChange = function(selectedSize) {
+
+            localStorage.setItem('clothing.sidebar.size.selected', selectedSize);
+
+            updatePage();
+        };
+
+        $scope.sizeReset = function() {
+
+            // set the size select value to false to show all sizes
+            localStorage.setItem('clothing.sidebar.size.selected', false);
+
+            // set the value to false to show the select a size option
+            $scope.size.selected = false;
+
+            updatePage();
+        };
+
+        function updatePage () {
+
+            // get the selected size by which to filter available clothing
+            var selectedSize = localStorage.getItem('clothing.sidebar.size.selected');
+
+            /*  Filter available clothing based on user's selections */
+            var clothingProducts = ClothingSidebarService.clothingFilter(tempClothing, $scope.types, $scope.sports, $scope.users, selectedSize);
+
+            localStorage.setItem('clothing.clothingProducts', JSON.stringify(clothingProducts.availableClothing));
+
+            // quantities to show next to selector values
+            $scope.quantities = clothingProducts.quantities;
+
+            // all available clothing to display on all pages
+            $scope.clothingProducts = JSON.parse(localStorage.getItem('clothing.clothingProducts'));
+
+            // data array to be passed into the ViewData.page() function
+            var data = [$scope.clothing.currentPage, $scope.itemsPerPage, $scope.clothingProducts];
+
+            // set the members segment array for the current page
+            var clothingProductsShow = ViewData.page(data);
+
+            localStorage.setItem('clothing.clothingProductsShow', JSON.stringify(clothingProductsShow));
+
+            $scope.clothingProductsShow = JSON.parse(localStorage.getItem('clothing.clothingProductsShow'));
+
+            // assign the number of members to a variable for pagination purposes
+            $scope.totalItems = $scope.clothingProducts.length;
+        };
+    }]);
 
 // 'use strict';
 
@@ -2389,28 +2579,24 @@ angular.module('controllers')
                     $scope.RunningBarComponent = false;
                     $scope.FeaturedSportsBarComponent = false;
                     $scope.MySportifBarComponent = false;
-                    console.log("ShopBar lead clicked");
                     break;
                 case "RunningBar":
                     $scope.RunningBarComponent = !$scope.RunningBarComponent;
                     $scope.ShopBarComponent = false;
                     $scope.FeaturedSportsBarComponent = false;
                     $scope.MySportifBarComponent = false;
-                    console.log("RunningBar lead clicked");
                     break;
                 case "FeaturedSportsBar":
                     $scope.FeaturedSportsBarComponent = !$scope.FeaturedSportsBarComponent;
                     $scope.ShopBarComponent = false;
                     $scope.RunningBarComponent = false;
                     $scope.MySportifBarComponent = false;
-                    console.log("FeaturedSportsBar lead clicked");
                     break;
                 case "MySportifBar":
                     $scope.MySportifBarComponent = !$scope.MySportifBarComponent;
                     $scope.ShopBarComponent = false;
                     $scope.RunningBarComponent = false;
                     $scope.FeaturedSportsBarComponent = false;
-                    console.log("MySportifBar lead clicked");
                     break;
             }
         };
@@ -2462,75 +2648,6 @@ angular.module('controllers')
     ============================================================================ */
     .controller('MainCtrl', ['$scope', 'ProductsFactory', 'ViewData', function ($scope, ProductsFactory, ViewData) {
 
-        /* Product Categories */
-        $scope.shoesProducts = [];
-        $scope.clothingProducts = [];
-        $scope.accessoriesProducts = [];
-        $scope.fanGearProducts = [];
-
-        /* User Categories */
-        $scope.mensProducts = [];
-        $scope.womensProducts = [];
-        $scope.kidsProducts = [];
-
-        /* User Activities */
-        $scope.soccerProducts = [];
-        $scope.basketballProducts = [];
-        $scope.runningProducts = [];
-        $scope.martialArtsProducts = [];
-
-        var returnedProducts = ProductsFactory.getAll.then(function(data){
-            data.forEach( function (product) {
-                // filter and assign the products by category to an array
-                switch (product.category) {
-                    case "Shoes":
-                        $scope.shoesProducts.push(product);
-                        break;
-                    case "Clothing":
-                        $scope.clothingProducts.push(product);
-                        break;
-                    case "Accessories":
-                        $scope.accessoriesProducts.push(product);
-                        break;
-                    case "Fan Gear":
-                        $scope.fanGearProducts.push(product);
-                        break;
-                    default:
-                        break;
-                }
-                // filter and assign the products by user to an array
-                switch (product.user) {
-                    case "men":
-                        $scope.mensProducts.push(product);
-                        break;
-                    case "women":
-                        $scope.womensProducts.push(product);
-                        break;
-                    case "children":
-                        $scope.kidsProducts.push(product);
-                        break;
-                    default:
-                        break;
-                }
-                // filter and assign the products by activity to an array
-                switch (product.activity) {
-                    case "Basketball":
-                        $scope.basketballProducts.push(product);
-                        break;
-                    case "Scoocer":
-                        $scope.soccerProducts.push(product);
-                        break;
-                    case "Running":
-                        $scope.runningProducts.push(product);
-                    case "Martial Arts":
-                        $scope.martialArtsProducts.push(product);
-                        break;
-                    default:
-                        break;
-                }
-            });
-        });
-
         var returnedMiscViewData = ViewData.miscViewData.then(function(miscViewData){
 
             var promise = miscViewData.data.values;
@@ -2573,132 +2690,191 @@ angular.module('controllers')
         SHOES CONTROLLER
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .controller('ShoesCtrl', ['$scope', 'ViewData', 'SidebarService', 'ProductsFactory', function ($scope, ViewData, SidebarService, ProductsFactory){
+    .controller('ShoesCtrl', ['$scope', "$injector", function ($scope, $injector){
 
-        var returnedViewData = ViewData.shoesMainData.then(function(shoesMainData){
+        var ShoesSidebarService = $injector.get("ShoesSidebarService"),
+            ViewData            = $injector.get("ViewData"),
+            ProductsFactory     = $injector.get("ProductsFactory");
 
-            var promise = shoesMainData.data.values;
+        if (!$scope.shoes) {
 
-            $scope.sidebarData = promise.sidebarData;
-        });
+            var returnedViewData = ViewData.shoesMainData.then(function(shoesMainData){
 
-        // temp array to hold all shoes
-        var tempShoes = [];
+                var promise = shoesMainData.data.values;
 
-        // scope array to hold available shoes
-        $scope.shoesProducts = [];
-
-        // set the number of items per page
-        $scope.itemsPerPage = localStorage.getItem("itemsPerPage") ? localStorage.getItem("itemsPerPage") : 9;
-        $scope.shoes = {};
-
-        var returnedProducts = ProductsFactory.getAll.then(function(data){
-            // filter products and assign all shoes to tempShoes
-            data.forEach( function (product) {
-                switch (product.category) {
-                    case "Shoes":
-                        tempShoes.push(product);
-                        break;
-                }
+                $scope.sidebarData = promise.sidebarData;
             });
 
-            // filter shoes and assign available shoes to $scope.shoesProducts
-            tempShoes.forEach( function (shoe) {
-                switch (shoe.available) {
-                    case true:
-                        $scope.shoesProducts.push(shoe);
-                        break;
-                }
+            // temp array to hold all shoes
+            var tempShoes = [];
+
+            // scope array to hold available shoes
+            $scope.shoesProducts = localStorage.getItem('shoes.shoesProducts') ? JSON.parse(localStorage.getItem('shoes.shoesProducts')) : [];
+
+            // set the number of items per page
+            $scope.itemsPerPage = localStorage.getItem("itemsPerPage") ? localStorage.getItem("itemsPerPage") : 18;
+
+            $scope.shoes = {};
+
+            var returnedProducts = ProductsFactory.getAll.then(function(data){
+                // filter products and assign all shoes to tempShoes
+                data.forEach( function (product) {
+                    switch (product.category) {
+                        case "Shoes":
+                            tempShoes.push(product);
+                            break;
+                    }
+                });
+
+                // filter shoes and assign available shoes to $scope.shoesProducts
+                tempShoes.forEach( function (shoe) {
+                    switch (shoe.available) {
+                        case true:
+                            $scope.shoesProducts.push(shoe);
+                            break;
+                    }
+                });
+
+                // assign the number of members to a variable for pagination purposes
+                $scope.totalItems = $scope.shoesProducts.length;
+
+                // get the current page using local storage; if none exists, set it to 1
+                $scope.shoes.currentPage = localStorage.getItem("shoes.pagination.page") ? localStorage.getItem("shoes.pagination.page") : 1;
             });
+        }
 
-            // assign the number of members to a variable for pagination purposes
-            $scope.totalItems = $scope.shoesProducts.length;
+        // watch for the change in current page to update the members per page
+        $scope.$watch("shoes.currentPage", function() {
+            // set the current page using local storage
+            localStorage.setItem("shoes.pagination.page", $scope.shoes.currentPage);
 
-            // get the current page using local storage; if none exists, set it to 1
-            $scope.shoes.currentPage = localStorage.getItem("shoes.pagination.page") ? localStorage.getItem("shoes.pagination.page") : 1;
+            if ( localStorage.getItem('shoes.sidebar.size.selected') == null ) {
+                // set the size select value to false to show all sizes
+                localStorage.setItem('shoes.sidebar.size.selected', false);
+            }
 
-            // watch for the change in current page to update the members per page
-            $scope.$watch("shoes.currentPage", function() {
-                // set the current page using local storage
-                localStorage.setItem("shoes.pagination.page", $scope.shoes.currentPage);
+            updatePage();
 
-                updatePage();
-
-            });
         });
 
         /* default selected values for sports checkboxes */
-        // check for the string "true" value of the selected item in localStorage
-        // if it doesn't exist, set it to true
-        $scope.sports = SidebarService.sportsCheckboxes;
+        $scope.sports = ShoesSidebarService.sportsCheckboxes;
 
         $scope.sportSelected = function(checkbox, currentValue) {
 
-            // change the selected value of the "this" checkbox
+            // change the selected value of "this" checkbox
             // from the current value to its opposite
             $scope.sports[checkbox].selected = !currentValue;
 
             // store the checkbox's value in localstorage
-            SidebarService.processCheckbox(checkbox, currentValue);
-
-            // get the selected size by which to filter available shoes
-            var selectedSize = localStorage.getItem('shoes.sidebar.size.selected');
-
-            /*  @TODO: Filter available shoes based on user's selections
-             *
-             */
-            $scope.shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
+            ShoesSidebarService.processCheckbox(checkbox, currentValue);
 
             updatePage();
         };
 
         /* default selected values for users checkboxes */
-        // check for the string "true" value of the selected item in localStorage
-        // if it doesn't exist, set it to true
-        $scope.users = SidebarService.usersCheckboxes;
-
-        /* default selected values for users checkboxes */
-        // check for the string "true" value of the selected item in localStorage
-        // if it doesn't exist, set it to false
-        $scope.size = {selected: localStorage.getItem('shoes.sidebar.size.selected') ? localStorage.getItem('shoes.sidebar.size.selected') : ""};
+        $scope.users = ShoesSidebarService.usersCheckboxes;
 
         $scope.userSelected = function(checkbox, currentValue) {
 
-            // change the selected value of the "this" checkbox
+            // change the selected value of "this" checkbox
             // from the current value to its opposite
             $scope.users[checkbox].selected = !currentValue;
 
             // store the checkbox's value in localstorage
-            SidebarService.processCheckbox(checkbox, currentValue);
-
-            // get the selected size by which to filter available shoes
-            var selectedSize = localStorage.getItem('shoes.sidebar.size.selected');
-
-            /*  @TODO: Filter available shoes based on user's selections
-             *
-             */
-            $scope.shoesProducts = SidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
+            ShoesSidebarService.processCheckbox(checkbox, currentValue);
 
             updatePage();
         };
 
+        $scope.size = {selected: localStorage.getItem('shoes.sidebar.size.selected') ? localStorage.getItem('shoes.sidebar.size.selected') : false};
+
         $scope.sizeChange = function(selectedSize) {
 
             localStorage.setItem('shoes.sidebar.size.selected', selectedSize);
+
+            updatePage();
+        };
+
+        $scope.sizeReset = function() {
+
+            // set the size select value to false to show all sizes
+            localStorage.setItem('shoes.sidebar.size.selected', false);
+
+            // set the value to false to show the select a size option
+            $scope.size.selected = false;
+
+            updatePage();
         };
 
         function updatePage () {
 
-            // assign the number of members to a variable for pagination purposes
-            $scope.totalItems = $scope.shoesProducts.length;
+            // get the selected size by which to filter available shoes
+            var selectedSize = localStorage.getItem('shoes.sidebar.size.selected');
+
+            /*  Filter available shoes based on user's selections */
+            var shoesProducts = ShoesSidebarService.shoeFilter(tempShoes, $scope.sports, $scope.users, selectedSize);
+
+            localStorage.setItem('shoes.shoesProducts', JSON.stringify(shoesProducts.availableShoes));
+
+            // quantities to show next to selector values
+            $scope.quantities = shoesProducts.quantities;
+
+            // all available shoes to display on all pages
+            $scope.shoesProducts = JSON.parse(localStorage.getItem('shoes.shoesProducts'));
 
             // data array to be passed into the ViewData.page() function
-            var data =[$scope.shoes.currentPage, $scope.itemsPerPage, $scope.shoesProducts];
+            var data = [$scope.shoes.currentPage, $scope.itemsPerPage, $scope.shoesProducts];
 
             // set the members segment array for the current page
-            $scope.shoesProductsShow = ViewData.page(data);
+            var shoesProductsShow = ViewData.page(data);
+
+            localStorage.setItem('shoes.shoesProductsShow', JSON.stringify(shoesProductsShow));
+
+            $scope.shoesProductsShow = JSON.parse(localStorage.getItem('shoes.shoesProductsShow'));
+
+            // assign the number of members to a variable for pagination purposes
+            $scope.totalItems = $scope.shoesProducts.length;
         };
     }]);
+
+'use strict';
+
+/* Directives */
+angular.module('directives')
+    /*
+        ARTICLE-LOAD DIRECTIVE
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .directive('articleLoadAnimate', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                // listen for the "last_article_on_page_loaded" event
+                // prior to applying transition effects
+                scope.$on('last_article_on_page_loaded', function( domainElement ) {
+                    // assign the articles to a variable
+                    var articles = element.children();
+
+                    // animate the loading of articles on pagination
+                    articles.css("opacity", 0).velocity("transition.slideUpBigIn", { stagger: 60   , duration: 350 });
+                });
+            }
+        };
+    })
+    /*
+        ON-REPEAT-DONE DIRECTIVE
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .directive("onRepeatDone", function() {
+        return {
+            restriction: 'A',
+            link: function(scope, element, attributes ) {
+                // emit the event named in the "on-repeat-done" directive
+                scope.$emit(attributes["onRepeatDone"], element);
+            }
+        }
+    });
 
 'use strict';
 
@@ -2710,127 +2886,528 @@ angular.module('directives')
         AUTOPLAY DIRECTIVE
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .directive('autoplay', function($injector) {
+    .directive('autoplay', ["$injector", function($injector) {
         return {
             restrict: 'A',
+            // create a *new* scope that prototypically inherits from the scope of the parent
             scope: true,
             link: function(scope, element, attrs) {
 
-                function loop() {
-                    globals.timer = setTimeout(function(){
-                        var rScope = $injector.get('$rootScope');
+                var rScope = $injector.get('$rootScope'),
+                    autoplayTimer;
+
+                function autoplayBroadcast() {
+                    autoplayTimer = setTimeout(function() {
                         rScope.$broadcast('autoplay');
-                        loop();
-                    }, 3000);
+                        // recursively call this function to run it repeatedly after the set interval
+                        autoplayBroadcast();
+                    }, 5000);
                 }
-                if (!globals.timer) loop();
+                // if autoplayTimer hasn't been initialized,
+                // run the autoplayBroadcast function
+                if (!autoplayTimer) {
+                    autoplayBroadcast();
+                }
             }
         };
-    })
+    }])
     /*
         CAROUSEL DIRECTIVE
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .directive('carousel', function() {
+    .directive('carousel', ["$injector", function($injector) {
         return {
             restrict: 'A',
             link: function(scope, element, attrs) {
 
-                var data,
-                    carousel  = element,
-                    container = carousel.hasClass('.item') ? carousel : carousel.closest('div.item'),
-                    dynamic   = carousel.hasClass('dynamic'),
-                    viewport  = carousel.find(".viewport"),
-                    slides    = carousel.find(".slides"),
-                    controls,
-                    pageWidth   = attrs.carouselPageWidth || viewport.width(),
-                    pageCurrent = 0,
-                    pageTarget,
-                    pageTotal,
-                    timer;
+                var rScope = $injector.get('$rootScope'),
+                    viewData = $injector.get('ViewData');
 
-                //Verify pageWidth is divisble by 10, otherwise add 1 pixel to pageWidth as it was rounded down by browser
-                //during page zoom out. This is based on hardcoded css widths which are all multiples of 10.
-                //(See: http://tylertate.com/blog/2012/01/05/subpixel-rounding.html for details on problem.)
-                if (pageWidth % 10 != 0) {
-                    pageWidth += 1;
-                }
-                if (dynamic) {
-                        // Product (Multi)
-                        scope.$on('updated', function(event) {
-                            changePage();
-                            Asics.Common.widthMatch('div.actions.join');
-                        });
-                } else {
-                    data = {
-                        itemsTotal: slides.children().length,
-                        pageItems: parseInt(attrs.carouselPageItems) || 1
-                    }
-                    if (globals.ieLt9 && data.pageItems > 1) slides.children(':nth-child(3n+1)').addClass('first_of_page');
-                    init();
-                }
+                // listen for the "last_slide_loaded" event
+                // prior to applying carousel effects
+                rScope.$on('last_slide_loaded', function( domainElement ) {
 
-                function init() {
-                    if (data.itemsTotal > 1) {
-                        carousel.addClass('active');
-                        pageTotal = Math.ceil(data.itemsTotal / data.pageItems);
-                        slides.css({ 'width': pageTotal * pageWidth });
-                    }
-                    if (data.itemsTotal > data.pageItems) {
-                        interaction();
-                        autoplay();
-                    }
-                }
+                    var data,
+                        carousel  = element,
+                        container = carousel.hasClass('.item') ? carousel : carousel.closest('div.item'),
+                        dynamic   = carousel.hasClass('dynamic'),
+                        viewport  = carousel.find(".viewport"),
+                        slides    = carousel.find(".slides"),
+                        controls,
+                        pageWidth   = attrs.carouselPageWidth || viewport.width(),
+                        pageCurrent = 0,
+                        pageTarget,
+                        pageTotal,
+                        timer;
 
-                function interaction() {
-                    var li = ''; for (var i = 0; i < pageTotal; i++) li += '<li><span>' + (i + 1) + '</span></li>';
-                    $('<ol class="controls">' + li + '</ol>').appendTo(carousel);
-                    controls = carousel.children('ol.controls').children();
-                    controls.each(function(i, e) {
-                        var control = $(this).on('click', function() {
-                            if (!carousel.hasClass('paused')) {
-                                pageTarget = i;
-                                if (dynamic && i > data.pageTotalRendered - 1) {
-                                    scope.getProducts(i * data.pageItems + data.pageItems -1);
-                                    carousel.addClass('paused');
-                                } else {
+                    //Verify pageWidth is divisble by 10, otherwise add 1 pixel to pageWidth as it was rounded down by browser
+                    //during page zoom out. This is based on hardcoded css widths which are all multiples of 10.
+                    //(See: http://tylertate.com/blog/2012/01/05/subpixel-rounding.html for details on problem.)
+                    if (pageWidth % 10 != 0) {
+                        pageWidth += 1;
+                    }
+                    if (dynamic) {
+                            // Product (Multi)
+                            scope.$on('updated', function(event) {
+                                changePage();
+                                Asics.Common.widthMatch('div.actions.join');
+                            });
+                    } else {
+                        data = {
+                            itemsTotal: slides.children().length,
+                            pageItems: parseInt(attrs.carouselPageItems) || 1
+                        }
+                        if (viewData.ieLt9 && data.pageItems > 1) slides.children(':nth-child(3n+1)').addClass('first_of_page');
+                        init();
+                    }
+
+                    function init() {
+                        if (data.itemsTotal > 1) {
+                            carousel.addClass('active');
+                            pageTotal = Math.ceil(data.itemsTotal / data.pageItems);
+                            slides.css({ 'width': pageTotal * pageWidth });
+                        }
+                        if (data.itemsTotal > data.pageItems) {
+                            interaction();
+                            autoplay();
+                        }
+                    }
+
+                    function interaction() {
+                        var li = ''; for (var i = 0; i < pageTotal; i++) li += '<li><span>' + (i + 1) + '</span></li>';
+                        $('<ol class="controls">' + li + '</ol>').appendTo(carousel);
+                        controls = carousel.children('ol.controls').children();
+                        controls.each(function(i, e) {
+                            var control = $(this).on('click', function() {
+                                if (!carousel.hasClass('paused')) {
+                                    pageTarget = i;
+                                    if (dynamic && i > data.pageTotalRendered - 1) {
+                                        scope.getProducts(i * data.pageItems + data.pageItems -1);
+                                        carousel.addClass('paused');
+                                    } else {
+                                        changePage();
+                                    }
+                                }
+                            });
+                        }).first().addClass('active');
+                    }
+
+                    function autoplay() {
+                        carousel.on('load', function() {
+                            if (timer) clearTimeout(timer);
+                            container.addClass('hover');
+                        }).on('mouseleave', function() {
+                            if (timer) clearTimeout(timer);
+                            timer = setTimeout(function(){ container.removeClass('hover'); }, 1000);
+                        })
+                        if (attrs.autoplay !== undefined && attrs.autoplay !== false) {
+                            scope.$on('autoplay', function() {
+                                if (!container.hasClass('hover')) {
+                                    pageTarget = pageCurrent + 1;
+                                    if (pageTarget > pageTotal - 1) pageTarget = 0;
                                     changePage();
                                 }
-                            }
-                        });
-                    }).first().addClass('active');
-                }
-
-                function autoplay() {
-                    carousel.on('load', function() {
-                        if (timer) clearTimeout(timer);
-                        container.addClass('hover');
-                    }).on('mouseleave', function() {
-                        if (timer) clearTimeout(timer);
-                        timer = setTimeout(function(){ container.removeClass('hover'); }, 1000);
-                    })
-                    if (attrs.autoplay !== undefined && attrs.autoplay !== false) {
-                        scope.$on('autoplay', function() {
-                            if (!container.hasClass('hover')) {
-                                pageTarget = pageCurrent + 1;
-                                if (pageTarget > pageTotal - 1) pageTarget = 0;
-                                changePage();
-                            }
-                        });
+                            });
+                        }
                     }
-                }
 
-                function changePage() {
-                    carousel.removeClass('paused');
-                    if (pageCurrent !== pageTarget) {
-                        slides.stop().animate({'left': - (pageWidth * pageTarget)}, 400);
-                        controls.eq(pageTarget).addClass('active').siblings().removeClass('active');
-                        pageCurrent = pageTarget;
+                    function changePage() {
+                        carousel.removeClass('paused');
+                        if (pageCurrent !== pageTarget) {
+                            slides.stop().animate({'left': - (pageWidth * pageTarget)}, 400);
+                            controls.eq(pageTarget).addClass('active').siblings().removeClass('active');
+                            pageCurrent = pageTarget;
+                        }
                     }
-                }
+                });
             }
         };
-    });
+    }]);
+
+'use strict';
+
+/* Factories */
+angular.module('factories')
+    /*
+        CLOTHING SIDEBAR SERVICE
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .factory("ClothingSidebarService", [function () {
+
+            // set localStorage values to false if checkboxes are checked
+        var typesCheckboxes = {
+            "Jersey Shirts": {
+                selected: localStorage.getItem('clothing.sidebar.type.JerseyShirts.unselected') == "true" ? false : true
+            },
+            "Jersey Shorts": {
+                selected: localStorage.getItem('clothing.sidebar.type.JerseyShorts.unselected') == "true" ? false : true
+            },
+            Tights: {
+                selected: localStorage.getItem('clothing.sidebar.type.Tights.unselected') == "true" ? false : true
+            },
+            Tees: {
+                selected: localStorage.getItem('clothing.sidebar.type.Tees.unselected') == "true" ? false : true
+            },
+            "Tank Tops": {
+                selected: localStorage.getItem('clothing.sidebar.type.TankTops.unselected') == "true" ? false : true
+            }
+        };
+
+            // set localStorage values to false if checkboxes are checked
+        var sportsCheckboxes = {
+            Running: {
+                selected: localStorage.getItem('clothing.sidebar.sport.Running.unselected') == "true" ? false : true
+            },
+            Training: {
+                selected: localStorage.getItem('clothing.sidebar.sport.Training.unselected') == "true" ? false : true
+            },
+            Basketball: {
+                selected: localStorage.getItem('clothing.sidebar.sport.Basketball.unselected') == "true" ? false : true
+            },
+            Football: {
+                selected: localStorage.getItem('clothing.sidebar.sport.Football.unselected') == "true" ? false : true
+            },
+            "Martial Arts": {
+                selected: localStorage.getItem('clothing.sidebar.sport.MartialArts.unselected') == "true" ? false : true
+            }
+        };
+
+        var usersCheckboxes = {
+            Male: {
+                selected: localStorage.getItem('clothing.sidebar.user.Male.unselected') == "true" ? false : true
+            },
+            Female: {
+                selected: localStorage.getItem('clothing.sidebar.user.Female.unselected') == "true" ? false : true
+            },
+            Kids: {
+                selected: localStorage.getItem('clothing.sidebar.user.Kids.unselected') == "true" ? false : true
+            }
+        };
+
+        var sizeSelections = {
+            small: {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "small" ? true : false
+            },
+            medium: {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "medium" ? true : false
+            },
+            large: {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "large" ? true : false
+            },
+            "x-large": {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "x-large" ? true : false
+            },
+            "2x-large": {
+                selected: localStorage.getItem('clothing.sidebar.size.selected') == "2x-large" ? true : false
+            }
+        };
+
+        return {
+
+            typesCheckboxes  : typesCheckboxes,
+
+            sportsCheckboxes : sportsCheckboxes,
+
+            usersCheckboxes  : usersCheckboxes,
+
+            sizeSelections   : sizeSelections,
+
+            clothingFilter : function(tempClothing, types, sports, users, selectedSize) {
+
+                var availableClothing  = [],
+                    checkboxSelections = [],
+                    matchedSizes       = [],
+                    clothing           = {availableClothing: [], quantities: {}},
+
+                    jerseyShirtsVal    = {
+                            selector   : "Jersey Shirts",
+                            category   : "Types",
+                            val        : types["Jersey Shirts"].selected,
+                            updatedQty : 0
+                    },
+                    jerseyShortsVal    = {
+                            selector   : "Jersey Shorts",
+                            category   : "Types",
+                            val        : types["Jersey Shorts"].selected,
+                            updatedQty : 0
+                    },
+                    tightsVal          = {
+                            selector   : "Tights",
+                            category   : "Types",
+                            val        : types.Tights.selected,
+                            updatedQty : 0
+                    },
+                    teesVal            = {
+                            selector   : "Tees",
+                            category   : "Types",
+                            val        : types.Tees.selected,
+                            updatedQty : 0
+                    },
+                    tankTopsVal        = {
+                            selector   : "Tank Tops",
+                            category   : "Types",
+                            val        : types["Tank Tops"].selected,
+                            updatedQty : 0
+                    },
+                    runningVal         = {
+                            selector   : "Running",
+                            category   : "Sports",
+                            val        : sports.Running.selected,
+                            updatedQty : 0
+                    },
+                    trainingVal        = {
+                            selector   : "Training",
+                            category   : "Sports",
+                            val        : sports.Training.selected,
+                            updatedQty : 0
+                    },
+                    basketballVal      = {
+                            selector   : "Basketball",
+                            category   : "Sports",
+                            val        : sports.Basketball.selected,
+                            updatedQty : 0
+                    },
+                    footballVal        = {
+                            selector   : "Football",
+                            category   : "Sports",
+                            val        : sports.Football.selected,
+                            updatedQty : 0
+                    },
+                    martialArtsVal     = {
+                            selector   : "Martial Arts",
+                            category   : "Sports",
+                            val        : sports["Martial Arts"].selected,
+                            updatedQty : 0
+                    },
+                    menVal             = {
+                            selector   : "Men",
+                            category   : "User",
+                            val        : users.Male.selected,
+                            updatedQty : 0
+                    },
+                    womenVal           = {
+                            selector   : "Women",
+                            category   : "User",
+                            val        : users.Female.selected,
+                            updatedQty : 0
+                    },
+                    kidsVal            = {
+                            selector   : "Kids",
+                            category   : "User",
+                            val        : users.Kids.selected,
+                            updatedQty : 0
+                    },
+                    sizeVal            = {
+                            selector   : "Clothing Size",
+                            category   : "Size",
+                            val        : selectedSize.replace(/(^\s+|\s+$)/g,'') /*remove blank spaces from size value*/,
+                            updatedQty : 0
+                    };
+
+                // build an array of checkbox selections to compare against clothing
+                checkboxSelections.push(jerseyShirtsVal);
+                checkboxSelections.push(jerseyShortsVal);
+                checkboxSelections.push(tightsVal);
+                checkboxSelections.push(teesVal);
+                checkboxSelections.push(tankTopsVal);
+                checkboxSelections.push(runningVal);
+                checkboxSelections.push(trainingVal);
+                checkboxSelections.push(basketballVal);
+                checkboxSelections.push(footballVal);
+                checkboxSelections.push(martialArtsVal);
+                checkboxSelections.push(menVal);
+                checkboxSelections.push(womenVal);
+                checkboxSelections.push(kidsVal);
+
+                // assign available clothing to an array
+                tempClothing.forEach( function (item) {
+                    switch (item.available) {
+                        case true:
+                            availableClothing.push(item);
+                            break;
+                    }
+                });
+
+                // compare checkbox selections against item values
+                checkboxSelections.forEach( function (checkbox) {
+                    switch (checkbox.val) {
+                        case false:
+                            matchByType(checkbox);
+                            matchBySport(checkbox);
+                            matchByUser(checkbox);
+                            break;
+                    }
+                });
+
+                function matchByType (checkbox) {
+                    // remove every element matching the deselected sport from the available clothing array
+                    for (var i = availableClothing.length - 1; i >= 0; i--) {
+                        if (availableClothing[i].sub_category === checkbox.selector) {
+                           availableClothing.splice(i, 1);
+                        }
+                    }
+                };
+
+                function matchBySport (checkbox) {
+                    // remove every element matching the deselected sport from the available clothing array
+                    for (var i = availableClothing.length - 1; i >= 0; i--) {
+                        if (availableClothing[i].activity === checkbox.selector) {
+                           availableClothing.splice(i, 1);
+                        }
+                    }
+                };
+
+                function matchByUser (checkbox) {
+                    // remove every element matching the deselected user from the available clothing array
+                    for (var i = availableClothing.length - 1; i >= 0; i--) {
+                        if (availableClothing[i].user === checkbox.selector) {
+                           availableClothing.splice(i, 1);
+                        }
+                    }
+                };
+
+                Array.prototype.contains = function ( needle ) {
+                   for (var i in this) {
+                       if (this[i] == needle) return true;
+                   }
+                   return false;
+                };
+
+                function matchBySize () {
+                    // remove every element matching the deselected user from the available clothing array
+                    for (var i = availableClothing.length - 1; i >= 0; i--) {
+
+                        if (availableClothing[i].sizes.contains(sizeVal.val)) {
+                            matchedSizes.push(availableClothing[i]);
+                        }
+                    }
+                    if (matchedSizes.length > 0) {
+                        availableClothing = matchedSizes;
+                    }
+
+                };
+                matchBySize();
+
+                function updateProductQuantity () {
+                    // remove every element matching the deselected user from the available clothing array
+                    availableClothing.forEach( function (item) {
+                        switch (item.sub_category) {
+                            case "Jersey Shirts":
+                                jerseyShirtsVal.updatedQty += 1;
+                                break;
+                            case "Jersey Shorts":
+                                jerseyShortsVal.updatedQty += 1;
+                                break;
+                            case "Tights":
+                                tightsVal.updatedQty += 1;
+                                break;
+                            case "Tees":
+                                teesVal.updatedQty += 1;
+                                break;
+                            case "Tank Tops":
+                                tankTopsVal.updatedQty += 1;
+                                break;
+                        }
+                        switch (item.activity) {
+                            case "Running":
+                                runningVal.updatedQty += 1;
+                                break;
+                            case "Training":
+                                trainingVal.updatedQty += 1;
+                                break;
+                            case "Basketball":
+                                basketballVal.updatedQty += 1;
+                                break;
+                            case "Football":
+                                footballVal.updatedQty += 1;
+                                break;
+                            case "Martial Arts":
+                                martialArtsVal.updatedQty += 1;
+                                break;
+                        }
+                        switch (item.user) {
+                            case "Men":
+                                menVal.updatedQty += 1;
+                                break;
+                            case "Women":
+                                womenVal.updatedQty += 1;
+                                break;
+                            case "Kids":
+                                kidsVal.updatedQty += 1;
+                                break;
+                        }
+                    });
+                };
+                updateProductQuantity();
+
+                clothing.availableClothing           = availableClothing;
+                clothing.quantities["Jersey Shirts"] = jerseyShirtsVal.updatedQty;
+                clothing.quantities["Jersey Shorts"] = jerseyShortsVal.updatedQty;
+                clothing.quantities.Tights           = tightsVal.updatedQty;
+                clothing.quantities.Tees             = teesVal.updatedQty;
+                clothing.quantities["Tank Tops"]     = tankTopsVal.updatedQty;
+                clothing.quantities.Running          = runningVal.updatedQty;
+                clothing.quantities.Training         = trainingVal.updatedQty;
+                clothing.quantities.Basketball       = basketballVal.updatedQty;
+                clothing.quantities.Football         = footballVal.updatedQty;
+                clothing.quantities["Martial Arts"]  = martialArtsVal.updatedQty;
+                clothing.quantities.Male             = menVal.updatedQty;
+                clothing.quantities.Female           = womenVal.updatedQty;
+                clothing.quantities.Kids             = kidsVal.updatedQty;
+
+                return clothing;
+            },
+
+            processCheckbox : function(checkbox, currentValue) {
+                /*
+                 * store the checkbox value in localstorage
+                 */
+
+                switch (checkbox) {
+                    // set the changed value of the checkbox on the in localStorage
+                    case "Jersey Shirts":
+                        localStorage.setItem('clothing.sidebar.type.JerseyShirts.unselected', currentValue);
+                        break;
+                    case "Jersey Shorts":
+                        localStorage.setItem('clothing.sidebar.type.JerseyShorts.unselected', currentValue);
+                        break;
+                    case "Tights":
+                        localStorage.setItem('clothing.sidebar.type.Tights.unselected', currentValue);
+                        break;
+                    case "Tees":
+                        localStorage.setItem('clothing.sidebar.type.Tees.unselected', currentValue);
+                        break;
+                    case "Tank Tops":
+                        localStorage.setItem('clothing.sidebar.type.TankTops.unselected', currentValue);
+                        break;
+                    case "Running":
+                        localStorage.setItem('clothing.sidebar.sport.Running.unselected', currentValue);
+                        break;
+                    case "Training":
+                        localStorage.setItem('clothing.sidebar.sport.Training.unselected', currentValue);
+                        break;
+                    case "Basketball":
+                        localStorage.setItem('clothing.sidebar.sport.Basketball.unselected', currentValue);
+                        break;
+                    case "Football":
+                        localStorage.setItem('clothing.sidebar.sport.Football.unselected', currentValue);
+                        break;
+                    case "Martial Arts":
+                        localStorage.setItem('clothing.sidebar.sport.MartialArts.unselected', currentValue);
+                        break;
+                    case "Male":
+                        localStorage.setItem('clothing.sidebar.user.Male.unselected', currentValue);
+                        break;
+                    case "Female":
+                        localStorage.setItem('clothing.sidebar.user.Female.unselected', currentValue);
+                        break;
+                    case "Kids":
+                        localStorage.setItem('clothing.sidebar.user.Kids.unselected', currentValue);
+                        break;
+                }
+            }
+        }
+    }]);
 
 'use strict';
 
@@ -2857,39 +3434,39 @@ angular.module('factories')
 /* Factories */
 angular.module('factories')
     /*
-        SIDEBAR SERVICE
+        SHOE SIDEBAR SERVICE
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .factory("SidebarService", [function () {
+    .factory("ShoesSidebarService", [function () {
 
             // set localStorage values to false if checkboxes are checked
         var sportsCheckboxes = {
             Running: {
-                selected: localStorage.getItem('shoes.sidebar.sport.Running.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.sport.Running.unselected') == "true" ? false : true
             },
             Training: {
-                selected: localStorage.getItem('shoes.sidebar.sport.Training.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.sport.Training.unselected') == "true" ? false : true
             },
             Basketball: {
-                selected: localStorage.getItem('shoes.sidebar.sport.Basketball.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.sport.Basketball.unselected') == "true" ? false : true
             },
             Football: {
-                selected: localStorage.getItem('shoes.sidebar.sport.Football.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.sport.Football.unselected') == "true" ? false : true
             },
             "Martial Arts": {
-                selected: localStorage.getItem('shoes.sidebar.sport.MartialArts.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.sport.MartialArts.unselected') == "true" ? false : true
             }
         };
 
         var usersCheckboxes = {
             Male: {
-                selected: localStorage.getItem('shoes.sidebar.user.Male.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.user.Male.unselected') == "true" ? false : true
             },
             Female: {
-                selected: localStorage.getItem('shoes.sidebar.user.Female.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.user.Female.unselected') == "true" ? false : true
             },
             Kids: {
-                selected: localStorage.getItem('shoes.sidebar.user.Kids.selected') == "true" ? false : true
+                selected: localStorage.getItem('shoes.sidebar.user.Kids.unselected') == "true" ? false : true
             }
         };
 
@@ -2903,52 +3480,65 @@ angular.module('factories')
 
                 var availableShoes     = [],
                     checkboxSelections = [],
+                    matchedSizes       = [],
+                    shoes              = {availableShoes: [], quantities: {}},
+
                     runningVal         = {
-                            selector : "Running",
-                            category : "Sports",
-                            val      : sports.Running.selected
+                            selector   : "Running",
+                            category   : "Sports",
+                            val        : sports.Running.selected,
+                            updatedQty : 0
                     },
                     trainingVal        = {
-                            selector : "Training",
-                            category : "Sports",
-                            val      : sports.Training.selected
+                            selector   : "Training",
+                            category   : "Sports",
+                            val        : sports.Training.selected,
+                            updatedQty : 0
                     },
                     basketballVal      = {
-                            selector : "Basketball",
-                            category : "Sports",
-                            val      : sports.Basketball.selected
+                            selector   : "Basketball",
+                            category   : "Sports",
+                            val        : sports.Basketball.selected,
+                            updatedQty : 0
                     },
                     footballVal        = {
-                            selector : "Football",
-                            category : "Sports",
-                            val      : sports.Football.selected
+                            selector   : "Football",
+                            category   : "Sports",
+                            val        : sports.Football.selected,
+                            updatedQty : 0
                     },
                     martialArtsVal     = {
-                            selector : "Martial Arts",
-                            category : "Sports Arts",
-                            val      : sports["Martial Arts"].selected
+                            selector   : "Martial Arts",
+                            category   : "Sports",
+                            val        : sports["Martial Arts"].selected,
+                            updatedQty : 0
                     },
                     menVal             = {
-                            selector : "Men",
-                            category : "User",
-                            val      : users.Male.selected
+                            selector   : "Men",
+                            category   : "User",
+                            val        : users.Male.selected,
+                            updatedQty : 0
                     },
                     womenVal           = {
-                            selector : "Women",
-                            category : "User",
-                            val      : users.Female.selected
+                            selector   : "Women",
+                            category   : "User",
+                            val        : users.Female.selected,
+                            updatedQty : 0
                     },
                     kidsVal            = {
-                            selector : "Kids",
-                            category : "User",
-                            val      : users.Kids.selected
+                            selector   : "Kids",
+                            category   : "User",
+                            val        : users.Kids.selected,
+                            updatedQty : 0
                     },
                     sizeVal            = {
-                            selector : "Shoe Size",
-                            category : "Size",
-                            val      : selectedSize
+                            selector   : "Shoe Size",
+                            category   : "Size",
+                            val        : selectedSize,
+                            updatedQty : 0
                     };
 
+                // build an array of checkbox selections to compare against shoes
                 checkboxSelections.push(runningVal);
                 checkboxSelections.push(trainingVal);
                 checkboxSelections.push(basketballVal);
@@ -2967,25 +3557,102 @@ angular.module('factories')
                     }
                 });
 
+                // compare checkbox selections against shoe values
                 checkboxSelections.forEach( function (checkbox) {
                     switch (checkbox.val) {
                         case false:
-                            matchBySelector(checkbox.selector);
+                            matchBySport(checkbox);
+                            matchByUser(checkbox);
                             break;
                     }
                 });
 
-                function matchBySelector (selector) {
-                    availableShoes.forEach( function (shoe) {
-                        if (shoe.activity == selector) {
-                            availableShoes.splice(availableShoes.indexOf(shoe), 1);
-                        } else if (shoe.user == selector) {
-                            availableShoes.splice(availableShoes.indexOf(shoe), 1);
-                        };
-                    });
-                }
+                function matchBySport (checkbox) {
+                    // remove every element matching the deselected sport from the available shoes array
+                    for (var i = availableShoes.length - 1; i >= 0; i--) {
+                        if (availableShoes[i].activity === checkbox.selector) {
+                           availableShoes.splice(i, 1);
+                        }
+                    }
+                };
 
-                return availableShoes;
+                function matchByUser (checkbox) {
+                    // remove every element matching the deselected user from the available shoes array
+                    for (var i = availableShoes.length - 1; i >= 0; i--) {
+                        if (availableShoes[i].user === checkbox.selector) {
+                           availableShoes.splice(i, 1);
+                        }
+                    }
+                };
+
+                Array.prototype.contains = function ( needle ) {
+                   for (var i in this) {
+                       if (this[i] == needle) return true;
+                   }
+                   return false;
+                };
+
+                function matchBySize () {
+                    // remove every element matching the deselected user from the available shoes array
+                    for (var i = availableShoes.length - 1; i >= 0; i--) {
+                        // console.log(sizeVal.val);
+                        if (availableShoes[i].sizes.contains(JSON.parse(sizeVal.val))) {
+                            matchedSizes.push(availableShoes[i]);
+                        }
+                    }
+                    // if (matchedSizes.length > 0) {
+                        availableShoes = matchedSizes;
+                    // }
+
+                };
+                matchBySize();
+
+                function updateProductQuantity () {
+                    // remove every element matching the deselected user from the available shoes array
+                    availableShoes.forEach( function (shoe) {
+                        switch (shoe.activity) {
+                            case "Running":
+                                runningVal.updatedQty += 1;
+                                break;
+                            case "Training":
+                                trainingVal.updatedQty += 1;
+                                break;
+                            case "Basketball":
+                                basketballVal.updatedQty += 1;
+                                break;
+                            case "Football":
+                                footballVal.updatedQty += 1;
+                                break;
+                            case "Martial Arts":
+                                martialArtsVal.updatedQty += 1;
+                                break;
+                        }
+                        switch (shoe.user) {
+                            case "Men":
+                                menVal.updatedQty += 1;
+                                break;
+                            case "Women":
+                                womenVal.updatedQty += 1;
+                                break;
+                            case "Kids":
+                                kidsVal.updatedQty += 1;
+                                break;
+                        }
+                    });
+                };
+                updateProductQuantity();
+
+                shoes.availableShoes = availableShoes;
+                shoes.quantities.Running         = runningVal.updatedQty;
+                shoes.quantities.Training        = trainingVal.updatedQty;
+                shoes.quantities.Basketball      = basketballVal.updatedQty;
+                shoes.quantities.Football        = footballVal.updatedQty;
+                shoes.quantities["Martial Arts"] = martialArtsVal.updatedQty;
+                shoes.quantities.Male            = menVal.updatedQty;
+                shoes.quantities.Female          = womenVal.updatedQty;
+                shoes.quantities.Kids            = kidsVal.updatedQty;
+
+                return shoes;
             },
 
             processCheckbox : function(checkbox, currentValue) {
@@ -2996,35 +3663,35 @@ angular.module('factories')
                 switch (checkbox) {
                     case "Running":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.sport.Running.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.sport.Running.unselected', currentValue);
                         break;
                     case "Training":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.sport.Training.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.sport.Training.unselected', currentValue);
                         break;
                     case "Basketball":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.sport.Basketball.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.sport.Basketball.unselected', currentValue);
                         break;
                     case "Football":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.sport.Football.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.sport.Football.unselected', currentValue);
                         break;
                     case "Martial Arts":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.sport.MartialArts.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.sport.MartialArts.unselected', currentValue);
                         break;
                         case "Male":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.user.Male.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.user.Male.unselected', currentValue);
                         break;
                     case "Female":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.user.Female.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.user.Female.unselected', currentValue);
                         break;
                     case "Kids":
                         // set the changed value of the checkbox on the in localStorage
-                        localStorage.setItem('shoes.sidebar.user.Kids.selected', currentValue);
+                        localStorage.setItem('shoes.sidebar.user.Kids.unselected', currentValue);
                         break;
                 }
             }
@@ -3053,6 +3720,7 @@ angular.module('factories')
             headerRoute          = "viewdata/header",
             homemainRoute        = "viewdata/homemain",
             shoesmainRoute       = "viewdata/shoesmain",
+            clothingmainRoute    = "viewdata/clothingmain",
             miscDataRoute        = "viewdata/miscdata",
             corporateInfoRoute   = "viewdata/corporateinfo",
             customServicesRoute  = "viewdata/customerservices",
@@ -3063,10 +3731,13 @@ angular.module('factories')
             headerData       = viewDataCollection.one(headerRoute).get(),
             homeMainData     = viewDataCollection.one(homemainRoute).get(),
             shoesMainData    = viewDataCollection.one(shoesmainRoute).get(),
+            clothingMainData = viewDataCollection.one(clothingmainRoute).get(),
             miscViewData     = viewDataCollection.one(miscDataRoute).get(),
             corporateInfo    = viewDataCollection.one(corporateInfoRoute).get(),
             customerServices = viewDataCollection.one(customServicesRoute).get(),
-            popularProducts  = viewDataCollection.one(popularProductsRoute).get();
+            popularProducts  = viewDataCollection.one(popularProductsRoute).get(),
+
+            ieLt9            = (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener);
 
         return {
 
@@ -3078,6 +3749,8 @@ angular.module('factories')
 
             shoesMainData: shoesMainData,
 
+            clothingMainData: clothingMainData,
+
             miscViewData: miscViewData,
 
             corporateInfo: corporateInfo,
@@ -3085,6 +3758,8 @@ angular.module('factories')
             customerServices: customerServices,
 
             popularProducts: popularProducts,
+
+            ieLt9: ieLt9,
 
             newsletterSignup: function (email) {
 

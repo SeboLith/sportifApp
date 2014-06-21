@@ -12,7 +12,7 @@
             <li ng-repeat="value in sidebarData.sportSection.values" class="checkbox_holder">
               <input ng-model="sports[value.sport].selected" ng-click="sportSelected(value.sport, sports[value.sport].selected)" type="checkbox">
               <label>
-                {{value.sport}}
+                {{value.sport}} ({{quantities[value.sport]}})
               </label>
             </li>
           </ol>
@@ -28,7 +28,7 @@
             <li ng-repeat="value in sidebarData.userSection.values" class="checkbox_holder">
               <input ng-model="users[value.user].selected" ng-click="userSelected(value.user, users[value.user].selected)" type="checkbox">
               <label>
-                {{value.user}}
+                {{value.user}} ({{quantities[value.user]}})
               </label>
             </li>
           </ol>
@@ -40,11 +40,12 @@
               {{sidebarData.sizeSection.section}}
             </h3>
           </div>
+          <p><a ng-click="sizeReset()">Show All</a></p>
           <ul>
             <li class="select">
               <div class="select_wrap">
                 <select class="" ng-model="size.selected" ng-change="sizeChange(size.selected)">
-                  <option disabled="disabled" ng-selected="true">
+                  <option disabled="disabled" ng-selected="size.selected == false">
                     Select a size
                   </option>
                   <option ng-repeat="value in sidebarData.sizeSection.values" ng-selected="size.selected == value">

@@ -4,9 +4,12 @@
   <div ng-include="'partials/pagination'"></div>
   <!-- END PAGINATION -->
 
-  <div class="product_listing_compact">
+  <div data-article-load-animate class="product_listing_compact">
 
-    <article ng-repeat="shoe in shoesProductsShow" class="product basic" ng-class="{'first_of_row': $index % 3 == 0}">
+    <article ng-repeat="shoe in shoesProductsShow" class="product basic" ng-class="{'first_of_row': $index % 3 == 0, 'last_in_view': $last}">
+
+      <!-- apply directive to trigger last_element_loaded event -->
+      <div ng-if="$last" data-on-repeat-done="last_article_on_page_loaded"></div>
 
       <div class="image">
         <a href="{{shoe.link}}" class="image_link">
@@ -33,13 +36,8 @@
       <div class="actions">
         <a href="{{shoe.link}}" class="button">{{shoe.availability}}</a>
       </div>
-
     </article>
   </div>
-
-  <!-- START PAGINATION -->
-  <div ng-include="'partials/pagination'"></div>
-  <!-- END PAGINATION -->
 
 </div>
 
