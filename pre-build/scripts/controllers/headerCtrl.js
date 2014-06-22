@@ -6,11 +6,18 @@ angular.module('controllers')
         HEADER CONTROLLER
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .controller('HeaderCtrl', ['$scope', 'ViewData', function ($scope, ViewData) {
+    .controller('HeaderCtrl', ['$scope', '$injector', function ($scope, $injector) {
+
+        var ViewData = $injector.get("ViewData");
 
         $scope.search = {};
 
-        var returnedHeaderData = ViewData.headerData.then(function(headerData){
+        $scope.ShopBarComponent = false;
+        $scope.RunningBarComponent = false;
+        $scope.FeaturedSportsBarComponent = false;
+        $scope.MySportifBarComponent = false;
+
+        ViewData.headerData.then(function(headerData){
 
             $scope.topNav            = headerData.data.values.topNav;
             $scope.shopBar           = headerData.data.values.mainNav.shopBar;
@@ -19,11 +26,6 @@ angular.module('controllers')
             $scope.mySportifBar      = headerData.data.values.mainNav.mySportifBar;
 
         });
-
-        $scope.ShopBarComponent = false;
-        $scope.RunningBarComponent = false;
-        $scope.FeaturedSportsBarComponent = false;
-        $scope.MySportifBarComponent = false;
 
         $scope.componentShow = function(componentName) {
 

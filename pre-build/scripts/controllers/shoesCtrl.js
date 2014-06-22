@@ -12,9 +12,9 @@ angular.module('controllers')
             ViewData            = $injector.get("ViewData"),
             ProductsFactory     = $injector.get("ProductsFactory");
 
-        if (!$scope.shoes) {
+        if (localStorage.getItem("shoes.pagination.page") != undefined) {
 
-            var returnedViewData = ViewData.shoesMainData.then(function(shoesMainData){
+            ViewData.shoesMainData.then(function(shoesMainData){
 
                 var promise = shoesMainData.data.values;
 
@@ -32,7 +32,7 @@ angular.module('controllers')
 
             $scope.shoes = {};
 
-            var returnedProducts = ProductsFactory.getAll.then(function(data){
+            ProductsFactory.getAll.then(function(data){
                 // filter products and assign all shoes to tempShoes
                 data.forEach( function (product) {
                     switch (product.category) {
