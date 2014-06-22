@@ -8,8 +8,7 @@ angular.module('controllers')
     ============================================================================ */
     .controller('MainCtrl', ['$scope', '$injector', function ($scope, $injector) {
 
-        var ViewData        = $injector.get("ViewData"),
-            ProductsFactory = $injector.get("ProductsFactory");
+        var ViewData = $injector.get("ViewData");
 
         ViewData.miscViewData.then(function(miscViewData){
 
@@ -27,20 +26,20 @@ angular.module('controllers')
 
             var promise = corporateInfo.data;
 
-            $scope.corporateInfo  = promise;
+            $scope.corporateInfo = promise;
         });
 
         ViewData.customerServices.then(function(customerServices){
 
             var promise = customerServices.data;
 
-            $scope.customerServices  = promise;
+            $scope.customerServices = promise;
         });
 
         ViewData.popularProducts.then(function(popularProducts){
 
             var promise = popularProducts.data;
 
-            $scope.popularProducts  = promise;
+            $scope.popularProducts = promise;
         });
     }]);

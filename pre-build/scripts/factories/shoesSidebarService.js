@@ -45,7 +45,7 @@ angular.module('factories')
 
             usersCheckboxes: usersCheckboxes,
 
-            shoeFilter : function(tempShoes, sports, users, selectedSize) {
+            shoesFilter : function(tempShoes, sports, users, selectedSize) {
 
                 var availableShoes     = [],
                     checkboxSelections = [],
