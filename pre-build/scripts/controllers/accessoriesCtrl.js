@@ -87,6 +87,20 @@ angular.module('controllers')
             updatePage();
         };
 
+        $scope.selectAllTypes = function() {
+
+            $scope.types = AccessoriesSidebarService.selectAllTypes();
+
+            updatePage();
+        };
+
+        $scope.unselectAllTypes = function() {
+
+            $scope.types = AccessoriesSidebarService.unselectAllTypes();
+
+            updatePage();
+        };
+
         /* default selected values for sports checkboxes */
         $scope.sports = AccessoriesSidebarService.sportsCheckboxes;
 
@@ -98,6 +112,20 @@ angular.module('controllers')
 
             // store the checkbox's value in localstorage
             AccessoriesSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        $scope.selectAllSports = function() {
+
+            $scope.sports = AccessoriesSidebarService.selectAllSports();
+
+            updatePage();
+        };
+
+        $scope.unselectAllSports = function() {
+
+            $scope.sports = AccessoriesSidebarService.unselectAllSports();
 
             updatePage();
         };
@@ -117,29 +145,6 @@ angular.module('controllers')
             updatePage();
         };
 
-        $scope.size = {selected: localStorage.getItem('accessories.sidebar.size.selected') ? localStorage.getItem('accessories.sidebar.size.selected').replace(/(^\s+|\s+$)/g,'' /*remove blank spaces from size value*/) : false};
-
-        $scope.sizeChange = function(selectedSize) {
-
-            localStorage.setItem('accessories.sidebar.size.selected', selectedSize);
-
-            updatePage();
-        };
-
-        $scope.selectAllSports = function() {
-
-            $scope.sports = AccessoriesSidebarService.selectAllSports();
-
-            updatePage();
-        };
-
-        $scope.unselectAllSports = function() {
-
-            $scope.sports = AccessoriesSidebarService.unselectAllSports();
-
-            updatePage();
-        };
-
         $scope.selectAllUsers = function() {
 
             $scope.users = AccessoriesSidebarService.selectAllUsers();
@@ -150,6 +155,15 @@ angular.module('controllers')
         $scope.unselectAllUsers = function() {
 
             $scope.users = AccessoriesSidebarService.unselectAllUsers();
+
+            updatePage();
+        };
+
+        $scope.size = {selected: localStorage.getItem('accessories.sidebar.size.selected') ? localStorage.getItem('accessories.sidebar.size.selected').replace(/(^\s+|\s+$)/g,'' /*remove blank spaces from size value*/) : false};
+
+        $scope.sizeChange = function(selectedSize) {
+
+            localStorage.setItem('accessories.sidebar.size.selected', selectedSize);
 
             updatePage();
         };

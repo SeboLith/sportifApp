@@ -422,6 +422,59 @@ angular.module('factories')
                 return accessories;
             },
 
+            selectAllTypes : function() {
+
+                var typesCheckboxes = {
+                        Headbands : 'accessories.sidebar.type.Headbands.unselected',
+                        Socks     : 'accessories.sidebar.type.Socks.unselected',
+                        Towels    : 'accessories.sidebar.type.Towels.unselected',
+                        Belts     : 'accessories.sidebar.type.Belts.unselected',
+                        Bags      : 'accessories.sidebar.type.Bags.unselected',
+                        Hats      : 'accessories.sidebar.type.Hats.unselected',
+                        Bottles   : 'accessories.sidebar.type.Bottles.unselected',
+                        Glasses   : 'accessories.sidebar.type.Glasses.unselected',
+                        Lamps     : 'accessories.sidebar.type.Lamps.unselected'
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in typesCheckboxes) {
+
+                    var value = localStorage.getItem(typesCheckboxes[key]);
+
+                    localStorage.setItem(typesCheckboxes[key], false);
+
+                    returnedCheckboxes[key] = {selected: true}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            unselectAllTypes : function() {
+
+                var typesCheckboxes = {
+                        Headbands : 'accessories.sidebar.type.Headbands.unselected',
+                        Socks     : 'accessories.sidebar.type.Socks.unselected',
+                        Towels    : 'accessories.sidebar.type.Towels.unselected',
+                        Belts     : 'accessories.sidebar.type.Belts.unselected',
+                        Bags      : 'accessories.sidebar.type.Bags.unselected',
+                        Hats      : 'accessories.sidebar.type.Hats.unselected',
+                        Bottles   : 'accessories.sidebar.type.Bottles.unselected',
+                        Glasses   : 'accessories.sidebar.type.Glasses.unselected',
+                        Lamps     : 'accessories.sidebar.type.Lamps.unselected'
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in typesCheckboxes) {
+
+                    var value = localStorage.getItem(typesCheckboxes[key]);
+
+                    localStorage.setItem(typesCheckboxes[key], true);
+
+                    returnedCheckboxes[key] = {selected: false}
+               };
+
+               return returnedCheckboxes;
+            },
             selectAllSports : function() {
 
                 var sportsCheckboxes = {
@@ -429,8 +482,7 @@ angular.module('factories')
                         Training       : 'accessories.sidebar.sport.Training.unselected',
                         Basketball     : 'accessories.sidebar.sport.Basketball.unselected',
                         Football       : 'accessories.sidebar.sport.Football.unselected',
-                        "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected',
-                        "Any Sport"    : 'accessories.sidebar.sport.Any.unselected'
+                        "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected'
                     },
                     returnedCheckboxes = {}
 
@@ -453,8 +505,7 @@ angular.module('factories')
                         Training       : 'accessories.sidebar.sport.Training.unselected',
                         Basketball     : 'accessories.sidebar.sport.Basketball.unselected',
                         Football       : 'accessories.sidebar.sport.Football.unselected',
-                        "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected',
-                        "Any Sport"    : 'accessories.sidebar.sport.Any.unselected'
+                        "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected'
                     },
                     returnedCheckboxes = {}
 
@@ -475,8 +526,7 @@ angular.module('factories')
                 var usersCheckboxes = {
                         Male       : 'accessories.sidebar.user.Male.unselected',
                         Female     : 'accessories.sidebar.user.Female.unselected',
-                        Kids       : 'accessories.sidebar.user.Kids.unselected',
-                        "Any User" : 'accessories.sidebar.user.Any.unselected'
+                        Kids       : 'accessories.sidebar.user.Kids.unselected'
                     },
                     returnedCheckboxes = {}
 
@@ -497,8 +547,7 @@ angular.module('factories')
                 var usersCheckboxes = {
                         Male       : 'accessories.sidebar.user.Male.unselected',
                         Female     : 'accessories.sidebar.user.Female.unselected',
-                        Kids       : 'accessories.sidebar.user.Kids.unselected',
-                        "Any User" : 'accessories.sidebar.user.Any.unselected'
+                        Kids       : 'accessories.sidebar.user.Kids.unselected'
                     },
                     returnedCheckboxes = {}
 

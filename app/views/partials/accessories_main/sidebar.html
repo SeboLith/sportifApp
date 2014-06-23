@@ -8,6 +8,7 @@
               {{sidebarData.typesSection.section}}
             </h3>
           </div>
+          <p><a ng-click="selectAllTypes()">All</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ng-click="unselectAllTypes()">None</a></p>
           <ol>
             <li ng-repeat="value in sidebarData.typesSection.values" class="checkbox_holder">
               <input ng-model="types[value.type].selected" ng-click="typeSelected(value.type, types[value.type].selected)" type="checkbox">
