@@ -88,6 +88,9 @@ angular.module('factories')
             },
             "2x-large": {
                 selected: localStorage.getItem('accessories.sidebar.size.selected') == "2x-large" ? true : false
+            },
+            "N/A": {
+                selected: localStorage.getItem('accessories.sidebar.size.selected') == "N/A" ? true : false
             }
         };
 
@@ -264,7 +267,6 @@ angular.module('factories')
                 });
 
                 function matchByType (checkbox) {
-                    console.log("matchByType: "+checkbox.selector);
                     // remove every element matching the deselected sport from the available accessories array
                     for (var i = availableAccessories.length - 1; i >= 0; i--) {
                         if (availableAccessories[i].sub_category === checkbox.selector) {
@@ -274,7 +276,6 @@ angular.module('factories')
                 };
 
                 function matchBySport (checkbox) {
-                    console.log("matchBySport: "+checkbox.selector);
                     // remove every element matching the deselected sport from the available accessories array
                     for (var i = availableAccessories.length - 1; i >= 0; i--) {
                         if (availableAccessories[i].activity === checkbox.selector) {
@@ -284,7 +285,6 @@ angular.module('factories')
                 };
 
                 function matchByUser (checkbox) {
-                    console.log("matchByUser: "+checkbox.selector);
                     // remove every element matching the deselected user from the available accessories array
                     for (var i = availableAccessories.length - 1; i >= 0; i--) {
                         if (availableAccessories[i].user === checkbox.selector) {
@@ -308,9 +308,12 @@ angular.module('factories')
                             matchedSizes.push(availableAccessories[i]);
                         }
                     }
-                    if (matchedSizes.length > 0) {
-                        availableAccessories = matchedSizes;
-                    }
+
+                    if (matchedSizes.length > 0) availableAccessories = matchedSizes;
+
+                    else if (sizeVal.val == "false") return
+
+                    else availableAccessories = [];
 
                 };
                 matchBySize();
@@ -400,8 +403,8 @@ angular.module('factories')
                 accessories.quantities.Male             = menVal.updatedQty;
                 accessories.quantities.Female           = womenVal.updatedQty;
                 accessories.quantities.Kids             = kidsVal.updatedQty;
-                accessories.quantities.All              = allUsersVal.updatedQty;
-console.log(accessories.quantities.All);
+                accessories.quantities.All
+
                 return accessories;
             },
 

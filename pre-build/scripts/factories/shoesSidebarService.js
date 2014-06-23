@@ -169,9 +169,12 @@ angular.module('factories')
                             matchedSizes.push(availableShoes[i]);
                         }
                     }
-                    // if (matchedSizes.length > 0) {
-                        availableShoes = matchedSizes;
-                    // }
+
+                    if (matchedSizes.length > 0) availableShoes = matchedSizes;
+
+                    else if (sizeVal.val == "false") return
+
+                    else availableShoes = [];
 
                 };
                 matchBySize();

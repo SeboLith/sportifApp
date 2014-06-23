@@ -255,9 +255,12 @@ angular.module('factories')
                             matchedSizes.push(availableClothing[i]);
                         }
                     }
-                    if (matchedSizes.length > 0) {
-                        availableClothing = matchedSizes;
-                    }
+
+                    if (matchedSizes.length > 0) availableClothing = matchedSizes;
+
+                    else if (sizeVal.val == "false") return
+
+                    else availableClothing = [];
 
                 };
                 matchBySize();
