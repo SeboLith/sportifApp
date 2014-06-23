@@ -164,7 +164,6 @@ angular.module('factories')
                 function matchBySize () {
                     // remove every element matching the deselected user from the available shoes array
                     for (var i = availableShoes.length - 1; i >= 0; i--) {
-                        // console.log(sizeVal.val);
                         if (availableShoes[i].sizes.contains(JSON.parse(sizeVal.val))) {
                             matchedSizes.push(availableShoes[i]);
                         }

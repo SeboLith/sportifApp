@@ -55,8 +55,11 @@ angular.module('factories')
             },
             "Martial Arts": {
                 selected: localStorage.getItem('accessories.sidebar.sport.MartialArts.unselected') == "true" ? false : true
+            },
+            "Any Sport": {
+                selected: localStorage.getItem('accessories.sidebar.sport.Any.unselected') == "true" ? false : true
             }
-        };
+   };
 
         var usersCheckboxes = {
             Male: {
@@ -68,8 +71,8 @@ angular.module('factories')
             Kids: {
                 selected: localStorage.getItem('accessories.sidebar.user.Kids.unselected') == "true" ? false : true
             },
-            All: {
-                selected: localStorage.getItem('accessories.sidebar.user.All.unselected') == "true" ? false : true
+            "Any User": {
+                selected: localStorage.getItem('accessories.sidebar.user.Any.unselected') == "true" ? false : true
             }
         };
 
@@ -135,7 +138,7 @@ angular.module('factories')
                             val        : types.Belts.selected,
                             updatedQty : 0
                     },
-                    bagsVal        = {
+                    bagsVal            = {
                             selector   : "Bags",
                             category   : "Types",
                             val        : types.Bags.selected,
@@ -159,7 +162,7 @@ angular.module('factories')
                             val        : types.Glasses.selected,
                             updatedQty : 0
                     },
-                    lampsVal         = {
+                    lampsVal           = {
                             selector   : "Lamps",
                             category   : "Types",
                             val        : types.Lamps.selected,
@@ -195,6 +198,12 @@ angular.module('factories')
                             val        : sports["Martial Arts"].selected,
                             updatedQty : 0
                     },
+                    anySportVal       = {
+                            selector   : "Any Sport",
+                            category   : "Sports",
+                            val        : sports["Any Sport"].selected,
+                            updatedQty : 0
+                    },
                     menVal             = {
                             selector   : "Men",
                             category   : "User",
@@ -213,10 +222,10 @@ angular.module('factories')
                             val        : users.Kids.selected,
                             updatedQty : 0
                     },
-                    allUsersVal        = {
-                            selector   : "All",
+                    anyUserVal        = {
+                            selector   : "Any User",
                             category   : "User",
-                            val        : users.All.selected,
+                            val        : users["Any User"].selected,
                             updatedQty : 0
                     },
                     sizeVal            = {
@@ -241,10 +250,11 @@ angular.module('factories')
                 checkboxSelections.push(basketballVal);
                 checkboxSelections.push(footballVal);
                 checkboxSelections.push(martialArtsVal);
+                checkboxSelections.push(anySportVal);
                 checkboxSelections.push(menVal);
                 checkboxSelections.push(womenVal);
                 checkboxSelections.push(kidsVal);
-                checkboxSelections.push(allUsersVal);
+                checkboxSelections.push(anyUserVal);
 
                 // assign available accessories to an array
                 tempAccessories.forEach( function (item) {
@@ -366,6 +376,9 @@ angular.module('factories')
                             case "Martial Arts":
                                 martialArtsVal.updatedQty += 1;
                                 break;
+                            case "Any Sport":
+                                anySportVal.updatedQty += 1;
+                                break;
                         }
                         switch (item.user) {
                             case "Men":
@@ -377,8 +390,8 @@ angular.module('factories')
                             case "Kids":
                                 kidsVal.updatedQty += 1;
                                 break;
-                            case "All":
-                                allUsersVal.updatedQty += 1;
+                            case "Any User":
+                                anyUserVal.updatedQty += 1;
                                 break;
                         }
                     });
@@ -400,10 +413,11 @@ angular.module('factories')
                 accessories.quantities.Basketball       = basketballVal.updatedQty;
                 accessories.quantities.Football         = footballVal.updatedQty;
                 accessories.quantities["Martial Arts"]  = martialArtsVal.updatedQty;
+                accessories.quantities["Any Sport"]     = anySportVal.updatedQty;
                 accessories.quantities.Male             = menVal.updatedQty;
                 accessories.quantities.Female           = womenVal.updatedQty;
                 accessories.quantities.Kids             = kidsVal.updatedQty;
-                accessories.quantities.All
+                accessories.quantities["Any User"]      = anyUserVal.updatedQty;
 
                 return accessories;
             },
@@ -454,6 +468,9 @@ angular.module('factories')
                     case "Football":
                         localStorage.setItem('accessories.sidebar.sport.Football.unselected', currentValue);
                         break;
+                    case "Any Sport":
+                        localStorage.setItem('accessories.sidebar.sport.Any.unselected', currentValue);
+                        break;
                     case "Martial Arts":
                         localStorage.setItem('accessories.sidebar.sport.MartialArts.unselected', currentValue);
                         break;
@@ -466,8 +483,8 @@ angular.module('factories')
                     case "Kids":
                         localStorage.setItem('accessories.sidebar.user.Kids.unselected', currentValue);
                         break;
-                    case "All":
-                        localStorage.setItem('accessories.sidebar.user.All.unselected', currentValue);
+                    case "Any User":
+                        localStorage.setItem('accessories.sidebar.user.Any.unselected', currentValue);
                         break;
                 }
             }
