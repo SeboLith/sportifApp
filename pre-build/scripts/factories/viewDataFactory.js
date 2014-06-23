@@ -21,23 +21,25 @@ angular.module('factories')
             homemainRoute        = "viewdata/homemain",
             shoesmainRoute       = "viewdata/shoesmain",
             clothingmainRoute    = "viewdata/clothingmain",
+            accessoriesmainRoute = "viewdata/accessoriesmain",
             miscDataRoute        = "viewdata/miscdata",
             corporateInfoRoute   = "viewdata/corporateinfo",
             customServicesRoute  = "viewdata/customerservices",
             popularProductsRoute = "viewdata/popularproducts",
 
             // api get calls
-            returnedData     = viewDataCollection.all(viewDataRoute).getList(),
-            headerData       = viewDataCollection.one(headerRoute).get(),
-            homeMainData     = viewDataCollection.one(homemainRoute).get(),
-            shoesMainData    = viewDataCollection.one(shoesmainRoute).get(),
-            clothingMainData = viewDataCollection.one(clothingmainRoute).get(),
-            miscViewData     = viewDataCollection.one(miscDataRoute).get(),
-            corporateInfo    = viewDataCollection.one(corporateInfoRoute).get(),
-            customerServices = viewDataCollection.one(customServicesRoute).get(),
-            popularProducts  = viewDataCollection.one(popularProductsRoute).get(),
+            returnedData        = viewDataCollection.all(viewDataRoute).getList(),
+            headerData          = viewDataCollection.one(headerRoute).get(),
+            homeMainData        = viewDataCollection.one(homemainRoute).get(),
+            shoesMainData       = viewDataCollection.one(shoesmainRoute).get(),
+            clothingMainData    = viewDataCollection.one(clothingmainRoute).get(),
+            accessoriesMainData = viewDataCollection.one(accessoriesmainRoute).get(),
+            miscViewData        = viewDataCollection.one(miscDataRoute).get(),
+            corporateInfo       = viewDataCollection.one(corporateInfoRoute).get(),
+            customerServices    = viewDataCollection.one(customServicesRoute).get(),
+            popularProducts     = viewDataCollection.one(popularProductsRoute).get(),
 
-            ieLt9            = (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener);
+            ieLt9               = (navigator.appName == 'Microsoft Internet Explorer' && !document.addEventListener);
 
         return {
 
@@ -50,6 +52,8 @@ angular.module('factories')
             shoesMainData: shoesMainData,
 
             clothingMainData: clothingMainData,
+
+            accessoriesMainData: accessoriesMainData,
 
             miscViewData: miscViewData,
 
