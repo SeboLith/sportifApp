@@ -126,6 +126,34 @@ angular.module('controllers')
             updatePage();
         };
 
+        $scope.selectAllSports = function() {
+
+            $scope.sports = AccessoriesSidebarService.selectAllSports();
+
+            updatePage();
+        };
+
+        $scope.unselectAllSports = function() {
+
+            $scope.sports = AccessoriesSidebarService.unselectAllSports();
+
+            updatePage();
+        };
+
+        $scope.selectAllUsers = function() {
+
+            $scope.users = AccessoriesSidebarService.selectAllUsers();
+
+            updatePage();
+        };
+
+        $scope.unselectAllUsers = function() {
+
+            $scope.users = AccessoriesSidebarService.unselectAllUsers();
+
+            updatePage();
+        };
+
         $scope.sizeReset = function() {
 
             // set the size select value to false to show all sizes

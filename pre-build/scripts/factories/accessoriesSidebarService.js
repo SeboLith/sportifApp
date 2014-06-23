@@ -422,11 +422,102 @@ angular.module('factories')
                 return accessories;
             },
 
+            selectAllSports : function() {
+
+                var sportsCheckboxes = {
+                        Running        : 'accessories.sidebar.sport.Running.unselected',
+                        Training       : 'accessories.sidebar.sport.Training.unselected',
+                        Basketball     : 'accessories.sidebar.sport.Basketball.unselected',
+                        Football       : 'accessories.sidebar.sport.Football.unselected',
+                        "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected',
+                        "Any Sport"    : 'accessories.sidebar.sport.Any.unselected'
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in sportsCheckboxes) {
+
+                    var value = localStorage.getItem(sportsCheckboxes[key]);
+
+                    localStorage.setItem(sportsCheckboxes[key], false);
+
+                    returnedCheckboxes[key] = {selected: true}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            unselectAllSports : function() {
+
+                var sportsCheckboxes = {
+                        Running        : 'accessories.sidebar.sport.Running.unselected',
+                        Training       : 'accessories.sidebar.sport.Training.unselected',
+                        Basketball     : 'accessories.sidebar.sport.Basketball.unselected',
+                        Football       : 'accessories.sidebar.sport.Football.unselected',
+                        "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected',
+                        "Any Sport"    : 'accessories.sidebar.sport.Any.unselected'
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in sportsCheckboxes) {
+
+                    var value = localStorage.getItem(sportsCheckboxes[key]);
+
+                    localStorage.setItem(sportsCheckboxes[key], true);
+
+                    returnedCheckboxes[key] = {selected: false}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            selectAllUsers : function() {
+
+                var usersCheckboxes = {
+                        Male       : 'accessories.sidebar.user.Male.unselected',
+                        Female     : 'accessories.sidebar.user.Female.unselected',
+                        Kids       : 'accessories.sidebar.user.Kids.unselected',
+                        "Any User" : 'accessories.sidebar.user.Any.unselected'
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in usersCheckboxes) {
+
+                    var value = localStorage.getItem(usersCheckboxes[key]);
+
+                    localStorage.setItem(usersCheckboxes[key], false);
+
+                    returnedCheckboxes[key] = {selected: true}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            unselectAllUsers : function() {
+
+                var usersCheckboxes = {
+                        Male       : 'accessories.sidebar.user.Male.unselected',
+                        Female     : 'accessories.sidebar.user.Female.unselected',
+                        Kids       : 'accessories.sidebar.user.Kids.unselected',
+                        "Any User" : 'accessories.sidebar.user.Any.unselected'
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in usersCheckboxes) {
+
+                    var value = localStorage.getItem(usersCheckboxes[key]);
+
+                    localStorage.setItem(usersCheckboxes[key], true);
+
+                    returnedCheckboxes[key] = {selected: false}
+               };
+
+               return returnedCheckboxes;
+            },
+
             processCheckbox : function(checkbox, currentValue) {
                 /*
                  * store the checkbox value in localstorage
                  */
-
                 switch (checkbox) {
                     // set the changed value of the checkbox on the in localStorage
                     case "Headbands":
