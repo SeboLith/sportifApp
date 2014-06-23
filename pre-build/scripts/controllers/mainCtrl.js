@@ -6,9 +6,11 @@ angular.module('controllers')
         MAIN CONTROLLER
     ----------------------------------------------------------------------------
     ============================================================================ */
-    .controller('MainCtrl', ['$scope', 'ProductsFactory', 'ViewData', function ($scope, ProductsFactory, ViewData) {
+    .controller('MainCtrl', ['$scope', '$injector', function ($scope, $injector) {
 
-        var returnedMiscViewData = ViewData.miscViewData.then(function(miscViewData){
+        var ViewData = $injector.get("ViewData");
+
+        ViewData.miscViewData.then(function(miscViewData){
 
             var promise = miscViewData.data.values;
 
@@ -20,24 +22,24 @@ angular.module('controllers')
 
         });
 
-        var returnedCorporateInfo = ViewData.corporateInfo.then(function(corporateInfo){
+        ViewData.corporateInfo.then(function(corporateInfo){
 
             var promise = corporateInfo.data;
 
-            $scope.corporateInfo  = promise;
+            $scope.corporateInfo = promise;
         });
 
-        var returnedCustomerServices = ViewData.customerServices.then(function(customerServices){
+        ViewData.customerServices.then(function(customerServices){
 
             var promise = customerServices.data;
 
-            $scope.customerServices  = promise;
+            $scope.customerServices = promise;
         });
 
-        var returnedPopularProducts = ViewData.popularProducts.then(function(popularProducts){
+        ViewData.popularProducts.then(function(popularProducts){
 
             var promise = popularProducts.data;
 
-            $scope.popularProducts  = promise;
+            $scope.popularProducts = promise;
         });
     }]);

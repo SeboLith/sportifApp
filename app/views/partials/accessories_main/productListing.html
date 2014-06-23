@@ -1,12 +1,12 @@
 <div class="product_listing_main cover_holder">
 
   <!-- START PAGINATION -->
-  <div ng-include="'partials/clothing_main/pagination'"></div>
+  <div ng-include="'partials/accessories_main/pagination'"></div>
   <!-- END PAGINATION -->
 
   <div data-article-load-animate class="product_listing_compact">
 
-    <article ng-repeat="item in clothingProductsShow" class="product basic" ng-class="{'first_of_row': $index % 3 == 0, 'last_in_view': $last}">
+    <article ng-repeat="item in accessoriesProductsShow" class="product basic" ng-class="{'first_of_row': $index % 3 == 0, 'last_in_view': $last}">
 
       <!-- apply directive to trigger last_element_loaded event -->
       <div ng-if="$last" data-on-repeat-done="last_article_on_page_loaded"></div>

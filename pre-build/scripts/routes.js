@@ -71,5 +71,25 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
           controller: 'FooterCtrl'
         }
       }
+    })
+    .state('accessories', {
+      url: '/accessories',
+      views: {
+        '': {
+          templateUrl: 'views/partials/accessories.html'
+        },
+        'header@accessories': {
+          templateUrl: 'views/partials/header/header.html',
+          controller: 'HeaderCtrl'
+        },
+        'accessoriesMain@accessories': {
+          templateUrl: 'views/partials/accessories_main/accessoriesMain.html',
+          controller: 'AccessoriesCtrl'
+        },
+        'footer@accessories': {
+          templateUrl: 'views/partials/footer/footer.html',
+          controller: 'FooterCtrl'
+        }
+      }
     });
 }]);
