@@ -87,6 +87,20 @@ angular.module('controllers')
             updatePage();
         };
 
+        $scope.selectAllTypes = function() {
+
+            $scope.types = AccessoriesSidebarService.selectAllTypes();
+
+            updatePage();
+        };
+
+        $scope.unselectAllTypes = function() {
+
+            $scope.types = AccessoriesSidebarService.unselectAllTypes();
+
+            updatePage();
+        };
+
         /* default selected values for sports checkboxes */
         $scope.sports = AccessoriesSidebarService.sportsCheckboxes;
 
@@ -102,6 +116,20 @@ angular.module('controllers')
             updatePage();
         };
 
+        $scope.selectAllSports = function() {
+
+            $scope.sports = AccessoriesSidebarService.selectAllSports();
+
+            updatePage();
+        };
+
+        $scope.unselectAllSports = function() {
+
+            $scope.sports = AccessoriesSidebarService.unselectAllSports();
+
+            updatePage();
+        };
+
         /* default selected values for users checkboxes */
         $scope.users = AccessoriesSidebarService.usersCheckboxes;
 
@@ -113,6 +141,20 @@ angular.module('controllers')
 
             // store the checkbox's value in localstorage
             AccessoriesSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        $scope.selectAllUsers = function() {
+
+            $scope.users = AccessoriesSidebarService.selectAllUsers();
+
+            updatePage();
+        };
+
+        $scope.unselectAllUsers = function() {
+
+            $scope.users = AccessoriesSidebarService.unselectAllUsers();
 
             updatePage();
         };

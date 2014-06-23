@@ -255,9 +255,12 @@ angular.module('factories')
                             matchedSizes.push(availableClothing[i]);
                         }
                     }
-                    if (matchedSizes.length > 0) {
-                        availableClothing = matchedSizes;
-                    }
+
+                    if (matchedSizes.length > 0) availableClothing = matchedSizes;
+
+                    else if (sizeVal.val == "false") return
+
+                    else availableClothing = [];
 
                 };
                 matchBySize();
@@ -330,6 +333,143 @@ angular.module('factories')
                 clothing.quantities.Kids             = kidsVal.updatedQty;
 
                 return clothing;
+            },
+
+            selectAllTypes : function() {
+
+                var typesCheckboxes = {
+                        "Jersey Shirts" : 'accessories.sidebar.type.JerseyShirts.unselected',
+                        "Jersey Shorts" : 'accessories.sidebar.type.JerseyShorts.unselected',
+                        Tights          : 'accessories.sidebar.type.Tights.unselected',
+                        Tees            : 'accessories.sidebar.type.Tees.unselected',
+                        "Tank Tops"     : 'accessories.sidebar.type.TankTops.unselected',
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in typesCheckboxes) {
+
+                    var value = localStorage.getItem(typesCheckboxes[key]);
+
+                    localStorage.setItem(typesCheckboxes[key], false);
+
+                    returnedCheckboxes[key] = {selected: true}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            unselectAllTypes : function() {
+
+                var typesCheckboxes = {
+                        "Jersey Shirts" : 'accessories.sidebar.type.JerseyShirts.unselected',
+                        "Jersey Shorts" : 'accessories.sidebar.type.JerseyShorts.unselected',
+                        Tights          : 'accessories.sidebar.type.Tights.unselected',
+                        Tees            : 'accessories.sidebar.type.Tees.unselected',
+                        "Tank Tops"     : 'accessories.sidebar.type.TankTops.unselected',
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in typesCheckboxes) {
+
+                    var value = localStorage.getItem(typesCheckboxes[key]);
+
+                    localStorage.setItem(typesCheckboxes[key], true);
+
+                    returnedCheckboxes[key] = {selected: false}
+               };
+
+               return returnedCheckboxes;
+            },
+            selectAllSports : function() {
+
+                var sportsCheckboxes = {
+                        Running        : 'accessories.sidebar.sport.Running.unselected',
+                        Training       : 'accessories.sidebar.sport.Training.unselected',
+                        Basketball     : 'accessories.sidebar.sport.Basketball.unselected',
+                        Football       : 'accessories.sidebar.sport.Football.unselected',
+                        "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected',
+                        "Any Sport"    : 'accessories.sidebar.sport.Any.unselected'
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in sportsCheckboxes) {
+
+                    var value = localStorage.getItem(sportsCheckboxes[key]);
+
+                    localStorage.setItem(sportsCheckboxes[key], false);
+
+                    returnedCheckboxes[key] = {selected: true}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            unselectAllSports : function() {
+
+                var sportsCheckboxes = {
+                        Running        : 'accessories.sidebar.sport.Running.unselected',
+                        Training       : 'accessories.sidebar.sport.Training.unselected',
+                        Basketball     : 'accessories.sidebar.sport.Basketball.unselected',
+                        Football       : 'accessories.sidebar.sport.Football.unselected',
+                        "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected',
+                        "Any Sport"    : 'accessories.sidebar.sport.Any.unselected'
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in sportsCheckboxes) {
+
+                    var value = localStorage.getItem(sportsCheckboxes[key]);
+
+                    localStorage.setItem(sportsCheckboxes[key], true);
+
+                    returnedCheckboxes[key] = {selected: false}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            selectAllUsers : function() {
+
+                var usersCheckboxes = {
+                        Male       : 'accessories.sidebar.user.Male.unselected',
+                        Female     : 'accessories.sidebar.user.Female.unselected',
+                        Kids       : 'accessories.sidebar.user.Kids.unselected',
+                        "Any User" : 'accessories.sidebar.user.Any.unselected'
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in usersCheckboxes) {
+
+                    var value = localStorage.getItem(usersCheckboxes[key]);
+
+                    localStorage.setItem(usersCheckboxes[key], false);
+
+                    returnedCheckboxes[key] = {selected: true}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            unselectAllUsers : function() {
+
+                var usersCheckboxes = {
+                        Male       : 'accessories.sidebar.user.Male.unselected',
+                        Female     : 'accessories.sidebar.user.Female.unselected',
+                        Kids       : 'accessories.sidebar.user.Kids.unselected',
+                        "Any User" : 'accessories.sidebar.user.Any.unselected'
+                    },
+                    returnedCheckboxes = {}
+
+                for (var key in usersCheckboxes) {
+
+                    var value = localStorage.getItem(usersCheckboxes[key]);
+
+                    localStorage.setItem(usersCheckboxes[key], true);
+
+                    returnedCheckboxes[key] = {selected: false}
+               };
+
+               return returnedCheckboxes;
             },
 
             processCheckbox : function(checkbox, currentValue) {
