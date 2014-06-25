@@ -22,7 +22,7 @@ angular.module('controllers')
         });
 
         // set the number of items per page
-        localStorage.setItem("itemsPerPage", 6);
+        localStorage.setItem("itemsPerPage", 12);
         $scope.itemsPerPage = localStorage.getItem("itemsPerPage");
 
         ProductsFactory.getAll.then(function(data){

@@ -91,5 +91,25 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
           controller: 'FooterCtrl'
         }
       }
+    })
+    .state('men', {
+      url: '/men',
+      views: {
+        '': {
+          templateUrl: 'views/partials/men.html'
+        },
+        'header@men': {
+          templateUrl: 'views/partials/header/header.html',
+          controller: 'HeaderCtrl'
+        },
+        'menMain@men': {
+          templateUrl: 'views/partials/men_main/menMain.html',
+          controller: 'MenCtrl'
+        },
+        'footer@men': {
+          templateUrl: 'views/partials/footer/footer.html',
+          controller: 'FooterCtrl'
+        }
+      }
     });
 }]);

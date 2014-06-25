@@ -344,7 +344,7 @@ angular.module('factories')
                         Tees            : 'accessories.sidebar.type.Tees.unselected',
                         "Tank Tops"     : 'accessories.sidebar.type.TankTops.unselected',
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in typesCheckboxes) {
 
@@ -367,7 +367,7 @@ angular.module('factories')
                         Tees            : 'accessories.sidebar.type.Tees.unselected',
                         "Tank Tops"     : 'accessories.sidebar.type.TankTops.unselected',
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in typesCheckboxes) {
 
@@ -380,6 +380,7 @@ angular.module('factories')
 
                return returnedCheckboxes;
             },
+
             selectAllSports : function() {
 
                 var sportsCheckboxes = {
@@ -390,7 +391,7 @@ angular.module('factories')
                         "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected',
                         "Any Sport"    : 'accessories.sidebar.sport.Any.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in sportsCheckboxes) {
 
@@ -414,7 +415,7 @@ angular.module('factories')
                         "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected',
                         "Any Sport"    : 'accessories.sidebar.sport.Any.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in sportsCheckboxes) {
 
@@ -436,7 +437,7 @@ angular.module('factories')
                         Kids       : 'accessories.sidebar.user.Kids.unselected',
                         "Any User" : 'accessories.sidebar.user.Any.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in usersCheckboxes) {
 
@@ -458,7 +459,7 @@ angular.module('factories')
                         Kids       : 'accessories.sidebar.user.Kids.unselected',
                         "Any User" : 'accessories.sidebar.user.Any.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in usersCheckboxes) {
 

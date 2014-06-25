@@ -22,7 +22,7 @@ angular.module('controllers')
         });
 
         // set the number of items per page
-        localStorage.setItem("itemsPerPage", 6);
+        localStorage.setItem("itemsPerPage", 12);
         $scope.itemsPerPage = localStorage.getItem("itemsPerPage");
 
         ProductsFactory.getAll.then(function(data){
@@ -83,6 +83,20 @@ angular.module('controllers')
 
             // store the checkbox's value in localstorage
             ShoesSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        $scope.selectAllSports = function() {
+
+            $scope.sports = ShoesSidebarService.selectAllSports();
+
+            updatePage();
+        };
+
+        $scope.unselectAllSports = function() {
+
+            $scope.sports = ShoesSidebarService.unselectAllSports();
 
             updatePage();
         };

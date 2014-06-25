@@ -59,7 +59,7 @@ angular.module('factories')
             "Any Sport": {
                 selected: localStorage.getItem('accessories.sidebar.sport.Any.unselected') == "true" ? false : true
             }
-   };
+        };
 
         var usersCheckboxes = {
             Male: {
@@ -435,7 +435,7 @@ angular.module('factories')
                         Glasses   : 'accessories.sidebar.type.Glasses.unselected',
                         Lamps     : 'accessories.sidebar.type.Lamps.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in typesCheckboxes) {
 
@@ -462,7 +462,7 @@ angular.module('factories')
                         Glasses   : 'accessories.sidebar.type.Glasses.unselected',
                         Lamps     : 'accessories.sidebar.type.Lamps.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in typesCheckboxes) {
 
@@ -475,6 +475,7 @@ angular.module('factories')
 
                return returnedCheckboxes;
             },
+
             selectAllSports : function() {
 
                 var sportsCheckboxes = {
@@ -484,7 +485,7 @@ angular.module('factories')
                         Football       : 'accessories.sidebar.sport.Football.unselected',
                         "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in sportsCheckboxes) {
 
@@ -507,7 +508,7 @@ angular.module('factories')
                         Football       : 'accessories.sidebar.sport.Football.unselected',
                         "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in sportsCheckboxes) {
 
@@ -528,7 +529,7 @@ angular.module('factories')
                         Female     : 'accessories.sidebar.user.Female.unselected',
                         Kids       : 'accessories.sidebar.user.Kids.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in usersCheckboxes) {
 
@@ -549,7 +550,7 @@ angular.module('factories')
                         Female     : 'accessories.sidebar.user.Female.unselected',
                         Kids       : 'accessories.sidebar.user.Kids.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in usersCheckboxes) {
 

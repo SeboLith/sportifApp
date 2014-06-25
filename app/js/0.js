@@ -1136,6 +1136,26 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
           controller: 'FooterCtrl'
         }
       }
+    })
+    .state('men', {
+      url: '/men',
+      views: {
+        '': {
+          templateUrl: 'views/partials/men.html'
+        },
+        'header@men': {
+          templateUrl: 'views/partials/header/header.html',
+          controller: 'HeaderCtrl'
+        },
+        'menMain@men': {
+          templateUrl: 'views/partials/men_main/menMain.html',
+          controller: 'MenCtrl'
+        },
+        'footer@men': {
+          templateUrl: 'views/partials/footer/footer.html',
+          controller: 'FooterCtrl'
+        }
+      }
     });
 }]);
 
@@ -1163,7 +1183,7 @@ angular.module('controllers')
         });
 
         // set the number of items per page
-        localStorage.setItem("itemsPerPage", 6);
+        localStorage.setItem("itemsPerPage", 12);
         $scope.itemsPerPage = localStorage.getItem("itemsPerPage");
 
         ProductsFactory.getAll.then(function(data){
@@ -1390,7 +1410,7 @@ angular.module('controllers')
         });
 
         // set the number of items per page
-        localStorage.setItem("itemsPerPage", 6);
+        localStorage.setItem("itemsPerPage", 12);
         $scope.itemsPerPage = localStorage.getItem("itemsPerPage");
 
         ProductsFactory.getAll.then(function(data){
@@ -1776,6 +1796,219 @@ angular.module('controllers')
 /* Controllers */
 angular.module('controllers')
     /*
+        MEN CONTROLLER
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .controller('MenCtrl', ['$scope', "$injector", function ($scope, $injector){
+
+        var MenSidebarService = $injector.get("MenSidebarService"),
+            ViewData          = $injector.get("ViewData"),
+            ProductsFactory   = $injector.get("ProductsFactory");
+
+        $scope.men = {};
+
+        ViewData.menMainData.then(function(menMainData){
+
+            var promise = menMainData.data.values;
+
+            $scope.sidebarData = promise.sidebarData;
+        });
+
+        // set the number of items per page
+        localStorage.setItem("itemsPerPage", 12);
+        $scope.itemsPerPage = localStorage.getItem("itemsPerPage");
+
+        ProductsFactory.getAll.then(function(data){
+            // temp array to hold all men
+            var tempMen = [];
+
+            // filter products and assign all men to tempMen
+            data.forEach( function (product) {
+                switch (product.user) {
+                    case "Men":
+                        tempMen.push(product);
+                        break;
+                }
+            });
+
+            // assign all products to localStorage variable
+            localStorage.setItem('men.allMensProducts', JSON.stringify(tempMen));
+
+            // temp array to hold available men
+            var menProducts = [];
+
+            // filter men and assign available men to $scope.menProducts
+            tempMen.forEach( function (item) {
+                switch (item.available) {
+                    case true:
+                        menProducts.push(item);
+                        break;
+                }
+            });
+
+            // assign all available products to localStorage variable
+            localStorage.setItem('men.availableMensProducts', JSON.stringify(menProducts));
+            updatePage();
+        });
+
+        // get the current page using local storage; if none exists, set it to 1
+        $scope.men.currentPage = localStorage.getItem("men.pagination.page") && localStorage.getItem("men.pagination.page") != 'undefined' ? localStorage.getItem("men.pagination.page") : 1;
+
+        // watch for the change in current page to update the products per page
+        $scope.$watch("men.currentPage", function() {
+
+            // set the current page using local storage
+            localStorage.setItem("men.pagination.page", $scope.men.currentPage);
+
+            updatePage();
+        });
+
+        /* default selected values for types checkboxes */
+        $scope.products = MenSidebarService.productsCheckboxes;
+
+        $scope.productSelected = function(checkbox, currentValue) {
+
+            // change the selected value of "this" checkbox
+            // from the current value to its opposite
+            $scope.products[checkbox].selected = !currentValue;
+
+            // store the checkbox's value in localstorage
+            MenSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        /* default selected values for sports checkboxes */
+        $scope.sports = MenSidebarService.sportsCheckboxes;
+
+        $scope.sportSelected = function(checkbox, currentValue) {
+
+            // change the selected value of "this" checkbox
+            // from the current value to its opposite
+            $scope.sports[checkbox].selected = !currentValue;
+
+            // store the checkbox's value in localstorage
+            MenSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        $scope.selectAllSports = function() {
+
+            $scope.sports = MenSidebarService.selectAllSports();
+
+            updatePage();
+        };
+
+        $scope.unselectAllSports = function() {
+
+            $scope.sports = MenSidebarService.unselectAllSports();
+
+            updatePage();
+        };
+
+        /* default selected values for types checkboxes */
+        $scope.types = MenSidebarService.typesCheckboxes;
+
+        $scope.typeSelected = function(checkbox, currentValue) {
+
+            // change the selected value of "this" checkbox
+            // from the current value to its opposite
+            $scope.types[checkbox].selected = !currentValue;
+
+            // store the checkbox's value in localstorage
+            MenSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        $scope.selectAllTypes = function() {
+
+            $scope.types = MenSidebarService.selectAllTypes();
+
+            updatePage();
+        };
+
+        $scope.unselectAllTypes = function() {
+
+            $scope.types = MenSidebarService.unselectAllTypes();
+
+            updatePage();
+        };
+
+        $scope.size = {selected: localStorage.getItem('men.sidebar.size.selected') ? localStorage.getItem('men.sidebar.size.selected').replace(/(^\s+|\s+$)/g,'' /*remove blank spaces from size value*/) : false};
+
+        $scope.sizeChange = function(selectedSize) {
+
+            localStorage.setItem('men.sidebar.size.selected', selectedSize);
+
+            updatePage();
+        };
+
+        $scope.sizeReset = function() {
+
+            // set the size select value to false to show all sizes
+            localStorage.setItem('men.sidebar.size.selected', false);
+
+            // set the value to false to show the "select a size" option
+            $scope.size.selected = false;
+
+            updatePage();
+        };
+
+        function updatePage () {
+
+            if ( localStorage.getItem('men.sidebar.size.selected') == null || localStorage.getItem('men.sidebar.size.selected') == 'false' ) {
+                // set the size select value to false to show all sizes
+                localStorage.setItem('men.sidebar.size.selected', false);
+
+                // set the value to false to show the "select a size" option
+                $scope.size.selected = false;
+            }
+
+            // get the selected size by which to filter available men
+            var selectedSize = localStorage.getItem('men.sidebar.size.selected'),
+
+                tempMen = JSON.parse(localStorage.getItem('men.allMensProducts')),
+
+                itemsPerPage = localStorage.getItem("itemsPerPage"),
+
+                currentPage = localStorage.getItem("men.pagination.page"),
+
+                /*  Filter available men based on mens selections */
+                menProducts = MenSidebarService.menFilter(tempMen, $scope.products, $scope.sports, $scope.types, selectedSize);
+
+            localStorage.setItem('men.availableMensProducts', JSON.stringify(menProducts.availableMensProducts));
+
+            var availableMensProducts = JSON.parse(localStorage.getItem('men.availableMensProducts'));
+
+            // assign the number of products to a variable for pagination purposes
+            $scope.totalItems = availableMensProducts.length;
+
+            // all available men to display on all pages
+            $scope.menProducts = availableMensProducts;
+
+            // quantities to show next to selector values
+            $scope.quantities = menProducts.quantities;
+
+            // data array to be passed into the ViewData.page() function
+            var data = [currentPage, itemsPerPage, $scope.menProducts],
+                // set the products segment array for the current page
+                menProductsShow = ViewData.page(data);
+
+            localStorage.setItem('men.menProductsShow', JSON.stringify(menProductsShow));
+
+            $scope.menProductsShow = JSON.parse(localStorage.getItem('men.menProductsShow'));
+            /*
+            */
+        };
+    }]);
+
+'use strict';
+
+/* Controllers */
+angular.module('controllers')
+    /*
         SHOES CONTROLLER
     ----------------------------------------------------------------------------
     ============================================================================ */
@@ -1795,7 +2028,7 @@ angular.module('controllers')
         });
 
         // set the number of items per page
-        localStorage.setItem("itemsPerPage", 6);
+        localStorage.setItem("itemsPerPage", 12);
         $scope.itemsPerPage = localStorage.getItem("itemsPerPage");
 
         ProductsFactory.getAll.then(function(data){
@@ -1856,6 +2089,20 @@ angular.module('controllers')
 
             // store the checkbox's value in localstorage
             ShoesSidebarService.processCheckbox(checkbox, currentValue);
+
+            updatePage();
+        };
+
+        $scope.selectAllSports = function() {
+
+            $scope.sports = ShoesSidebarService.selectAllSports();
+
+            updatePage();
+        };
+
+        $scope.unselectAllSports = function() {
+
+            $scope.sports = ShoesSidebarService.unselectAllSports();
 
             updatePage();
         };
@@ -1960,7 +2207,7 @@ angular.module('directives')
                     var articles = element.children();
 
                     // animate the loading of articles on pagination
-                    articles.css("opacity", 0).velocity("transition.slideUpBigIn", { stagger: 60   , duration: 350 });
+                    articles.css("opacity", 0).delay(200).velocity("transition.slideUpBigIn", { stagger: 60, duration: 350 });
                 });
             }
         };
@@ -2129,6 +2376,25 @@ angular.module('directives')
 
 'use strict';
 
+/* Directives */
+angular.module('directives')
+    /*
+        PAGE-LOAD DIRECTIVE
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .directive('pageLoadAnimate', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+
+                    // animate the loading of articles on pagination
+                    element.css("opacity", 0).velocity("fadeIn", { duration: 650 });
+            }
+        };
+    });
+
+'use strict';
+
 /* Factories */
 angular.module('factories')
     /*
@@ -2188,7 +2454,7 @@ angular.module('factories')
             "Any Sport": {
                 selected: localStorage.getItem('accessories.sidebar.sport.Any.unselected') == "true" ? false : true
             }
-   };
+        };
 
         var usersCheckboxes = {
             Male: {
@@ -2564,7 +2830,7 @@ angular.module('factories')
                         Glasses   : 'accessories.sidebar.type.Glasses.unselected',
                         Lamps     : 'accessories.sidebar.type.Lamps.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in typesCheckboxes) {
 
@@ -2591,7 +2857,7 @@ angular.module('factories')
                         Glasses   : 'accessories.sidebar.type.Glasses.unselected',
                         Lamps     : 'accessories.sidebar.type.Lamps.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in typesCheckboxes) {
 
@@ -2604,6 +2870,7 @@ angular.module('factories')
 
                return returnedCheckboxes;
             },
+
             selectAllSports : function() {
 
                 var sportsCheckboxes = {
@@ -2613,7 +2880,7 @@ angular.module('factories')
                         Football       : 'accessories.sidebar.sport.Football.unselected',
                         "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in sportsCheckboxes) {
 
@@ -2636,7 +2903,7 @@ angular.module('factories')
                         Football       : 'accessories.sidebar.sport.Football.unselected',
                         "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in sportsCheckboxes) {
 
@@ -2657,7 +2924,7 @@ angular.module('factories')
                         Female     : 'accessories.sidebar.user.Female.unselected',
                         Kids       : 'accessories.sidebar.user.Kids.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in usersCheckboxes) {
 
@@ -2678,7 +2945,7 @@ angular.module('factories')
                         Female     : 'accessories.sidebar.user.Female.unselected',
                         Kids       : 'accessories.sidebar.user.Kids.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in usersCheckboxes) {
 
@@ -3106,7 +3373,7 @@ angular.module('factories')
                         Tees            : 'accessories.sidebar.type.Tees.unselected',
                         "Tank Tops"     : 'accessories.sidebar.type.TankTops.unselected',
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in typesCheckboxes) {
 
@@ -3129,7 +3396,7 @@ angular.module('factories')
                         Tees            : 'accessories.sidebar.type.Tees.unselected',
                         "Tank Tops"     : 'accessories.sidebar.type.TankTops.unselected',
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in typesCheckboxes) {
 
@@ -3142,6 +3409,7 @@ angular.module('factories')
 
                return returnedCheckboxes;
             },
+
             selectAllSports : function() {
 
                 var sportsCheckboxes = {
@@ -3152,7 +3420,7 @@ angular.module('factories')
                         "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected',
                         "Any Sport"    : 'accessories.sidebar.sport.Any.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in sportsCheckboxes) {
 
@@ -3176,7 +3444,7 @@ angular.module('factories')
                         "Martial Arts" : 'accessories.sidebar.sport.MartialArts.unselected',
                         "Any Sport"    : 'accessories.sidebar.sport.Any.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in sportsCheckboxes) {
 
@@ -3198,7 +3466,7 @@ angular.module('factories')
                         Kids       : 'accessories.sidebar.user.Kids.unselected',
                         "Any User" : 'accessories.sidebar.user.Any.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in usersCheckboxes) {
 
@@ -3220,7 +3488,7 @@ angular.module('factories')
                         Kids       : 'accessories.sidebar.user.Kids.unselected',
                         "Any User" : 'accessories.sidebar.user.Any.unselected'
                     },
-                    returnedCheckboxes = {}
+                    returnedCheckboxes = {};
 
                 for (var key in usersCheckboxes) {
 
@@ -3279,6 +3547,678 @@ angular.module('factories')
                         break;
                     case "Kids":
                         localStorage.setItem('clothing.sidebar.user.Kids.unselected', currentValue);
+                        break;
+                }
+            }
+        }
+    }]);
+
+'use strict';
+
+/* Factories */
+angular.module('factories')
+    /*
+        MEN SIDEBAR SERVICE
+    ----------------------------------------------------------------------------
+    ============================================================================ */
+    .factory("MenSidebarService", [function () {
+
+        var productsCheckboxes = {
+            Shoes: {
+                selected: localStorage.getItem('men.sidebar.product.Shoes.unselected') == "true" ? false : true
+            },
+            Clothing: {
+                selected: localStorage.getItem('men.sidebar.product.Clothing.unselected') == "true" ? false : true
+            },
+            Accessories: {
+                selected: localStorage.getItem('men.sidebar.product.Accessories.unselected') == "true" ? false : true
+            }
+        };
+
+            // set localStorage values to false if checkboxes are checked
+        var sportsCheckboxes = {
+            Running: {
+                selected: localStorage.getItem('men.sidebar.sport.Running.unselected') == "true" ? false : true
+            },
+            Training: {
+                selected: localStorage.getItem('men.sidebar.sport.Training.unselected') == "true" ? false : true
+            },
+            Basketball: {
+                selected: localStorage.getItem('men.sidebar.sport.Basketball.unselected') == "true" ? false : true
+            },
+            Football: {
+                selected: localStorage.getItem('men.sidebar.sport.Football.unselected') == "true" ? false : true
+            },
+            "Martial Arts": {
+                selected: localStorage.getItem('men.sidebar.sport.MartialArts.unselected') == "true" ? false : true
+            },
+            "Any Sport": {
+                selected: localStorage.getItem('men.sidebar.sport.Any.unselected') == "true" ? false : true
+            }
+        };
+
+            // set localStorage values to false if checkboxes are checked
+        var typesCheckboxes = {
+            Headbands: {
+                selected: localStorage.getItem('men.sidebar.type.Headbands.unselected') == "true" ? false : true
+            },
+            Socks: {
+                selected: localStorage.getItem('men.sidebar.type.Socks.unselected') == "true" ? false : true
+            },
+            Towels: {
+                selected: localStorage.getItem('men.sidebar.type.Towels.unselected') == "true" ? false : true
+            },
+            Belts: {
+                selected: localStorage.getItem('men.sidebar.type.Belts.unselected') == "true" ? false : true
+            },
+            Bags: {
+                selected: localStorage.getItem('men.sidebar.type.Bags.unselected') == "true" ? false : true
+            },
+            Hats: {
+                selected: localStorage.getItem('men.sidebar.type.Hats.unselected') == "true" ? false : true
+            },
+            Bottles: {
+                selected: localStorage.getItem('men.sidebar.type.Bottles.unselected') == "true" ? false : true
+            },
+            Glasses: {
+                selected: localStorage.getItem('men.sidebar.type.Glasses.unselected') == "true" ? false : true
+            },
+            Lamps: {
+                selected: localStorage.getItem('men.sidebar.type.Lamps.unselected') == "true" ? false : true
+            },
+            "Jersey Shirts": {
+                selected: localStorage.getItem('men.sidebar.type.JerseyShirts.unselected') == "true" ? false : true
+            },
+            "Jersey Shorts": {
+                selected: localStorage.getItem('men.sidebar.type.JerseyShorts.unselected') == "true" ? false : true
+            },
+            Tights: {
+                selected: localStorage.getItem('men.sidebar.type.Tights.unselected') == "true" ? false : true
+            },
+            Tees: {
+                selected: localStorage.getItem('men.sidebar.type.Tees.unselected') == "true" ? false : true
+            },
+            "Tank Tops": {
+                selected: localStorage.getItem('men.sidebar.type.TankTops.unselected') == "true" ? false : true
+            }
+        };
+
+        var sizeSelections = {
+            small: {
+                selected: localStorage.getItem('men.sidebar.size.selected') == "small" ? true : false
+            },
+            medium: {
+                selected: localStorage.getItem('men.sidebar.size.selected') == "medium" ? true : false
+            },
+            large: {
+                selected: localStorage.getItem('men.sidebar.size.selected') == "large" ? true : false
+            },
+            "x-large": {
+                selected: localStorage.getItem('men.sidebar.size.selected') == "x-large" ? true : false
+            },
+            "2x-large": {
+                selected: localStorage.getItem('men.sidebar.size.selected') == "2x-large" ? true : false
+            },
+            "N/A": {
+                selected: localStorage.getItem('men.sidebar.size.selected') == "N/A" ? true : false
+            }
+        };
+
+        return {
+
+            productsCheckboxes : productsCheckboxes,
+
+            sportsCheckboxes   : sportsCheckboxes,
+
+            typesCheckboxes    : typesCheckboxes,
+
+            sizeSelections     : sizeSelections,
+
+            menFilter : function(tempMensProducts, products, sports, types, selectedSize) {
+
+                var availableMensProducts = [],
+                    checkboxSelections    = [],
+                    matchedSizes          = [],
+                    mensProducts          = {availableMensProducts: [], quantities: {}},
+
+                    shoesVal           = {
+                            selector   : "Shoes",
+                            category   : "Products",
+                            val        : products.Shoes.selected,
+                            updatedQty : 0
+                    },
+                    clothingVal        = {
+                            selector   : "Clothing",
+                            category   : "Products",
+                            val        : products.Clothing.selected,
+                            updatedQty : 0
+                    },
+                    accessoriesVal     = {
+                            selector   : "Accessories",
+                            category   : "Products",
+                            val        : products.Accessories.selected,
+                            updatedQty : 0
+                    },
+                    runningVal         = {
+                            selector   : "Running",
+                            category   : "Sports",
+                            val        : sports.Running.selected,
+                            updatedQty : 0
+                    },
+                    trainingVal        = {
+                            selector   : "Training",
+                            category   : "Sports",
+                            val        : sports.Training.selected,
+                            updatedQty : 0
+                    },
+                    basketballVal      = {
+                            selector   : "Basketball",
+                            category   : "Sports",
+                            val        : sports.Basketball.selected,
+                            updatedQty : 0
+                    },
+                    footballVal        = {
+                            selector   : "Football",
+                            category   : "Sports",
+                            val        : sports.Football.selected,
+                            updatedQty : 0
+                    },
+                    martialArtsVal     = {
+                            selector   : "Martial Arts",
+                            category   : "Sports",
+                            val        : sports["Martial Arts"].selected,
+                            updatedQty : 0
+                    },
+                    anySportVal        = {
+                            selector   : "Any Sport",
+                            category   : "Sports",
+                            val        : sports["Any Sport"].selected,
+                            updatedQty : 0
+                    },
+                    headbandsVal       = {
+                            selector   : "Headbands",
+                            category   : "Types",
+                            val        : types.Headbands.selected,
+                            updatedQty : 0
+                    },
+                    socksVal           = {
+                            selector   : "Socks",
+                            category   : "Types",
+                            val        : types.Socks.selected,
+                            updatedQty : 0
+                    },
+                    towelsVal          = {
+                            selector   : "Towels",
+                            category   : "Types",
+                            val        : types.Towels.selected,
+                            updatedQty : 0
+                    },
+                    beltsVal           = {
+                            selector   : "Belts",
+                            category   : "Types",
+                            val        : types.Belts.selected,
+                            updatedQty : 0
+                    },
+                    bagsVal            = {
+                            selector   : "Bags",
+                            category   : "Types",
+                            val        : types.Bags.selected,
+                            updatedQty : 0
+                    },
+                    hatsVal            = {
+                            selector   : "Hats",
+                            category   : "Types",
+                            val        : types.Hats.selected,
+                            updatedQty : 0
+                    },
+                    bottlesVal         = {
+                            selector   : "Bottles",
+                            category   : "Types",
+                            val        : types.Bottles.selected,
+                            updatedQty : 0
+                    },
+                    glassesVal         = {
+                            selector   : "Glasses",
+                            category   : "Types",
+                            val        : types.Glasses.selected,
+                            updatedQty : 0
+                    },
+                    lampsVal           = {
+                            selector   : "Lamps",
+                            category   : "Types",
+                            val        : types.Lamps.selected,
+                            updatedQty : 0
+                    },
+                    jerseyShirtsVal    = {
+                            selector   : "Jersey Shirts",
+                            category   : "Types",
+                            val        : types["Jersey Shirts"].selected,
+                            updatedQty : 0
+                    },
+                    jerseyShortsVal    = {
+                            selector   : "Jersey Shorts",
+                            category   : "Types",
+                            val        : types["Jersey Shorts"].selected,
+                            updatedQty : 0
+                    },
+                    tightsVal          = {
+                            selector   : "Tights",
+                            category   : "Types",
+                            val        : types.Tights.selected,
+                            updatedQty : 0
+                    },
+                    teesVal            = {
+                            selector   : "Tees",
+                            category   : "Types",
+                            val        : types.Tees.selected,
+                            updatedQty : 0
+                    },
+                    tankTopsVal        = {
+                            selector   : "Tank Tops",
+                            category   : "Types",
+                            val        : types["Tank Tops"].selected,
+                            updatedQty : 0
+                    },
+                    sizeVal            = {
+                            selector   : "Accessories Size",
+                            category   : "Size",
+                            val        : selectedSize.replace(/(^\s+|\s+$)/g,'') /*remove blank spaces from size value*/,
+                            updatedQty : 0
+                    };
+
+                // build an array of checkbox selections to compare against mens products
+                checkboxSelections.push(shoesVal);
+                checkboxSelections.push(clothingVal);
+                checkboxSelections.push(accessoriesVal);
+                checkboxSelections.push(runningVal);
+                checkboxSelections.push(trainingVal);
+                checkboxSelections.push(basketballVal);
+                checkboxSelections.push(footballVal);
+                checkboxSelections.push(martialArtsVal);
+                checkboxSelections.push(anySportVal);
+                checkboxSelections.push(headbandsVal);
+                checkboxSelections.push(socksVal);
+                checkboxSelections.push(towelsVal);
+                checkboxSelections.push(beltsVal);
+                checkboxSelections.push(bagsVal);
+                checkboxSelections.push(hatsVal);
+                checkboxSelections.push(bottlesVal);
+                checkboxSelections.push(glassesVal);
+                checkboxSelections.push(lampsVal);
+                checkboxSelections.push(jerseyShirtsVal);
+                checkboxSelections.push(jerseyShortsVal);
+                checkboxSelections.push(tightsVal);
+                checkboxSelections.push(teesVal);
+                checkboxSelections.push(tankTopsVal);
+
+                // assign available men's products to an array
+                tempMensProducts.forEach( function (item) {
+                    switch (item.available) {
+                        case true:
+                            availableMensProducts.push(item);
+                            break;
+                    }
+                });
+
+                // compare checkbox selections against item values
+                checkboxSelections.forEach( function (checkbox) {
+                    switch (checkbox.val) {
+                        case false:
+                            matchByProduct(checkbox);
+                            matchBySport(checkbox);
+                            matchByType(checkbox);
+                            break;
+                    }
+                });
+
+                function matchByProduct (checkbox) {
+                    // remove every element matching the deselected product from the available men's products array
+                    for (var i = availableMensProducts.length - 1; i >= 0; i--) {
+                        if (availableMensProducts[i].category === checkbox.selector) {
+                           availableMensProducts.splice(i, 1);
+                        }
+                    }
+                };
+
+                function matchBySport (checkbox) {
+                    // remove every element matching the deselected sport from the available men's products array
+                    for (var i = availableMensProducts.length - 1; i >= 0; i--) {
+                        if (availableMensProducts[i].activity === checkbox.selector) {
+                           availableMensProducts.splice(i, 1);
+                        }
+                    }
+                };
+
+                function matchByType (checkbox) {
+                    // remove every element matching the deselected sport from the available men's products array
+                    for (var i = availableMensProducts.length - 1; i >= 0; i--) {
+                        if (availableMensProducts[i].sub_category === checkbox.selector) {
+                           availableMensProducts.splice(i, 1);
+                        }
+                    }
+                };
+
+                Array.prototype.contains = function ( needle ) {
+                   for (var i in this) {
+                       if (this[i] == needle) return true;
+                   }
+                   return false;
+                };
+
+                function matchBySize () {
+                    // remove every element matching the deselected user from the available men's products array
+                    for (var i = availableMensProducts.length - 1; i >= 0; i--) {
+
+                        if (availableMensProducts[i].sizes.contains(sizeVal.val)) {
+                            matchedSizes.push(availableMensProducts[i]);
+                        }
+                    }
+
+                    if (matchedSizes.length > 0) availableMensProducts = matchedSizes;
+
+                    else if (sizeVal.val == "false") return
+
+                    else availableMensProducts = [];
+
+                };
+                matchBySize();
+
+                function updateProductQuantity () {
+                    // remove every element matching the deselected user from the available men's products array
+                    availableMensProducts.forEach( function (item) {
+                        switch (item.category) {
+                            case "Shoes":
+                                shoesVal.updatedQty += 1;
+                                break;
+                            case "Clothing":
+                                clothingVal.updatedQty += 1;
+                                break;
+                            case "Accessories":
+                                accessoriesVal.updatedQty += 1;
+                                break;
+                        }
+                        switch (item.activity) {
+                            case "Running":
+                                runningVal.updatedQty += 1;
+                                break;
+                            case "Training":
+                                trainingVal.updatedQty += 1;
+                                break;
+                            case "Basketball":
+                                basketballVal.updatedQty += 1;
+                                break;
+                            case "Football":
+                                footballVal.updatedQty += 1;
+                                break;
+                            case "Martial Arts":
+                                martialArtsVal.updatedQty += 1;
+                                break;
+                            case "Any Sport":
+                                anySportVal.updatedQty += 1;
+                                break;
+                        }
+                        switch (item.sub_category) {
+                            case "Headbands":
+                                headbandsVal.updatedQty += 1;
+                                break;
+                            case "Socks":
+                                socksVal.updatedQty += 1;
+                                break;
+                            case "Towels":
+                                towelsVal.updatedQty += 1;
+                                break;
+                            case "Belts":
+                                beltsVal.updatedQty += 1;
+                                break;
+                            case "Bags":
+                                bagsVal.updatedQty += 1;
+                                break;
+                            case "Hats":
+                                hatsVal.updatedQty += 1;
+                                break;
+                            case "Bottles":
+                                bottlesVal.updatedQty += 1;
+                                break;
+                            case "Glasses":
+                                glassesVal.updatedQty += 1;
+                                break;
+                            case "Lamps":
+                                lampsVal.updatedQty += 1;
+                                break;
+                            case "Jersey Shirts":
+                                jerseyShirtsVal.updatedQty += 1;
+                                break;
+                            case "Jersey Shorts":
+                                jerseyShortsVal.updatedQty += 1;
+                                break;
+                            case "Tights":
+                                tightsVal.updatedQty += 1;
+                                break;
+                            case "Tees":
+                                teesVal.updatedQty += 1;
+                                break;
+                            case "Tank Tops":
+                                tankTopsVal.updatedQty += 1;
+                                break;
+                        }
+                    });
+                };
+                updateProductQuantity();
+
+                mensProducts.availableMensProducts       = availableMensProducts;
+                mensProducts.quantities.Shoes            = shoesVal.updatedQty;
+                mensProducts.quantities.Clothing         = clothingVal.updatedQty;
+                mensProducts.quantities.Accessories      = accessoriesVal.updatedQty;
+                mensProducts.quantities.Running          = runningVal.updatedQty;
+                mensProducts.quantities.Training         = trainingVal.updatedQty;
+                mensProducts.quantities.Basketball       = basketballVal.updatedQty;
+                mensProducts.quantities.Football         = footballVal.updatedQty;
+                mensProducts.quantities["Martial Arts"]  = martialArtsVal.updatedQty;
+                mensProducts.quantities["Any Sport"]     = anySportVal.updatedQty;
+                mensProducts.quantities.Headbands        = headbandsVal.updatedQty;
+                mensProducts.quantities.Socks            = socksVal.updatedQty;
+                mensProducts.quantities.Towels           = towelsVal.updatedQty;
+                mensProducts.quantities.Belts            = beltsVal.updatedQty;
+                mensProducts.quantities.Bags             = bagsVal.updatedQty;
+                mensProducts.quantities.Hats             = hatsVal.updatedQty;
+                mensProducts.quantities.Bottles          = bottlesVal.updatedQty;
+                mensProducts.quantities.Glasses          = glassesVal.updatedQty;
+                mensProducts.quantities.Lamps            = lampsVal.updatedQty;
+                mensProducts.quantities["Jersey Shirts"] = jerseyShirtsVal.updatedQty;
+                mensProducts.quantities["Jersey Shorts"] = jerseyShortsVal.updatedQty;
+                mensProducts.quantities.Tights           = tightsVal.updatedQty;
+                mensProducts.quantities.Tees             = teesVal.updatedQty;
+                mensProducts.quantities["Tank Tops"]     = tankTopsVal.updatedQty;
+
+                return mensProducts;
+            },
+
+            selectAllSports : function() {
+
+                var sportsCheckboxes = {
+                        Running        : 'men.sidebar.sport.Running.unselected',
+                        Training       : 'men.sidebar.sport.Training.unselected',
+                        Basketball     : 'men.sidebar.sport.Basketball.unselected',
+                        Football       : 'men.sidebar.sport.Football.unselected',
+                        "Martial Arts" : 'men.sidebar.sport.MartialArts.unselected',
+                        "Any Sport"    : 'men.sidebar.sport.AnySport.unselected'
+                    },
+                    returnedCheckboxes = {};
+
+                for (var key in sportsCheckboxes) {
+
+                    var value = localStorage.getItem(sportsCheckboxes[key]);
+
+                    localStorage.setItem(sportsCheckboxes[key], false);
+
+                    returnedCheckboxes[key] = {selected: true}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            unselectAllSports : function() {
+
+                var sportsCheckboxes = {
+                        Running        : 'men.sidebar.sport.Running.unselected',
+                        Training       : 'men.sidebar.sport.Training.unselected',
+                        Basketball     : 'men.sidebar.sport.Basketball.unselected',
+                        Football       : 'men.sidebar.sport.Football.unselected',
+                        "Martial Arts" : 'men.sidebar.sport.MartialArts.unselected',
+                        "Any Sport"    : 'men.sidebar.sport.AnySport.unselected'
+                    },
+                    returnedCheckboxes = {};
+
+                for (var key in sportsCheckboxes) {
+
+                    var value = localStorage.getItem(sportsCheckboxes[key]);
+
+                    localStorage.setItem(sportsCheckboxes[key], true);
+
+                    returnedCheckboxes[key] = {selected: false}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            selectAllTypes : function() {
+
+                var typesCheckboxes = {
+                        Headbands       : 'men.sidebar.type.Headbands.unselected',
+                        Socks           : 'men.sidebar.type.Socks.unselected',
+                        Towels          : 'men.sidebar.type.Towels.unselected',
+                        Belts           : 'men.sidebar.type.Belts.unselected',
+                        Bags            : 'men.sidebar.type.Bags.unselected',
+                        Hats            : 'men.sidebar.type.Hats.unselected',
+                        Bottles         : 'men.sidebar.type.Bottles.unselected',
+                        Glasses         : 'men.sidebar.type.Glasses.unselected',
+                        Lamps           : 'men.sidebar.type.Lamps.unselected',
+                        "Jersey Shirts" : 'men.sidebar.type.JerseyShirts.unselected',
+                        "Jersey Shorts" : 'men.sidebar.type.JerseyShorts.unselected',
+                        Tights          : 'men.sidebar.type.Tights.unselected',
+                        Tees            : 'men.sidebar.type.Tees.unselected',
+                        "Tank Tops"     : 'men.sidebar.type.TankTops.unselected'
+                    },
+                    returnedCheckboxes = {};
+
+                for (var key in typesCheckboxes) {
+
+                    var value = localStorage.getItem(typesCheckboxes[key]);
+
+                    localStorage.setItem(typesCheckboxes[key], false);
+
+                    returnedCheckboxes[key] = {selected: true}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            unselectAllTypes : function() {
+
+                var typesCheckboxes = {
+                        Headbands       : 'men.sidebar.type.Headbands.unselected',
+                        Socks           : 'men.sidebar.type.Socks.unselected',
+                        Towels          : 'men.sidebar.type.Towels.unselected',
+                        Belts           : 'men.sidebar.type.Belts.unselected',
+                        Bags            : 'men.sidebar.type.Bags.unselected',
+                        Hats            : 'men.sidebar.type.Hats.unselected',
+                        Bottles         : 'men.sidebar.type.Bottles.unselected',
+                        Glasses         : 'men.sidebar.type.Glasses.unselected',
+                        Lamps           : 'men.sidebar.type.Lamps.unselected',
+                        "Jersey Shirts" : 'men.sidebar.type.JerseyShirts.unselected',
+                        "Jersey Shorts" : 'men.sidebar.type.JerseyShorts.unselected',
+                        Tights          : 'men.sidebar.type.Tights.unselected',
+                        Tees            : 'men.sidebar.type.Tees.unselected',
+                        "Tank Tops"     : 'men.sidebar.type.TankTops.unselected'
+                    },
+                    returnedCheckboxes = {};
+
+                for (var key in typesCheckboxes) {
+
+                    var value = localStorage.getItem(typesCheckboxes[key]);
+
+                    localStorage.setItem(typesCheckboxes[key], true);
+
+                    returnedCheckboxes[key] = {selected: false}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            processCheckbox : function(checkbox, currentValue) {
+                /*
+                 * store the checkbox value in localstorage
+                 */
+                switch (checkbox) {
+                    // set the changed value of the checkbox on the in localStorage
+                    case "Shoes":
+                        localStorage.setItem('men.sidebar.product.Shoes.unselected', currentValue);
+                        break;
+                    case "Clothing":
+                        localStorage.setItem('men.sidebar.product.Clothing.unselected', currentValue);
+                        break;
+                    case "Accessories":
+                        localStorage.setItem('men.sidebar.product.Accessories.unselected', currentValue);
+                        break;
+                    case "Running":
+                        localStorage.setItem('men.sidebar.sport.Running.unselected', currentValue);
+                        break;
+                    case "Training":
+                        localStorage.setItem('men.sidebar.sport.Training.unselected', currentValue);
+                        break;
+                    case "Basketball":
+                        localStorage.setItem('men.sidebar.sport.Basketball.unselected', currentValue);
+                        break;
+                    case "Football":
+                        localStorage.setItem('men.sidebar.sport.Football.unselected', currentValue);
+                        break;
+                    case "Martial Arts":
+                        localStorage.setItem('men.sidebar.sport.MartialArts.unselected', currentValue);
+                        break;
+                    case "Any Sport":
+                        localStorage.setItem('men.sidebar.sport.Any.unselected', currentValue);
+                        break;
+                    case "Headbands":
+                        localStorage.setItem('men.sidebar.type.Headbands.unselected', currentValue);
+                        break;
+                    case "Socks":
+                        localStorage.setItem('men.sidebar.type.Socks.unselected', currentValue);
+                        break;
+                    case "Towels":
+                        localStorage.setItem('men.sidebar.type.Towels.unselected', currentValue);
+                        break;
+                    case "Belts":
+                        localStorage.setItem('men.sidebar.type.Belts.unselected', currentValue);
+                        break;
+                    case "Bags":
+                        localStorage.setItem('men.sidebar.type.Bags.unselected', currentValue);
+                        break;
+                    case "Hats":
+                        localStorage.setItem('men.sidebar.type.Hats.unselected', currentValue);
+                        break;
+                    case "Bottles":
+                        localStorage.setItem('men.sidebar.type.Bottles.unselected', currentValue);
+                        break;
+                    case "Glasses":
+                        localStorage.setItem('men.sidebar.type.Glasses.unselected', currentValue);
+                        break;
+                    case "Lamps":
+                        localStorage.setItem('men.sidebar.type.Lamps.unselected', currentValue);
+                        break;
+                    case "Jersey Shirts":
+                        localStorage.setItem('men.sidebar.type.JerseyShirts.unselected', currentValue);
+                        break;
+                    case "Jersey Shorts":
+                        localStorage.setItem('men.sidebar.type.JerseyShorts.unselected', currentValue);
+                        break;
+                    case "Tights":
+                        localStorage.setItem('men.sidebar.type.Tights.unselected', currentValue);
+                        break;
+                    case "Tees":
+                        localStorage.setItem('men.sidebar.type.Tees.unselected', currentValue);
+                        break;
+                    case "Tank Tops":
+                        localStorage.setItem('men.sidebar.type.TankTops.unselected', currentValue);
                         break;
                 }
             }
@@ -3533,6 +4473,52 @@ angular.module('factories')
                 return shoes;
             },
 
+            selectAllSports : function() {
+
+                var sportsCheckboxes = {
+                        Running        : 'shoes.sidebar.sport.Running.unselected',
+                        Training       : 'shoes.sidebar.sport.Training.unselected',
+                        Basketball     : 'shoes.sidebar.sport.Basketball.unselected',
+                        Football       : 'shoes.sidebar.sport.Football.unselected',
+                        "Martial Arts" : 'shoes.sidebar.sport.MartialArts.unselected'
+                    },
+                    returnedCheckboxes = {};
+
+                for (var key in sportsCheckboxes) {
+
+                    var value = localStorage.getItem(sportsCheckboxes[key]);
+
+                    localStorage.setItem(sportsCheckboxes[key], false);
+
+                    returnedCheckboxes[key] = {selected: true}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            unselectAllSports : function() {
+
+                var sportsCheckboxes = {
+                        Running        : 'shoes.sidebar.sport.Running.unselected',
+                        Training       : 'shoes.sidebar.sport.Training.unselected',
+                        Basketball     : 'shoes.sidebar.sport.Basketball.unselected',
+                        Football       : 'shoes.sidebar.sport.Football.unselected',
+                        "Martial Arts" : 'shoes.sidebar.sport.MartialArts.unselected'
+                    },
+                    returnedCheckboxes = {};
+
+                for (var key in sportsCheckboxes) {
+
+                    var value = localStorage.getItem(sportsCheckboxes[key]);
+
+                    localStorage.setItem(sportsCheckboxes[key], true);
+
+                    returnedCheckboxes[key] = {selected: false}
+               };
+
+               return returnedCheckboxes;
+            },
+
             processCheckbox : function(checkbox, currentValue) {
                 /*
                  * store the checkbox value in localstorage
@@ -3600,6 +4586,7 @@ angular.module('factories')
             shoesmainRoute       = "viewdata/shoesmain",
             clothingmainRoute    = "viewdata/clothingmain",
             accessoriesmainRoute = "viewdata/accessoriesmain",
+            menmainRoute         = "viewdata/menmain",
             miscDataRoute        = "viewdata/miscdata",
             corporateInfoRoute   = "viewdata/corporateinfo",
             customServicesRoute  = "viewdata/customerservices",
@@ -3612,6 +4599,7 @@ angular.module('factories')
             shoesMainData       = viewDataCollection.one(shoesmainRoute).get(),
             clothingMainData    = viewDataCollection.one(clothingmainRoute).get(),
             accessoriesMainData = viewDataCollection.one(accessoriesmainRoute).get(),
+            menMainData         = viewDataCollection.one(menmainRoute).get(),
             miscViewData        = viewDataCollection.one(miscDataRoute).get(),
             corporateInfo       = viewDataCollection.one(corporateInfoRoute).get(),
             customerServices    = viewDataCollection.one(customServicesRoute).get(),
@@ -3632,6 +4620,8 @@ angular.module('factories')
             clothingMainData: clothingMainData,
 
             accessoriesMainData: accessoriesMainData,
+
+            menMainData: menMainData,
 
             miscViewData: miscViewData,
 

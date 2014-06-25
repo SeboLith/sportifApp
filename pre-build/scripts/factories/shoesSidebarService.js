@@ -226,6 +226,52 @@ angular.module('factories')
                 return shoes;
             },
 
+            selectAllSports : function() {
+
+                var sportsCheckboxes = {
+                        Running        : 'shoes.sidebar.sport.Running.unselected',
+                        Training       : 'shoes.sidebar.sport.Training.unselected',
+                        Basketball     : 'shoes.sidebar.sport.Basketball.unselected',
+                        Football       : 'shoes.sidebar.sport.Football.unselected',
+                        "Martial Arts" : 'shoes.sidebar.sport.MartialArts.unselected'
+                    },
+                    returnedCheckboxes = {};
+
+                for (var key in sportsCheckboxes) {
+
+                    var value = localStorage.getItem(sportsCheckboxes[key]);
+
+                    localStorage.setItem(sportsCheckboxes[key], false);
+
+                    returnedCheckboxes[key] = {selected: true}
+               };
+
+               return returnedCheckboxes;
+            },
+
+            unselectAllSports : function() {
+
+                var sportsCheckboxes = {
+                        Running        : 'shoes.sidebar.sport.Running.unselected',
+                        Training       : 'shoes.sidebar.sport.Training.unselected',
+                        Basketball     : 'shoes.sidebar.sport.Basketball.unselected',
+                        Football       : 'shoes.sidebar.sport.Football.unselected',
+                        "Martial Arts" : 'shoes.sidebar.sport.MartialArts.unselected'
+                    },
+                    returnedCheckboxes = {};
+
+                for (var key in sportsCheckboxes) {
+
+                    var value = localStorage.getItem(sportsCheckboxes[key]);
+
+                    localStorage.setItem(sportsCheckboxes[key], true);
+
+                    returnedCheckboxes[key] = {selected: false}
+               };
+
+               return returnedCheckboxes;
+            },
+
             processCheckbox : function(checkbox, currentValue) {
                 /*
                  * store the checkbox value in localstorage

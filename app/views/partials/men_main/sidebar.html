@@ -5,6 +5,22 @@
         <li class="facet" ng-init="primary=true">
           <div class="facet_header">
             <h3 class=" first" ng-class="{first: $first &amp;&amp; primary}">
+              {{sidebarData.productSection.section}}
+            </h3>
+          </div>
+          <ol>
+            <li ng-repeat="value in sidebarData.productSection.values" class="checkbox_holder">
+              <input ng-model="products[value.product].selected" ng-click="productSelected(value.product, products[value.product].selected)" type="checkbox">
+              <label>
+                {{value.product}} ({{quantities[value.product]}})
+              </label>
+            </li>
+          </ol>
+        </li>
+
+        <li class="facet" ng-init="primary=true">
+          <div class="facet_header">
+            <h3 class=" first" ng-class="{first: $first &amp;&amp; primary}">
               {{sidebarData.sportSection.section}}
             </h3>
           </div>
@@ -22,14 +38,15 @@
         <li class="facet" ng-init="primary=true">
           <div class="facet_header">
             <h3 class=" first" ng-class="{first: $first &amp;&amp; primary}">
-              {{sidebarData.userSection.section}}
+              {{sidebarData.typeSection.section}}
             </h3>
           </div>
+          <p><a ng-click="selectAllTypes()">All</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ng-click="unselectAllTypes()">None</a></p>
           <ol>
-            <li ng-repeat="value in sidebarData.userSection.values" class="checkbox_holder">
-              <input ng-model="users[value.user].selected" ng-click="userSelected(value.user, users[value.user].selected)" type="checkbox">
+            <li ng-repeat="value in sidebarData.typeSection.values" class="checkbox_holder">
+              <input ng-model="types[value.type].selected" ng-click="typeSelected(value.type, types[value.type].selected)" type="checkbox">
               <label>
-                {{value.user}} ({{quantities[value.user]}})
+                {{value.type}} ({{quantities[value.type]}})
               </label>
             </li>
           </ol>
