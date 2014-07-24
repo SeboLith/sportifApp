@@ -6,6 +6,7 @@ angular.module('SportifStore', [
     'ui.router',
     'ui.bootstrap',
     'restangular',
+    'ngActivityIndicator',
     'directives',
     'controllers',
     'factories'
@@ -2207,7 +2208,7 @@ angular.module('directives')
                     var articles = element.children();
 
                     // animate the loading of articles on pagination
-                    articles.css("opacity", 0).delay(200).velocity("transition.slideUpBigIn", { stagger: 60, duration: 350 });
+                    articles.css("opacity", 0).velocity("transition.slideUpBigIn", { stagger: 60, duration: 350 });
                 });
             }
         };

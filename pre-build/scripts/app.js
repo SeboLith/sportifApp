@@ -6,6 +6,7 @@ angular.module('SportifStore', [
     'ui.router',
     'ui.bootstrap',
     'restangular',
+    'ngActivityIndicator',
     'directives',
     'controllers',
     'factories'
