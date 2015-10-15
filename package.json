@@ -28,7 +28,7 @@
     "tiny-lr": "0.0.7"
   },
   "devDependencies": {
-    "gulp": "^3.7.0",
+    "gulp": "^3.8.10",
     "gulp-autoprefixer": "0.0.7",
     "gulp-clean": "^0.3.0",
     "gulp-concat": "^2.2.0",
@@ -40,8 +40,5 @@
   },
   "engines": {
     "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "grunt test"
   }
 }
